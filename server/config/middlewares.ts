@@ -5,14 +5,14 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:5173'], // ✅ React 앱 주소
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      origin: ['http://localhost:5173'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
       headers: ['Content-Type', 'Authorization'],
       credentials: true,
     },
   },
   'strapi::poweredBy',
-  'strapi::query',
+  'strapi::query', // ✅ 이 줄 꼭 필요!!
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
