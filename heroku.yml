@@ -1,6 +1,7 @@
 build:
   docker:
-    web: Dockerfile
+    web: Dockerfile.server # 서버용 Dockerfile
+    client: Dockerfile.client # 클라이언트용 Dockerfile
   scripts:
     - yarn install # 클라이언트와 서버 의존성 설치
     - yarn build # 클라이언트 빌드
