@@ -1,19 +1,15 @@
-# 1. 클라이언트 빌드를 위한 기본 Node.js 이미지 사용
 FROM node:20 AS build
 
-# 2. 작업 디렉토리 설정
 WORKDIR /app
 
-# 3. 클라이언트 소스 코드 복사
+# Copy client package.json and package-lock.json
 COPY ./client/package.json ./client/package-lock.json ./client/
 WORKDIR /app/client
-RUN npm install  # 의존성 설치
+RUN npm install
 
-# 4. 클라이언트 빌드
-RUN npm run build  # 빌드
+# Build the React client
+RUN npm run build
 
-# 5. 포트 열기 (만약 5174 포트를 사용하면 이 부분 유지)
 EXPOSE 5174
 
-# 6. 클라이언트 개발 서버 시작 (개발 환경에서 실행하는 경우)
 CMD ["npm", "run", "dev"]

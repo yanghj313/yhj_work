@@ -1,20 +1,19 @@
-# Node.js 이미지를 사용합니다.
+# Use Node.js official image as base
 FROM node:20 AS build
 
-# 작업 디렉토리를 설정합니다.
 WORKDIR /app
 
-# 서버 파일 복사
+# Copy server's package.json and package-lock.json
 COPY ./server/package.json ./server/package-lock.json ./server/
-
-# 서버 의존성 설치
 WORKDIR /app/server
 RUN npm install
 
-# 서버 빌드
-RUN npm run build
+# Copy environment variables
+COPY ./server/.env ./
+
+# Copy the rest of the server code
+COPY ./server /app/server
 
 EXPOSE 1337
 
-# 서버 시작
 CMD ["npm", "run", "develop"]
