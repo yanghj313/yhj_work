@@ -23,7 +23,10 @@
     // Include all js files
     "./**/*.js",
     // Force the JSON files in the src folder to be included
-    "src/**/*.json"
+    "src/**/*.json",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/vite/client.d.ts" // 여기에 vite 타입 정의 파일 포함
   ],
 
   "exclude": [
