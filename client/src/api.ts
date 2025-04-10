@@ -1,4 +1,5 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
+console.log('✅ 현재 API 주소:', API_BASE); // ←
 
 // 공통 타입
 type StrapiItem<T> = {
