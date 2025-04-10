@@ -6,13 +6,10 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: [
-        'http://localhost:5173', // 로컬 React 앱 주소
-        'https://yhjwork-production.up.railway.app', // 배포된 React 앱 주소
-      ],
-      methods: ['GET', 'POST', 'PUT', 'DELETE'], // 허용할 HTTP 메소드들
-      headers: ['Content-Type', 'Authorization'], // 허용할 헤더들
-      credentials: true, // 쿠키나 인증 토큰을 함께 보내는 경우 true로 설정
+      origin: ['http://localhost:5173', 'https://yhjwork-production.up.railway.app'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      headers: ['Content-Type', 'Authorization'],
+      credentials: true,
     },
   },
   'strapi::poweredBy',
