@@ -1,0 +1,12 @@
+
+FROM node:20 AS build
+WORKDIR /app
+COPY ./client /app/client
+COPY ./client/node_modules /app/client/node_modules
+WORKDIR /app/client
+RUN npm run build
+
+
+EXPOSE 5174
+
+CMD ["npm", "run", "dev"]

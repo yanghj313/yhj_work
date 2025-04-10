@@ -1,0 +1,10 @@
+build:
+  docker:
+    web: Dockerfile
+  scripts:
+    - yarn install # 클라이언트와 서버 의존성 설치
+    - yarn build # 클라이언트 빌드
+    - yarn start # 서버 시작 (Strapi)
+
+run:
+  web: node server/dist/app.js # Strapi 서버를 실행합니다.
