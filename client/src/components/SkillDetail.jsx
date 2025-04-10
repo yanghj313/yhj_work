@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSkillDetail } from './api';
+import { getSkills } from '../api';
 
 const SkillDetail = () => {
   const { id } = useParams();
   const [skill, setSkill] = useState(null);
 
   useEffect(() => {
-    if (id) getSkillDetail(id).then(setSkill);
+    if (id) {
+      getSkills().then((skills) => {
+        const found = skills.find((s) => s.id === parseInt(id));
+        setSkill(found);
+      });
+    }
   }, [id]);
 
   if (!skill) return <p>Loading...</p>;

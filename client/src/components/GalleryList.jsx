@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getGalleries } from './api';
+import { Link } from 'react-router-dom';
+import { getGalleries } from '../api';
 
 const GalleryList = () => {
   const [galleries, setGalleries] = useState([]);
@@ -13,7 +14,9 @@ const GalleryList = () => {
       <h2>🖼️ 갤러리</h2>
       <ul>
         {galleries.map((g) => (
-          <li key={g.id}>{g.attributes.title}</li>
+          <li key={g.id}>
+            <Link to={`/gallery/${g.id}`}>{g.attributes.title}</Link>
+          </li>
         ))}
       </ul>
     </div>

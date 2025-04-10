@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import ProjectList from './pages/ProjectList';
-import ProjectDetail from './pages/ProjectDetail';
-import SkillList from './pages/SkillList';
-import SkillDetail from './pages/SkillDetail';
-import ExperienceList from './pages/ExperienceList';
-import ExperienceDetail from './pages/ExperienceDetail';
-import GalleryList from './pages/GalleryList';
-import GalleryDetail from './pages/GalleryDetail';
+import ProjectList from './components/ProjectList';
+import ProjectDetail from './components/ProjectDetail';
+import SkillList from './components/SkillList';
+import SkillDetail from './components/SkillDetail';
+import ExperienceList from './components/ExperienceList';
+import ExperienceDetail from './components/ExperienceDetail';
+import GalleryList from './components/GalleryList';
+import GalleryDetail from './components/GalleryDetail';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -21,7 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           path="/"
           element={<ProjectList />}
         />
-
         <Route
           path="/projects"
           element={<ProjectList />}
@@ -30,7 +29,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           path="/project/:id"
           element={<ProjectDetail />}
         />
-
         <Route
           path="/skills"
           element={<SkillList />}
@@ -39,7 +37,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           path="/skill/:id"
           element={<SkillDetail />}
         />
-
         <Route
           path="/experiences"
           element={<ExperienceList />}
@@ -48,7 +45,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           path="/experience/:id"
           element={<ExperienceDetail />}
         />
-
         <Route
           path="/galleries"
           element={<GalleryList />}

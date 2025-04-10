@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getExperienceDetail } from './api';
+import { getExperiences } from '../api';
 
 const ExperienceDetail = () => {
   const { id } = useParams();
   const [experience, setExperience] = useState(null);
 
   useEffect(() => {
-    if (id) getExperienceDetail(id).then(setExperience);
+    if (id) {
+      getExperiences().then((experiences) => {
+        const found = experiences.find((e) => e.id === parseInt(id));
+        setExperience(found);
+      });
+    }
   }, [id]);
 
   if (!experience) return <p>Loading...</p>;
