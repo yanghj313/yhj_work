@@ -11,6 +11,7 @@ const ProjectList = () => {
     axios
       .get(`${API_BASE}/api/projects?populate=*`)
       .then((res) => {
+        console.log('🔥 프로젝트 실제 데이터:', res.data.data); // ✅ 여기!!
         setProjects((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
