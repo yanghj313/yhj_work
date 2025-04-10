@@ -6,10 +6,8 @@ export default ({ env }: { env: any }) => {
   const connections = {
     postgres: {
       connection: {
-        connectionString: env('DATABASE_URL', 'postgres://postgres:cUdjgHySMeREwBUxJEAEpnrronjkrYYL@postgres-production-f22c.up.railway.app:5432/railway'),
-
+        connectionString: env('DATABASE_URL'),
         ssl: env.bool('DATABASE_SSL', false) ? { rejectUnauthorized: false } : false,
-
         schema: env('DATABASE_SCHEMA', 'public'),
       },
       pool: {
