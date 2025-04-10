@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProjects } from '../api';
+import axios from 'axios';
+
+const API_BASE = 'https://yhjwork-production.up.railway.app'; // Strapi API 주소
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -8,14 +10,19 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     if (id) {
-      getProjects().then((projects) => {
-        const found = projects.find((p) => p.id === parseInt(id));
-        setProject(found);
-      });
+      axios
+        .get(`${API_BASE}/api/projects/${id}?populate=*`)
+        .then((res) => {
+          console.log('✅ 상세 프로젝트 데이터:', res.data);
+          setProject(res.data.data);
+        })
+        .catch((err) => {
+          console.error('❌ 상세 프로젝트 데이터 오류:', err);
+        });
     }
   }, [id]);
 
-  if (!project) return <p>Loading...</p>;
+  if (!project) return <p>📭 프로젝트 정보를 불러오는 중...</p>;
 
   const { title, description } = project.attributes;
 

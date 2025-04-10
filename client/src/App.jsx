@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './App.css';
+
+const API_BASE = 'https://yhjwork-production.up.railway.app'; // Strapi API 주소
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // axios로 프로젝트 데이터 가져오기
+    axios
+      .get(`${API_BASE}/api/projects?populate=*`)
+      .then((res) => {
+        console.log('✅ 프로젝트 데이터:', res.data);
+        setProjects(res.data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('❌ 프로젝트 데이터 오류:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>📭 데이터 로딩 중...</p>;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>📁 프로젝트 목록</h1>
+      <ul>
+        {projects.map((p) => (
+          <li key={p.id}>{p.attributes.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,12 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getProjects } from '../api';
+import axios from 'axios';
+
+const API_BASE = 'https://yhjwork-production.up.railway.app'; // Strapi API 주소
 
 const ProjectList = () => {
-  const [projects, setProjects] = useState([]); // ✅ JSX에서는 타입 제거!
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    getProjects().then(setProjects);
+    // axios로 프로젝트 리스트 가져오기
+    axios
+      .get(`${API_BASE}/api/projects?populate=*`)
+      .then((res) => {
+        console.log('✅ 프로젝트 데이터:', res.data);
+        setProjects(res.data.data);
+      })
+      .catch((err) => {
+        console.error('❌ 프로젝트 데이터 오류:', err);
+      });
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import App from './App';
 import ProjectList from './components/ProjectList';
 import ProjectDetail from './components/ProjectDetail';
 import SkillList from './components/SkillList';
@@ -12,14 +12,16 @@ import GalleryList from './components/GalleryList';
 import GalleryDetail from './components/GalleryDetail';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+
+root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route
           path="/"
-          element={<ProjectList />}
+          element={<App />}
         />
         <Route
           path="/projects"
