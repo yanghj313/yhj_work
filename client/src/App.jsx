@@ -27,7 +27,13 @@ function App() {
   return (
     <div className="App">
       <h1>📁 프로젝트 목록</h1>
-      <ul>{projects.map((p) => (p?.attributes?.title ? <li key={p.id}>{p.attributes.title}</li> : null))}</ul>
+      <ul>
+        {projects
+          .filter((p) => p?.attributes?.title)
+          .map((p) => (
+            <li key={p.id}>{p.attributes.title}</li>
+          ))}
+      </ul>
     </div>
   );
 }
