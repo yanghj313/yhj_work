@@ -8,7 +8,7 @@ const SkillList = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE}/api/skills?populate=*`)
+      .get(`${API_BASE}/api/skills`)
       .then((res) => {
         setSkills((res.data.data || []).filter(Boolean));
       })
@@ -20,7 +20,7 @@ const SkillList = () => {
   return (
     <div>
       <h2>⚙️ 스킬</h2>
-      <ul>{skills.map((s) => (s?.attributes?.name ? <li key={s.id}>{s.attributes.name}</li> : null))}</ul>
+      <ul>{skills.map((s) => (s?.name ? <li key={s.id}>{s.name}</li> : null))}</ul>
     </div>
   );
 };

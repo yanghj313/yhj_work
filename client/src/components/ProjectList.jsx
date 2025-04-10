@@ -23,9 +23,9 @@ const ProjectList = () => {
       <h2>📁 프로젝트 목록</h2>
       <ul>
         {projects.map((p) =>
-          p?.attributes?.title ? (
+          p?.title ? (
             <li key={p.id}>
-              <Link to={`/project/${p.id}`}>{p.attributes.title}</Link>
+              <Link to={`/project/${p.id}`}>{p.title}</Link>
             </li>
           ) : null
         )}
