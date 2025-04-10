@@ -11,13 +11,16 @@ const ProjectList = () => {
     axios
       .get(`${API_BASE}/api/projects?populate=*`)
       .then((res) => {
-        console.log('✅ 프로젝트 데이터:', res.data);
-        setProjects(res.data.data || []);
+        // ✅ 여기! setProjects 전에 넣어야 데이터 구조 확인 가능
+        console.log('🔥 프로젝트 실제 데이터:', res.data.data);
+  
+        setProjects((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
         console.error('❌ 프로젝트 데이터 오류:', err.message);
       });
   }, []);
+  
 
   return (
     <div>
