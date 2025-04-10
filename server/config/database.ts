@@ -1,7 +1,7 @@
 import path from 'path';
 
-export default ({ env }) => {
-  const client = env('DATABASE_CLIENT', 'sqlite');
+export default ({ env }: { env: any }) => {
+  const client = env('DATABASE_CLIENT', 'postgres'); // PostgreSQL 사용
 
   const connections = {
     mysql: {
@@ -24,7 +24,7 @@ export default ({ env }) => {
     },
     postgres: {
       connection: {
-        connectionString: env('DATABASE_URL'),
+        connectionString: env('DATABASE_URL'), // PostgreSQL URL 사용
         ssl: env.bool('DATABASE_SSL', false) && {
           rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
         },
@@ -34,13 +34,6 @@ export default ({ env }) => {
         min: env.int('DATABASE_POOL_MIN', 0),
         max: env.int('DATABASE_POOL_MAX', 5),
       },
-    },
-
-    sqlite: {
-      connection: {
-        filename: path.join(__dirname, '..', '..', env('DATABASE_FILENAME', '.tmp/data.db')),
-      },
-      useNullAsDefault: true,
     },
   };
 
