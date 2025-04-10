@@ -8,7 +8,7 @@ const GalleryList = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE}/api/galleries`)
+      .get(`${API_BASE}/api/galleries?populate=*`)
       .then((res) => {
         setGalleries((res.data.data || []).filter(Boolean));
       })
@@ -20,7 +20,7 @@ const GalleryList = () => {
   return (
     <div>
       <h2>🖼 갤러리</h2>
-      <ul>{galleries.map((g) => (g?.title ? <li key={g.id}>{g.title}</li> : null))}</ul>
+      <ul>{galleries.map((g) => (g?.attributes?.title ? <li key={g.id}>{g.attributes.title}</li> : null))}</ul>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const ExperienceList = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE}/api/experiences`)
+      .get(`${API_BASE}/api/experiences?populate=*`)
       .then((res) => {
         setExperiences((res.data.data || []).filter(Boolean));
       })
@@ -20,7 +20,7 @@ const ExperienceList = () => {
   return (
     <div>
       <h2>💼 경력사항</h2>
-      <ul>{experiences.map((e) => (e?.title ? <li key={e.id}>{e.title}</li> : null))}</ul>
+      <ul>{experiences.map((e) => (e?.attributes?.title ? <li key={e.id}>{e.attributes.title}</li> : null))}</ul>
     </div>
   );
 };
