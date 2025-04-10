@@ -1,35 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE = 'https://yhjwork-production.up.railway.app'; // Strapi API 주소
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const ExperienceList = () => {
   const [experiences, setExperiences] = useState([]);
 
   useEffect(() => {
-    // axios로 경험 목록 가져오기
     axios
       .get(`${API_BASE}/api/experiences?populate=*`)
       .then((res) => {
-        console.log('✅ 경험 데이터:', res.data);
-        setExperiences(res.data.data);
+        setExperiences((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
-        console.error('❌ 경험 데이터 오류:', err);
+        console.error('❌ 경력 데이터 오류:', err.message);
       });
   }, []);
 
   return (
     <div>
-      <h2>💼 경험 목록</h2>
-      <ul>
-        {experiences.map((e) => (
-          <li key={e.id}>
-            <Link to={`/experience/${e.id}`}>{e.attributes.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <h2>💼 경력사항</h2>
+      <ul>{experiences.map((e) => (e?.attributes?.title ? <li key={e.id}>{e.attributes.title}</li> : null))}</ul>
     </div>
   );
 };

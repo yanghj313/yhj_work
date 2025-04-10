@@ -1,35 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE = 'https://yhjwork-production.up.railway.app'; // Strapi API 주소
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const GalleryList = () => {
   const [galleries, setGalleries] = useState([]);
 
   useEffect(() => {
-    // axios로 갤러리 목록 가져오기
     axios
       .get(`${API_BASE}/api/galleries?populate=*`)
       .then((res) => {
-        console.log('✅ 갤러리 데이터:', res.data);
-        setGalleries(res.data.data);
+        setGalleries((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
-        console.error('❌ 갤러리 데이터 오류:', err);
+        console.error('❌ 갤러리 데이터 오류:', err.message);
       });
   }, []);
 
   return (
     <div>
-      <h2>🖼️ 갤러리 목록</h2>
-      <ul>
-        {galleries.map((g) => (
-          <li key={g.id}>
-            <Link to={`/gallery/${g.id}`}>{g.attributes.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <h2>🖼 갤러리</h2>
+      <ul>{galleries.map((g) => (g?.attributes?.title ? <li key={g.id}>{g.attributes.title}</li> : null))}</ul>
     </div>
   );
 };
