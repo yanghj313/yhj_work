@@ -6,10 +6,10 @@ export default ({ env }: { env: any }) => {
   const connections = {
     postgres: {
       connection: {
-        connectionString: env('DATABASE_URL', 'postgres://postgres:cUdjgHySMeREwBUxJEAEpnrronjkrYYL@postgres.railway.internal:5432/railway'),
-        ssl: env.bool('DATABASE_SSL', false) && {
-          rejectUnauthorized: false, // SSL 인증서 확인을 비활성화
-        },
+        connectionString: env('DATABASE_URL', 'postgres://postgres:cUdjgHySMeREwBUxJEAEpnrronjkrYYL@postgres-production-f22c.up.railway.app:5432/railway'),
+
+        ssl: env.bool('DATABASE_SSL', false) ? { rejectUnauthorized: false } : false,
+
         schema: env('DATABASE_SCHEMA', 'public'),
       },
       pool: {
