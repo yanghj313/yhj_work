@@ -5,7 +5,7 @@ export default [
   // 에러 처리 미들웨어
   'strapi::errors',
 
-  // 보안 관련 설정 미들웨어
+  // 보안 관련 설정 미들웨어 (CSP)
   {
     name: 'strapi::security',
     config: {
@@ -13,8 +13,9 @@ export default [
         useDefaults: true,
         directives: {
           'default-src': ["'self'"],
-          'img-src': ["'self'", 'data:', 'https://yourwebsite.com'],
-          'script-src': ["'self'", "'unsafe-inline'"],
+          'img-src': ["'self'", 'data:', 'https://yhj-work.vercel.app'],
+          'script-src': ["'self'", "'unsafe-inline'", 'https://yhj-work.vercel.app'],
+          'frame-src': ["'self'", 'https://yhj-work.vercel.app'],
         },
       },
     },
@@ -25,10 +26,11 @@ export default [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: ['*'], // 모든 도메인 허용 (특정 도메인만 허용하려면 ['https://yourdomain.com'])
+      origin: ['https://yhj-work.vercel.app'],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       headers: ['Content-Type', 'Authorization', 'Origin'],
       exposeHeaders: ['X-Total-Count'],
+      credentials: true,
     },
   },
 
