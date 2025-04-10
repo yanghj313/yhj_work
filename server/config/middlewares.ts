@@ -26,10 +26,14 @@ export default [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: ['https://yhj-work.vercel.app'],
+      origin: [
+        'https://yhj-work.vercel.app',
+        'https://yhj-work-git-main-yanghj313s-projects.vercel.app',
+        'http://localhost:3000',
+        'http://localhost:5173'
+      ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      headers: ['Content-Type', 'Authorization', 'Origin'],
-      exposeHeaders: ['X-Total-Count'],
+      headers: ['Content-Type', 'Authorization'],
       credentials: true,
     },
   },
