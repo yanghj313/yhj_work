@@ -70,27 +70,34 @@ const ProjectDetail = () => {
                 <h4>📘 설명</h4>
 
                 {p.description.map((block, idx) => {
-                  const text = block.children?.map((c) => c.text).join('') || '';
+                  const childrenText = Array.isArray(block.children) ? block.children.map((c) => c.text).join('') : '';
 
-                  if (block.type === 'paragraph') {
-                    return <p key={idx}>{text}</p>;
+                  switch (block.type) {
+                    case 'heading':
+                    case 'heading-one':
+                    case 'heading-two':
+                      return <h3 key={idx}>{childrenText}</h3>;
+
+                    case 'paragraph':
+                      return <p key={idx}>{childrenText}</p>;
+
+                    case 'list':
+                    case 'bulleted-list':
+                    case 'numbered-list':
+                      return (
+                        <ul key={idx}>
+                          {block.children?.map((li, i) => (
+                            <li key={i}>{Array.isArray(li.children) ? li.children.map((c) => c.text).join('') : ''}</li>
+                          ))}
+                        </ul>
+                      );
+
+                    case 'quote':
+                      return <blockquote key={idx}>{childrenText}</blockquote>;
+
+                    default:
+                      return <p key={idx}>{childrenText}</p>;
                   }
-
-                  if (block.type === 'heading') {
-                    return <h3 key={idx}>{text}</h3>;
-                  }
-
-                  if (block.type === 'list') {
-                    return (
-                      <ul key={idx}>
-                        {block.children?.map((item, i) => (
-                          <li key={i}>{item.text}</li>
-                        ))}
-                      </ul>
-                    );
-                  }
-
-                  return null;
                 })}
               </div>
             )}
