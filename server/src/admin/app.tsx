@@ -3,15 +3,13 @@ import CloudinaryImageField from './components/CloudinaryImageField';
 
 export default {
   config: {
-    locales: [], // 필요한 언어가 있으면 여기에 추가
+    locales: [],
   },
-
-  bootstrap(app: StrapiApp) {
+  bootstrap(app) {
+    console.log('✅ 커스텀 필드 등록 중...');
     app.addFields({
-      type: 'cloudinary-image',
+      type: 'cloudinary-image', // 👈 이 이름 중요!
       Component: CloudinaryImageField,
     });
-
-    console.log('✅ Strapi Admin bootstrap complete');
   },
 };
