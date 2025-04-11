@@ -10,8 +10,21 @@ const ExperienceList = () => {
     axios
       .get(`${API_BASE}/api/experiences?populate=*`)
       .then((res) => {
-        console.log('🔥경험 데이터:', res.data.data);
-        setExperiences((res.data.data || []).filter(Boolean));
+        const formatted = (res.data.data || []).map((item) => {
+          const attr = item.attributes || {};
+          return {
+            id: item.id,
+            position: attr.position,
+            Career: attr.Career,
+            startDate: attr.startDate,
+            endDate: attr.endDate,
+            description: attr.description,
+            logo: attr.logo?.data?.attributes || null,
+          };
+        });
+
+        console.log('🔥 경험 평탄화된 데이터:', formatted);
+        setExperiences(formatted);
       })
       .catch((err) => {
         console.error('❌ 경험 데이터 오류:', err.message);
