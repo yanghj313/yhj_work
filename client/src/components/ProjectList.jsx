@@ -10,8 +10,19 @@ const ProjectList = () => {
     axios
       .get(`${API_BASE}/api/projects?populate=*`)
       .then((res) => {
-        console.log('🔥 프로젝트 데이터:', res.data.data);
-        setProjects((res.data.data || []).filter(Boolean));
+        const formatted = (res.data.data || []).map((item) => {
+          const attr = item.attributes || {};
+          return {
+            id: item.id,
+            title: attr.title,
+            link: attr.link,
+            role: attr.role,
+            period: attr.period,
+            thumbnail: attr.thumbnail?.data?.attributes || null,
+          };
+        });
+
+        setProjects(formatted);
       })
       .catch((err) => {
         console.error('❌ 프로젝트 데이터 오류:', err.message);
@@ -41,11 +52,17 @@ const ProjectList = () => {
               )}
               <br />
 
+              {/* 역할 */}
+              {p.role && <p>👤 역할: {p.role}</p>}
+
+              {/* 기간 */}
+              {p.period && <p>🕒 기간: {p.period}</p>}
+
               {/* 썸네일 이미지 */}
               {p.thumbnail?.url && (
                 <div>
                   <img
-                    src={p.thumbnail.url}
+                    src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : API_BASE + p.thumbnail.url}
                     alt={p.thumbnail.name || '프로젝트 이미지'}
                     width="240"
                     style={{ marginTop: '0.5rem', borderRadius: '8px' }}
