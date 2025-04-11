@@ -37,9 +37,7 @@
       "enum": ["Publisher", "Designer", "Frontend"]
     },
     "tags": {
-      "type": "component",
-      "repeatable": true,
-      "component": "tags.tag"
+      "type": "string"
     }
   }
 }
