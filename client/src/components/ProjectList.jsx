@@ -9,9 +9,9 @@ const ProjectList = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE}/api/projects`) // populate 제거
+      .get(`${API_BASE}/api/projects?populate=*`)
       .then((res) => {
-        console.log('🔥 프로젝트 데이터:', res.data.data); // 데이터 확인
+        console.log('🔥 프로젝트 데이터:', res.data.data);
         setProjects((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
@@ -28,13 +28,11 @@ const ProjectList = () => {
             <li
               key={p.id}
               style={{ marginBottom: '2rem' }}>
-              {/* 썸네일 처리 */}
-              {p.thumbnail && p.thumbnail.url && (
+              {/* 썸네일 먼저 */}
+              {p.thumbnail?.url && (
                 <div>
-                  {/* 이미지 경로 처리 */}
-                  const imageUrl = p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`; console.log("Image URL: ", imageUrl); // 경로 확인
                   <img
-                    src={imageUrl}
+                    src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`}
                     alt={p.thumbnail.name || '프로젝트 이미지'}
                     width="240"
                     style={{ marginBottom: '0.5rem', borderRadius: '8px' }}
@@ -59,18 +57,6 @@ const ProjectList = () => {
 
               {p.role && <p>👤 역할: {p.role}</p>}
               {p.period && <p>🗓️ 작업 기간: {p.period}</p>}
-
-              {/* 태그 텍스트만 li로 출력 */}
-              {p.tags && (
-                <ul>
-                  {p.tags.split(',').map((tag, index) => {
-                    const trimmedTag = tag.trim(); // 각 태그 공백 제거
-                    return (
-                      <li key={index}>{trimmedTag}</li> // 태그 텍스트만 li로 출력
-                    );
-                  })}
-                </ul>
-              )}
             </li>
           ) : null
         )}
