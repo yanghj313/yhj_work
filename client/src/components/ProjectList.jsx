@@ -1,9 +1,65 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FaReact, FaJsSquare, FaHtml5, FaCss3Alt } from 'react-icons/fa';
+
+// 아이콘 이미지 경로 (실제 경로로 수정)
+const photoshopIcon = '/path/to/photoshop-icon.png';
+const illustratorIcon = '/path/to/illustrator-icon.png';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
+// TagIcons 컴포넌트: 쉼표로 구분된 태그를 받아서 아이콘으로 변환
+const TagIcons = ({ tags }) => {
+  const tagArray = tags.split(',').map((tag) => tag.trim());
+
+  // 태그에 맞는 아이콘을 반환하는 함수
+  const getIcon = (tag) => {
+    switch (tag.toLowerCase()) {
+      case 'react':
+        return <FaReact />;
+      case 'javascript':
+        return <FaJsSquare />;
+      case 'html':
+        return <FaHtml5 />;
+      case 'css':
+        return <FaCss3Alt />;
+      case 'photoshop':
+        return (
+          <img
+            src={photoshopIcon}
+            alt="Photoshop"
+            style={{ width: '24px', height: '24px' }}
+          />
+        );
+      case 'illustrator':
+        return (
+          <img
+            src={illustratorIcon}
+            alt="Illustrator"
+            style={{ width: '24px', height: '24px' }}
+          />
+        );
+      default:
+        return null; // 아이콘이 없으면 아무 것도 출력하지 않음
+    }
+  };
+
+  return (
+    <div>
+      {tagArray.map((tag, index) => (
+        <span
+          key={index}
+          style={{ display: 'inline-flex', alignItems: 'center', margin: '0 8px' }}>
+          {getIcon(tag)} {/* 아이콘 출력 */}
+          <span style={{ marginLeft: '4px' }}>{tag}</span> {/* 태그 텍스트 출력 */}
+        </span>
+      ))}
+    </div>
+  );
+};
+
+// ProjectList 컴포넌트: 프로젝트 목록을 가져와서 표시
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
 
@@ -57,6 +113,9 @@ const ProjectList = () => {
 
               {p.role && <p>👤 역할: {p.role}</p>}
               {p.period && <p>🗓️ 작업 기간: {p.period}</p>}
+
+              {/* 아이콘 형태로 태그 출력 */}
+              {p.tags && <TagIcons tags={p.tags} />}
             </li>
           ) : null
         )}
