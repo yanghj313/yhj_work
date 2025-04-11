@@ -31,8 +31,6 @@ const ProjectList = () => {
               {/* 썸네일 */}
               {p.thumbnail?.url && (
                 <div>
-                  {/* 이미지 URL 처리 */}
-                  const imageUrl = p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`; console.log("Image URL: ", imageUrl); // 이미지 URL 확인
                   <img
                     src={imageUrl}
                     alt={p.thumbnail.name || '프로젝트 이미지'}
