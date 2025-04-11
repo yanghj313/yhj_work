@@ -28,11 +28,13 @@ const ProjectList = () => {
             <li
               key={p.id}
               style={{ marginBottom: '2rem' }}>
-              {/* 썸네일 먼저 */}
+              {/* 썸네일 */}
               {p.thumbnail?.url && (
                 <div>
+                  {/* 이미지 URL 처리 */}
+                  const imageUrl = p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`; console.log("Image URL: ", imageUrl); // 이미지 URL 확인
                   <img
-                    src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`}
+                    src={imageUrl}
                     alt={p.thumbnail.name || '프로젝트 이미지'}
                     width="240"
                     style={{ marginBottom: '0.5rem', borderRadius: '8px' }}
