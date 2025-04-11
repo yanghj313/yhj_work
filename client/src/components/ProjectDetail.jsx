@@ -68,31 +68,33 @@ const ProjectDetail = () => {
             {Array.isArray(p.description) && p.description.length > 0 && (
               <div style={{ marginTop: '2rem' }}>
                 <h4>📘 설명</h4>
+
                 {p.description.map((block, idx) => {
+                  const text = block.children?.map((c) => c.text).join('') || '';
+
                   if (block.type === 'paragraph') {
-                    return <p key={idx}>{block.children.map((c) => c.text).join('')}</p>;
+                    return <p key={idx}>{text}</p>;
                   }
+
                   if (block.type === 'heading') {
-                    return <h3 key={idx}>{block.children.map((c) => c.text).join('')}</h3>;
+                    return <h3 key={idx}>{text}</h3>;
                   }
+
+                  if (block.type === 'list') {
+                    return (
+                      <ul key={idx}>
+                        {block.children?.map((item, i) => (
+                          <li key={i}>{item.text}</li>
+                        ))}
+                      </ul>
+                    );
+                  }
+
                   return null;
                 })}
               </div>
             )}
-            {Array.isArray(p.description) && p.description.length > 0 && (
-              <div style={{ marginTop: '2rem' }}>
-                <h4>📘 설명</h4>
-                {p.description.map((block, idx) => {
-                  if (block.type === 'paragraph') {
-                    return <p key={idx}>{block.children.map((c) => c.text).join('')}</p>;
-                  }
-                  if (block.type === 'heading') {
-                    return <h3 key={idx}>{block.children.map((c) => c.text).join('')}</h3>;
-                  }
-                  return null;
-                })}
-              </div>
-            )}
+
             <br />
             <Link to="/projects">← 목록으로</Link>
           </div>
