@@ -39,7 +39,10 @@ const ProjectList = () => {
                 </div>
               )}
 
-              <strong>{p.title}</strong>
+              <strong>
+                {' '}
+                <Link to={`/projects/${p.id}`}>{p.title}</Link>
+              </strong>
               <br />
 
               {p.link && (
