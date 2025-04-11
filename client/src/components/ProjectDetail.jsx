@@ -9,24 +9,23 @@ const ProjectDetail = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    if (!id) return;
-
-    console.log('🆔 현재 상세 페이지 ID:', id); // 확인용
-
-    axios;
-    axios
-      .get(`${API_BASE}/api/projects?filters[documentId][$eq]=${id}&populate=*`)
-      .then((res) => {
-        const data = res.data.data;
-        if (data) {
-          setProjects([data]); // 배열로 감싸서 map 돌리기
-        } else {
-          console.warn('❗ 프로젝트 데이터 없음:', res);
-        }
-      })
-      .catch((err) => {
-        console.error('❌ 프로젝트 상세 오류:', err.message);
-      });
+    if (id) {
+      console.log('🆔 현재 상세 페이지 ID:', id); // <- 콘솔 찍어보기
+      axios
+        .get(`${API_BASE}/api/projects?filters[documentId][$eq]=${id}&populate=*`)
+        .then((res) => {
+          const data = res.data.data;
+          if (Array.isArray(data) && data.length > 0) {
+            setProjects(data); // 배열로 set
+          } else {
+            console.warn('🚫 프로젝트를 찾을 수 없음');
+            setProjects([]);
+          }
+        })
+        .catch((err) => {
+          console.error('❌ 프로젝트 상세 오류:', err.message);
+        });
+    }
   }, [id]);
 
   return (
