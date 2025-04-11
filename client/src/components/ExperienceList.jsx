@@ -11,7 +11,9 @@ const ExperienceList = () => {
       .get(`${API_BASE}/api/experiences?populate=*`)
       .then((res) => {
         const formatted = (res.data.data || []).map((item) => {
-          const attr = item.attributes || {};
+          const attr = item.attributes;
+          if (!attr) return {}; // 안전하게 빠짐 처리
+
           return {
             id: item.id,
             position: attr.position,
