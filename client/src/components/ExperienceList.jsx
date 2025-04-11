@@ -27,22 +27,28 @@ const ExperienceList = () => {
     <div>
       <h2>📘 경력사항</h2>
       <ul>
-        {experiences.map((e) => (
-          <li key={e.id}>
-            <strong>{e.position}</strong> ({e.Career})<br />
-            {e.title}
-            <br />
-            {e.startDate} ~ {e.endDate}
-            <br />
-            {e.logo?.url && (
-              <img
-                src={API_BASE + e.logo.url}
-                alt={e.logo.name || '로고'}
-                width="100"
-              />
-            )}
-          </li>
-        ))}
+        {experiences.map((e) =>
+          e?.position ? (
+            <li
+              key={e.id}
+              style={{ marginBottom: '2rem' }}>
+              {/* 로고 먼저 */}
+              {e.logo?.url && (
+                <img
+                  src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`}
+                  alt={e.logo.name || '로고'}
+                  width="120"
+                  style={{ display: 'block', marginBottom: '0.5rem' }}
+                />
+              )}
+              <strong>{e.position}</strong> ({e.Career})
+              <br />
+              {e.startDate} ~ {e.endDate}
+              <br />
+              {e.description && <p>{e.description}</p>}
+            </li>
+          ) : null
+        )}
       </ul>
     </div>
   );

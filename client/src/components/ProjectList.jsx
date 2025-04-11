@@ -27,10 +27,21 @@ const ProjectList = () => {
             <li
               key={p.id}
               style={{ marginBottom: '2rem' }}>
+              {/* 썸네일 먼저 */}
+              {p.thumbnail?.url && (
+                <div>
+                  <img
+                    src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`}
+                    alt={p.thumbnail.name || '프로젝트 이미지'}
+                    width="240"
+                    style={{ marginBottom: '0.5rem', borderRadius: '8px' }}
+                  />
+                </div>
+              )}
+
               <strong>{p.title}</strong>
               <br />
 
-              {/* 프로젝트 링크 */}
               {p.link && (
                 <a
                   href={p.link}
@@ -41,23 +52,8 @@ const ProjectList = () => {
               )}
               <br />
 
-              {/* 역할 */}
               {p.role && <p>👤 역할: {p.role}</p>}
-
-              {/* 작업 기간 */}
               {p.period && <p>🗓️ 작업 기간: {p.period}</p>}
-
-              {/* 썸네일 이미지 */}
-              {p.thumbnail?.url && (
-                <div>
-                  <img
-                    src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`}
-                    alt={p.thumbnail.name || '프로젝트 이미지'}
-                    width="240"
-                    style={{ marginTop: '0.5rem', borderRadius: '8px' }}
-                  />
-                </div>
-              )}
             </li>
           ) : null
         )}

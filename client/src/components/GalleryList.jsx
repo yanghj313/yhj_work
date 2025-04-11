@@ -27,18 +27,26 @@ const GalleryList = () => {
     <div>
       <h2>🖼️ 갤러리</h2>
       <ul>
-        {galleries.map((g) => (
-          <li key={g.id}>
-            <strong>{g.title}</strong> ({g.category})<br />
-            {g.image?.url && (
-              <img
-                src={API_BASE + g.image.url}
-                alt={g.image.name || '갤러리 이미지'}
-                width="160"
-              />
-            )}
-          </li>
-        ))}
+        {galleries.map((g) =>
+          g?.title ? (
+            <li
+              key={g.id}
+              style={{ marginBottom: '2rem' }}>
+              {/* 이미지 먼저 */}
+              {g.image?.url && (
+                <img
+                  src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`}
+                  alt={g.image.name || '갤러리 이미지'}
+                  width="240"
+                  style={{ display: 'block', marginBottom: '0.5rem' }}
+                />
+              )}
+              <strong>{g.title}</strong> {g.category && `(${g.category})`}
+              <br />
+              {g.description && <p>{g.description}</p>}
+            </li>
+          ) : null
+        )}
       </ul>
     </div>
   );

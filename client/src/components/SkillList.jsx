@@ -27,19 +27,26 @@ const SkillList = () => {
     <div>
       <h2>🛠️ 스킬 목록</h2>
       <ul>
-        {skills.map((s) => (
-          <li key={s.id}>
-            {s.icon?.url && (
-              <img
-                src={API_BASE + s.icon.url}
-                alt={s.icon.name || '스킬 아이콘'}
-                width="40"
-                style={{ verticalAlign: 'middle', marginRight: '0.5rem' }}
-              />
-            )}
-            <strong>{s.name}</strong> - {s.level}
-          </li>
-        ))}
+        {skills.map((s) =>
+          s?.name ? (
+            <li
+              key={s.id}
+              style={{ marginBottom: '1.5rem' }}>
+              {/* 아이콘 먼저 */}
+              {s.icon?.url && (
+                <img
+                  src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`}
+                  alt={s.icon.name || '스킬 아이콘'}
+                  width="48"
+                  style={{ display: 'block', marginBottom: '0.5rem' }}
+                />
+              )}
+
+              <strong>{s.name}</strong>
+              {s.level && <p>🎯 숙련도: {s.level}</p>}
+            </li>
+          ) : null
+        )}
       </ul>
     </div>
   );
