@@ -24,7 +24,7 @@ const ProjectList = () => {
       });
   }, []);
 
-  // 태그에 맞는 아이콘을 반환하는 함수
+  // 하드코딩으로 아이콘만 출력
   const getIcon = (tag) => {
     switch (tag.toLowerCase()) {
       case 'react':
@@ -52,7 +52,7 @@ const ProjectList = () => {
           />
         );
       default:
-        return <span>{tag}</span>; // 아이콘이 없으면 텍스트로 태그 출력
+        return null; // 아이콘이 없으면 아무 것도 출력하지 않음
     }
   };
 
@@ -95,7 +95,7 @@ const ProjectList = () => {
               {p.role && <p>👤 역할: {p.role}</p>}
               {p.period && <p>🗓️ 작업 기간: {p.period}</p>}
 
-              {/* 태그 처리 */}
+              {/* 하드코딩된 태그 아이콘 출력 */}
               {p.tags && (
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {p.tags.split(',').map((tag, index) => {
@@ -104,7 +104,7 @@ const ProjectList = () => {
                       <span
                         key={index}
                         style={{ display: 'inline-flex', alignItems: 'center', margin: '0 8px' }}>
-                        {getIcon(trimmedTag)} {/* 아이콘 출력 또는 텍스트 출력 */}
+                        {getIcon(trimmedTag)} {/* 아이콘 출력 */}
                         <span style={{ marginLeft: '4px' }}>{trimmedTag}</span> {/* 태그 텍스트 출력 */}
                       </span>
                     );
