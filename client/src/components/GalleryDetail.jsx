@@ -45,7 +45,14 @@ const GalleryDetail = () => {
                 />
               </div>
             )}
-
+            <ul style={{ paddingLeft: '1rem' }}>
+              {g.description &&
+                g.description
+                  .replace(/<[^>]+>/g, '')
+                  .split(/\n|\r|\r\n/)
+                  .filter(Boolean)
+                  .map((line, idx) => <li key={idx}>{line}</li>)}
+            </ul>
             {g.category && <p>📂 분류: {g.category}</p>}
 
             <Link to="/galleries">← 목록으로</Link>
