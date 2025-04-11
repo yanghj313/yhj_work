@@ -9,41 +9,40 @@ const illustratorIcon = '/path/to/illustrator-icon.png'; // 실제 경로로 수
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-// TagIcons 컴포넌트: 쉼표로 구분된 태그를 받아서 아이콘으로 변환
-const TagIcons = ({ tags }) => {
-  const tagArray = tags.split(' ').map((tag) => tag.trim()); // 띄어쓰기로 구분된 문자열을 배열로 변환
+const getIcon = (tag) => {
+  switch (tag.toLowerCase()) {
+    case 'react':
+      return <FaReact />;
+    case 'javascript':
+      return <FaJsSquare />;
+    case 'html':
+      return <FaHtml5 />;
+    case 'css':
+      return <FaCss3Alt />;
+    case 'photoshop':
+      return (
+        <img
+          src={photoshopIcon}
+          alt="Photoshop"
+          style={{ width: '24px', height: '24px' }}
+        />
+      );
+    case 'illustrator':
+      return (
+        <img
+          src={illustratorIcon}
+          alt="Illustrator"
+          style={{ width: '24px', height: '24px' }}
+        />
+      );
+    default:
+      return <span>{tag}</span>; // 아이콘이 없으면 텍스트로 태그 출력
+  }
+};
 
-  // 태그에 맞는 아이콘을 반환하는 함수
-  const getIcon = (tag) => {
-    switch (tag.toLowerCase()) {
-      case 'react':
-        return <FaReact />;
-      case 'javascript':
-        return <FaJsSquare />;
-      case 'html':
-        return <FaHtml5 />;
-      case 'css':
-        return <FaCss3Alt />;
-      case 'photoshop':
-        return (
-          <img
-            src={photoshopIcon}
-            alt="Photoshop"
-            style={{ width: '24px', height: '24px' }}
-          />
-        );
-      case 'illustrator':
-        return (
-          <img
-            src={illustratorIcon}
-            alt="Illustrator"
-            style={{ width: '24px', height: '24px' }}
-          />
-        );
-      default:
-        return <span>{tag}</span>; // 아이콘이 없으면 텍스트로 태그 출력
-    }
-  };
+const TagIcons = ({ tags }) => {
+  // 쉼표나 띄어쓰기로 구분된 태그를 배열로 변환
+  const tagArray = tags.split(' ').map((tag) => tag.trim());
 
   return (
     <div>
