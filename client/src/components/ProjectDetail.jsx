@@ -13,8 +13,9 @@ const ProjectDetail = () => {
 
     console.log('🆔 현재 상세 페이지 ID:', id); // 확인용
 
+    axios;
     axios
-      .get(`${API_BASE}/api/projects/${id}?populate=*`)
+      .get(`${API_BASE}/api/projects?filters[documentId][$eq]=${id}&populate=*`)
       .then((res) => {
         const data = res.data.data;
         if (data) {
