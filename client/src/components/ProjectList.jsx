@@ -24,13 +24,18 @@ const ProjectList = () => {
       <ul>
         {projects.map((p) =>
           p?.title ? (
-            <li key={p.id} style={{ marginBottom: '2rem' }}>
+            <li
+              key={p.id}
+              style={{ marginBottom: '2rem' }}>
               <strong>{p.title}</strong>
               <br />
 
               {/* 프로젝트 링크 */}
               {p.link && (
-                <a href={p.link} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer">
                   🔗 프로젝트 바로가기
                 </a>
               )}
@@ -40,7 +45,7 @@ const ProjectList = () => {
               {p.thumbnail?.url && (
                 <div>
                   <img
-                    src={API_BASE + p.thumbnail.url}
+                    src={p.thumbnail.url}
                     alt={p.thumbnail.name || '프로젝트 이미지'}
                     width="240"
                     style={{ marginTop: '0.5rem', borderRadius: '8px' }}
