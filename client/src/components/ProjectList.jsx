@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API_BASE = 'https://yhjwork-production.up.railway.app';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
@@ -9,43 +9,52 @@ const ProjectList = () => {
   useEffect(() => {
     axios
       .get(`${API_BASE}/api/projects?populate=*`)
-      .then((res) => setProjects(res.data.data || []))
-      .catch((err) => console.error('❌ 프로젝트 오류:', err));
+      .then((res) => {
+        console.log('🔥 프로젝트 데이터:', res.data.data);
+        setProjects((res.data.data || []).filter(Boolean));
+      })
+      .catch((err) => {
+        console.error('❌ 프로젝트 데이터 오류:', err.message);
+      });
   }, []);
 
   return (
     <div>
       <h2>📁 프로젝트 목록</h2>
       <ul>
-        {projects.map((p) => {
-          if (!p?.attributes) return null;
-
-          const attr = p.attributes;
-          const imgUrl = attr.thumbnail?.data?.attributes?.url;
-
-          return (
-            <li key={p.id}>
-              <strong>{attr.title}</strong>
+        {projects.map((p) =>
+          p?.title ? (
+            <li
+              key={p.id}
+              style={{ marginBottom: '2rem' }}>
+              <strong>{p.title}</strong>
               <br />
-              {imgUrl && (
-                <img
-                  src={imgUrl}
-                  alt={attr.title}
-                  width="120"
-                />
-              )}
-              <p>{attr.period}</p>
-              {attr.link && (
+
+              {/* 프로젝트 링크 */}
+              {p.link && (
                 <a
-                  href={attr.link}
+                  href={p.link}
                   target="_blank"
-                  rel="noreferrer">
-                  🔗 바로가기
+                  rel="noopener noreferrer">
+                  🔗 프로젝트 바로가기
                 </a>
               )}
+              <br />
+
+              {/* 썸네일 이미지 */}
+              {p.thumbnail?.url && (
+                <div>
+                  <img
+                    src={p.thumbnail.url}
+                    alt={p.thumbnail.name || '프로젝트 이미지'}
+                    width="240"
+                    style={{ marginTop: '0.5rem', borderRadius: '8px' }}
+                  />
+                </div>
+              )}
             </li>
-          );
-        })}
+          ) : null
+        )}
       </ul>
     </div>
   );
