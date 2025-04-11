@@ -36,14 +36,23 @@ function App() {
   return (
     <Layout navLinks={navLinks}>
       <Switch>
+        {/* 메인 진입점 - 자동 리디렉트 */}
+        <Route exact path={`/plugins/${pluginId}`}>
+          <Redirect to={pathTo("import")} />
+        </Route>
+
+        {/* Import 페이지 */}
         <Route path={pathTo("import")}>
           <ImportPage contentTypes={userContentTypes} />
         </Route>
+
+        {/* Export 페이지 */}
         <Route path={pathTo("export")}>
           <ExportPage contentTypes={userContentTypes} />
         </Route>
+
+        {/* 나머지 경로 예외처리 */}
         <Route>
-          {/* Default Route Retur to Import Page */}
           <Redirect to={pathTo("import")} />
         </Route>
       </Switch>
