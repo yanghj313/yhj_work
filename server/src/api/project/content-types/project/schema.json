@@ -35,6 +35,15 @@
     "role": {
       "type": "enumeration",
       "enum": ["Publisher", "Designer", "Frontend"]
+    },
+    "skills": {
+      "type": "json",
+      "default": []
+    },
+    "tags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tags.tag"
     }
   }
 }
