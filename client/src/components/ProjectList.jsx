@@ -9,9 +9,8 @@ const illustratorIcon = '/path/to/illustrator-icon.png';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-// TagIcons 컴포넌트: 쉼표로 구분된 태그를 받아서 아이콘으로 변환
 const TagIcons = ({ tags }) => {
-  const tagArray = tags.split(" ").map((tag) => tag.trim()); // 띄어쓰기로 구분된 문자열을 배열로 변환
+  const tagArray = tags.split(' ').map((tag) => tag.trim()); // 띄어쓰기로 구분된 문자열을 배열로 변환
 
   // 태그에 맞는 아이콘을 반환하는 함수
   const getIcon = (tag) => {
@@ -25,13 +24,39 @@ const TagIcons = ({ tags }) => {
       case 'css':
         return <FaCss3Alt />;
       case 'photoshop':
-        return <img src={photoshopIcon} alt="Photoshop" style={{ width: '24px', height: '24px' }} />;
+        return (
+          <img
+            src={photoshopIcon}
+            alt="Photoshop"
+            style={{ width: '24px', height: '24px' }}
+          />
+        );
       case 'illustrator':
-        return <img src={illustratorIcon} alt="Illustrator" style={{ width: '24px', height: '24px' }} />;
+        return (
+          <img
+            src={illustratorIcon}
+            alt="Illustrator"
+            style={{ width: '24px', height: '24px' }}
+          />
+        );
       default:
         return <span>{tag}</span>; // 아이콘이 없으면 텍스트로 태그 출력
     }
   };
+
+  return (
+    <div>
+      {tagArray.map((tag, index) => (
+        <span
+          key={index}
+          style={{ display: 'inline-flex', alignItems: 'center', margin: '0 8px' }}>
+          {getIcon(tag)} {/* 아이콘 출력 또는 텍스트 출력 */}
+          <span style={{ marginLeft: '4px' }}>{tag}</span> {/* 태그 텍스트 출력 */}
+        </span>
+      ))}
+    </div>
+  );
+};
 
 // ProjectList 컴포넌트: 프로젝트 목록을 가져와서 표시
 const ProjectList = () => {
