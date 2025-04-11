@@ -9,10 +9,20 @@ const illustratorIcon = '/images/illustrator-icon.png'; // public/images/illustr
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-// TagIcons 컴포넌트: 쉼표로 구분된 태그를 받아서 아이콘으로 변환
-const TagIcons = ({ tags }) => {
-  // 쉼표로 구분된 문자열을 배열로 변환하고, 공백을 제거
-  const tagArray = tags.split(',').map((tag) => tag.trim()); // 쉼표로 구분하고 각 항목을 trim 처리
+const ProjectList = () => {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/api/projects`) // populate 제거
+      .then((res) => {
+        console.log('🔥 프로젝트 데이터:', res.data.data); // 데이터 확인
+        setProjects((res.data.data || []).filter(Boolean));
+      })
+      .catch((err) => {
+        console.error('❌ 프로젝트 데이터 오류:', err.message);
+      });
+  }, []);
 
   // 태그에 맞는 아이콘을 반환하는 함수
   const getIcon = (tag) => {
@@ -47,36 +57,6 @@ const TagIcons = ({ tags }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {tagArray.map((tag, index) => (
-        <span
-          key={index}
-          style={{ display: 'inline-flex', alignItems: 'center', margin: '0 8px' }}>
-          {getIcon(tag)} {/* 아이콘 출력 또는 텍스트 출력 */}
-          <span style={{ marginLeft: '4px' }}>{tag}</span> {/* 태그 텍스트 출력 */}
-        </span>
-      ))}
-    </div>
-  );
-};
-
-// ProjectList 컴포넌트: 프로젝트 목록을 가져와서 표시
-const ProjectList = () => {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${API_BASE}/api/projects`) // populate 제거
-      .then((res) => {
-        console.log('🔥 프로젝트 데이터:', res.data.data); // 데이터 확인
-        setProjects((res.data.data || []).filter(Boolean));
-      })
-      .catch((err) => {
-        console.error('❌ 프로젝트 데이터 오류:', err.message);
-      });
-  }, []);
-
-  return (
     <div>
       <h2>📁 프로젝트 목록</h2>
       <ul>
@@ -96,10 +76,12 @@ const ProjectList = () => {
                   />
                 </div>
               )}
+
               <strong>
                 <Link to={`/projects/${p.documentId}`}>{p.title}</Link>
               </strong>
               <br />
+
               {p.link && (
                 <a
                   href={p.link}
@@ -109,10 +91,26 @@ const ProjectList = () => {
                 </a>
               )}
               <br />
+
               {p.role && <p>👤 역할: {p.role}</p>}
               {p.period && <p>🗓️ 작업 기간: {p.period}</p>}
-              {/* 아이콘 형태로 태그 출력 */}
-              {p.tags && <TagIcons tags={p.tags} />} {/* tags 데이터가 없으면 렌더링되지 않음 */}
+
+              {/* 태그 처리 */}
+              {p.tags && (
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  {p.tags.split(',').map((tag, index) => {
+                    const trimmedTag = tag.trim(); // 각 태그 공백 제거
+                    return (
+                      <span
+                        key={index}
+                        style={{ display: 'inline-flex', alignItems: 'center', margin: '0 8px' }}>
+                        {getIcon(trimmedTag)} {/* 아이콘 출력 또는 텍스트 출력 */}
+                        <span style={{ marginLeft: '4px' }}>{trimmedTag}</span> {/* 태그 텍스트 출력 */}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
             </li>
           ) : null
         )}
