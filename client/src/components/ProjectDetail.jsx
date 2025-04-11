@@ -12,10 +12,30 @@ const ProjectDetail = () => {
     axios
       .get(`${API_BASE}/api/projects/${id}?populate=*`)
       .then((res) => {
-        setProjects([res.data.data]); // 배열로 감싸서 map 돌리게
+        const raw = res.data.data;
+
+        // attributes 안쓰고 직접 구조 정리
+        const p = {
+          id: raw.id,
+          title: raw.title || raw.attributes?.title,
+          link: raw.link || raw.attributes?.link,
+          role: raw.role || raw.attributes?.role,
+          period: raw.period || raw.attributes?.period,
+          images:
+            raw.images?.data ||
+            raw.attributes?.images?.data?.map((img) => ({
+              id: img.id,
+              name: img.attributes.name,
+              url: img.attributes.url,
+            })) ||
+            [],
+          description: raw.description || raw.attributes?.description || [],
+        };
+
+        setProjects([p]); // 배열로 만들어 map 돌림
       })
       .catch((err) => {
-        console.error('❌ 프로젝트 상세 오류:', err.message);
+        console.error('❌ 상세 프로젝트 오류:', err.message);
       });
   }, [id]);
 
@@ -40,7 +60,7 @@ const ProjectDetail = () => {
               </p>
             )}
 
-            {p.images?.length > 0 && (
+            {p.images.length > 0 && (
               <div>
                 <h4>🖼 상세 이미지</h4>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
