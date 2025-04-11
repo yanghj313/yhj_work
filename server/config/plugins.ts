@@ -12,8 +12,6 @@ export default ({ env }) => ({
 
   'import-export-content': {
     enabled: true,
-    config: {
-      // 옵션 비워도 됨
-    },
+    resolve: './src/plugins/import-export-content',
   },
 });
