@@ -9,7 +9,7 @@ const GalleryList = () => {
   useEffect(() => {
     axios
       .get(`${API_BASE}/api/galleries?populate=*`)
-      .then((res) => setGalleries(res.data.data))
+      .then((res) => setGalleries(res.data.data || []))
       .catch((err) => console.error('❌ 갤러리 오류:', err));
   }, []);
 
@@ -17,18 +17,24 @@ const GalleryList = () => {
     <div>
       <h2>🖼️ 갤러리</h2>
       <ul>
-        {galleries.map((g) => (
-          <li key={g.id}>
-            <strong>{g.attributes.title}</strong> ({g.attributes.category})
-            {g.attributes.image?.data?.attributes?.url && (
-              <img
-                src={g.attributes.image.data.attributes.url}
-                alt="갤러리 이미지"
-                width="120"
-              />
-            )}
-          </li>
-        ))}
+        {galleries.map((g) => {
+          if (!g?.attributes) return null;
+          const attr = g.attributes;
+          const imageUrl = attr.image?.data?.attributes?.url;
+
+          return (
+            <li key={g.id}>
+              <strong>{attr.title}</strong> ({attr.category})
+              {imageUrl && (
+                <img
+                  src={imageUrl}
+                  alt="갤러리 이미지"
+                  width="120"
+                />
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
