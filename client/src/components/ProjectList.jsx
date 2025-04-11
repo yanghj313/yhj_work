@@ -9,47 +9,51 @@ const illustratorIcon = '/path/to/illustrator-icon.png'; // 실제 경로로 수
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-const getIcon = (tag) => {
-  switch (tag.toLowerCase()) {
-    case 'react':
-      return <FaReact />;
-    case 'javascript':
-      return <FaJsSquare />;
-    case 'html':
-      return <FaHtml5 />;
-    case 'css':
-      return <FaCss3Alt />;
-    case 'photoshop':
-      return (
-        <img
-          src={photoshopIcon}
-          alt="Photoshop"
-          style={{ width: '24px', height: '24px' }}
-        />
-      );
-    case 'illustrator':
-      return (
-        <img
-          src={illustratorIcon}
-          alt="Illustrator"
-          style={{ width: '24px', height: '24px' }}
-        />
-      );
-    default:
-      return <span>{tag}</span>; // 아이콘이 없으면 텍스트로 태그 출력
-  }
-};
-
 const TagIcons = ({ tags }) => {
-  // 쉼표나 띄어쓰기로 구분된 태그를 배열로 변환
-  const tagArray = tags.split(' ').map((tag) => tag.trim());
+  const tagArray = tags.split(' ').map((tag) => tag.trim()); // 띄어쓰기로 구분된 문자열을 배열로 변환
+
+  const getIcon = (tag) => {
+    switch (tag.toLowerCase()) {
+      case 'react':
+        return <FaReact />;
+      case 'javascript':
+        return <FaJsSquare />;
+      case 'html':
+        return <FaHtml5 />;
+      case 'css':
+        return <FaCss3Alt />;
+      case 'photoshop':
+        return (
+          <img
+            src={photoshopIcon}
+            alt="Photoshop"
+            style={{ width: '24px', height: '24px' }}
+          />
+        );
+      case 'illustrator':
+        return (
+          <img
+            src={illustratorIcon}
+            alt="Illustrator"
+            style={{ width: '24px', height: '24px' }}
+          />
+        );
+      default:
+        return <span>{tag}</span>; // 아이콘이 없으면 텍스트로 태그 출력
+    }
+  };
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {tagArray.map((tag, index) => (
         <span
           key={index}
-          style={{ display: 'inline-flex', alignItems: 'center', margin: '0 8px' }}>
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            margin: '0 8px',
+            fontSize: '16px',
+          }}>
           {getIcon(tag)} {/* 아이콘 출력 또는 텍스트 출력 */}
           <span style={{ marginLeft: '4px' }}>{tag}</span> {/* 태그 텍스트 출력 */}
         </span>
