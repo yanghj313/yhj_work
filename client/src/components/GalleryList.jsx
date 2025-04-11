@@ -10,7 +10,7 @@ const GalleryList = () => {
     axios
       .get(`${API_BASE}/api/galleries?populate=*`)
       .then((res) => {
-        console.log('🔥갤러리 데이터:', res.data.data);
+        console.log('🔥 갤러리 데이터:', res.data.data);
         setGalleries((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
@@ -29,15 +29,18 @@ const GalleryList = () => {
               style={{ marginBottom: '2rem' }}>
               {/* 이미지 먼저 */}
               {g.image?.url && (
-                <img
-                  src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`}
-                  alt={g.image.name || '갤러리 이미지'}
-                  width="240"
-                  style={{ display: 'block', marginBottom: '0.5rem' }}
-                />
+                <div>
+                  <img
+                    src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`}
+                    alt={g.image.name || '갤러리 이미지'}
+                    width="240"
+                    style={{ marginBottom: '0.5rem', borderRadius: '8px' }}
+                  />
+                </div>
               )}
-              <strong>{g.title}</strong> {g.category && `(${g.category})`}
-              <br />
+
+              <strong>{g.title}</strong>
+              {g.category && <p>📂 카테고리: {g.category}</p>}
               {g.description && <p>{g.description}</p>}
             </li>
           ) : null
