@@ -41,7 +41,14 @@ const SkillList = () => {
 
               <strong>{s.name}</strong>
               {s.level && <p>🎯 숙련도: {s.level}</p>}
-              <div class="expain"> {s.description && <p>{s.description}</p>}</div>
+              <ul style={{ paddingLeft: '1rem' }}>
+                {s.description &&
+                  s.description
+                    .replace(/<[^>]+>/g, '')
+                    .split(/\n|\r|\r\n/)
+                    .filter(Boolean)
+                    .map((line, idx) => <li key={idx}>{line}</li>)}
+              </ul>
             </li>
           ) : null
         )}

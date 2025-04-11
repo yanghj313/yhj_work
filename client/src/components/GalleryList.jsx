@@ -41,7 +41,14 @@ const GalleryList = () => {
 
               <strong>{g.title}</strong>
               {g.category && <p>📂 카테고리: {g.category}</p>}
-              {g.description && <p>{g.description}</p>}
+              <ul style={{ paddingLeft: '1rem' }}>
+                {g.description &&
+                  g.description
+                    .replace(/<[^>]+>/g, '')
+                    .split(/\n|\r|\r\n/)
+                    .filter(Boolean)
+                    .map((line, idx) => <li key={idx}>{line}</li>)}
+              </ul>
             </li>
           ) : null
         )}
