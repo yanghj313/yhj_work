@@ -39,7 +39,10 @@ const GalleryList = () => {
                 </div>
               )}
 
-              <strong>{g.title}</strong>
+              <strong>
+                {' '}
+                <Link to={`/gallery/${g.documentId}`}>{g.title}</Link>
+              </strong>
               {g.category && <p>📂 카테고리: {g.category}</p>}
               <ul style={{ paddingLeft: '1rem' }}>
                 {g.description &&
