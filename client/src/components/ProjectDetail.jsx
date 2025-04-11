@@ -9,15 +9,22 @@ const ProjectDetail = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    if (!id) return;
+
     console.log('🆔 현재 상세 페이지 ID:', id); // 확인용
+
     axios
       .get(`${API_BASE}/api/projects/${id}?populate=*`)
       .then((res) => {
-        console.log('🔥 상세 데이터 응답:', res.data);
-        ...
+        const data = res.data.data;
+        if (data) {
+          setProjects([data]); // 배열로 감싸서 map 돌리기
+        } else {
+          console.warn('❗ 프로젝트 데이터 없음:', res);
+        }
       })
       .catch((err) => {
-        console.error('❌ 상세 프로젝트 오류:', err.message);
+        console.error('❌ 프로젝트 상세 오류:', err.message);
       });
   }, [id]);
 
