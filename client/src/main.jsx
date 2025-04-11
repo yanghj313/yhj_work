@@ -53,7 +53,7 @@ root.render(
           element={<GalleryList />}
         />
         <Route
-          path="/galleries/:id"
+          path="/gallery/:id"
           element={<GalleryDetail />}
         />
       </Routes>
