@@ -45,18 +45,18 @@ const ProjectList = () => {
               </strong>
               <br />
 
-              {p.link && (
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  🔗 프로젝트 바로가기
-                </a>
-              )}
-              <br />
-
               {p.role && <p>👤 역할: {p.role}</p>}
               {p.period && <p>🗓️ 작업 기간: {p.period}</p>}
+
+              {/* 태그 텍스트만 li로 출력 */}
+              {p.tags && (
+                <ul style={{ paddingLeft: '1rem' }}>
+                  {p.tags.split(',').map((tag, index) => {
+                    const trimmedTag = tag.trim(); // 공백 제거
+                    return <li key={index}>{trimmedTag}</li>; // 태그 텍스트만 li로 출력
+                  })}
+                </ul>
+              )}
             </li>
           ) : null
         )}
