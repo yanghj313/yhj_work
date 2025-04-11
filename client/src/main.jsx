@@ -31,8 +31,7 @@ root.render(
         <Route
           path="/projects/:id"
           element={<ProjectDetail />}
-        />{' '}
-        {/* ✅ 여기 복수형 */}
+        />
         <Route
           path="/skills"
           element={<SkillList />}
