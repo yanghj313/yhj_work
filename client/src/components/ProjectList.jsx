@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { FaReact, FaJsSquare, FaHtml5, FaCss3Alt } from 'react-icons/fa';
 
 // 아이콘 이미지 경로 (실제 경로로 수정)
-const photoshopIcon = '/path/to/photoshop-icon.png';
-const illustratorIcon = '/path/to/illustrator-icon.png';
+const photoshopIcon = '/path/to/photoshop-icon.png'; // 실제 경로로 수정
+const illustratorIcon = '/path/to/illustrator-icon.png'; // 실제 경로로 수정
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
+// TagIcons 컴포넌트: 쉼표로 구분된 태그를 받아서 아이콘으로 변환
 const TagIcons = ({ tags }) => {
   const tagArray = tags.split(' ').map((tag) => tag.trim()); // 띄어쓰기로 구분된 문자열을 배열로 변환
 
@@ -83,7 +84,7 @@ const ProjectList = () => {
             <li
               key={p.id}
               style={{ marginBottom: '2rem' }}>
-              {/* 썸네일 먼저 */}
+              {/* 썸네일 */}
               {p.thumbnail?.url && (
                 <div>
                   <img
