@@ -19,7 +19,7 @@
       "multiple": false
     },
     "description": {
-      "type": "blocks"
+      "type": "text"
     },
     "category": {
       "type": "enumeration",

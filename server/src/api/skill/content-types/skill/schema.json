@@ -23,7 +23,7 @@
       "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "description": {
-      "type": "blocks"
+      "type": "text"
     }
   }
 }
