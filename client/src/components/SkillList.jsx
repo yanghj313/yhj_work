@@ -12,7 +12,7 @@ const SkillList = () => {
         .get(`${API_BASE}/api/skills?populate=*`)
         .then((res) => {
           console.log('🔥기술 데이터:', res.data.data);
-          setProjects((res.data.data || []).filter(Boolean));
+          setSkills((res.data.data || []).filter(Boolean));
         })
         .catch((err) => {
           console.error('❌기술 데이터 오류:', err.message);

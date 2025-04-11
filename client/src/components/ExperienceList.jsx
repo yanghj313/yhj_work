@@ -11,7 +11,7 @@ const ExperienceList = () => {
       .get(`${API_BASE}/api/experiences?populate=*`)
       .then((res) => {
         console.log('🔥경험 데이터:', res.data.data);
-        setProjects((res.data.data || []).filter(Boolean));
+        setExperiences((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
         console.error('❌ 경험 데이터 오류:', err.message);

@@ -11,7 +11,7 @@ const GalleryList = () => {
       .get(`${API_BASE}/api/galleries?populate=*`)
       .then((res) => {
         console.log('🔥갤러리 데이터:', res.data.data);
-        setProjects((res.data.data || []).filter(Boolean));
+        setGalleries((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
         console.error('❌ 갤러리 데이터 오류:', err.message);
