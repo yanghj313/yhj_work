@@ -17,24 +17,16 @@
       "type": "blocks"
     },
     "thumbnail": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "customField": "cloudinary-image"
     },
     "images": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": true
+      "multiple": true,
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "customField": "cloudinary-image"
     },
     "link": {
       "type": "string"
@@ -44,11 +36,7 @@
     },
     "role": {
       "type": "enumeration",
-      "enum": [
-        "Publisher",
-        "Designer",
-        "Frontend"
-      ]
+      "enum": ["Publisher", "Designer", "Frontend"]
     }
   }
 }

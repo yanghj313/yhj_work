@@ -14,26 +14,17 @@
       "type": "string"
     },
     "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
+      "allowedTypes": ["images", "files", "videos", "audios"],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "customField": "cloudinary-image"
     },
     "description": {
       "type": "blocks"
     },
     "category": {
       "type": "enumeration",
-      "enum": [
-        "Banner",
-        "Landing Page",
-        "Poster",
-        "Others"
-      ]
+      "enum": ["Banner", "Landing Page", "Poster", "Others"]
     }
   }
 }

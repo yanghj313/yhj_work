@@ -12,10 +12,7 @@
   "attributes": {
     "Career": {
       "type": "enumeration",
-      "enum": [
-        "Education",
-        "Company"
-      ]
+      "enum": ["Education", "Company"]
     },
     "position": {
       "type": "string"
@@ -28,6 +25,13 @@
     },
     "description": {
       "type": "blocks"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"],
+      "customField": "cloudinary-image"
     }
   }
 }

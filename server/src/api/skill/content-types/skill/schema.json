@@ -4,7 +4,7 @@
   "info": {
     "singularName": "skill",
     "pluralName": "skills",
-    "displayName": " Skill"
+    "displayName": "Skill"
   },
   "options": {
     "draftAndPublish": true
@@ -15,21 +15,13 @@
     },
     "level": {
       "type": "enumeration",
-      "enum": [
-        "High",
-        "Middle",
-        "Low"
-      ]
+      "enum": ["High", "Middle", "Low"]
     },
     "icon": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "customField": "cloudinary-image"
     }
   }
 }

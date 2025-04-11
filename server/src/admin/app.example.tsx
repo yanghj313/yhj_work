@@ -1,37 +1,17 @@
 import type { StrapiApp } from '@strapi/strapi/admin';
+import CloudinaryImageField from './components/CloudinaryImageField';
 
 export default {
   config: {
-    locales: [
-      // 'ar',
-      // 'fr',
-      // 'cs',
-      // 'de',
-      // 'dk',
-      // 'es',
-      // 'he',
-      // 'id',
-      // 'it',
-      // 'ja',
-      // 'ko',
-      // 'ms',
-      // 'nl',
-      // 'no',
-      // 'pl',
-      // 'pt-BR',
-      // 'pt',
-      // 'ru',
-      // 'sk',
-      // 'sv',
-      // 'th',
-      // 'tr',
-      // 'uk',
-      // 'vi',
-      // 'zh-Hans',
-      // 'zh',
-    ],
+    locales: [], // 필요한 언어가 있으면 여기에 추가
   },
+
   bootstrap(app: StrapiApp) {
-    console.log(app);
+    app.addFields({
+      type: 'cloudinary-image',
+      Component: CloudinaryImageField,
+    });
+
+    console.log('✅ Strapi Admin bootstrap complete');
   },
 };
