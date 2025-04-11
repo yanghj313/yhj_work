@@ -10,13 +10,8 @@ const ExperienceList = () => {
     axios
       .get(`${API_BASE}/api/experiences?populate=*`)
       .then((res) => {
-        setExperiences(
-          (res.data.data || []).map((e) => ({
-            id: e.id,
-            ...e.attributes,
-            logo: e.attributes.logo?.data?.attributes,
-          }))
-        );
+        console.log('🔥경험 데이터:', res.data.data);
+        setProjects((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
         console.error('❌ 경험 데이터 오류:', err.message);

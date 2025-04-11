@@ -10,13 +10,8 @@ const GalleryList = () => {
     axios
       .get(`${API_BASE}/api/galleries?populate=*`)
       .then((res) => {
-        setGalleries(
-          (res.data.data || []).map((g) => ({
-            id: g.id,
-            ...g.attributes,
-            image: g.attributes.image?.data?.attributes,
-          }))
-        );
+        console.log('🔥갤러리 데이터:', res.data.data);
+        setProjects((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
         console.error('❌ 갤러리 데이터 오류:', err.message);

@@ -7,21 +7,18 @@ const SkillList = () => {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${API_BASE}/api/skills?populate=*`)
-      .then((res) => {
-        setSkills(
-          (res.data.data || []).map((s) => ({
-            id: s.id,
-            ...s.attributes,
-            icon: s.attributes.icon?.data?.attributes,
-          }))
-        );
-      })
-      .catch((err) => {
-        console.error('❌ 스킬 데이터 오류:', err.message);
-      });
-  }, []);
+    useEffect(() => {
+      axios
+        .get(`${API_BASE}/api/skills?populate=*`)
+        .then((res) => {
+          console.log('🔥기술 데이터:', res.data.data);
+          setProjects((res.data.data || []).filter(Boolean));
+        })
+        .catch((err) => {
+          console.error('❌기술 데이터 오류:', err.message);
+        });
+    }, []);
+  });
 
   return (
     <div>
