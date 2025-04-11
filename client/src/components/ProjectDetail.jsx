@@ -22,7 +22,7 @@ const ProjectDetail = () => {
 
   if (!project) return <p>📭 상세 데이터를 불러오는 중...</p>;
 
-  const data = project;
+  const data = project.attributes;
 
   return (
     <div style={{ padding: '1rem' }}>
@@ -80,7 +80,7 @@ const ProjectDetail = () => {
       )}
 
       <br />
-      <Link to="/">← 목록으로</Link>
+      <Link to="/projects">← 목록으로</Link>
     </div>
   );
 };
