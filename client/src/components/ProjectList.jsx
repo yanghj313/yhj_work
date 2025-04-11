@@ -28,7 +28,7 @@ const ProjectList = () => {
             <li
               key={p.id}
               style={{ marginBottom: '2rem' }}>
-              {/* 썸네일 */}
+              {/* 썸네일 먼저 */}
               {p.thumbnail?.url && (
                 <div>
                   <img
