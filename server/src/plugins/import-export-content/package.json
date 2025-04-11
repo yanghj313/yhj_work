@@ -4,9 +4,10 @@
   "description": "This is a plugin for import and export content of collection types.",
   "license": "MIT",
   "strapi": {
-    "name": "Import / Export Content",
-    "icon": "sync-alt",
-    "description": "Import and Export your Content"
+    "name": "import-export-content",
+    "displayName": "Import Export Content",
+    "description": "Import and export your content easily.",
+    "kind": "plugin"
   },
   "scripts": {
     "test": "echo \"No test specified\""
