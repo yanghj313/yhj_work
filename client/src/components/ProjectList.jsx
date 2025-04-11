@@ -10,13 +10,14 @@ const ProjectList = () => {
     axios
       .get(`${API_BASE}/api/projects?populate=*`)
       .then((res) => {
-        setProjects(
-          (res.data.data || []).map((p) => ({
+        const flatProjects = (res.data.data || []).map((p) => {
+          return {
             id: p.id,
             ...p.attributes,
-            thumbnail: p.attributes.thumbnail?.data?.attributes,
-          }))
-        );
+            thumbnail: p.attributes.thumbnail?.data?.attributes || null,
+          };
+        });
+        setProjects(flatProjects);
       })
       .catch((err) => {
         console.error('❌ 프로젝트 데이터 오류:', err.message);
@@ -33,6 +34,8 @@ const ProjectList = () => {
             style={{ marginBottom: '2rem' }}>
             <strong>{p.title}</strong>
             <br />
+
+            {/* 프로젝트 링크 */}
             {p.link && (
               <a
                 href={p.link}
@@ -42,11 +45,13 @@ const ProjectList = () => {
               </a>
             )}
             <br />
+
+            {/* 썸네일 이미지 */}
             {p.thumbnail?.url && (
               <div>
                 <img
                   src={API_BASE + p.thumbnail.url}
-                  alt={p.thumbnail.name || '프로젝트 이미지'}
+                  alt={p.thumbnail.name || '프로젝트 썸네일'}
                   width="240"
                   style={{ marginTop: '0.5rem', borderRadius: '8px' }}
                 />
