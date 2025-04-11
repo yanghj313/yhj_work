@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header'; // Header 불러오기
+import Header from './components/Header';
 import App from './App';
 import ProjectList from './components/ProjectList';
 import ProjectDetail from './components/ProjectDetail';
@@ -13,13 +13,12 @@ import GalleryList from './components/GalleryList';
 import GalleryDetail from './components/GalleryDetail';
 import './index.css';
 
-const rootElement = document.getElementById('root');
-const root = ReactDOM.createRoot(rootElement);
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Header /> {/* 여기서 헤더 추가 */}
+      <Header />
       <Routes>
         <Route
           path="/"
@@ -30,15 +29,16 @@ root.render(
           element={<ProjectList />}
         />
         <Route
-          path="/project/:id"
+          path="/projects/:id"
           element={<ProjectDetail />}
-        />
+        />{' '}
+        {/* ✅ 여기 복수형 */}
         <Route
           path="/skills"
           element={<SkillList />}
         />
         <Route
-          path="/skill/:id"
+          path="/skills/:id"
           element={<SkillDetail />}
         />
         <Route
@@ -46,7 +46,7 @@ root.render(
           element={<ExperienceList />}
         />
         <Route
-          path="/experience/:id"
+          path="/experiences/:id"
           element={<ExperienceDetail />}
         />
         <Route
@@ -54,7 +54,7 @@ root.render(
           element={<GalleryList />}
         />
         <Route
-          path="/gallery/:id"
+          path="/galleries/:id"
           element={<GalleryDetail />}
         />
       </Routes>
