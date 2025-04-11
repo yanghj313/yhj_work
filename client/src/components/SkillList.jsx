@@ -41,6 +41,7 @@ const SkillList = () => {
 
               <strong>{s.name}</strong>
               {s.level && <p>🎯 숙련도: {s.level}</p>}
+              <div class="expain"> {s.description && <p>{s.description}</p>}</div>
             </li>
           ) : null
         )}
