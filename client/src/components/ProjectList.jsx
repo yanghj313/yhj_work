@@ -41,7 +41,7 @@ const ProjectList = () => {
               )}
 
               <strong>
-                <Link to={`/projects/${p.id}`}>{p.title}</Link>
+                <Link to={`/projects/${p.documentId}`}>{p.title}</Link>
               </strong>
               <br />
 
