@@ -10,8 +10,10 @@ const illustratorIcon = '/path/to/illustrator-icon.png'; // 실제 경로로 수
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const TagIcons = ({ tags }) => {
-  const tagArray = tags.split(' ').map((tag) => tag.trim()); // 띄어쓰기로 구분된 문자열을 배열로 변환
+  // 쉼표로 구분된 문자열을 배열로 변환
+  const tagArray = tags.split(',').map((tag) => tag.trim()); // 쉼표로 구분하고 각 항목을 trim 처리
 
+  // 태그에 맞는 아이콘을 반환하는 함수
   const getIcon = (tag) => {
     switch (tag.toLowerCase()) {
       case 'react':
@@ -48,12 +50,7 @@ const TagIcons = ({ tags }) => {
       {tagArray.map((tag, index) => (
         <span
           key={index}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            margin: '0 8px',
-            fontSize: '16px',
-          }}>
+          style={{ display: 'inline-flex', alignItems: 'center', margin: '0 8px' }}>
           {getIcon(tag)} {/* 아이콘 출력 또는 텍스트 출력 */}
           <span style={{ marginLeft: '4px' }}>{tag}</span> {/* 태그 텍스트 출력 */}
         </span>
