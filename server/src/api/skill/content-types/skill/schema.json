@@ -20,8 +20,7 @@
     "icon": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images", "files", "videos", "audios"],
-      "customField": "cloudinary-image"
+      "allowedTypes": ["images", "files", "videos", "audios"]
     }
   }
 }
