@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { FaReact, FaJsSquare, FaHtml5, FaCss3Alt } from 'react-icons/fa';
 
 // 아이콘 이미지 경로 (실제 경로로 수정)
-const photoshopIcon = '/path/to/photoshop-icon.png'; // 실제 경로로 수정
-const illustratorIcon = '/path/to/illustrator-icon.png'; // 실제 경로로 수정
+const photoshopIcon = '/images/photoshop-icon.png'; // public/images/photoshop-icon.png
+const illustratorIcon = '/images/illustrator-icon.png'; // public/images/illustrator-icon.png
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
+// TagIcons 컴포넌트: 쉼표로 구분된 태그를 받아서 아이콘으로 변환
 const TagIcons = ({ tags }) => {
-  // 쉼표로 구분된 문자열을 배열로 변환
+  // 쉼표로 구분된 문자열을 배열로 변환하고, 공백을 제거
   const tagArray = tags.split(',').map((tag) => tag.trim()); // 쉼표로 구분하고 각 항목을 trim 처리
 
   // 태그에 맞는 아이콘을 반환하는 함수
@@ -65,9 +66,9 @@ const ProjectList = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE}/api/projects?populate=*`)
+      .get(`${API_BASE}/api/projects`) // populate 제거
       .then((res) => {
-        console.log('🔥 프로젝트 데이터:', res.data.data);
+        console.log('🔥 프로젝트 데이터:', res.data.data); // 데이터 확인
         setProjects((res.data.data || []).filter(Boolean));
       })
       .catch((err) => {
@@ -95,12 +96,10 @@ const ProjectList = () => {
                   />
                 </div>
               )}
-
               <strong>
                 <Link to={`/projects/${p.documentId}`}>{p.title}</Link>
               </strong>
               <br />
-
               {p.link && (
                 <a
                   href={p.link}
@@ -110,12 +109,10 @@ const ProjectList = () => {
                 </a>
               )}
               <br />
-
               {p.role && <p>👤 역할: {p.role}</p>}
               {p.period && <p>🗓️ 작업 기간: {p.period}</p>}
-
               {/* 아이콘 형태로 태그 출력 */}
-              {p.tags && <TagIcons tags={p.tags} />}
+              {p.tags && <TagIcons tags={p.tags} />} {/* tags 데이터가 없으면 렌더링되지 않음 */}
             </li>
           ) : null
         )}
