@@ -10,14 +10,27 @@ const ProjectList = () => {
     axios
       .get(`${API_BASE}/api/projects?populate=*`)
       .then((res) => {
-        const flatProjects = (res.data.data || []).map((p) => {
+        const rawData = res.data.data || [];
+
+        // 데이터 평탄화 + thumbnail 안전 처리
+        const formatted = rawData.map((project) => {
+          const attributes = project.attributes || {};
+
+          const thumbnailData = attributes.thumbnail?.data;
+          const thumbnail = thumbnailData?.attributes || null;
+
           return {
-            id: p.id,
-            ...p.attributes,
-            thumbnail: p.attributes.thumbnail?.data?.attributes || null,
+            id: project.id,
+            title: attributes.title || '',
+            link: attributes.link || '',
+            period: attributes.period || '',
+            role: attributes.role || '',
+            description: attributes.description || '',
+            thumbnail: thumbnail, // 썸네일이 없으면 null
           };
         });
-        setProjects(flatProjects);
+
+        setProjects(formatted);
       })
       .catch((err) => {
         console.error('❌ 프로젝트 데이터 오류:', err.message);
@@ -51,7 +64,7 @@ const ProjectList = () => {
               <div>
                 <img
                   src={API_BASE + p.thumbnail.url}
-                  alt={p.thumbnail.name || '프로젝트 썸네일'}
+                  alt={p.thumbnail.name || '프로젝트 이미지'}
                   width="240"
                   style={{ marginTop: '0.5rem', borderRadius: '8px' }}
                 />
