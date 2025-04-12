@@ -27,16 +27,17 @@ const Login = ({ onLogin }) => {
       });
       const { jwt, user } = res.data;
       localStorage.setItem('token', jwt);
+      localStorage.setItem('user', JSON.stringify(user));
       if (remember) {
         localStorage.setItem('savedEmail', user.email);
       } else {
         localStorage.removeItem('savedEmail');
       }
       onLogin(user);
-      alert(`${user.username}님, 환영합니다!`);
+      window.alert(`${user.username}님, 환영합니다!`);
       navigate(from, { replace: true });
     } catch (err) {
-      alert('로그인 실패!');
+      window.alert('로그인 실패!');
     }
   };
 

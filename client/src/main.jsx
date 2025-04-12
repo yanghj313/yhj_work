@@ -1,4 +1,3 @@
-// main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -19,10 +18,14 @@ import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const MainApp = () => {
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = React.useState(() => {
+    const stored = localStorage.getItem('user');
+    return stored ? JSON.parse(stored) : null;
+  });
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setUser(null);
   };
 
