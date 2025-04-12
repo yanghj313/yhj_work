@@ -10,19 +10,19 @@ const SearchResult = () => {
 	const [input, setInput] = useState('');
 	const navigate = useNavigate();
 	const { search } = useLocation();
-	const query = new URLSearchParams(search).get('query');
+	const query = decodeURIComponent(new URLSearchParams(search).get('query') || '');
 
 	useEffect(() => {
-		setInput(query || '');
+		setInput(query);
 		const fetchAll = async () => {
 			if (!query) return;
 			setLoading(true);
 			try {
 				const [projects, skills, experiences, galleries] = await Promise.all([
-					axios.get(`${API_BASE}/api/projects?populate=*&&filters[description][$containsi]=${query}`),
-					axios.get(`${API_BASE}/api/skills?populate=*&&filters[description][$containsi]=${query}`),
-					axios.get(`${API_BASE}/api/experiences?populate=*&&filters[description][$containsi]=${query}`),
-					axios.get(`${API_BASE}/api/galleries?populate=*&&filters[description][$containsi]=${query}`),
+					axios.get(`${API_BASE}/api/projects`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
+					axios.get(`${API_BASE}/api/skills`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
+					axios.get(`${API_BASE}/api/experiences`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
+					axios.get(`${API_BASE}/api/galleries`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
 				]);
 
 				setResults({
