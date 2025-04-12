@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import ReactFullpage from '@fullpage/react-fullpage';
+import React, { useEffect, useRef } from 'react';
 import Splitting from 'splitting';
 import ScrollOut from 'scroll-out';
+import LocomotiveScroll from 'locomotive-scroll';
+import 'locomotive-scroll/dist/locomotive-scroll.css';
 import '../styles/fullpage.css';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
@@ -14,32 +15,31 @@ const sectionTexts = [
 ];
 
 const FullpageHome = () => {
+	const scrollRef = useRef(null);
+
 	useEffect(() => {
 		Splitting();
-		ScrollOut({
-			targets: '.word',
-			scrollingElement: '.fp-scroller',
+		ScrollOut({ targets: '.word' });
+
+		const scroll = new LocomotiveScroll({
+			el: scrollRef.current,
+			smooth: true,
+			lerp: 0.07,
 		});
+
+		return () => scroll.destroy();
 	}, []);
 
 	return (
-		<ReactFullpage
-			licenseKey={'null'}
-			scrollingSpeed={800}
-			navigation
-			anchors={['welcome', 'introduction', 'interest', 'travel']}
-			render={() => (
-				<ReactFullpage.Wrapper>
-					{sectionTexts.map((section, i) => (
-						<div key={i} className={`section panel ${i === 0 ? 'active' : ''}`} style={{ backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-							<div className={`text text--${section.effect} word`} data-scroll="out" data-splitting>
-								{section.text}
-							</div>
-						</div>
-					))}
-				</ReactFullpage.Wrapper>
-			)}
-		/>
+		<div ref={scrollRef} data-scroll-container>
+			{sectionTexts.map((section, i) => (
+				<section key={i} className={`panel section`} style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }} data-scroll-section>
+					<div className={`text text--${section.effect} word`} data-scroll data-splitting>
+						{section.text}
+					</div>
+				</section>
+			))}
+		</div>
 	);
 };
 
