@@ -11,52 +11,37 @@ import ExperienceList from './components/ExperienceList';
 import ExperienceDetail from './components/ExperienceDetail';
 import GalleryList from './components/GalleryList';
 import GalleryDetail from './components/GalleryDetail';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-  <React.StrictMode>
+const MainApp = () => {
+  const [user, setUser] = React.useState(null);
+
+  return (
     <BrowserRouter>
-      <Header />
+      <Header user={user} />
       <Routes>
-        <Route
-          path="/"
-          element={<App />}
-        />
-        <Route
-          path="/projects"
-          element={<ProjectList />}
-        />
-        <Route
-          path="/projects/:id"
-          element={<ProjectDetail />}
-        />
-        <Route
-          path="/skills"
-          element={<SkillList />}
-        />
-        <Route
-          path="/skills/:id"
-          element={<SkillDetail />}
-        />
-        <Route
-          path="/experiences"
-          element={<ExperienceList />}
-        />
-        <Route
-          path="/experiences/:id"
-          element={<ExperienceDetail />}
-        />
-        <Route
-          path="/galleries"
-          element={<GalleryList />}
-        />
-        <Route
-          path="/gallery/:id"
-          element={<GalleryDetail />}
-        />
+        <Route path="/" element={<App />} />
+        <Route path="/projects" element={<ProjectList />} />
+        <Route path="/projects/:id" element={<ProjectDetail />} />
+        <Route path="/skills" element={<SkillList />} />
+        <Route path="/skills/:id" element={<SkillDetail />} />
+        <Route path="/experiences" element={<ExperienceList />} />
+        <Route path="/experiences/:id" element={<ExperienceDetail />} />
+        <Route path="/galleries" element={<GalleryList />} />
+        <Route path="/gallery/:id" element={<GalleryDetail />} />
+        <Route path="/login" element={<Login onLogin={setUser} />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
+  );
+};
+
+root.render(
+  <React.StrictMode>
+    <MainApp />
   </React.StrictMode>
 );
