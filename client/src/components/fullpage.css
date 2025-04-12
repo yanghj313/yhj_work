@@ -9,7 +9,16 @@ body {
 	background: #fff;
 	min-height: 100vh;
 	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
 	scroll-behavior: smooth;
+}
+
+.container {
+	height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+	scroll-snap-type: y mandatory;
 }
 
 .page {
@@ -24,16 +33,6 @@ body {
 	position: relative;
 	background: #fff;
 	color: #333;
-}
-
-.container {
-	height: 100vh;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	scroll-snap-type: y mandatory;
-}
-
-.page {
 	font-size: 3rem;
 	text-align: center;
 }

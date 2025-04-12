@@ -14,7 +14,7 @@ const sectionTexts = [
 
 const FullpageHome = () => {
 	useEffect(() => {
-		Splitting();
+		Splitting(); // 먼저 분해!
 		ScrollOut({
 			targets: '.word',
 			onShown: el => el.setAttribute('data-scroll', 'in'),
@@ -26,7 +26,7 @@ const FullpageHome = () => {
 		<div className="container">
 			{sectionTexts.map((section, i) => (
 				<section key={i} className="page" data-scroll-section>
-					<div className={`text text--${section.effect} word`} data-splitting data-scroll="out">
+					<div className={`text text--${section.effect} word`} data-splitting>
 						{section.text}
 					</div>
 				</section>
