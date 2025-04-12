@@ -19,7 +19,10 @@ const Header = ({ user, onLogout }) => (
           </>
         ) : (
           <>
-            
+            {/* 사용자 닉네임 표시 */}
+            <li><span>{user.username}님</span></li>
+
+            {/* 최고 관리자용 설정 버튼 */}
             {user.email === 'lawork@gmail.com' && (
               <li>
                 <a
@@ -31,6 +34,7 @@ const Header = ({ user, onLogout }) => (
                 </a>
               </li>
             )}
+
             <li>
               <button onClick={onLogout} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                 로그아웃
