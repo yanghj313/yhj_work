@@ -1,3 +1,4 @@
+// main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -13,6 +14,7 @@ import GalleryList from './components/GalleryList';
 import GalleryDetail from './components/GalleryDetail';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import FullpageHome from './components/FullpageHome';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,7 +29,7 @@ const MainApp = () => {
     <BrowserRouter>
       <Header user={user} />
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<FullpageHome />} />
         <Route path="/projects" element={<ProjectList />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/skills" element={<SkillList />} />
