@@ -2,10 +2,9 @@
 import React, { useEffect } from 'react';
 import Splitting from 'splitting';
 import ScrollOut from 'scroll-out';
-
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
-import './fullpage.css'; // canvas에서 작업 중인 fullpage.css 경로
+import './fullpage.css'; // 작성하신 CSS
 
 const sectionTexts = [
 	{ text: 'Welcome', effect: 'random' },
@@ -25,15 +24,15 @@ const FullpageHome = () => {
 	}, []);
 
 	return (
-		
+		<>
 			{sectionTexts.map((section, i) => (
 				<section key={i} className="page" data-scroll-section>
-					<div className={`text text--${section.effect} word`} data-splitting data-scroll="out">
+					<div className={`text text--${section.effect} word`} data-scroll data-splitting>
 						{section.text}
 					</div>
 				</section>
 			))}
-	
+		</>
 	);
 };
 
