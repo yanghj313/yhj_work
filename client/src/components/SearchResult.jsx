@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE = 'https://yhjwork-production.up.railway.app/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const SearchResult = () => {
 	const [results, setResults] = useState([]);
@@ -15,14 +15,20 @@ const SearchResult = () => {
 			setLoading(true);
 			try {
 				const endpoints = ['projects', 'skills', 'experiences', 'galleries'];
-				const allResults = await Promise.all(endpoints.map(endpoint => axios.get(`${API_BASE}/${endpoint}?populate=*&filters[title][$containsi]=${query}`)));
+				const allResults = await Promise.all(endpoints.map(endpoint => axios.get(`${API_BASE}/api/${endpoint}?populate=*&&filters[title][$containsi]=${query}`)));
 
-				const merged = allResults.flatMap((res, i) =>
-					res.data.data.map(item => ({
-						...item,
-						category: endpoints[i],
-					}))
-				);
+				const merged = allResults.flatMap((res, i) => {
+					const items = res.data.data || [];
+					return items.map(item => {
+						return {
+							id: item.id,
+							category: endpoints[i],
+							title: item.title,
+							description: item.description,
+							thumbnail: item.thumbnail,
+						};
+					});
+				});
 
 				setResults(merged);
 			} catch (err) {
@@ -43,8 +49,29 @@ const SearchResult = () => {
 			<h2>🔍 "{query}" 검색 결과</h2>
 			<ul style={{ listStyle: 'none', padding: 0 }}>
 				{results.map(item => (
-					<li key={item.id} style={{ marginBottom: '1rem' }}>
-						<strong>[{item.category}]</strong> {item.attributes?.title || '(제목 없음)'}
+					<li key={item.id} style={{ marginBottom: '2rem' }}>
+						<strong>[{item.category}]</strong> <p style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{item.title || '(제목 없음)'}</p>
+						{item.thumbnail?.url && (
+							<div>
+								<img
+									src={item.thumbnail.url.startsWith('http') ? item.thumbnail.url : `${API_BASE}${item.thumbnail.url}`}
+									alt={item.title || '썸네일'}
+									width="200"
+									style={{ marginBottom: '1rem', borderRadius: '0.5rem' }}
+								/>
+							</div>
+						)}
+						{item.description && (
+							<ul style={{ paddingLeft: '1rem' }}>
+								{item.description
+									.replace(/<[^>]+>/g, '')
+									.split(/\r?\n/)
+									.filter(Boolean)
+									.map((line, idx) => (
+										<li key={idx}>{line}</li>
+									))}
+							</ul>
+						)}
 					</li>
 				))}
 			</ul>
