@@ -18,14 +18,12 @@ const FullpageHome = () => {
 	const scrollRef = useRef();
 
 	useEffect(() => {
-		const results = Splitting(); // 문자 분할
-		console.log('Splitting 적용됨:', results); // 디버깅용
-
-		ScrollOut({
-			targets: '.word',
-			onShown: el => el.setAttribute('data-scroll', 'in'),
-			onHidden: el => el.setAttribute('data-scroll', 'out'),
+		const scroll = new LocomotiveScroll({
+			el: document.querySelector('[data-scroll-container]'),
+			smooth: true,
 		});
+
+		return () => scroll.destroy(); // cleanup
 	}, []);
 
 	return (
