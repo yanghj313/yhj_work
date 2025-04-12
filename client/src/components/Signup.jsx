@@ -1,11 +1,14 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -17,7 +20,8 @@ const Signup = () => {
         email,
         password,
       });
-      alert('회원가입 완료!');
+      alert('회원가입이 정상적으로 완료되었습니다.');
+      navigate('/');
     } catch (err) {
       if (err.response?.data?.error?.message.includes('Email')) {
         setErrorMsg('이미 사용 중인 이메일입니다.');
