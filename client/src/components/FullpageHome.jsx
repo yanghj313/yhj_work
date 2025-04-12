@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
 import Splitting from 'splitting';
 import ScrollOut from 'scroll-out';
-import './fullpage.css';
+import '../styles/fullpage.css';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
 
