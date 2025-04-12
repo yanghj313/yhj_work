@@ -43,16 +43,16 @@ const Login = ({ onLogin }) => {
 
   return (
     <form onSubmit={handleLogin}>
-      <h2>로그인</h2>
+      <h2>Login</h2>
       <input
         type="text"
-        placeholder="아이디 또는 이메일"
+        placeholder="ID or E-mail"
         value={identifier}
         onChange={(e) => setIdentifier(e.target.value)}
       />
       <input
         type="password"
-        placeholder="비밀번호"
+        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -64,7 +64,7 @@ const Login = ({ onLogin }) => {
         />
         아이디 저장
       </label>
-      <button type="submit">로그인</button>
+      <button type="submit">Login</button></button>
     </form>
   );
 };
