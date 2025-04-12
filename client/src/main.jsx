@@ -23,15 +23,9 @@ const MainApp = () => {
     return stored ? JSON.parse(stored) : null;
   });
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
-  };
-
   return (
     <BrowserRouter>
-      <Header user={user} onLogout={handleLogout} />
+      <Header user={user} />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/projects" element={<ProjectList />} />

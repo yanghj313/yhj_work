@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ user, onLogout }) => (
+const Header = ({ user }) => (
   <header className="site-header">
     <nav className="nav">
       <ul>
@@ -35,10 +35,18 @@ const Header = ({ user, onLogout }) => (
               </li>
             )}
 
+            {/* 로그아웃 링크 */}
             <li>
-              <button onClick={onLogout}>
+              <a
+                href="/"
+                onClick={() => {
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('user');
+                  window.location.reload();
+                }}
+              >
                 로그아웃
-              </button>
+              </a>
             </li>
           </>
         )}
