@@ -19,7 +19,7 @@ const Header = ({ user, onLogout }) => (
           </>
         ) : (
           <>
-            {/* ⚙ 설정 버튼은 최고 관리자만 */}
+            
             {user.email === 'lawork@gmail.com' && (
               <li>
                 <a
