@@ -3,8 +3,8 @@ import Splitting from 'splitting';
 import ScrollOut from 'scroll-out';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
-import './fullpage.css'; // 네가 올린 CSS 파일 경로
 import './fullpage-style-full.scss';
+import './fullpage.css';
 
 const sectionTexts = [
 	{ id: 'welcome', text: 'Welcome', effect: 'random' },
@@ -18,13 +18,14 @@ const FullpageHome = () => {
 		Splitting();
 		ScrollOut({
 			targets: '.word',
+			once: false,
 			onShown: el => el.setAttribute('data-scroll', 'in'),
 			onHidden: el => el.setAttribute('data-scroll', 'out'),
 		});
 	}, []);
 
 	return (
-		<div className="container">
+		<div className="fullpage-wrapper">
 			{sectionTexts.map((section, index) => (
 				<section key={index} id={section.id} className="page" data-scroll-section>
 					<div className={`text text--${section.effect} word`} data-scroll data-splitting="chars">
