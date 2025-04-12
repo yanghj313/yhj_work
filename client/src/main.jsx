@@ -1,3 +1,4 @@
+// main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -20,9 +21,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const MainApp = () => {
   const [user, setUser] = React.useState(null);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
   return (
     <BrowserRouter>
-      <Header user={user} />
+      <Header user={user} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/projects" element={<ProjectList />} />

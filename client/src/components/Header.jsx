@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ user }) => (
+const Header = ({ user, onLogout }) => (
   <header className="site-header">
     <nav className="nav">
       <ul>
@@ -12,23 +12,31 @@ const Header = ({ user }) => (
         <li><Link to="/experiences">Experience</Link></li>
         <li><Link to="/galleries">Gallery</Link></li>
 
-        {!user && (
+        {!user ? (
           <>
             <li><Link to="/login">로그인</Link></li>
             <li><Link to="/signup">회원가입</Link></li>
           </>
-        )}
-
-        {user?.role?.name === 'Admin' && (
-          <li>
-            <a
-              href="https://yhjwork-production.up.railway.app/admin"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              🛠 관리자 페이지
-            </a>
-          </li>
+        ) : (
+          <>
+            {/* ⚙ 설정 버튼은 최고 관리자만 */}
+            {user.email === 'lawork@gmail.com' && (
+              <li>
+                <a
+                  href="https://yhjwork-production.up.railway.app/admin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ⚙ 설정
+                </a>
+              </li>
+            )}
+            <li>
+              <button onClick={onLogout} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                로그아웃
+              </button>
+            </li>
+          </>
         )}
       </ul>
     </nav>

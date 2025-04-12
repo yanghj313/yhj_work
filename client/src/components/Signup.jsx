@@ -5,9 +5,12 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setErrorMsg('');
+
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/local/register`, {
         username,
@@ -16,13 +19,20 @@ const Signup = () => {
       });
       alert('회원가입 완료!');
     } catch (err) {
-      alert('회원가입 실패!');
+      if (err.response?.data?.error?.message.includes('Email')) {
+        setErrorMsg('이미 사용 중인 이메일입니다.');
+      } else if (err.response?.data?.error?.message.includes('Username')) {
+        setErrorMsg('이미 사용 중인 닉네임입니다.');
+      } else {
+        setErrorMsg('회원가입 실패! 다시 시도해 주세요.');
+      }
     }
   };
 
   return (
     <form onSubmit={handleSignup}>
       <h2>회원가입</h2>
+      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
       <input
         type="text"
         placeholder="유저 이름"
