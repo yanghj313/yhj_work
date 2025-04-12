@@ -7,20 +7,21 @@ body,
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	overflow: scroll;
+	width: 100%;
+	overflow: auto;
 	font-family: 'Lato', sans-serif;
 }
 
-body {
-	scroll-snap-type: y mandatory;
-}
 .page {
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 4rem;
+	font-size: 3rem;
+	position: relative;
 	scroll-snap-align: start;
+	overflow: hidden;
 }
 
 .text,
