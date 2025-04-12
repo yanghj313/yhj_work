@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Splitting from 'splitting';
-import ScrollOut from 'scroll-out';
-import Lenis from '@studio-freight/lenis';
+import LocomotiveScroll from 'locomotive-scroll';
+import 'locomotive-scroll/dist/locomotive-scroll.css';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
 import './fullpage-style-full.scss';
@@ -15,37 +15,27 @@ const sectionTexts = [
 ];
 
 const FullpageHome = () => {
+	const scrollRef = useRef();
+
 	useEffect(() => {
 		Splitting();
 
-		const scrollOut = ScrollOut({
-			targets: '.word',
-			once: false,
-			onShown: el => el.setAttribute('data-scroll', 'in'),
-			onHidden: el => el.setAttribute('data-scroll', 'out'),
-		});
-
-		const lenis = new Lenis({
+		const scroll = new LocomotiveScroll({
+			el: scrollRef.current,
 			smooth: true,
+			lerp: 0.1,
 		});
 
-		lenis.on('scroll', () => {
-			scrollOut.update(); // 💡 Lenis가 스크롤할 때 ScrollOut에게 알림
-		});
-
-		function raf(time) {
-			lenis.raf(time);
-			requestAnimationFrame(raf);
-		}
-
-		requestAnimationFrame(raf);
+		return () => {
+			scroll.destroy();
+		};
 	}, []);
 
 	return (
-		<div className="fullpage-wrapper">
-			{sectionTexts.map((section, index) => (
-				<section key={index} id={section.id} className="page" data-scroll-section>
-					<div className={`text text--${section.effect} word`} data-scroll data-splitting="chars">
+		<div data-scroll-container ref={scrollRef}>
+			{sectionTexts.map((section, i) => (
+				<section key={i} id={section.id} className="page" data-scroll-section>
+					<div className={`text text--${section.effect} word`} data-splitting="chars" data-scroll data-scroll-speed="1">
 						{section.text}
 					</div>
 				</section>
