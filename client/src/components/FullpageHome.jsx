@@ -25,7 +25,7 @@ const FullpageHome = () => {
 	}, []);
 
 	return (
-		<div className="container">
+		
 			{sectionTexts.map((section, i) => (
 				<section key={i} className="page" data-scroll-section>
 					<div className={`text text--${section.effect} word`} data-splitting data-scroll="out">
@@ -33,7 +33,7 @@ const FullpageHome = () => {
 					</div>
 				</section>
 			))}
-		</div>
+	
 	);
 };
 
