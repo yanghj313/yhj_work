@@ -7,8 +7,6 @@ import 'splitting/dist/splitting-cells.css';
 import './fullpage-style-full.scss';
 import './fullpage.css';
 
-document.querySelector('.fullpage-wrapper').scrollTop = 100;
-
 const sectionTexts = [
 	{ id: 'welcome', text: 'Welcome', effect: 'random' },
 	{ id: 'intro', text: 'Introduction', effect: 'enter' },
