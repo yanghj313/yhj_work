@@ -18,19 +18,20 @@ const FullpageHome = () => {
 	useEffect(() => {
 		Splitting();
 
-		ScrollOut({
+		const scrollOut = ScrollOut({
 			targets: '.word',
 			once: false,
 			onShown: el => el.setAttribute('data-scroll', 'in'),
 			onHidden: el => el.setAttribute('data-scroll', 'out'),
 		});
 
-		// 🚀 부드러운 스크롤 적용
 		const lenis = new Lenis({
 			smooth: true,
-			wheelMultiplier: 1.2,
-			touchMultiplier: 1.5,
 			gestureOrientation: 'vertical',
+		});
+
+		lenis.on('scroll', () => {
+			scrollOut.update(); // 💡 Lenis가 스크롤할 때 ScrollOut에게 알림
 		});
 
 		function raf(time) {
