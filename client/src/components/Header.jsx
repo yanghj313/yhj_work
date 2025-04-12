@@ -70,7 +70,7 @@ const Header = ({ user }) => {
 					)}
 					<li>
 						<form className="search-bar" onSubmit={handleSearch}>
-							<input type="search" name="search" pattern=".*\\S.*" required value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+							<input type="search" name="search" required placeholder="검색어 입력" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
 							<button className="search-btn" type="submit">
 								<span>Search</span>
 							</button>

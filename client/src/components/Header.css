@@ -85,7 +85,8 @@
 }
 .search-bar,
 .search-bar input:focus,
-.search-bar input:valid {
+.search-bar input:valid,
+.search-bar input:not(:placeholder-shown) {
 	width: 100%;
 }
 .search-bar input:focus,
