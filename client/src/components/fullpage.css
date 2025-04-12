@@ -1,7 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:700');
+
 .section {
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 2rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+	background: #111;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+.page {
+	height: 100vh;
+	width: 100vw;
+	scroll-snap-align: center;
+	font-size: calc(var(--font-size) * 1px);
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.container {
+	height: 100vh;
+	overflow: auto;
+	overflow-x: hidden;
+	scroll-snap-type: y mandatory;
+}
+
+.page {
+	color: #fff;
+	font-size: 3rem;
+	text-align: center;
+}
+
+@media (min-width: 768px) {
+	.page {
+		font-size: 5rem;
+	}
+}
+
+.page:nth-child(n) {
+	background: #7e05d7;
+}
+.page:nth-child(2n) {
+	background: #f21e56;
+}
+.page:nth-child(3n) {
+	background: #bd04a9;
+}
+
+.char {
+	display: inline-block;
+	animation-delay: calc(0.25s + var(--char-index) * 0.1s);
+	transition: all 0.25s calc(0.25s + var(--char-index) * 0.1s);
+}
+
+/* Minimal versions of splitting effects */
+.text--enter .char {
+	opacity: 0;
+	transform: translateY(-150%);
+	animation: enterAnim 0.6s ease-out forwards;
+	animation-delay: calc(var(--char-index) * 0.05s);
+}
+@keyframes enterAnim {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.text--random .char {
+	opacity: 0;
+	transform: translateY(100%);
+	animation: randomFade 0.6s ease-out forwards;
+	animation-delay: calc(var(--char-index) * 0.05s);
+}
+@keyframes randomFade {
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.text--swapsies .char:nth-of-type(odd) {
+	transform: translateX(100%);
+	animation: swapLeft 0.6s ease-out forwards;
+	animation-delay: calc(var(--char-index) * 0.04s);
+}
+.text--swapsies .char:nth-of-type(even) {
+	transform: translateX(-100%);
+	animation: swapRight 0.6s ease-out forwards;
+	animation-delay: calc(var(--char-index) * 0.04s);
+}
+@keyframes swapLeft {
+	to {
+		transform: translateX(0);
+	}
+}
+@keyframes swapRight {
+	to {
+		transform: translateX(0);
+	}
+}
+
+.text--flipping .char {
+	transform: rotateY(180deg);
+	opacity: 0;
+	animation: flipIn 0.6s ease-out forwards;
+	animation-delay: calc(var(--char-index) * 0.06s);
+}
+@keyframes flipIn {
+	to {
+		transform: rotateY(0);
+		opacity: 1;
+	}
 }
