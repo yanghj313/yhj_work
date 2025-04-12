@@ -20,16 +20,10 @@ const FullpageHome = () => {
 
 	useEffect(() => {
 		Splitting();
-		const so = ScrollOut({
+		ScrollOut({
 			targets: '.word',
-			onShown: el => {
-				el.setAttribute('data-scroll', 'in');
-				console.log('shown:', el);
-			},
-			onHidden: el => {
-				el.setAttribute('data-scroll', 'out');
-				console.log('hidden:', el);
-			},
+			onShown: el => el.setAttribute('data-scroll', 'in'),
+			onHidden: el => el.setAttribute('data-scroll', 'out'),
 		});
 
 		const scroll = new LocomotiveScroll({
@@ -38,10 +32,7 @@ const FullpageHome = () => {
 			lerp: 0.07,
 		});
 
-		return () => {
-			scroll.destroy();
-			so.teardown(); // scrollOut 해제
-		};
+		return () => scroll.destroy();
 	}, []);
 
 	return (
