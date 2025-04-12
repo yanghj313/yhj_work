@@ -16,7 +16,6 @@ const ScrollMagicPage = () => {
 			'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js',
-			'https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText.min.js',
 		];
 
 		const loadScripts = async () => {
@@ -48,18 +47,22 @@ const ScrollMagicPage = () => {
 				.addIndicators()
 				.addTo(controller);
 
-			// 개별 텍스트 애니메이션
+			// 각 섹션 텍스트 간단 등장 애니메이션 (SplitText 대체)
 			sections.forEach((section, i) => {
-				const target = document.querySelector(`#${section.id} h1`);
-				const split = new window.SplitText(target, { type: 'chars' });
 				const tl2 = new window.TimelineMax();
 
-				tl2.staggerFrom(split.chars, 0.5, { opacity: 0, scale: 0.5, y: -100, ease: window.Bounce.easeOut }, 0.05);
+				tl2.from(`#${section.id} h1`, 0.6, {
+					opacity: 0,
+					scale: 0.8,
+					y: -60,
+					ease: window.Power2.easeOut,
+				});
 
 				new window.ScrollMagic.Scene({
-					triggerElement: '#pinMaster',
-					triggerHook: 0,
-					offset: i * offset,
+					triggerElement: `#${section.id}`,
+					triggerHook: 0.8,
+					offset: 0,
+					reverse: true,
 				})
 					.setTween(tl2)
 					.addIndicators()
