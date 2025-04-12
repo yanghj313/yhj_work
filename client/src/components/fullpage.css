@@ -7,9 +7,13 @@ body,
 	margin: 0;
 	padding: 0;
 	height: 100%;
+	overflow: scroll;
 	font-family: 'Lato', sans-serif;
 }
 
+body {
+	scroll-snap-type: y mandatory;
+}
 .page {
 	height: 100vh;
 	display: flex;

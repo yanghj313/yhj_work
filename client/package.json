@@ -12,6 +12,7 @@
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
     "axios": "^1.8.4",
+    "gsap": "^3.12.7",
     "jquery": "^3.7.1",
     "locomotive-scroll": "^4.1.4",
     "react": "^19.0.0",
