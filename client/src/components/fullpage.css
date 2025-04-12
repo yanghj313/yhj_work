@@ -3,21 +3,26 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	font-family: 'Lato', sans-serif;
+	overflow: auto; /* Lenis가 smooth 처리할 수 있도록 */
+	font-family: 'Pretendard', sans-serif;
 	background: #111;
-	color: white;
+	color: #fff;
+}
+
+[data-scroll-container] {
 	overflow: hidden;
 }
 
-.page {
+.page-section {
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 4rem;
+	background: #111;
+	transition: background 0.4s;
 }
 
-.text {
-	font-size: 5vw;
-	font-weight: bold;
-	text-align: center;
+.page-section:nth-child(2n) {
+	background: #222;
 }
