@@ -13,6 +13,7 @@ const sections = [
 const FullPageReact = () => {
 	useEffect(() => {
 		new fullpage('#fullpage', {
+			licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM', // 'OPEN-SOURCE-GPLV3-USE' 무료용키
 			autoScrolling: true,
 			navigation: true,
 			anchors: sections.map(s => s.id),

@@ -19,10 +19,30 @@ const SearchResult = () => {
 			setLoading(true);
 			try {
 				const [projects, skills, experiences, galleries] = await Promise.all([
-					axios.get(`${API_BASE}/api/projects`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
-					axios.get(`${API_BASE}/api/skills`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
-					axios.get(`${API_BASE}/api/experiences`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
-					axios.get(`${API_BASE}/api/galleries`, { params: { populate: '*', filters: { description: { $containsi: query } } } }),
+					axios.get(`${API_BASE}/api/projects`, {
+						params: {
+							populate: '*',
+							filters: { description: { $containsi: query } },
+						},
+					}),
+					axios.get(`${API_BASE}/api/skills`, {
+						params: {
+							populate: '*',
+							filters: { description: { $containsi: query } },
+						},
+					}),
+					axios.get(`${API_BASE}/api/experiences`, {
+						params: {
+							populate: '*',
+							filters: { description: { $containsi: query } },
+						},
+					}),
+					axios.get(`${API_BASE}/api/galleries`, {
+						params: {
+							populate: '*',
+							filters: { description: { $containsi: query } },
+						},
+					}),
 				]);
 
 				setResults({
@@ -32,7 +52,7 @@ const SearchResult = () => {
 					g: galleries.data.data || [],
 				});
 			} catch (err) {
-				console.error('검색 에러:', err);
+				console.error('Search error:', err);
 			} finally {
 				setLoading(false);
 			}
@@ -55,11 +75,11 @@ const SearchResult = () => {
 				<ul style={{ listStyle: 'none', padding: 0 }}>
 					{items.map(el => (
 						<li key={el.id} style={{ marginBottom: '1.5rem' }}>
-							<p style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{el.title || '(제목 없음)'}</p>
+							<p style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{el.title || '(No Title)'}</p>
 							{el.thumbnail?.url && (
 								<img
 									src={el.thumbnail.url.startsWith('http') ? el.thumbnail.url : `${API_BASE}${el.thumbnail.url}`}
-									alt={el.title || '썸네일'}
+									alt={el.title || 'Thumbnail'}
 									width="200"
 									style={{ marginBottom: '1rem', borderRadius: '0.5rem' }}
 								/>
@@ -85,24 +105,26 @@ const SearchResult = () => {
 		<div style={{ padding: '2rem' }}>
 			<form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
 				<input
+					id="search"
+					name="search"
 					type="search"
 					value={input}
 					onChange={e => setInput(e.target.value)}
-					placeholder="검색어를 입력하세요"
+					placeholder="Enter keyword"
 					style={{ padding: '0.5rem 1rem', width: '60%', fontSize: '1rem', marginRight: '1rem' }}
 				/>
 				<button type="submit" style={{ padding: '0.5rem 1.5rem', fontSize: '1rem' }}>
-					검색
+					Search
 				</button>
 			</form>
 
 			{loading ? (
-				<p>🔍 검색 중입니다...</p>
+				<p>🔍 Searching...</p>
 			) : !results.p.length && !results.s.length && !results.e.length && !results.g.length && query ? (
-				<p>❌ "{query}"에 대한 결과가 없습니다.</p>
+				<p>❌ No results found for "{query}"</p>
 			) : (
 				<>
-					<h2>🔍 "{query}" Search Results</h2>
+					<h2>🔍 Results for "{query}"</h2>
 					{renderSection('📁 P. Projects', results.p)}
 					{renderSection('🛠️ S. Skills', results.s)}
 					{renderSection('🧭 E. Experiences', results.e)}
