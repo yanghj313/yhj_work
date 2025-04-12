@@ -7,10 +7,8 @@
 }
 .panel {
 	position: relative;
-	background-color: #1a1a1a;
 }
 .panel:nth-of-type(even) {
-	background-color: #111111;
 }
 
 .svg-path {

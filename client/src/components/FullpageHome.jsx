@@ -94,7 +94,7 @@ const FullpageHome = () => {
 			render={() => (
 				<ReactFullpage.Wrapper>
 					{svgPaths.map((d, i) => (
-						<div key={i} className={`section panel ${i === 0 ? 'active' : ''}`}>
+						<div key={i} className={`section panel ${i === 0 ? 'active' : ''}`} style={{ backgroundColor: 'transparent' }}>
 							<div className="svg-path">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1366 768" preserveAspectRatio="xMidYMid slice">
 									<path d={d} />
