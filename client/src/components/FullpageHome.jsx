@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Splitting from 'splitting';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
 import './fullpage-style-full.scss';
