@@ -52,7 +52,7 @@ body {
 	color: #333;
 }
 
-[data-scroll='in'] .char {
+.word[data-scroll='in'] .char {
 	opacity: 1;
 	transform: translateY(0);
 }
