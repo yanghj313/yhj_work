@@ -3,10 +3,10 @@ import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Splitting from 'splitting';
+
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
-import './fullpage.css'; // 스타일 파일
-import './fullpage-style-full.scss'; // 효과 스타일
+import './fullpage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,15 +21,15 @@ const FullpageHome = () => {
 	const scrollRef = useRef(null);
 
 	useEffect(() => {
-		// 💥 Splitting 먼저 실행
-		const results = Splitting();
-		console.log('Splitting 결과:', results);
+		// Splitting 실행
+		Splitting();
 
-		// ✨ Lenis 초기화
+		// Lenis 초기화
 		const lenis = new Lenis({
 			smooth: true,
 			duration: 1.2,
 			easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+			wheelMultiplier: 1.5,
 		});
 
 		function raf(time) {
@@ -39,12 +39,16 @@ const FullpageHome = () => {
 
 		requestAnimationFrame(raf);
 
-		// Lenis와 ScrollTrigger 연결
 		lenis.on('scroll', ScrollTrigger.update);
 		gsap.ticker.add(time => lenis.raf(time * 1000));
 		gsap.ticker.lagSmoothing(0);
 
-		// 섹션마다 애니메이션 트리거
+		// 기본 스냅 설정
+		ScrollTrigger.defaults({
+			snap: 1 / (sections.length - 1),
+		});
+
+		// 텍스트 애니메이션
 		sections.forEach(section => {
 			gsap.from(`#${section.id} .char`, {
 				scrollTrigger: {
@@ -60,7 +64,13 @@ const FullpageHome = () => {
 			});
 		});
 
-		return () => lenis.destroy();
+		setTimeout(() => {
+			ScrollTrigger.refresh();
+		}, 1000);
+
+		return () => {
+			lenis.destroy();
+		};
 	}, []);
 
 	return (
