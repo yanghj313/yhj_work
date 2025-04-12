@@ -9,7 +9,6 @@ body,
 	padding: 0;
 	overflow: hidden;
 	box-sizing: border-box;
-	position: relative;
 	font-family: 'Lato', sans-serif;
 }
 
@@ -35,6 +34,8 @@ body,
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	scroll-snap-align: start;
+	scroll-margin-top: 56px;
 }
 
 .text,
