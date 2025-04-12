@@ -16,7 +16,6 @@ body,
 	justify-content: center;
 	align-items: center;
 	padding: 4rem;
-	scroll-snap-align: start;
 }
 
 .text,
