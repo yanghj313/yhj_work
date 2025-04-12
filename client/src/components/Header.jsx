@@ -1,70 +1,85 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ user }) => (
-	<header className="site-header">
-		<nav className="nav">
-			<ul>
-				<li>
-					<Link to="/">Home</Link>
-				</li>
-				<li>
-					<Link to="/projects">Project</Link>
-				</li>
-				<li>
-					<Link to="/skills">Skill</Link>
-				</li>
-				<li>
-					<Link to="/experiences">Experience</Link>
-				</li>
-				<li>
-					<Link to="/galleries">Gallery</Link>
-				</li>
+const Header = ({ user }) => {
+	const [searchTerm, setSearchTerm] = useState('');
+	const navigate = useNavigate();
 
-				{!user ? (
-					<>
-						<li>
-							<Link to="/login">Login</Link>
-						</li>
-						<li>
-							<Link to="/signup">Join</Link>
-						</li>
-					</>
-				) : (
-					<>
-						{/* 사용자 닉네임 표시 */}
-						<li>
-							<span>{user.username}님</span>
-						</li>
+	const handleSearch = e => {
+		e.preventDefault();
+		if (searchTerm.trim()) {
+			navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+		}
+	};
 
-						{/* 최고 관리자용 설정 버튼 */}
-						{user.email?.toLowerCase() === 'lawork313@gmail.com' && (
+	return (
+		<header className="site-header">
+			<nav className="nav">
+				{/* 🔍 검색 바 삽입 */}
+				<form className="search-bar" onSubmit={handleSearch}>
+					<input type="search" name="search" pattern=".*\\S.*" required value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+					<button className="search-btn" type="submit">
+						<span>Search</span>
+					</button>
+				</form>
+
+				<ul>
+					<li>
+						<Link to="/">Home</Link>
+					</li>
+					<li>
+						<Link to="/projects">Project</Link>
+					</li>
+					<li>
+						<Link to="/skills">Skill</Link>
+					</li>
+					<li>
+						<Link to="/experiences">Experience</Link>
+					</li>
+					<li>
+						<Link to="/galleries">Gallery</Link>
+					</li>
+
+					{!user ? (
+						<>
 							<li>
-								<a href="https://yhjwork-production.up.railway.app/admin" target="_blank" rel="noopener noreferrer">
-									⚙ Settings
+								<Link to="/login">Login</Link>
+							</li>
+							<li>
+								<Link to="/signup">Join</Link>
+							</li>
+						</>
+					) : (
+						<>
+							<li>
+								<span>{user.username}님</span>
+							</li>
+							{user.email?.toLowerCase() === 'lawork313@gmail.com' && (
+								<li>
+									<a href="https://yhjwork-production.up.railway.app/admin" target="_blank" rel="noopener noreferrer">
+										⚙ Settings
+									</a>
+								</li>
+							)}
+							<li>
+								<a
+									href="/"
+									onClick={() => {
+										localStorage.removeItem('token');
+										localStorage.removeItem('user');
+										window.location.reload();
+									}}
+								>
+									Logout
 								</a>
 							</li>
-						)}
-
-						{/* 로그아웃 링크 */}
-						<li>
-							<a
-								href="/"
-								onClick={() => {
-									localStorage.removeItem('token');
-									localStorage.removeItem('user');
-									window.location.reload();
-								}}
-							>
-								Logout
-							</a>
-						</li>
-					</>
-				)}
-			</ul>
-		</nav>
-	</header>
-);
+						</>
+					)}
+				</ul>
+			</nav>
+		</header>
+	);
+};
 
 export default Header;

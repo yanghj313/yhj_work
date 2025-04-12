@@ -15,6 +15,7 @@ import GalleryDetail from './components/GalleryDetail';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import FullpageHome from './components/FullpageHome';
+import SearchResult from './components/SearchResult';
 
 import './components/fullpage-style-full.scss'; // 👉 Fullpage 스타일 여기서 불러옴
 import './index.css'; // 공통 스타일
@@ -42,6 +43,7 @@ const MainApp = () => {
 				<Route path="/gallery/:id" element={<GalleryDetail />} />
 				<Route path="/login" element={<Login onLogin={setUser} />} />
 				<Route path="/signup" element={<Signup />} />
+				<Route path="/search" element={<SearchResult />} />
 			</Routes>
 		</BrowserRouter>
 	);
