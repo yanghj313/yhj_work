@@ -5,12 +5,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
-import 'fullpage-style-full.scss';
-import './fullpage.css';
+import './fullpage.css'; // 스타일 파일
+import './fullpage-style-full.scss'; // 효과 스타일
 
 gsap.registerPlugin(ScrollTrigger);
 
-const sectionTexts = [
+const sections = [
 	{ id: 'welcome', text: 'Welcome', effect: 'enter' },
 	{ id: 'intro', text: 'Introduction', effect: 'bulge' },
 	{ id: 'interest', text: 'Interest', effect: 'flipping' },
@@ -21,15 +21,15 @@ const FullpageHome = () => {
 	const scrollRef = useRef(null);
 
 	useEffect(() => {
-		// ✨ Splitting 적용
-		Splitting();
+		// 💥 Splitting 먼저 실행
+		const results = Splitting();
+		console.log('Splitting 결과:', results);
 
 		// ✨ Lenis 초기화
 		const lenis = new Lenis({
-			duration: 1.2,
 			smooth: true,
-			direction: 'vertical',
-			gestureDirection: 'vertical',
+			duration: 1.2,
+			easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 		});
 
 		function raf(time) {
@@ -39,39 +39,36 @@ const FullpageHome = () => {
 
 		requestAnimationFrame(raf);
 
-		// ✨ GSAP ScrollTrigger와 연동
+		// Lenis와 ScrollTrigger 연결
 		lenis.on('scroll', ScrollTrigger.update);
 		gsap.ticker.add(time => lenis.raf(time * 1000));
 		gsap.ticker.lagSmoothing(0);
 
-		// ✨ 섹션마다 트리거 애니메이션 예시 (선택적)
-		sectionTexts.forEach(section => {
+		// 섹션마다 애니메이션 트리거
+		sections.forEach(section => {
 			gsap.from(`#${section.id} .char`, {
 				scrollTrigger: {
 					trigger: `#${section.id}`,
 					start: 'top 80%',
 					toggleActions: 'play none none reverse',
-					scroller: document.body,
 				},
 				opacity: 0,
-				y: 50,
-				stagger: 0.05,
+				y: 60,
+				stagger: 0.04,
 				duration: 0.6,
-				ease: 'power2.out',
+				ease: 'power3.out',
 			});
 		});
 
-		return () => {
-			lenis.destroy();
-		};
+		return () => lenis.destroy();
 	}, []);
 
 	return (
 		<div ref={scrollRef} data-scroll-container>
-			{sectionTexts.map((section, i) => (
-				<section key={i} id={section.id} className="page" data-scroll-section>
-					<div className={`text text--${section.effect} word`} data-splitting="chars" data-scroll data-scroll-speed="1">
-						{section.text}
+			{sections.map(({ id, text, effect }) => (
+				<section key={id} id={id} className="page" data-scroll-section>
+					<div className={`text text--${effect} word`} data-splitting="chars" data-scroll data-scroll-speed="1">
+						{text}
 					</div>
 				</section>
 			))}
