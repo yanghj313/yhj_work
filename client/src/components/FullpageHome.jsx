@@ -24,6 +24,7 @@ const FullpageHome = () => {
 
 	return (
 		<ReactFullpage
+			licenseKey={'null'}
 			scrollingSpeed={800}
 			navigation
 			anchors={['welcome', 'introduction', 'interest', 'travel']}
