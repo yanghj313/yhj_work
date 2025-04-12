@@ -4,7 +4,7 @@ import ScrollOut from 'scroll-out';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
 import './fullpage.css'; // 네가 올린 CSS 파일 경로
-import './fullpage-style-complete.scss';
+import './fullpage-style-full.scss';
 
 const sectionTexts = [
 	{ id: 'welcome', text: 'Welcome', effect: 'random' },
