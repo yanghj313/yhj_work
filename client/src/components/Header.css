@@ -1,8 +1,11 @@
 .site-header {
   background-color: #fff;
   padding: 16px;
+  width:100%;
+  position: absolute;
+  top:0;
 }
-
+.nav {margin:0 60px;}
 .nav ul {
   list-style: none;
   display: flex;

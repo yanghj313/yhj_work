@@ -2,6 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
 }
 
 /* 기본 브라우저 스타일 제거 */
