@@ -38,7 +38,7 @@ const Header = ({ user, onLogout }) => (
               <span>{user.username}님</span>
             </li>
 
-            {user?.email === "lawork@gmail.com" && (
+            {user?.email === "lawork313@gmail.com" && (
               <li>
                 <a
                   href="https://yhjwork-production.up.railway.app/admin"
