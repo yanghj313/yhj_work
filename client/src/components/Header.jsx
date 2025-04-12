@@ -16,14 +16,6 @@ const Header = ({ user }) => {
 	return (
 		<header className="site-header">
 			<nav className="nav">
-				{/* 🔍 검색 바 삽입 */}
-				<form className="search-bar" onSubmit={handleSearch}>
-					<input type="search" name="search" pattern=".*\\S.*" required value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-					<button className="search-btn" type="submit">
-						<span>Search</span>
-					</button>
-				</form>
-
 				<ul>
 					<li>
 						<Link to="/">Home</Link>
@@ -76,6 +68,14 @@ const Header = ({ user }) => {
 							</li>
 						</>
 					)}
+					<li>
+						<form className="search-bar" onSubmit={handleSearch}>
+							<input type="search" name="search" pattern=".*\\S.*" required value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+							<button className="search-btn" type="submit">
+								<span>Search</span>
+							</button>
+						</form>
+					</li>
 				</ul>
 			</nav>
 		</header>
