@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Splitting from 'splitting';
 
 import 'splitting/dist/splitting.css';
-import 'splitting/dist/splitting-cells.css';
 import './fullpage.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -21,10 +20,8 @@ const FullpageHome = () => {
 	const scrollRef = useRef(null);
 
 	useEffect(() => {
-		// Splitting 실행
 		Splitting();
 
-		// Lenis 초기화
 		const lenis = new Lenis({
 			smooth: true,
 			duration: 1.2,
@@ -43,12 +40,10 @@ const FullpageHome = () => {
 		gsap.ticker.add(time => lenis.raf(time * 1000));
 		gsap.ticker.lagSmoothing(0);
 
-		// 기본 스냅 설정
 		ScrollTrigger.defaults({
 			snap: 1 / (sections.length - 1),
 		});
 
-		// 텍스트 애니메이션
 		sections.forEach(section => {
 			gsap.from(`#${section.id} .char`, {
 				scrollTrigger: {
@@ -68,9 +63,7 @@ const FullpageHome = () => {
 			ScrollTrigger.refresh();
 		}, 1000);
 
-		return () => {
-			lenis.destroy();
-		};
+		return () => lenis.destroy();
 	}, []);
 
 	return (
