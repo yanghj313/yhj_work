@@ -3,7 +3,7 @@ import Splitting from 'splitting';
 import ScrollOut from 'scroll-out';
 import LocomotiveScroll from 'locomotive-scroll';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
-import './fullpage-effects.css';
+import './fullpage.css';
 import 'splitting/dist/splitting.css';
 import 'splitting/dist/splitting-cells.css';
 
