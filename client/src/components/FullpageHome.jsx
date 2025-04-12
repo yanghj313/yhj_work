@@ -7,10 +7,10 @@ import './fullpage.css'; // 네가 올린 CSS 파일 경로
 import './fullpage-style-complete.scss';
 
 const sectionTexts = [
-	{ text: 'Welcome', effect: 'random' },
-	{ text: 'Introduction', effect: 'enter' },
-	{ text: 'Interest', effect: 'swapsies' },
-	{ text: 'Travel', effect: 'flipping' },
+	{ id: 'welcome', text: 'Welcome', effect: 'random' },
+	{ id: 'intro', text: 'Introduction', effect: 'enter' },
+	{ id: 'interest', text: 'Interest', effect: 'swapsies' },
+	{ id: 'travel', text: 'Travel', effect: 'flipping' },
 ];
 
 const FullpageHome = () => {
@@ -26,8 +26,8 @@ const FullpageHome = () => {
 	return (
 		<div className="container">
 			{sectionTexts.map((section, index) => (
-				<section key={index} className="page" data-scroll-section>
-					<div className={`text text--${section.effect} word`} data-splitting="chars" data-scroll>
+				<section key={index} id={section.id} className="page" data-scroll-section>
+					<div className={`text text--${section.effect} word`} data-scroll data-splitting="chars">
 						{section.text}
 					</div>
 				</section>
