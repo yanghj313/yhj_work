@@ -131,3 +131,13 @@ body {
 		opacity: 1;
 	}
 }
+
+[data-scroll-section]:not(.is-inview) {
+	opacity: 0;
+	pointer-events: none;
+}
+
+[data-scroll-section].is-inview {
+	opacity: 1;
+	pointer-events: auto;
+}
