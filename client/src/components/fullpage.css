@@ -3,10 +3,10 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	overflow: auto;
 	font-family: 'Lato', sans-serif;
 	background: #111;
 	color: #fff;
+	overflow: hidden;
 }
 
 [data-scroll-container] {
@@ -21,6 +21,7 @@ body {
 	font-size: 4rem;
 	background: #111;
 	transition: background 0.4s;
+	position: relative;
 }
 
 .page-section:nth-child(2n) {

@@ -17,18 +17,19 @@ const sections = [
 ];
 
 const FullpageHome = () => {
-	const scrollRef = useRef(null);
+	const lenisRef = useRef(null);
+	const [index, setIndex] = useState(0);
+	const isScrolling = useRef(false);
 
 	useEffect(() => {
-		// Splitting 실행
-		Splitting();
+		Splitting(); // 문자 단위 쪼개기
 
 		const lenis = new Lenis({
-			smooth: true,
 			duration: 1.2,
-			wheelMultiplier: 1.2,
 			easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+			smooth: true,
 		});
+		lenisRef.current = lenis;
 
 		function raf(time) {
 			lenis.raf(time);
@@ -36,43 +37,43 @@ const FullpageHome = () => {
 		}
 		requestAnimationFrame(raf);
 
-		lenis.on('scroll', ScrollTrigger.update);
-		gsap.ticker.add(time => lenis.raf(time * 1000));
-		gsap.ticker.lagSmoothing(0);
+		const handleWheel = e => {
+			e.preventDefault();
+			if (isScrolling.current) return;
+			isScrolling.current = true;
 
-		// Snap 설정
-		ScrollTrigger.defaults({
-			scroller: scrollRef.current,
-			snap: 1 / (sections.length - 1),
-		});
+			const dir = e.deltaY > 0 ? 1 : -1;
+			const next = Math.min(Math.max(index + dir, 0), sections.length - 1);
 
-		// Splitting된 텍스트 애니메이션
-		sections.forEach(section => {
-			gsap.from(`#${section.id} .char`, {
-				scrollTrigger: {
-					trigger: `#${section.id}`,
-					start: 'top 80%',
-					toggleActions: 'play none none reverse',
-				},
-				opacity: 0,
-				y: 50,
-				stagger: 0.05,
-				duration: 0.5,
-				ease: 'power3.out',
-			});
-		});
+			if (next !== index) {
+				setIndex(next);
+				const target = document.getElementById(sections[next].id);
+				lenis.scrollTo(target);
 
-		setTimeout(() => {
-			ScrollTrigger.refresh();
-		}, 1000);
+				// 텍스트 애니메이션
+				gsap.from(`#${sections[next].id} .char`, {
+					opacity: 0,
+					y: 50,
+					stagger: 0.03,
+					duration: 0.6,
+					ease: 'power3.out',
+				});
+			}
 
+			setTimeout(() => {
+				isScrolling.current = false;
+			}, 1300); // 휠 딜레이
+		};
+
+		window.addEventListener('wheel', handleWheel, { passive: false });
 		return () => {
+			window.removeEventListener('wheel', handleWheel);
 			lenis.destroy();
 		};
-	}, []);
+	}, [index]);
 
 	return (
-		<div ref={scrollRef} data-scroll-container>
+		<div data-scroll-container>
 			{sections.map(({ id, text }) => (
 				<section key={id} id={id} className="page-section" data-scroll-section>
 					<h1 className="split-text" data-splitting="chars">
