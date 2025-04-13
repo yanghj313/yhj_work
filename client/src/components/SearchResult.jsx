@@ -36,8 +36,9 @@ const SearchResult = () => {
 		};
 		const getProjectURL = () => {
 			const q = encodeURIComponent(query);
-			return `${API_BASE}/api/projects?filters[$or][0][title][$containsi]=${q}&filters[$or][1][description][children][text][$containsi]=${q}&pagination[pageSize]=10&populate=*`;
+			return `${API_BASE}/api/projects?filters[$or][0][title][$containsi]=${q}&filters[$or][1][description][$containsi]=${q}&pagination[pageSize]=10&populate=*`;
 		};
+
 		Promise.all([axios.get(getProjectURL()), axios.get(getURL('skills', 'name')), axios.get(getURL('experiences', 'position')), axios.get(getURL('galleries', 'title'))])
 			.then(([pRes, sRes, eRes, gRes]) => {
 				console.log('✅ 프로젝트 응답:', pRes.data);
