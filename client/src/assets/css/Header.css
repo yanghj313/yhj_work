@@ -171,21 +171,22 @@ input[type='search']::-webkit-search-results-decoration {
 .clear-btn {
 	position: absolute;
 	left: 8px;
+	top: 50%;
+	transform: translateY(-50%);
 	background: transparent;
 	border: none;
 	color: #aaa;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	cursor: pointer;
 	z-index: 999;
-	padding: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 99;
+	z-index: 999;
 }
 
 .clear-btn:hover {
-	color: #000;
+	color: #fff;
 }
 
 .search-bar input {
