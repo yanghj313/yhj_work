@@ -47,7 +47,7 @@ const TravelMap = () => {
 							<div className="active-marker" style={{ left: marker.x, top: marker.y }}>
 								<FaMapMarkerAlt size={28} />
 							</div>
-
+							<div className="marker-shadow" style={{ left: marker.x, top: marker.y }} />
 							<div key={`popup-${marker.id}`} className="map-popup" style={{ top: marker.y, left: marker.x }}>
 								<img src={marker.image} alt={marker.name} />
 								<h3>{marker.name}</h3>

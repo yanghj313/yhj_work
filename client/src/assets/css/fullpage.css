@@ -262,27 +262,24 @@
 /* 활성화 마커 */
 .active-marker {
 	position: absolute;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -100%);
 	color: #e74c3c;
-	animation: pulse 1.2s infinite;
-	z-index: 2;
-	font-size: 2.5rem;
-	filter: drop-shadow(0 0 5px rgba(231, 76, 60, 0.5));
+	z-index: 3;
 }
 
 /* 팝업 박스 */
 .map-popup {
 	position: absolute;
-	top: 0;
-	left: calc(100% + 10px); /* 마커 기준 오른쪽에 위치 */
+	transform: translate(10px, -50%);
+	left: calc(100% + 8px); /* 마커 기준 오른쪽 8px 간격 */
+	top: 50%;
 	background: white;
 	border-radius: 10px;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 	width: 220px;
 	padding: 10px;
-	z-index: 3;
-	animation: slideRight 0.4s ease-out;
-	height: 300px;
+	z-index: 4;
+	animation: slideInRight 0.3s ease-out;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -308,17 +305,16 @@
 	text-align: center;
 }
 
-/* 말풍선 꼬리 */
 .popup-tail {
 	position: absolute;
-	top: 50%;
 	left: -10px;
+	top: 50%;
 	transform: translateY(-50%);
 	width: 10px;
-	height: 20px;
+	height: 16px;
 	background: white;
 	clip-path: polygon(0 50%, 100% 0, 100% 100%);
-	box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+	box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes slideRight {
@@ -332,13 +328,30 @@
 	}
 }
 
-@keyframes pulse {
-	from {
-		transform: translate(-50%, -50%) scale(0.8);
-		opacity: 0.6;
-	}
-	to {
+.marker-shadow {
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	transform: translate(-50%, -50%);
+	width: 24px;
+	height: 12px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.15);
+	animation: shadowPulse 1.5s infinite ease-out;
+	z-index: 0;
+}
+
+@keyframes shadowPulse {
+	0% {
 		transform: translate(-50%, -50%) scale(1);
-		opacity: 1;
+		opacity: 0.4;
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1.2);
+		opacity: 0.15;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0.4;
 	}
 }
