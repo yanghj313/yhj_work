@@ -97,7 +97,7 @@
 	z-index: 9;
 	right: 16px;
 	outline: none;
-	max-width: 170px;
+	max-width: 100px;
 }
 
 .search-bar input:focus,
@@ -107,7 +107,7 @@
 	border: 1px solid #ccc;
 	opacity: 1;
 	transform: scale(1);
-	max-width: 170px;
+	max-width: 100px;
 }
 
 .search-btn {
