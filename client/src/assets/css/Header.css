@@ -157,7 +157,7 @@ input[type='search']::-webkit-search-results-decoration {
 	transform: translateY(-50%);
 	background: transparent;
 	border: none;
-	color: #aaa;
+	color: #ccc;
 	font-size: 1.2rem;
 	cursor: pointer;
 	z-index: 999;
@@ -168,9 +168,5 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .clear-btn:hover {
-	color: #fff;
-}
-
-.search-bar input {
-	padding-left: 24px; /* 왼쪽 X 버튼 공간 확보 */
+	color: #333;
 }
