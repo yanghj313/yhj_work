@@ -70,6 +70,12 @@ const Header = ({ user }) => {
 					)}
 					<li>
 						<form className="search-bar" onSubmit={handleSearch}>
+							{searchTerm && (
+								<button type="button" className="clear-btn" onClick={() => setSearchTerm('')} aria-label="검색어 지우기">
+									&times;
+								</button>
+							)}
+
 							<input type="search" name="q" required placeholder="검색어 입력" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
 							<button className="search-btn" type="submit">
 								<i className="fas fa-search" aria-hidden="true"></i>
