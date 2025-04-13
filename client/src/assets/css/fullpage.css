@@ -20,7 +20,7 @@
 	background: #777;
 }
 
-.page .char {
+.char {
 	display: inline-block;
 	animation-delay: calc(0.25s + var(--char-index) * 0.1s);
 	transition: all 0.25s calc(0.25s + var(--char-index) * 0.1s);
