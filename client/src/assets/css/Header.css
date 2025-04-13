@@ -107,7 +107,7 @@
 	background: #333;
 	color: white;
 	border: none;
-	border-radius: 0 2em 2em 0;
+	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
