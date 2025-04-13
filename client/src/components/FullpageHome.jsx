@@ -27,15 +27,18 @@ const FullPageReact = () => {
 			afterLoad(origin, destination) {
 				const current = destination.item;
 
-				// 기존 splitting 제거 (재진입 대비)
-				const prevSplits = current.querySelectorAll('.splitting');
-				prevSplits.forEach(el => el.classList.remove('splitting'));
-
-				// 다시 splitting 적용
+				// 기존 splitting 효과 제거
 				const h1 = current.querySelector('[data-splitting]');
-				if (h1 && !h1.classList.contains('splitting')) {
-					Splitting({ target: h1, by: 'chars' });
+				if (!h1) return;
+
+				// 기존 char span 제거 (완전 초기화)
+				const chars = h1.querySelectorAll('.char');
+				if (chars.length) {
+					h1.innerHTML = h1.innerText; // span 다 제거됨
 				}
+
+				// Splitting 다시 적용
+				Splitting({ target: h1, by: 'chars' });
 			},
 		});
 
