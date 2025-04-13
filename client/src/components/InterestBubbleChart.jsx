@@ -3,70 +3,6 @@ import * as d3 from 'd3';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
-
-const interests = [
-	{
-		name: 'Coding',
-		value: 80,
-		color: '#ff6b6b',
-		image: 'https://picsum.photos/seed/coding/400/400',
-	},
-	{
-		name: 'UI Design',
-		value: 70,
-		color: '#feca57',
-		image: 'https://picsum.photos/seed/design/400/400',
-	},
-	{
-		name: 'Movie',
-		value: 60,
-		color: '#48dbfb',
-		image: 'https://picsum.photos/seed/movie/400/400',
-	},
-	{
-		name: 'Book',
-		value: 55,
-		color: '#1dd1a1',
-		image: 'https://picsum.photos/seed/book/400/400',
-	},
-	{
-		name: 'Running',
-		value: 50,
-		color: '#5f27cd',
-		image: 'https://picsum.photos/seed/running/400/400',
-	},
-	{
-		name: 'Pilates',
-		value: 45,
-		color: '#341f97',
-		image: 'https://picsum.photos/seed/pilates/400/400',
-	},
-	{
-		name: 'Travel',
-		value: 65,
-		color: '#ee5253',
-		image: 'https://picsum.photos/seed/travel/400/400',
-	},
-	{
-		name: 'Stationery',
-		value: 40,
-		color: '#ff9ff3',
-		image: 'https://picsum.photos/seed/stationery/400/400',
-	},
-	{
-		name: 'Camera',
-		value: 50,
-		color: '#00d2d3',
-		image: 'https://picsum.photos/seed/camera/400/400',
-	},
-	{
-		name: 'Fashion',
-		value: 60,
-		color: '#576574',
-		image: 'https://picsum.photos/seed/fashion/400/400',
-	},
-];
-
 const InterestBubbleChart = () => {
 	const svgRef = useRef();
 	const wrapperRef = useRef();
@@ -95,15 +31,19 @@ const InterestBubbleChart = () => {
 			.style('transform', selected ? 'translateX(-120px)' : 'translateX(0)')
 			.style('transition', 'transform 0.5s ease');
 
-		svg.select('defs')?.remove(); // 중복 방지
+		svg.select('defs')?.remove();
 		const defs = svg.append('defs');
-		defs
-			.append('clipPath')
-			.attr('id', 'clipCircle')
-			.append('circle')
-			.attr('r', 100) // 일단 고정, 크기는 이미지마다 조절되니 괜찮음
-			.attr('cx', 0)
-			.attr('cy', 0);
+
+		// 각 버블마다 클리핑 경로 정의
+		interests.forEach(d => {
+			defs
+				.append('clipPath')
+				.attr('id', `clip-${d.name.replace(/\s+/g, '')}`)
+				.append('circle')
+				.attr('r', d.value / 2)
+				.attr('cx', 0)
+				.attr('cy', 0);
+		});
 
 		const simulation = d3
 			.forceSimulation(interests)
@@ -124,7 +64,7 @@ const InterestBubbleChart = () => {
 				const g = enter.append('g').style('cursor', 'pointer');
 				g.append('circle');
 				g.append('image')
-					.attr('clip-path', 'url(#clipCircle)')
+					.attr('clip-path', d => `url(#clip-${d.name.replace(/\s+/g, '')})`)
 					.attr('preserveAspectRatio', 'xMidYMid slice')
 					.attr('xlink:href', d => d.image)
 					.attr('width', d => d.value)
