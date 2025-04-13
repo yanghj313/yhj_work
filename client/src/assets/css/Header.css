@@ -82,7 +82,7 @@
 .search-bar input {
 	height: 2em;
 	width: 0;
-	padding: 0;
+	padding: 0 2.5em 0 0.75em;
 	border: 1px solid #ccc;
 	opacity: 0;
 	background: transparent;
