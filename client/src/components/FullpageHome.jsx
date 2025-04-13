@@ -66,7 +66,12 @@ const FullPageReact = () => {
 			{sections.map(s => (
 				<div key={s.id} className={`section ${s.class}`}>
 					{s.id === 'interest' ? (
-						<InterestBubbleChart /> // ✅ Interest 섹션엔 이거 넣기
+						<>
+							<h1 className="text text--rolling" data-splitting>
+								Interest
+							</h1>
+							<InterestBubbleChart />
+						</>
 					) : (
 						<h1 className={`text ${s.effect}`} data-splitting>
 							{s.text}

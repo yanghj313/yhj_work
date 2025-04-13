@@ -115,13 +115,6 @@ const InterestBubbleChart = () => {
 		}
 	}, [dimensions, selected]);
 
-	useEffect(() => {
-		const titleEl = document.querySelector('[data-splitting]');
-		if (titleEl && !titleEl.classList.contains('splitting')) {
-			Splitting({ target: titleEl, by: 'chars' });
-		}
-	}, []);
-
 	const isMobile = dimensions.width <= 1024;
 
 	return (
