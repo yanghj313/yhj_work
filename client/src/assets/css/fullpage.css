@@ -19,7 +19,7 @@
 	background: #e3aa59;
 }
 .four {
-	background: #777;
+	background: #ffffff;
 }
 
 .fp-overflow {
@@ -262,27 +262,32 @@
 /* 활성화 마커 */
 .active-marker {
 	position: absolute;
-	transform: translate(-50%, -100%);
+	width: 28px;
+	height: 28px;
+	transform: translate(-50%, -50%);
 	color: #e74c3c;
+	animation: pulse 0.8s ease-out;
 	z-index: 3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* 팝업 박스 */
 .map-popup {
 	position: absolute;
-	transform: translate(10px, -50%);
-	left: calc(100% + 8px); /* 마커 기준 오른쪽 8px 간격 */
-	top: 50%;
+	transform: translateY(-50%);
 	background: white;
 	border-radius: 10px;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 	width: 220px;
 	padding: 10px;
 	z-index: 4;
-	animation: slideInRight 0.3s ease-out;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	animation: slideIn 0.4s ease-out;
+	height: 300px;
 }
 
 .map-popup img {
@@ -305,53 +310,54 @@
 	text-align: center;
 }
 
-.popup-tail {
+.popup-tail.left {
 	position: absolute;
 	left: -10px;
 	top: 50%;
 	transform: translateY(-50%);
 	width: 10px;
-	height: 16px;
+	height: 20px;
 	background: white;
 	clip-path: polygon(0 50%, 100% 0, 100% 100%);
 	box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 1;
 }
 
-@keyframes slideRight {
-	from {
-		opacity: 0;
-		transform: translateX(-50px);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-.marker-shadow {
-	position: absolute;
-	left: 50%;
-	top: 100%;
-	transform: translate(-50%, -50%);
-	width: 24px;
-	height: 12px;
-	border-radius: 50%;
-	background: rgba(0, 0, 0, 0.15);
-	animation: shadowPulse 1.5s infinite ease-out;
-	z-index: 0;
-}
-
-@keyframes shadowPulse {
+@keyframes shadow-pulse {
 	0% {
 		transform: translate(-50%, -50%) scale(1);
 		opacity: 0.4;
 	}
 	50% {
-		transform: translate(-50%, -50%) scale(1.2);
-		opacity: 0.15;
+		transform: translate(-50%, -50%) scale(1.4);
+		opacity: 0.1;
 	}
 	100% {
 		transform: translate(-50%, -50%) scale(1);
 		opacity: 0.4;
 	}
+}
+
+/* 팝업 애니메이션 */
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(-50%) translateX(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(-50%) translateX(0);
+	}
+}
+
+.marker-shadow {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.2);
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	animation: shadow-pulse 1.5s infinite ease-in-out;
 }

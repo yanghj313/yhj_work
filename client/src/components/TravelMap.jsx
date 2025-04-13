@@ -41,21 +41,33 @@ const TravelMap = () => {
 					<div key={marker.id} className="circle-marker" style={{ left: marker.x, top: marker.y }} onClick={() => setActiveId(marker.id)}></div>
 				))}
 
-				{markers.map(marker =>
-					marker.id === activeId ? (
-						<React.Fragment key={`active-${marker.id}`}>
-							<div className="active-marker" style={{ left: marker.x, top: marker.y }}>
-								<FaMapMarkerAlt size={28} />
-							</div>
-							<div className="marker-shadow" style={{ left: marker.x, top: marker.y }} />
-							<div key={`popup-${marker.id}`} className="map-popup" style={{ top: marker.y, left: marker.x }}>
-								<img src={marker.image} alt={marker.name} />
-								<h3>{marker.name}</h3>
-								<p>{marker.description}</p>
-								<div className="popup-tail"></div>
-							</div>
-						</React.Fragment>
-					) : null
+				{markers.map(
+					marker =>
+						marker.id === activeId && (
+							<React.Fragment key={`active-${marker.id}`}>
+								{/* 파동 그림자 */}
+								<div className="marker-shadow" style={{ left: marker.x, top: marker.y }} />
+
+								{/* 마커 */}
+								<div className="active-marker" style={{ left: marker.x, top: marker.y }}>
+									<FaMapMarkerAlt size={28} />
+								</div>
+
+								{/* 팝업 */}
+								<div
+									className="map-popup"
+									style={{
+										left: `calc(${marker.x} + 32px)`,
+										top: `calc(${marker.y} - 50%)`,
+									}}
+								>
+									<div className="popup-tail left" />
+									<img src={marker.image} alt={marker.name} />
+									<h3>{marker.name}</h3>
+									<p>{marker.description}</p>
+								</div>
+							</React.Fragment>
+						)
 				)}
 			</div>
 		</div>
