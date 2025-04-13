@@ -45,14 +45,12 @@ const TravelMap = () => {
 					marker =>
 						marker.id === activeId && (
 							<React.Fragment key={`active-${marker.id}`}>
-								{/* 파동 그림자 */}
-								<div className="marker-shadow" style={{ left: marker.x, top: marker.y }} />
-
 								{/* 마커 */}
 								<div className={`active-marker active-marker--${marker.id}`}>
 									<FaMapMarkerAlt size={28} />
 								</div>
-
+								{/* 파동 그림자 */}
+								<div className="marker-shadow" style={{ left: marker.x, top: marker.y }} />
 								{/* 팝업 */}
 								<div className={`map-popup map-popup--${marker.id}`}>
 									<div className="popup-tail left" />
