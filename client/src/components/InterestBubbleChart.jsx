@@ -7,61 +7,61 @@ import '../assets/css/fullpage.css';
 const interests = [
 	{
 		name: 'Coding',
-		value: 80,
+		value: 200,
 		color: '#ff6b6b',
 		image: 'https://picsum.photos/seed/coding/400/400',
 	},
 	{
 		name: 'UI Design',
-		value: 70,
+		value: 170,
 		color: '#feca57',
 		image: 'https://picsum.photos/seed/design/400/400',
 	},
 	{
 		name: 'Movie',
-		value: 60,
+		value: 100,
 		color: '#48dbfb',
 		image: 'https://picsum.photos/seed/movie/400/400',
 	},
 	{
 		name: 'Book',
-		value: 55,
+		value: 220,
 		color: '#1dd1a1',
 		image: 'https://picsum.photos/seed/book/400/400',
 	},
 	{
 		name: 'Running',
-		value: 50,
+		value: 160,
 		color: '#5f27cd',
 		image: 'https://picsum.photos/seed/running/400/400',
 	},
 	{
 		name: 'Pilates',
-		value: 45,
+		value: 190,
 		color: '#341f97',
 		image: 'https://picsum.photos/seed/pilates/400/400',
 	},
 	{
 		name: 'Travel',
-		value: 65,
+		value: 100,
 		color: '#ee5253',
 		image: 'https://picsum.photos/seed/travel/400/400',
 	},
 	{
 		name: 'Stationery',
-		value: 40,
+		value: 170,
 		color: '#ff9ff3',
 		image: 'https://picsum.photos/seed/stationery/400/400',
 	},
 	{
 		name: 'Camera',
-		value: 50,
+		value: 90,
 		color: '#00d2d3',
 		image: 'https://picsum.photos/seed/camera/400/400',
 	},
 	{
 		name: 'Fashion',
-		value: 60,
+		value: 80,
 		color: '#576574',
 		image: 'https://picsum.photos/seed/fashion/400/400',
 	},
@@ -70,7 +70,7 @@ const interests = [
 const InterestBubbleChart = () => {
 	const svgRef = useRef();
 	const wrapperRef = useRef();
-	const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
+	const [dimensions, setDimensions] = useState({ width: 700, height: 700 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
 
