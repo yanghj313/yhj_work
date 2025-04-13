@@ -361,3 +361,24 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	animation: shadow-pulse 1.5s infinite ease-in-out;
 }
+
+/* 마커 위치 수동 지정 */
+.active-marker--1 {
+	left: 45%;
+	top: 30%;
+}
+.map-popup--1 {
+	left: 52%;
+	top: 25%;
+}
+
+.active-marker--2 {
+	left: 70%;
+	top: 55%;
+}
+.map-popup--2 {
+	left: 76%;
+	top: 50%;
+}
+
+/* 필요한 마커와 팝업마다 클래스 추가로 위치 조정 */
