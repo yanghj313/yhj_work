@@ -1,37 +1,69 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import '../assets/css/fullpage.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-const locations = [
-	{ id: 1, name: '부산역', left: '30%', top: '20%', image: '/img/place1.jpg', desc: '부산의 관문, 여행의 시작점' },
-	{ id: 2, name: '해운대', left: '60%', top: '40%', image: '/img/place2.jpg', desc: '부산의 대표 해수욕장' },
-	{ id: 3, name: '감천문화마을', left: '40%', top: '60%', image: '/img/place3.jpg', desc: '알록달록한 벽화마을' },
+import { FaMapMarkerAlt } from 'react-icons/fa';
+const markers = [
+	{
+		id: 1,
+		name: '부산 도서관',
+		description: '부산 시민을 위한 열린 공간과 자료를 제공합니다.',
+		image: 'https://source.unsplash.com/random/400x200?library',
+		x: '45%',
+		y: '30%',
+	},
+	{
+		id: 2,
+		name: '해운대 해수욕장',
+		description: '부산을 대표하는 바다 관광지입니다.',
+		image: 'https://source.unsplash.com/random/400x200?beach',
+		x: '70%',
+		y: '55%',
+	},
+	{
+		id: 3,
+		name: '감천문화마을',
+		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
+		image: 'https://source.unsplash.com/random/400x200?village',
+		x: '35%',
+		y: '65%',
+	},
 ];
 
 const TravelMap = () => {
-	const [active, setActive] = useState(null);
+	const [activeId, setActiveId] = useState(null);
 
 	return (
-		<div className="travel-map">
-			<div className="map-background" />
+		<div className="travel-map-wrapper">
+			<div className="travel-map">
+				<div className="map-background"></div>
 
-			{locations.map(loc => (
-				<div key={loc.id} className="circle-marker" style={{ left: loc.left, top: loc.top }} onClick={() => setActive(loc)} />
-			))}
+				{/* 마커들 */}
+				{markers.map(marker => (
+					<div key={marker.id} className="circle-marker" style={{ left: marker.x, top: marker.y }} onClick={() => setActiveId(marker.id)}></div>
+				))}
 
-			{active && (
-				<>
-					<div className="active-marker" style={{ left: active.left, top: active.top }}>
-						<FontAwesomeIcon icon={faLocationDot} size="2x" />
-					</div>
-					<div className="map-popup" style={{ left: active.left, top: `calc(${active.top} + 40px)` }}>
-						<img src={active.image} alt={active.name} />
-						<h3>{active.name}</h3>
-						<p>{active.desc}</p>
-						<div className="popup-tail" />
-					</div>
-				</>
-			)}
+				{/* 활성화된 마커 아이콘 */}
+				{markers.map(
+					marker =>
+						marker.id === activeId && (
+							<div key={`active-${marker.id}`} className="active-marker" style={{ left: marker.x, top: marker.y }}>
+								<FaMapMarkerAlt size={28} />
+							</div>
+						)
+				)}
+
+				{/* 팝업 */}
+				{markers.map(
+					marker =>
+						marker.id === activeId && (
+							<div key={`popup-${marker.id}`} className="map-popup" style={{ left: marker.x, top: `calc(${marker.y} - 130px)` }}>
+								<img src={marker.image} alt={marker.name} />
+								<h3>{marker.name}</h3>
+								<p>{marker.description}</p>
+								<div className="popup-tail"></div>
+							</div>
+						)
+				)}
+			</div>
 		</div>
 	);
 };
