@@ -6,61 +6,61 @@ import '../assets/css/fullpage.css';
 
 const interests = [
 	{
-		name: '코딩',
+		name: 'Conding',
 		value: 80,
 		color: '#ff6b6b',
 		image: 'https://source.unsplash.com/300x300/?coding&sig=1',
 	},
 	{
-		name: 'UI/UX 디자인',
+		name: 'UI Design',
 		value: 70,
 		color: '#feca57',
 		image: 'https://source.unsplash.com/300x300/?ui,design&sig=2',
 	},
 	{
-		name: '영화',
+		name: 'Movie',
 		value: 60,
 		color: '#48dbfb',
 		image: 'https://source.unsplash.com/300x300/?movie&sig=3',
 	},
 	{
-		name: '독서',
+		name: 'Book',
 		value: 55,
 		color: '#1dd1a1',
 		image: 'https://source.unsplash.com/300x300/?book,reading&sig=4',
 	},
 	{
-		name: '러닝',
+		name: 'Running',
 		value: 50,
 		color: '#5f27cd',
 		image: 'https://source.unsplash.com/300x300/?running&sig=5',
 	},
 	{
-		name: '필라테스',
+		name: 'Pilates',
 		value: 45,
 		color: '#341f97',
 		image: 'https://source.unsplash.com/300x300/?pilates&sig=6',
 	},
 	{
-		name: '여행',
+		name: 'Travel',
 		value: 65,
 		color: '#ee5253',
 		image: 'https://source.unsplash.com/300x300/?travel&sig=7',
 	},
 	{
-		name: '다이어리 꾸미기',
+		name: 'Stationery',
 		value: 40,
 		color: '#ff9ff3',
 		image: 'https://source.unsplash.com/300x300/?journal,stationery&sig=8',
 	},
 	{
-		name: '카메라',
+		name: 'Camera',
 		value: 50,
 		color: '#00d2d3',
 		image: 'https://source.unsplash.com/300x300/?camera,photography&sig=9',
 	},
 	{
-		name: '패션',
+		name: 'Fashion',
 		value: 60,
 		color: '#576574',
 		image: 'https://source.unsplash.com/300x300/?fashion&sig=10',
@@ -125,7 +125,7 @@ const InterestBubbleChart = () => {
 				g.append('text');
 				return g;
 			});
-
+		node.call(drag(simulation));
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
 			if (!isSame) setBoxVisible(false);
@@ -161,9 +161,26 @@ const InterestBubbleChart = () => {
 		function ticked() {
 			node.attr('transform', d => `translate(${Math.max(d.value / 2, Math.min(width - d.value / 2, d.x))},${Math.max(d.value / 2, Math.min(height - d.value / 2, d.y))})`);
 		}
-	}, [dimensions, selected]);
 
-	const isMobile = dimensions.width <= 1024;
+		function drag(simulation) {
+			return d3
+				.drag()
+				.on('start', (event, d) => {
+					if (!event.active) simulation.alphaTarget(0.3).restart();
+					d.fx = d.x;
+					d.fy = d.y;
+				})
+				.on('drag', (event, d) => {
+					d.fx = event.x;
+					d.fy = event.y;
+				})
+				.on('end', (event, d) => {
+					if (!event.active) simulation.alphaTarget(0);
+					d.fx = null;
+					d.fy = null;
+				});
+		}
+	}, [dimensions, selected]);
 
 	return (
 		<div className={`interest-section ${boxVisible ? 'with-box' : ''}`}>
