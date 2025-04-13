@@ -18,7 +18,6 @@ const FullPageReact = () => {
 		// only run fullpage.js if on homepage
 		if (location.pathname === '/' || location.pathname === '/home') {
 			const instance = new fullpage('#fullpage', {
-				licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
 				autoScrolling: true,
 				navigation: true,
 				anchors: sections.map(s => s.id),
