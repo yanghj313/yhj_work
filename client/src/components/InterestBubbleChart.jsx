@@ -118,7 +118,7 @@ const InterestBubbleChart = () => {
 	const isMobile = dimensions.width <= 1024;
 
 	return (
-		<div ref={wrapperRef} className="bubble-chart">
+		<div ref={wrapperRef} className={`bubble-chart ${boxVisible ? 'shift-left' : ''}`}>
 			<svg ref={svgRef} className="img-chart"></svg>
 			<div className={`about_keyword ${boxVisible ? 'show' : ''} ${isMobile ? 'mobile' : 'desktop'}`}>
 				{boxVisible && selected && (

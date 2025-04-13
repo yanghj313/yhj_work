@@ -113,6 +113,12 @@
 	text-align: center;
 	padding: 2rem;
 	position: relative;
+	transition: transform 0.5s ease;
+}
+
+/* 설명 박스가 보일 때 전체 버블 차트 완전히 왼쪽으로 이동 */
+.bubble-chart.shift-left {
+	transform: translateX(-40%);
 }
 .bubble-chart svg.img-chart {
 	width: 700px;
@@ -127,7 +133,7 @@
 	top: 20%;
 	right: -400px;
 	width: 320px;
-	max-width: 90%;
+	max-width: 320px;
 	padding: 1.2rem;
 	opacity: 0;
 	transform: translateX(50px);
@@ -207,5 +213,8 @@
 	.custom-description p {
 		font-size: 0.95rem;
 		line-height: 1.5;
+	}
+	.bubble-chart.shift-left {
+		transform: translateX(0);
 	}
 }
