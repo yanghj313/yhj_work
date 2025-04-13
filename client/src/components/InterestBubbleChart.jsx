@@ -70,7 +70,7 @@ const interests = [
 const InterestBubbleChart = () => {
 	const svgRef = useRef();
 	const wrapperRef = useRef();
-	const [dimensions, setDimensions] = useState({ width: 700, height: 700 });
+	const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
 
