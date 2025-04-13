@@ -11,6 +11,7 @@
 
 .nav {
 	margin: 0 60px;
+	position: relative;
 }
 
 .nav ul {
@@ -75,6 +76,7 @@
 	align-items: center;
 	max-width: 200px;
 	transition: all 0.3s ease;
+	right: 0;
 }
 
 .search-bar input {
