@@ -1,136 +1,114 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const SearchResult = () => {
-	const [results, setResults] = useState({ p: [], s: [], e: [], g: [] });
-	const [loading, setLoading] = useState(false);
-	const [input, setInput] = useState('');
-	const navigate = useNavigate();
-	const { search } = useLocation();
-	const query = decodeURIComponent(new URLSearchParams(search).get('query') || '');
+	const [results, setResults] = useState({
+		projects: [],
+		skills: [],
+		experiences: [],
+		galleries: [],
+	});
+
+	const [loading, setLoading] = useState(true);
+
+	const query = new URLSearchParams(useLocation().search).get('q') || '';
 
 	useEffect(() => {
-		setInput(query);
-		const fetchAll = async () => {
-			if (!query) return;
+		if (!query) return;
+
+		const fetchData = async () => {
 			setLoading(true);
 			try {
-				const [projects, skills, experiences, galleries] = await Promise.all([
-					axios.get(`${API_BASE}/api/projects`, {
-						params: {
-							populate: '*',
-							filters: { description: { $containsi: query } },
-						},
-					}),
-					axios.get(`${API_BASE}/api/skills`, {
-						params: {
-							populate: '*',
-							filters: { description: { $containsi: query } },
-						},
-					}),
-					axios.get(`${API_BASE}/api/experiences`, {
-						params: {
-							populate: '*',
-							filters: { description: { $containsi: query } },
-						},
-					}),
-					axios.get(`${API_BASE}/api/galleries`, {
-						params: {
-							populate: '*',
-							filters: { description: { $containsi: query } },
-						},
-					}),
+				const [projectRes, skillRes, expRes, galleryRes] = await Promise.all([
+					axios.get(`${API_BASE}/api/projects?filters[title][$containsi]=${query}&populate=*`),
+					axios.get(`${API_BASE}/api/skills?filters[name][$containsi]=${query}&populate=*`),
+					axios.get(`${API_BASE}/api/experiences?filters[position][$containsi]=${query}&populate=*`),
+					axios.get(`${API_BASE}/api/galleries?filters[title][$containsi]=${query}&populate=*`),
 				]);
 
 				setResults({
-					p: projects.data.data || [],
-					s: skills.data.data || [],
-					e: experiences.data.data || [],
-					g: galleries.data.data || [],
+					projects: projectRes.data.data || [],
+					skills: skillRes.data.data || [],
+					experiences: expRes.data.data || [],
+					galleries: galleryRes.data.data || [],
 				});
 			} catch (err) {
-				console.error('Search error:', err);
+				console.error('❌ 검색 오류:', err);
 			} finally {
 				setLoading(false);
 			}
 		};
 
-		fetchAll();
+		fetchData();
 	}, [query]);
 
-	const handleSubmit = e => {
-		e.preventDefault();
-		if (input.trim()) {
-			navigate(`/search?query=${encodeURIComponent(input.trim())}`);
-		}
-	};
-
-	const renderSection = (label, items) =>
-		items.length > 0 && (
-			<section style={{ marginBottom: '2rem' }}>
-				<h3>{label}</h3>
-				<ul style={{ listStyle: 'none', padding: 0 }}>
-					{items.map(el => (
-						<li key={el.id} style={{ marginBottom: '1.5rem' }}>
-							<p style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{el.title || '(No Title)'}</p>
-							{el.thumbnail?.url && (
-								<img
-									src={el.thumbnail.url.startsWith('http') ? el.thumbnail.url : `${API_BASE}${el.thumbnail.url}`}
-									alt={el.title || 'Thumbnail'}
-									width="200"
-									style={{ marginBottom: '1rem', borderRadius: '0.5rem' }}
-								/>
-							)}
-							{el.description && (
-								<ul style={{ paddingLeft: '1rem' }}>
-									{el.description
-										.replace(/<[^>]+>/g, '')
-										.split(/\r?\n/)
-										.filter(Boolean)
-										.map((line, idx) => (
-											<li key={idx}>{line}</li>
-										))}
-								</ul>
-							)}
-						</li>
-					))}
-				</ul>
-			</section>
-		);
+	if (loading) return <p>🔍 검색 중...</p>;
 
 	return (
-		<div style={{ padding: '2rem' }}>
-			<form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
-				<input
-					id="search"
-					name="search"
-					type="search"
-					value={input}
-					onChange={e => setInput(e.target.value)}
-					placeholder="Enter keyword"
-					style={{ padding: '0.5rem 1rem', width: '60%', fontSize: '1rem', marginRight: '1rem' }}
-				/>
-				<button type="submit" style={{ padding: '0.5rem 1.5rem', fontSize: '1rem' }}>
-					Search
-				</button>
-			</form>
+		<div style={{ padding: '1rem' }}>
+			<h2>🔎 “{query}” 검색 결과</h2>
 
-			{loading ? (
-				<p>🔍 Searching...</p>
-			) : !results.p.length && !results.s.length && !results.e.length && !results.g.length && query ? (
-				<p>❌ No results found for "{query}"</p>
-			) : (
+			{/* 프로젝트 */}
+			{results.projects.length > 0 && (
 				<>
-					<h2>🔍 Results for "{query}"</h2>
-					{renderSection('📁 P. Projects', results.p)}
-					{renderSection('🛠️ S. Skills', results.s)}
-					{renderSection('🧭 E. Experiences', results.e)}
-					{renderSection('🖼️ G. Galleries', results.g)}
+					<h3>📁 프로젝트</h3>
+					<ul>
+						{results.projects.map(p => (
+							<li key={p.id}>
+								<Link to={`/projects/${p.documentId}`}>{p.title}</Link>
+							</li>
+						))}
+					</ul>
 				</>
 			)}
+
+			{/* 스킬 */}
+			{results.skills.length > 0 && (
+				<>
+					<h3>💡 기술 스택</h3>
+					<ul>
+						{results.skills.map(s => (
+							<li key={s.id}>
+								<Link to={`/skills/${s.id}`}>{s.name}</Link>
+							</li>
+						))}
+					</ul>
+				</>
+			)}
+
+			{/* 경력사항 */}
+			{results.experiences.length > 0 && (
+				<>
+					<h3>📘 경력사항</h3>
+					<ul>
+						{results.experiences.map(e => (
+							<li key={e.id}>
+								<strong>{e.position}</strong> ({e.Career})
+							</li>
+						))}
+					</ul>
+				</>
+			)}
+
+			{/* 갤러리 */}
+			{results.galleries.length > 0 && (
+				<>
+					<h3>🖼️ 갤러리</h3>
+					<ul>
+						{results.galleries.map(g => (
+							<li key={g.id}>
+								<Link to={`/gallery/${g.documentId}`}>{g.title}</Link>
+							</li>
+						))}
+					</ul>
+				</>
+			)}
+
+			{/* 결과 없음 */}
+			{Object.values(results).every(arr => arr.length === 0) && <p>😢 검색 결과가 없습니다.</p>}
 		</div>
 	);
 };

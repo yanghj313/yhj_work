@@ -96,13 +96,14 @@
 	overflow: hidden;
 	position: absolute;
 	z-index: 9;
+	right: 16px;
 }
 
 .search-bar input:focus,
 .search-bar input:not(:placeholder-shown) {
 	width: 100%;
 	padding: 0 0.75em;
-	border: 1px solid #ccc;
+	border: none;
 	opacity: 1;
 	transform: scale(1);
 }
