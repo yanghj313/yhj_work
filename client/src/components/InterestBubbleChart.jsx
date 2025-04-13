@@ -6,64 +6,64 @@ import '../assets/css/fullpage.css';
 
 const interests = [
 	{
-		name: 'Conding',
+		name: 'Coding',
 		value: 80,
 		color: '#ff6b6b',
-		image: 'https://source.unsplash.com/300x300/?coding&sig=1',
+		image: 'https://picsum.photos/seed/coding/300/300',
 	},
 	{
 		name: 'UI Design',
 		value: 70,
 		color: '#feca57',
-		image: 'https://source.unsplash.com/300x300/?ui,design&sig=2',
+		image: 'https://picsum.photos/seed/design/300/300',
 	},
 	{
 		name: 'Movie',
 		value: 60,
 		color: '#48dbfb',
-		image: 'https://source.unsplash.com/300x300/?movie&sig=3',
+		image: 'https://picsum.photos/seed/movie/300/300',
 	},
 	{
 		name: 'Book',
 		value: 55,
 		color: '#1dd1a1',
-		image: 'https://source.unsplash.com/300x300/?book,reading&sig=4',
+		image: 'https://picsum.photos/seed/book/300/300',
 	},
 	{
 		name: 'Running',
 		value: 50,
 		color: '#5f27cd',
-		image: 'https://source.unsplash.com/300x300/?running&sig=5',
+		image: 'https://picsum.photos/seed/running/300/300',
 	},
 	{
 		name: 'Pilates',
 		value: 45,
 		color: '#341f97',
-		image: 'https://source.unsplash.com/300x300/?pilates&sig=6',
+		image: 'https://picsum.photos/seed/pilates/300/300',
 	},
 	{
 		name: 'Travel',
 		value: 65,
 		color: '#ee5253',
-		image: 'https://source.unsplash.com/300x300/?travel&sig=7',
+		image: 'https://picsum.photos/seed/travel/300/300',
 	},
 	{
 		name: 'Stationery',
 		value: 40,
 		color: '#ff9ff3',
-		image: 'https://source.unsplash.com/300x300/?journal,stationery&sig=8',
+		image: 'https://picsum.photos/seed/stationery/300/300',
 	},
 	{
 		name: 'Camera',
 		value: 50,
 		color: '#00d2d3',
-		image: 'https://source.unsplash.com/300x300/?camera,photography&sig=9',
+		image: 'https://picsum.photos/seed/camera/300/300',
 	},
 	{
 		name: 'Fashion',
 		value: 60,
 		color: '#576574',
-		image: 'https://source.unsplash.com/300x300/?fashion&sig=10',
+		image: 'https://picsum.photos/seed/fashion/300/300',
 	},
 ];
 
