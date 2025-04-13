@@ -23,6 +23,7 @@ const FullPageReact = () => {
 			licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
 			autoScrolling: true,
 			navigation: true,
+			scrollOverflow: false,
 			anchors: sections.map(s => s.id),
 			afterLoad(origin, destination) {
 				const current = destination.item;
