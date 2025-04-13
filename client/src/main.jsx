@@ -17,6 +17,7 @@ import Signup from './components/Signup';
 import FullpageHome from './components/FullpageHome';
 import SearchResult from './components/SearchResult';
 import './index.css'; // 공통 스타일
+import './assets/css/fonts.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
