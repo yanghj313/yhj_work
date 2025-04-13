@@ -4,7 +4,7 @@ import fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.min.css';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
-import '../assets/css/fullpage.css'; // Splitting 스타일 포함된 CSS
+import '../assets/css/fullpage.css'; // 여기에는 수정된 animation 스타일 포함되어야 함
 
 const sections = [
 	{ id: 'welcome', text: 'Welcome', class: 'one', effect: 'text--folding' },
@@ -16,61 +16,35 @@ const sections = [
 const FullPageReact = () => {
 	const location = useLocation();
 
-	// ✅ 스타일 동적 주입
 	useEffect(() => {
-		const style = document.createElement('style');
-		style.innerHTML = `.char {
-			display: inline-block;
-			animation-delay: calc(0.25s + var(--char-index) * 0.1s);
-			transition: all 0.25s calc(0.25s + var(--char-index) * 0.1s);
-		}
-
-		[data-scroll='out'] .text--folding .char {
-			transform: rotateX(90deg);
-			transform-origin: bottom;
-		}
-
-		[data-scroll='out'] .text--bubbling .char {
-			transform: scale(0.5);
-		}
-
-		[data-scroll='out'] .text--rolling .char {
-			opacity: 0;
-			transform: translate(-500%, 0) scale(0) rotate(-1440deg);
-		}
-
-		.text--swinging .char {
-			transform-origin: calc((var(--char-total) - var(--char-index)) * 100%) -100%;
-			transition-delay: calc((var(--char-total) - var(--char-index)) * .1s);
-		}
-		[data-scroll='out'] .text--swinging .char {
-			opacity: 0;
-			transform: rotate(90deg);
-		}
-	`;
+		'';
 		document.head.appendChild(style);
 	}, []);
 
-	// ✅ fullpage & splitting 적용
 	useEffect(() => {
 		if (location.pathname === '/' || location.pathname === '/home') {
+			// Splitting은 딱 1회만 적용
+			setTimeout(() => {
+				document.querySelectorAll('[data-splitting]').forEach(el => {
+					Splitting({ target: el, by: 'chars' });
+				});
+			}, 100);
+
 			const instance = new fullpage('#fullpage', {
-				// ...
+				licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
+				autoScrolling: true,
+				navigation: true,
+				anchors: sections.map(s => s.id),
 				afterLoad(origin, destination) {
-					document.querySelectorAll('.section').forEach(section => {
-						section.setAttribute('data-scroll', 'out');
-					});
+					document.querySelectorAll('.section').forEach(section => section.setAttribute('data-scroll', 'out'));
+
 					const current = destination.item;
 					current.setAttribute('data-scroll', 'in');
-
-					const h1 = current.querySelector('[data-splitting]');
-					if (h1) Splitting({ target: h1, by: 'chars' });
 				},
 			});
 
 			const firstSection = document.querySelector('.section');
 			firstSection?.setAttribute('data-scroll', 'in');
-			Splitting({ target: firstSection.querySelector('[data-splitting]'), by: 'chars' });
 
 			return () => {
 				instance.destroy('all');
