@@ -70,7 +70,7 @@ const interests = [
 const InterestBubbleChart = () => {
 	const svgRef = useRef();
 	const wrapperRef = useRef();
-	const [dimensions, setDimensions] = useState({ width: 800, height: 550 });
+	const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
 
@@ -111,11 +111,11 @@ const InterestBubbleChart = () => {
 
 		const simulation = d3
 			.forceSimulation(interests)
-			.force('x', d3.forceX(width / 2).strength(0.8))
-			.force('y', d3.forceY(height / 2).strength(0.05))
+			.force('x', d3.forceX(width / 2).strength(0.2))
+			.force('y', d3.forceY(height / 2).strength(0.1))
 			.force(
 				'collision',
-				d3.forceCollide().radius(d => d.value / 2 + 8)
+				d3.forceCollide().radius(d => d.value / 2 + 4)
 			)
 			.alpha(1)
 			.restart()
