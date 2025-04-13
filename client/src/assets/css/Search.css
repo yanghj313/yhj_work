@@ -11,3 +11,8 @@
 	margin: 200px auto;
 	text-align: center;
 }
+
+.highlight {
+	color: #007bff;
+	font-weight: bold;
+}

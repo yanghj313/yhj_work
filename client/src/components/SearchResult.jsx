@@ -39,7 +39,12 @@ const SearchResult = () => {
 			return `${API_BASE}/api/projects?filters[$or][0][title][$containsi]=${q}&filters[$or][1][description][$containsi]=${q}&pagination[pageSize]=10&populate=*`;
 		};
 
-		Promise.all([axios.get(getProjectURL()), axios.get(getURL('skills', 'name')), axios.get(getURL('experiences', 'position')), axios.get(getURL('galleries', 'title'))])
+		const getGalleryURL = () => {
+			const q = encodeURIComponent(query);
+			return `${API_BASE}/api/galleries?filters[$or][0][title][$containsi]=${q}&filters[$or][1][description][$containsi]=${q}&pagination[pageSize]=10&populate=*`;
+		};
+
+		Promise.all([axios.get(getProjectURL()), axios.get(getURL('skills', 'name')), axios.get(getURL('experiences', 'position')), axios.get(getGalleryURL())])
 			.then(([pRes, sRes, eRes, gRes]) => {
 				console.log('✅ 프로젝트 응답:', pRes.data);
 				console.log('✅ 스킬 응답:', sRes.data);
@@ -78,6 +83,22 @@ const SearchResult = () => {
 						{projects.map(p => (
 							<li key={p.id}>
 								<Link to={`/projects/${p.documentId}`}>{p.title}</Link>
+								{Array.isArray(p.description) && (
+									<div style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#444' }}>
+										{p.description
+											.map(block => {
+												if (!block || !block.children) return null;
+												const text = block.children.map(c => c.text).join('');
+												if (text.toLowerCase().includes(query.toLowerCase())) {
+													const regex = new RegExp(`(${query})`, 'gi');
+													const highlighted = text.replace(regex, '<span class="highlight">$1</span>');
+													return <p key={block.id} dangerouslySetInnerHTML={{ __html: highlighted }} />;
+												}
+												return null;
+											})
+											.filter(Boolean)}
+									</div>
+								)}
 							</li>
 						))}
 					</ul>
@@ -120,6 +141,16 @@ const SearchResult = () => {
 						{galleries.map(g => (
 							<li key={g.id}>
 								<Link to={`/gallery/${g.documentId}`}>{g.title}</Link>
+
+								{/* 갤러리 설명에 검색어가 포함되어 있다면 미리보기 출력 */}
+								{typeof g.description === 'string' && g.description.toLowerCase().includes(query.toLowerCase()) && (
+									<p
+										style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#444' }}
+										dangerouslySetInnerHTML={{
+											__html: g.description.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>'),
+										}}
+									/>
+								)}
 							</li>
 						))}
 					</ul>
