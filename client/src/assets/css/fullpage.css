@@ -107,47 +107,51 @@
 	overflow: hidden;
 }
 
+/* 처음엔 block layout */
 .interest-section {
-	display: block; /* 기본은 block */
+	display: block;
 	width: 100%;
 	max-width: 1400px;
 	margin: 0 auto;
 	padding: 2rem;
-	transition: all 0.5s ease;
-	text-align: center;
 	position: relative;
+	transition: all 0.4s ease;
 }
 
-/* 설명창 보이면 flex로 전환 */
+/* 설명박스가 나타났을 때 flex 전환 */
 .interest-section.with-box {
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
 	align-items: flex-start;
 	gap: 2rem;
 }
 
-/* 버블 차트 */
+/* 버블차트: 처음엔 100% */
 .bubble-chart {
 	width: 100%;
-	transition: all 0.5s ease;
+	transition: transform 0.4s ease, width 0.4s ease;
+	display: flex;
+	justify-content: center;
 }
 
-/* 설명창 있을 때만 양쪽 분할 */
+/* 설명박스 있을 때 버블차트 너비 줄이기 + 밀기 */
 .interest-section.with-box .bubble-chart {
 	width: 50%;
 	transform: translateX(-5%);
 }
 
+/* 설명 박스 기본 */
 .about_keyword {
 	width: 0;
 	opacity: 0;
 	overflow: hidden;
-	transition: all 0.5s ease;
 	transform: translateX(40px);
+	transition: all 0.4s ease;
+	pointer-events: none;
 }
 
-.about_keyword.show.desktop {
+/* 설명 박스 활성화 */
+.about_keyword.show {
 	width: 50%;
 	opacity: 1;
 	transform: translateX(0);
@@ -160,26 +164,7 @@
 	pointer-events: auto;
 }
 
-.custom-description h2 {
-	font-size: 1.25rem;
-	margin-bottom: 0.75rem;
-}
-
-.custom-description p {
-	font-size: 0.9rem;
-	line-height: 1.5;
-	margin-top: 0.5rem;
-}
-
-.custom-description img {
-	width: 100%;
-	border-radius: 8px;
-	margin-bottom: 1rem;
-	transition: all 0.3s ease;
-	filter: grayscale(50%);
-}
-
-/* 모바일 */
+/* 모바일 대응 */
 @media (max-width: 1024px) {
 	.interest-section,
 	.interest-section.with-box {
@@ -189,7 +174,7 @@
 
 	.bubble-chart {
 		width: 100%;
-		transform: none;
+		transform: none !important;
 	}
 
 	.about_keyword {
@@ -198,10 +183,9 @@
 		transform: translateY(30px);
 	}
 
-	.about_keyword.show.mobile {
+	.about_keyword.show {
 		opacity: 1;
 		transform: translateY(0);
-		background: #fff;
 		padding: 1.2rem;
 	}
 }

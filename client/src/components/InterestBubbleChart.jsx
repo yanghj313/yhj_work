@@ -118,12 +118,12 @@ const InterestBubbleChart = () => {
 	const isMobile = dimensions.width <= 1024;
 
 	return (
-		<div className={`interest-section ${boxVisible && !isMobile ? 'with-box' : ''}`}>
+		<div className={`interest-section ${boxVisible ? 'with-box' : ''}`}>
 			<div className="bubble-chart">
 				<svg ref={svgRef} className="img-chart"></svg>
 			</div>
 
-			<div className={`about_keyword ${boxVisible ? 'show' : ''} ${isMobile ? 'mobile' : 'desktop'}`}>
+			<div className={`about_keyword ${boxVisible ? 'show' : ''}`}>
 				{boxVisible && selected && (
 					<div className="custom-description">
 						<h2>{selected.name}</h2>
