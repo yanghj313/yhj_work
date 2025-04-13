@@ -1,4 +1,3 @@
-// FullPageReact.jsx
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import fullpage from 'fullpage.js';
@@ -26,26 +25,16 @@ const FullPageReact = () => {
 			navigation: true,
 			anchors: sections.map(s => s.id),
 			afterLoad(origin, destination) {
-				document.querySelectorAll('.section').forEach(section => section.setAttribute('data-scroll', 'out'));
 				const current = destination.item;
-				current.setAttribute('data-scroll', 'in');
-
-				// Splitting re-apply if not already applied
 				const h1 = current.querySelector('[data-splitting]');
 				if (h1 && !h1.classList.contains('splitting')) {
 					Splitting({ target: h1, by: 'chars' });
 				}
 			},
-			onLeave(origin) {
-				origin.item.setAttribute('data-scroll', 'out');
-			},
 		});
 
-		// 최초 섹션 Splitting 적용
 		requestAnimationFrame(() => {
 			const firstSection = document.querySelector('.section');
-			firstSection?.setAttribute('data-scroll', 'in');
-
 			const h1 = firstSection?.querySelector('[data-splitting]');
 			if (h1 && !h1.classList.contains('splitting')) {
 				Splitting({ target: h1, by: 'chars' });
@@ -58,7 +47,7 @@ const FullPageReact = () => {
 	return (
 		<div id="fullpage">
 			{sections.map(s => (
-				<div key={s.id} className={`section ${s.class}`} data-scroll="out">
+				<div key={s.id} className={`section ${s.class}`}>
 					<h1 className={`text ${s.effect}`} data-splitting>
 						{s.text}
 					</h1>
