@@ -141,24 +141,6 @@
 
 /* 다크모드 대응 */
 @media (prefers-color-scheme: dark) {
-	.site-header {
-		background-color: #1c1c1c;
-	}
-
-	.nav li a {
-		color: #f1f1f1;
-	}
-
-	.search-bar input {
-		background: #2d2d2d;
-		color: #fff;
-		border-color: #444;
-	}
-
-	.search-btn {
-		background: #555;
-		color: #fff;
-	}
 }
 
 input[type='search']::-webkit-search-decoration,
