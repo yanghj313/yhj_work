@@ -258,10 +258,19 @@
 	transform: translate(-50%, -100%);
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 	z-index: 10;
+	color: #333;
+	height: 150px;
 }
 
 .popup img {
 	width: 100%;
 	border-radius: 4px;
 	margin-top: 0.5rem;
+}
+.popup h3 {
+	font-size: 1.1rem;
+}
+
+.popup p {
+	font-size: 0.8rem;
 }
