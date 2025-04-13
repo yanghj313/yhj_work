@@ -83,7 +83,7 @@
 	height: 2em;
 	width: 0;
 	padding: 0;
-	border: none;
+	border: 1px solid #ccc;
 	opacity: 0;
 	background: transparent;
 	color: #333;
@@ -97,6 +97,7 @@
 	z-index: 9;
 	right: 16px;
 	outline: none;
+	max-width: 170px;
 }
 
 .search-bar input:focus,
