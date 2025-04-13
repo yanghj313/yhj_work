@@ -1,24 +1,70 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
-// ✅ Unsplash 이미지 URL 생성
-const getImage = (query, index) => `https://source.unsplash.com/300x300/?${query}&sig=${index}`;
-
-// ✅ 관심사 배열
 const interests = [
-	{ name: '코딩', value: 80, color: '#ff6b6b', pic: 'coding' },
-	{ name: 'UI/UX 디자인', value: 70, color: '#feca57', pic: 'ui,design' },
-	{ name: '영화', value: 60, color: '#48dbfb', pic: 'movie' },
-	{ name: '독서', value: 55, color: '#1dd1a1', pic: 'book,reading' },
-	{ name: '러닝', value: 50, color: '#5f27cd', pic: 'running' },
-	{ name: '필라테스', value: 45, color: '#341f97', pic: 'pilates' },
-	{ name: '여행', value: 65, color: '#ee5253', pic: 'travel' },
-	{ name: '다이어리 꾸미기', value: 40, color: '#ff9ff3', pic: 'journal,stationery' },
-	{ name: '카메라', value: 50, color: '#00d2d3', pic: 'camera,photography' },
-	{ name: '패션', value: 60, color: '#576574', pic: 'fashion' },
+	{
+		name: '코딩',
+		value: 80,
+		color: '#ff6b6b',
+		image: 'https://source.unsplash.com/300x300/?coding&sig=1',
+	},
+	{
+		name: 'UI/UX 디자인',
+		value: 70,
+		color: '#feca57',
+		image: 'https://source.unsplash.com/300x300/?ui,design&sig=2',
+	},
+	{
+		name: '영화',
+		value: 60,
+		color: '#48dbfb',
+		image: 'https://source.unsplash.com/300x300/?movie&sig=3',
+	},
+	{
+		name: '독서',
+		value: 55,
+		color: '#1dd1a1',
+		image: 'https://source.unsplash.com/300x300/?book,reading&sig=4',
+	},
+	{
+		name: '러닝',
+		value: 50,
+		color: '#5f27cd',
+		image: 'https://source.unsplash.com/300x300/?running&sig=5',
+	},
+	{
+		name: '필라테스',
+		value: 45,
+		color: '#341f97',
+		image: 'https://source.unsplash.com/300x300/?pilates&sig=6',
+	},
+	{
+		name: '여행',
+		value: 65,
+		color: '#ee5253',
+		image: 'https://source.unsplash.com/300x300/?travel&sig=7',
+	},
+	{
+		name: '다이어리 꾸미기',
+		value: 40,
+		color: '#ff9ff3',
+		image: 'https://source.unsplash.com/300x300/?journal,stationery&sig=8',
+	},
+	{
+		name: '카메라',
+		value: 50,
+		color: '#00d2d3',
+		image: 'https://source.unsplash.com/300x300/?camera,photography&sig=9',
+	},
+	{
+		name: '패션',
+		value: 60,
+		color: '#576574',
+		image: 'https://source.unsplash.com/300x300/?fashion&sig=10',
+	},
 ];
 
 const InterestBubbleChart = () => {
@@ -27,16 +73,6 @@ const InterestBubbleChart = () => {
 	const [dimensions, setDimensions] = useState({ width: 700, height: 700 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
-
-	// ✅ 한 번만 생성되도록 useMemo 사용
-	const interestsWithImage = useMemo(
-		() =>
-			interests.map((item, i) => ({
-				...item,
-				image: getImage(item.pic, i),
-			})),
-		[]
-	);
 
 	useEffect(() => {
 		const resizeObserver = new ResizeObserver(entries => {
@@ -60,7 +96,7 @@ const InterestBubbleChart = () => {
 			.style('transition', 'transform 0.5s ease');
 
 		const simulation = d3
-			.forceSimulation(interestsWithImage)
+			.forceSimulation(interests)
 			.force('x', d3.forceX(width / 2).strength(0.2))
 			.force('y', d3.forceY(height / 2).strength(0.1))
 			.force(
@@ -73,7 +109,7 @@ const InterestBubbleChart = () => {
 
 		const node = svg
 			.selectAll('g')
-			.data(interestsWithImage, d => d.name)
+			.data(interests, d => d.name)
 			.join(enter => {
 				const g = enter.append('g').style('cursor', 'pointer');
 				g.append('circle');
@@ -91,11 +127,10 @@ const InterestBubbleChart = () => {
 			});
 
 		node.on('click', (event, d) => {
-			const selectedData = interestsWithImage.find(item => item.name === d.name);
-			const isSame = selected?.name === selectedData?.name;
+			const isSame = selected?.name === d.name;
 			if (!isSame) setBoxVisible(false);
 			setTimeout(() => {
-				setSelected(isSame ? null : selectedData);
+				setSelected(isSame ? null : d);
 				setBoxVisible(!isSame);
 			}, 100);
 		});
@@ -131,9 +166,9 @@ const InterestBubbleChart = () => {
 	const isMobile = dimensions.width <= 1024;
 
 	return (
-		<div className={`interest-section ${boxVisible && !isMobile ? 'with-box' : ''}`} ref={wrapperRef}>
+		<div className={`interest-section ${boxVisible ? 'with-box' : ''}`}>
 			<div className="bubble-chart">
-				<svg ref={svgRef} className="img-chart" />
+				<svg ref={svgRef} className="img-chart"></svg>
 			</div>
 
 			<div className={`about_keyword ${boxVisible ? 'show' : ''}`}>
