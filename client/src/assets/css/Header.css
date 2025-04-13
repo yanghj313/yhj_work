@@ -174,9 +174,13 @@ input[type='search']::-webkit-search-results-decoration {
 	background: transparent;
 	border: none;
 	color: #aaa;
-	font-size: 1.2em;
+	font-size: 1rem;
 	cursor: pointer;
 	z-index: 999;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .clear-btn:hover {
