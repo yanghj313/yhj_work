@@ -36,7 +36,7 @@ const TravelMap = () => {
 					<i className="fas fa-map-marker-alt"></i>
 					<div className="marker-popup">
 						<img src={marker.image} alt={marker.title} />
-						<h3>{marker.title}</h3>
+						<h5>{marker.title}</h5>
 						<p>{marker.description}</p>
 						<span className="marker-wave" />
 					</div>

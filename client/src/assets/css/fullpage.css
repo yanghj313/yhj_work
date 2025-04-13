@@ -224,18 +224,17 @@
 .travel-map-wrapper {
 	position: relative;
 	width: 100%;
-	max-width: 1000px;
-	margin: 0 auto;
+	height: 100vh;
+	background: #000;
+	overflow: hidden;
 }
 
 .map-image {
-	position: relative;
 	width: 100%;
-	padding-top: 56.25%; /* 16:9 비율 */
-	background-image: url('../img/map.svg');
-	background-size: cover;
-	background-position: center;
+	height: 100%;
+	object-fit: cover;
 }
+
 .map-marker {
 	position: absolute;
 	cursor: pointer;
@@ -248,19 +247,8 @@
 	font-size: 2rem;
 	animation: pulse 2s infinite;
 }
-.marker {
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	background: red;
-	border-radius: 50%;
-	transform: translate(-50%, -50%);
-	cursor: pointer;
-	border: 2px solid white;
-	box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-}
 
-.popup {
+.marker-popup {
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -275,26 +263,21 @@
 	flex-direction: column;
 	align-items: center;
 	animation: fadeSlideIn 0.5s ease forwards;
-	color: #333;
 	height: 300px;
-	font-size: 0.75rem;
 }
 
-.popup img {
-	width: 100%;
-	border-radius: 4px;
-	margin-top: 0.5rem;
-}
-.popup h3 {
-	font-size: 1.1rem;
-}
-
-.popup p {
-	font-size: 0.8rem;
-}
 .map-marker:hover .marker-popup {
 	display: flex;
 }
+
+.marker-popup img {
+	width: 100%;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 8px;
+	margin-bottom: 0.5rem;
+}
+
 .marker-wave {
 	position: absolute;
 	bottom: -8px;
@@ -329,4 +312,14 @@
 		opacity: 1;
 		transform: translate(-50%, -110%) scale(1);
 	}
+}
+
+.marker-popup h5 {
+	font-size: 1rem;
+}
+.marker-popup {
+	font-size: 0.75rem;
+}
+.marker-popup p {
+	font-size: 0.8rem;
 }
