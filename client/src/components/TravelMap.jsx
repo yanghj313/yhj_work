@@ -3,41 +3,45 @@ import '../assets/css/fullpage.css';
 
 const markers = [
 	{
-		id: 1,
-		name: '부산타워',
-		x: '30%', // 이미지 기준 위치
-		y: '40%',
-		image: 'https://picsum.photos/id/1018/300/200',
-		description: '부산타워는 부산의 전망 명소로, 야경이 멋집니다.',
+		id: 'spot1',
+		top: '30%',
+		left: '20%',
+		title: '제주도',
+		description: '한라산과 돌하르방이 유명한 섬',
+		image: 'https://picsum.photos/id/1015/300/200',
 	},
 	{
-		id: 2,
-		name: '해운대 해수욕장',
-		x: '60%',
-		y: '70%',
-		image: 'https://picsum.photos/id/1015/300/200',
-		description: '해운대는 여름이면 많은 관광객이 찾는 부산의 대표 해변입니다.',
+		id: 'spot2',
+		top: '60%',
+		left: '70%',
+		title: '부산 해운대',
+		description: '해변과 도심이 만나는 곳',
+		image: 'https://picsum.photos/id/1025/300/200',
 	},
 ];
 
 const TravelMap = () => {
-	const [selected, setSelected] = useState(null);
+	const containerRef = useRef();
+
+	const scrollToMarker = id => {
+		const el = document.getElementById(id);
+		if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	};
 
 	return (
-		<div className="travel-map-wrapper">
-			<div className="map-image">
-				{markers.map(marker => (
-					<div key={marker.id} className="marker" style={{ left: marker.x, top: marker.y }} onClick={() => setSelected(marker)} />
-				))}
-				{selected && (
-					<div className="popup" style={{ left: selected.x, top: selected.y }}>
-						<h3>{selected.name}</h3>
-						<img src={selected.image} alt={selected.name} />
-						<p>{selected.description}</p>
-						<button onClick={() => setSelected(null)}>닫기</button>
+		<div className="travel-map-wrapper" ref={containerRef}>
+			<img src="/assets/images/travel-map.png" alt="여행 지도" className="map-image" />
+			{markers.map(marker => (
+				<div key={marker.id} id={marker.id} className="map-marker" style={{ top: marker.top, left: marker.left }} onClick={() => scrollToMarker(marker.id)}>
+					<i className="fas fa-map-marker-alt"></i>
+					<div className="marker-popup">
+						<img src={marker.image} alt={marker.title} />
+						<h3>{marker.title}</h3>
+						<p>{marker.description}</p>
+						<span className="marker-wave" />
 					</div>
-				)}
-			</div>
+				</div>
+			))}
 		</div>
 	);
 };

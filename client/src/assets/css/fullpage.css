@@ -236,7 +236,18 @@
 	background-size: cover;
 	background-position: center;
 }
+.map-marker {
+	position: absolute;
+	cursor: pointer;
+	transform: translate(-50%, -100%);
+	z-index: 5;
+}
 
+.map-marker i {
+	color: #e74c3c;
+	font-size: 2rem;
+	animation: pulse 2s infinite;
+}
 .marker {
 	position: absolute;
 	width: 20px;
@@ -251,15 +262,22 @@
 
 .popup {
 	position: absolute;
-	width: 250px;
-	background: #fff;
-	padding: 1rem;
-	border-radius: 8px;
-	transform: translate(-50%, -100%);
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-	z-index: 10;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -110%);
+	width: 240px;
+	background: white;
 	color: #333;
-	height: 150px;
+	padding: 1rem;
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	animation: fadeSlideIn 0.5s ease forwards;
+	color: #333;
+	height: 300px;
+	font-size: 0.75rem;
 }
 
 .popup img {
@@ -273,4 +291,42 @@
 
 .popup p {
 	font-size: 0.8rem;
+}
+.map-marker:hover .marker-popup {
+	display: flex;
+}
+.marker-wave {
+	position: absolute;
+	bottom: -8px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid white;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes fadeSlideIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -120%) scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -110%) scale(1);
+	}
 }
