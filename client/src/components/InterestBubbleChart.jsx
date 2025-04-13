@@ -1,22 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import * as d3 from 'd3';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
-const getRandomImage = () => `https://source.unsplash.com/random/300x300?sig=${Math.floor(Math.random() * 1000)}`;
+// ✅ Unsplash 이미지 URL 생성
+const getImage = (query, index) => `https://source.unsplash.com/300x300/?${query}&sig=${index}`;
 
+// ✅ 관심사 배열
 const interests = [
-	{ name: '코딩', value: 80, color: '#ff6b6b', image: getRandomImage() },
-	{ name: 'UI/UX 디자인', value: 70, color: '#feca57', image: getRandomImage() },
-	{ name: '영화', value: 60, color: '#48dbfb', image: getRandomImage() },
-	{ name: '독서', value: 55, color: '#1dd1a1', image: getRandomImage() },
-	{ name: '러닝', value: 50, color: '#5f27cd', image: getRandomImage() },
-	{ name: '필라테스', value: 45, color: '#341f97', image: getRandomImage() },
-	{ name: '여행', value: 65, color: '#ee5253', image: getRandomImage() },
-	{ name: '다이어리 꾸미기', value: 40, color: '#ff9ff3', image: getRandomImage() },
-	{ name: '카메라', value: 50, color: '#00d2d3', image: getRandomImage() },
-	{ name: '패션', value: 60, color: '#576574', image: getRandomImage() },
+	{ name: '코딩', value: 80, color: '#ff6b6b', pic: 'coding' },
+	{ name: 'UI/UX 디자인', value: 70, color: '#feca57', pic: 'ui,design' },
+	{ name: '영화', value: 60, color: '#48dbfb', pic: 'movie' },
+	{ name: '독서', value: 55, color: '#1dd1a1', pic: 'book,reading' },
+	{ name: '러닝', value: 50, color: '#5f27cd', pic: 'running' },
+	{ name: '필라테스', value: 45, color: '#341f97', pic: 'pilates' },
+	{ name: '여행', value: 65, color: '#ee5253', pic: 'travel' },
+	{ name: '다이어리 꾸미기', value: 40, color: '#ff9ff3', pic: 'journal,stationery' },
+	{ name: '카메라', value: 50, color: '#00d2d3', pic: 'camera,photography' },
+	{ name: '패션', value: 60, color: '#576574', pic: 'fashion' },
 ];
 
 const InterestBubbleChart = () => {
@@ -25,6 +27,16 @@ const InterestBubbleChart = () => {
 	const [dimensions, setDimensions] = useState({ width: 700, height: 700 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
+
+	// ✅ 한 번만 생성되도록 useMemo 사용
+	const interestsWithImage = useMemo(
+		() =>
+			interests.map((item, i) => ({
+				...item,
+				image: getImage(item.pic, i),
+			})),
+		[]
+	);
 
 	useEffect(() => {
 		const resizeObserver = new ResizeObserver(entries => {
@@ -48,7 +60,7 @@ const InterestBubbleChart = () => {
 			.style('transition', 'transform 0.5s ease');
 
 		const simulation = d3
-			.forceSimulation(interests)
+			.forceSimulation(interestsWithImage)
 			.force('x', d3.forceX(width / 2).strength(0.2))
 			.force('y', d3.forceY(height / 2).strength(0.1))
 			.force(
@@ -61,7 +73,7 @@ const InterestBubbleChart = () => {
 
 		const node = svg
 			.selectAll('g')
-			.data(interests, d => d.name)
+			.data(interestsWithImage, d => d.name)
 			.join(enter => {
 				const g = enter.append('g').style('cursor', 'pointer');
 				g.append('circle');
@@ -79,10 +91,11 @@ const InterestBubbleChart = () => {
 			});
 
 		node.on('click', (event, d) => {
-			const isSame = selected?.name === d.name;
+			const selectedData = interestsWithImage.find(item => item.name === d.name);
+			const isSame = selected?.name === selectedData?.name;
 			if (!isSame) setBoxVisible(false);
 			setTimeout(() => {
-				setSelected(isSame ? null : d);
+				setSelected(isSame ? null : selectedData);
 				setBoxVisible(!isSame);
 			}, 100);
 		});
@@ -118,9 +131,9 @@ const InterestBubbleChart = () => {
 	const isMobile = dimensions.width <= 1024;
 
 	return (
-		<div className={`interest-section ${boxVisible ? 'with-box' : ''}`}>
+		<div className={`interest-section ${boxVisible && !isMobile ? 'with-box' : ''}`} ref={wrapperRef}>
 			<div className="bubble-chart">
-				<svg ref={svgRef} className="img-chart"></svg>
+				<svg ref={svgRef} className="img-chart" />
 			</div>
 
 			<div className={`about_keyword ${boxVisible ? 'show' : ''}`}>
