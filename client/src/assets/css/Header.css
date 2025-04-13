@@ -149,7 +149,7 @@ input[type='search']::-webkit-search-cancel-button {
 
 .clear-btn {
 	position: absolute;
-	right: 32px;
+	right: 42px;
 	top: 50%;
 	transform: translateY(-50%);
 	background: transparent;
