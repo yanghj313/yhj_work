@@ -8,8 +8,8 @@ const markers = [
 		name: '부산 도서관',
 		description: '부산 시민을 위한 열린 공간과 자료를 제공합니다.',
 		image: 'https://source.unsplash.com/400x200/?library',
-		x: '45%',
-		y: '30%',
+		x: '47%',
+		y: '51%',
 	},
 	{
 		id: 2,
@@ -24,8 +24,24 @@ const markers = [
 		name: '감천문화마을',
 		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
 		image: 'https://source.unsplash.com/400x200/?village',
-		x: '35%',
-		y: '65%',
+		x: '32%',
+		y: '52%',
+	},
+	{
+		id: 4,
+		name: '감천문화마을',
+		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
+		image: 'https://source.unsplash.com/400x200/?village',
+		x: '40%',
+		y: '90%',
+	},
+	{
+		id: 5,
+		name: '감천문화마을',
+		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
+		image: 'https://source.unsplash.com/400x200/?village',
+		x: '38%',
+		y: '59%',
 	},
 ];
 
