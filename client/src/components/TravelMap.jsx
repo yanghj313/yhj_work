@@ -38,19 +38,18 @@ const TravelMap = () => {
 				<div className="map-background"></div>
 
 				{markers.map(marker => (
-					<div key={marker.id} className="circle-marker" style={{ left: marker.x, top: marker.y }} onClick={() => setActiveId(marker.id)}></div>
+					<div key={marker.id} className={`circle-marker ${activeId === marker.id ? 'hidden' : ''} circle-marker--${marker.id}`}></div>
 				))}
 
 				{markers.map(
 					marker =>
 						marker.id === activeId && (
 							<React.Fragment key={`active-${marker.id}`}>
-								{/* 마커 */}
-								<div className={`active-marker active-marker--${marker.id}`}>
+								<div key={`active-${marker.id}`} className={`active-marker active-marker--${marker.id}`}>
 									<FaMapMarkerAlt size={28} />
+									<div className="marker-wave"></div>
+									<div className="marker-wave marker-wave--inner"></div>
 								</div>
-								{/* 파동 그림자 */}
-								<div className="marker-shadow" style={{ left: marker.x, top: marker.y }} />
 								{/* 팝업 */}
 								<div className={`map-popup map-popup--${marker.id}`}>
 									<div className="popup-tail left" />
