@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Header.css';
+import '../assets/css/Header.css';
 
 const Header = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState('');

@@ -1,0 +1,136 @@
+/* 기본 헤더 레이아웃 */
+.site-header {
+	background-color: #fff;
+	padding: 16px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+}
+
+.nav {
+	margin: 0 60px;
+}
+
+.nav ul {
+	list-style: none;
+	display: flex;
+	gap: 20px;
+	margin: 0;
+	padding: 0;
+	justify-content: flex-end;
+}
+
+.nav li a {
+	color: #000;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+.nav li a:hover {
+	text-decoration: underline;
+}
+
+/* 드롭다운 메뉴 */
+.dropdown details {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown summary {
+	cursor: pointer;
+	list-style: none;
+}
+
+.dropdown ul {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+	z-index: 100;
+	list-style: none;
+}
+
+.dropdown ul li {
+	margin: 0;
+}
+
+.dropdown ul a {
+	text-decoration: none;
+	color: #000;
+	display: block;
+	padding: 0.25rem 0;
+}
+
+/* 🔍 검색 바 */
+.search-bar {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	max-width: 200px;
+}
+
+.search-bar input {
+	height: 2em;
+	padding: 0 0.75em;
+	border-radius: 2em 0 0 2em;
+	border: 1px solid #ccc;
+	font-size: 0.9rem;
+	flex: 1;
+	background: transparent;
+}
+
+.search-bar input:focus {
+	background-color: #e6f1fc;
+	outline: none;
+}
+
+.search-btn {
+	height: 2em;
+	width: 2.5em;
+	background: #333;
+	color: white;
+	border: none;
+	border-radius: 0 2em 2em 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1em;
+	cursor: pointer;
+}
+
+.search-btn i {
+	margin: 0;
+	pointer-events: none;
+}
+
+.search-btn span {
+	display: none;
+}
+
+/* 다크모드 대응 */
+@media (prefers-color-scheme: dark) {
+	.site-header {
+		background-color: #1c1c1c;
+	}
+
+	.nav li a {
+		color: #f1f1f1;
+	}
+
+	.search-bar input {
+		background: #2d2d2d;
+		color: #fff;
+		border-color: #444;
+	}
+
+	.search-btn {
+		background: #555;
+		color: #fff;
+	}
+}

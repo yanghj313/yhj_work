@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.min.css';
-import './fullpage.css';
+import '../assets/css/fullpage.css';
 
 const sections = [
 	{ id: 'welcome', text: 'Welcome', class: 'one' },
