@@ -107,114 +107,73 @@
 	overflow: hidden;
 }
 
-/*버블차트*/
-.bubble-chart {
-	color: #fff;
-	text-align: center;
+/* 전체 감싸는 구조 */
+.interest-section {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
 	padding: 2rem;
-	position: relative;
-	transition: transform 0.5s ease;
+	gap: 2rem;
+	transition: all 0.5s ease;
 }
 
-/* 설명 박스가 보일 때 전체 버블 차트 완전히 왼쪽으로 이동 */
-.bubble-chart.shift-left {
-	transform: translateX(-40%);
+/* 💡 설명 박스 보일 때 버블 차트 밀기 */
+.interest-section.with-box .bubble-chart {
+	transform: translateX(-10%);
 }
-.bubble-chart svg.img-chart {
-	width: 700px;
-	height: 700px;
+
+/* 버블 차트 */
+.bubble-chart {
+	flex: 1;
+	max-width: 50%;
+	transition: all 0.5s ease;
+	text-align: center;
 }
+
+/* 설명 박스 */
 .about_keyword {
+	flex: 1;
+	max-width: 50%;
 	background: #fff;
 	color: #333;
 	border-radius: 12px;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-	position: absolute;
-	top: 20%;
-	right: -400px;
-	width: 320px;
-	max-width: 320px;
-	padding: 1.2rem;
+	padding: 1.5rem;
 	opacity: 0;
-	transform: translateX(50px);
+	transform: translateX(40px);
 	transition: all 0.5s ease;
-	z-index: 10;
 	font-size: 0.9rem;
 }
 
+/* 박스 보일 때 */
 .about_keyword.show.desktop {
-	right: 5%;
 	opacity: 1;
 	transform: translateX(0);
 }
 
-.about_keyword.show.mobile {
-	position: relative;
-	top: auto;
-	right: auto;
-	margin: 2rem auto 0;
-	transform: translateY(20px);
-	opacity: 1;
-}
-
-.custom-description h2 {
-	font-size: 1.25rem;
-	margin-bottom: 0.75rem;
-}
-
-.custom-description p {
-	font-size: 0.9rem;
-	line-height: 1.5;
-	margin-top: 0.5rem;
-}
-
-.custom-description img {
-	width: 100%;
-	border-radius: 8px;
-	margin-bottom: 1rem;
-	transition: all 0.3s ease;
-	filter: grayscale(50%);
-}
-
+/* ✅ 반응형 모바일 */
 @media (max-width: 1024px) {
-	.bubble-chart svg.img-chart {
-		width: 100%;
-		height: 700px;
+	.interest-section {
+		flex-direction: column;
+		padding: 1rem;
 	}
-	.about_keyword.mobile {
-		position: relative;
-		width: 100%;
-		margin-top: 1.5rem;
-		padding: 1.2rem;
+
+	.bubble-chart {
+		max-width: 100%;
+		transform: none !important;
+	}
+
+	.about_keyword {
+		margin-top: 2rem;
+		max-width: 100%;
 		transform: translateY(30px);
-		opacity: 0;
-		transition: all 0.5s ease;
 	}
 
 	.about_keyword.show.mobile {
 		opacity: 1;
 		transform: translateY(0);
-	}
-
-	.bubble-chart {
-		padding-bottom: 2rem;
-	}
-
-	.custom-description img {
-		width: 100%;
-		max-height: 240px;
-		object-fit: cover;
-	}
-
-	.custom-description h2 {
-		font-size: 1.2rem;
-	}
-
-	.custom-description p {
-		font-size: 0.95rem;
-		line-height: 1.5;
-	}
-	.bubble-chart.shift-left {
-		transform: translateX(0);
 	}
 }
