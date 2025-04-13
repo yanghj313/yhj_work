@@ -2,18 +2,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
+import '../assets/css/fullpage.css';
+
+const getRandomImage = () => `https://source.unsplash.com/random/300x300?sig=${Math.floor(Math.random() * 1000)}`;
 
 const interests = [
-	{ name: '코딩', value: 80, color: '#ff6b6b', image: '/images/code.jpg' },
-	{ name: 'UI/UX 디자인', value: 70, color: '#feca57', image: '/images/design.jpg' },
-	{ name: '영화', value: 60, color: '#48dbfb', image: '/images/movie.jpg' },
-	{ name: '독서', value: 55, color: '#1dd1a1', image: '/images/book.jpg' },
-	{ name: '러닝', value: 50, color: '#5f27cd', image: '/images/run.jpg' },
-	{ name: '필라테스', value: 45, color: '#341f97', image: '/images/pilates.jpg' },
-	{ name: '여행', value: 65, color: '#ee5253', image: '/images/travel.jpg' },
-	{ name: '다이어리 꾸미기', value: 40, color: '#ff9ff3', image: '/images/diary.jpg' },
-	{ name: '카메라', value: 50, color: '#00d2d3', image: '/images/camera.jpg' },
-	{ name: '패션', value: 60, color: '#576574', image: '/images/fashion.jpg' },
+	{ name: '코딩', value: 80, color: '#ff6b6b', image: getRandomImage() },
+	{ name: 'UI/UX 디자인', value: 70, color: '#feca57', image: getRandomImage() },
+	{ name: '영화', value: 60, color: '#48dbfb', image: getRandomImage() },
+	{ name: '독서', value: 55, color: '#1dd1a1', image: getRandomImage() },
+	{ name: '러닝', value: 50, color: '#5f27cd', image: getRandomImage() },
+	{ name: '필라테스', value: 45, color: '#341f97', image: getRandomImage() },
+	{ name: '여행', value: 65, color: '#ee5253', image: getRandomImage() },
+	{ name: '다이어리 꾸미기', value: 40, color: '#ff9ff3', image: getRandomImage() },
+	{ name: '카메라', value: 50, color: '#00d2d3', image: getRandomImage() },
+	{ name: '패션', value: 60, color: '#576574', image: getRandomImage() },
 ];
 
 const InterestBubbleChart = () => {
@@ -105,7 +108,7 @@ const InterestBubbleChart = () => {
 			.attr('text-anchor', 'middle')
 			.attr('dy', '.35em')
 			.style('fill', '#fff')
-			.style('font-size', d => Math.min(d.value / 5, 14));
+			.style('font-size', d => Math.min(d.value / 6, 12));
 
 		function ticked() {
 			node.attr('transform', d => `translate(${Math.max(d.value / 2, Math.min(width - d.value / 2, d.x))},${Math.max(d.value / 2, Math.min(height - d.value / 2, d.y))})`);
@@ -122,33 +125,16 @@ const InterestBubbleChart = () => {
 	const isMobile = dimensions.width <= 1024;
 
 	return (
-		<div ref={wrapperRef} className="bubble-chart" style={{ position: 'relative', width: '100%', height: '100%', padding: '2rem' }}>
+		<div ref={wrapperRef} className="bubble-chart">
 			<h1 className={`text text--rolling`} data-splitting>
 				Interest
 			</h1>
-			<svg ref={svgRef} style={{ display: 'block', width: '600px', height: '600px', margin: '0 auto' }}></svg>
-			<div
-				className={`about_keyword ${boxVisible ? 'show' : ''}`}
-				style={{
-					position: isMobile ? 'relative' : 'absolute',
-					top: isMobile ? '0' : '20%',
-					right: isMobile ? 'auto' : '5%',
-					margin: isMobile ? '2rem auto' : '0',
-					width: isMobile ? '90%' : '300px',
-					background: '#fff',
-					padding: '1rem',
-					boxShadow: '0 0 10px rgba(0,0,0,0.2)',
-					borderRadius: '8px',
-					transform: boxVisible ? 'translateY(0)' : 'translateY(50px)',
-					opacity: boxVisible ? 1 : 0,
-					transition: 'all 0.5s ease',
-					pointerEvents: boxVisible ? 'auto' : 'none',
-				}}
-			>
+			<svg ref={svgRef}></svg>
+			<div className={`about_keyword ${boxVisible ? 'show' : ''} ${isMobile ? 'mobile' : 'desktop'}`}>
 				{boxVisible && selected && (
 					<div className="custom-description">
 						<h2>{selected.name}</h2>
-						<img src={selected.image} alt={selected.name} style={{ width: '100%', borderRadius: '6px', marginBottom: '1rem', transition: 'opacity 0.5s ease' }} />
+						<img src={selected.image} alt={selected.name} />
 						{selected.name === '코딩' && <p>프론트엔드와 백엔드 전반에 관심이 많고, 주로 React와 Node.js를 다룹니다.</p>}
 						{selected.name === 'UI/UX 디자인' && <p>프로토타입 제작과 사용자 흐름을 고려한 인터페이스를 설계합니다.</p>}
 						{selected.name === '영화' && <p>감성과 스토리 중심의 영화 감상을 즐기며, 감독의 연출력에 집중합니다.</p>}

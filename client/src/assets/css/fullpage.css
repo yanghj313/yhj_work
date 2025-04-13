@@ -106,3 +106,63 @@
 	align-items: center;
 	overflow: hidden;
 }
+
+/*버블차트*/
+.bubble-chart {
+	color: #fff;
+	text-align: center;
+	padding: 2rem;
+	position: relative;
+}
+
+.about_keyword {
+	background: #fff;
+	color: #333;
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	top: 20%;
+	right: -400px;
+	width: 320px;
+	max-width: 90%;
+	padding: 1.2rem;
+	opacity: 0;
+	transform: translateX(50px);
+	transition: all 0.5s ease;
+	z-index: 10;
+	font-size: 0.9rem;
+}
+
+.about_keyword.show.desktop {
+	right: 5%;
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.about_keyword.show.mobile {
+	position: relative;
+	top: auto;
+	right: auto;
+	margin: 2rem auto 0;
+	transform: translateY(20px);
+	opacity: 1;
+}
+
+.custom-description h2 {
+	font-size: 1.25rem;
+	margin-bottom: 0.75rem;
+}
+
+.custom-description p {
+	font-size: 0.9rem;
+	line-height: 1.5;
+	margin-top: 0.5rem;
+}
+
+.custom-description img {
+	width: 100%;
+	border-radius: 8px;
+	margin-bottom: 1rem;
+	transition: all 0.3s ease;
+	filter: grayscale(50%);
+}
