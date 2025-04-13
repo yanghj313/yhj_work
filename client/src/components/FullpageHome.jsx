@@ -5,6 +5,7 @@ import 'fullpage.js/dist/fullpage.min.css';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
+import InterestBubbleChart from './InterestBubbleChart';
 
 const sections = [
 	{ id: 'welcome', text: 'Welcome', class: 'one', effect: 'text--folding' },
@@ -64,9 +65,13 @@ const FullPageReact = () => {
 		<div id="fullpage">
 			{sections.map(s => (
 				<div key={s.id} className={`section ${s.class}`}>
-					<h1 className={`text ${s.effect}`} data-splitting>
-						{s.text}
-					</h1>
+					{s.id === 'interest' ? (
+						<InterestBubbleChart /> // ✅ Interest 섹션엔 이거 넣기
+					) : (
+						<h1 className={`text ${s.effect}`} data-splitting>
+							{s.text}
+						</h1>
+					)}
 				</div>
 			))}
 		</div>
