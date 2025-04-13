@@ -25,28 +25,34 @@ const FullPageReact = () => {
 			navigation: true,
 			scrollOverflow: false,
 			anchors: sections.map(s => s.id),
+
 			afterLoad(origin, destination) {
 				const current = destination.item;
-
-				// 기존 splitting 효과 제거
 				const h1 = current.querySelector('[data-splitting]');
 				if (!h1) return;
 
-				// 기존 char span 제거 (완전 초기화)
-				const chars = h1.querySelectorAll('.char');
-				if (chars.length) {
-					h1.innerHTML = h1.innerText; // span 다 제거됨
-				}
+				// 기존 Splitting span 제거
+				h1.innerHTML = h1.innerText;
 
-				// Splitting 다시 적용
+				// 다시 Splitting 적용
 				Splitting({ target: h1, by: 'chars' });
+
+				// 애니메이션 강제 재실행
+				const chars = h1.querySelectorAll('.char');
+				chars.forEach(char => {
+					char.style.animation = 'none';
+					char.offsetHeight; // 강제 리플로우
+					char.style.animation = '';
+				});
 			},
 		});
 
+		// 초기 첫 섹션에 Splitting 적용
 		requestAnimationFrame(() => {
 			const firstSection = document.querySelector('.section');
 			const h1 = firstSection?.querySelector('[data-splitting]');
-			if (h1 && !h1.classList.contains('splitting')) {
+			if (h1) {
+				h1.innerHTML = h1.innerText;
 				Splitting({ target: h1, by: 'chars' });
 			}
 		});
