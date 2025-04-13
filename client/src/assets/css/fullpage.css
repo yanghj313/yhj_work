@@ -7,6 +7,7 @@
 	align-items: center;
 	height: 100vh;
 	overflow: hidden;
+	font-family: 'Lato';
 }
 .one {
 	background: #1bb1a5;
@@ -39,7 +40,6 @@
 .char {
 	display: inline-block;
 	white-space: pre;
-	font-family: 'Lato';
 }
 
 /* 효과 1: folding */

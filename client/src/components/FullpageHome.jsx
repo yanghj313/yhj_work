@@ -13,6 +13,24 @@ const sections = [
 	{ id: 'travel', text: 'Travel', class: 'four', effect: 'text--swinging' },
 ];
 
+const applySplittingWithReset = el => {
+	if (!el) return;
+
+	// 기존 애니메이션 span 제거
+	el.innerHTML = el.innerText;
+
+	// Splitting 적용
+	Splitting({ target: el, by: 'chars' });
+
+	// animation 재실행 강제 트리거
+	const chars = el.querySelectorAll('.char');
+	chars.forEach(char => {
+		char.style.animation = 'none';
+		char.offsetHeight; // 리플로우
+		char.style.animation = '';
+	});
+};
+
 const FullPageReact = () => {
 	const location = useLocation();
 
@@ -27,35 +45,17 @@ const FullPageReact = () => {
 			anchors: sections.map(s => s.id),
 
 			afterLoad(origin, destination) {
-				const current = destination.item;
-				const h1 = current.querySelector('[data-splitting]');
-				if (!h1) return;
-
-				// 기존 Splitting span 제거
-				h1.innerHTML = h1.innerText;
-
-				// 다시 Splitting 적용
-				Splitting({ target: h1, by: 'chars' });
-
-				// 애니메이션 강제 재실행
-				const chars = h1.querySelectorAll('.char');
-				chars.forEach(char => {
-					char.style.animation = 'none';
-					char.offsetHeight; // 강제 리플로우
-					char.style.animation = '';
-				});
+				const h1 = destination.item.querySelector('[data-splitting]');
+				applySplittingWithReset(h1); // ✅ 효과 재적용
 			},
 		});
 
-		// 초기 첫 섹션에 Splitting 적용
-		requestAnimationFrame(() => {
+		// 첫 섹션에도 효과 적용
+		setTimeout(() => {
 			const firstSection = document.querySelector('.section');
 			const h1 = firstSection?.querySelector('[data-splitting]');
-			if (h1) {
-				h1.innerHTML = h1.innerText;
-				Splitting({ target: h1, by: 'chars' });
-			}
-		});
+			applySplittingWithReset(h1);
+		}, 10); // 약간 지연 줘야 첫 로딩시 적용됨
 
 		return () => instance.destroy('all');
 	}, [location.pathname]);
