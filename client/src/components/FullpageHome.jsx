@@ -19,7 +19,35 @@ const FullPageReact = () => {
 	// ✅ 스타일 동적 주입
 	useEffect(() => {
 		const style = document.createElement('style');
-		style.innerHTML = `...`;
+		style.innerHTML = `.char {
+			display: inline-block;
+			animation-delay: calc(0.25s + var(--char-index) * 0.1s);
+			transition: all 0.25s calc(0.25s + var(--char-index) * 0.1s);
+		}
+
+		[data-scroll='out'] .text--folding .char {
+			transform: rotateX(90deg);
+			transform-origin: bottom;
+		}
+
+		[data-scroll='out'] .text--bubbling .char {
+			transform: scale(0.5);
+		}
+
+		[data-scroll='out'] .text--rolling .char {
+			opacity: 0;
+			transform: translate(-500%, 0) scale(0) rotate(-1440deg);
+		}
+
+		.text--swinging .char {
+			transform-origin: calc((var(--char-total) - var(--char-index)) * 100%) -100%;
+			transition-delay: calc((var(--char-total) - var(--char-index)) * .1s);
+		}
+		[data-scroll='out'] .text--swinging .char {
+			opacity: 0;
+			transform: rotate(90deg);
+		}
+	`;
 		document.head.appendChild(style);
 	}, []);
 
