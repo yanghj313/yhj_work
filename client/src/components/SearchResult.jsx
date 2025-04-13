@@ -15,16 +15,17 @@ const SearchResult = () => {
 	const query = new URLSearchParams(useLocation().search).get('q') || '';
 
 	useEffect(() => {
-		if (!query) return;
-
 		setLoading(true);
 
-		Promise.all([
-			axios.get(`${API_BASE}/api/projects?filters[title][$containsi]=${query}&populate=*`),
-			axios.get(`${API_BASE}/api/skills?filters[name][$containsi]=${query}&populate=*`),
-			axios.get(`${API_BASE}/api/experiences?filters[position][$containsi]=${query}&populate=*`),
-			axios.get(`${API_BASE}/api/galleries?filters[title][$containsi]=${query}&populate=*`),
-		])
+		const getURL = (type, field) => {
+			// 검색어 있을 때는 필터, 없으면 전체
+			if (query) {
+				return `${API_BASE}/api/${type}?filters[${field}][$containsi]=${query}&populate=*`;
+			}
+			return `${API_BASE}/api/${type}?populate=*`;
+		};
+
+		Promise.all([axios.get(getURL('projects', 'title')), axios.get(getURL('skills', 'name')), axios.get(getURL('experiences', 'position')), axios.get(getURL('galleries', 'title'))])
 			.then(([pRes, sRes, eRes, gRes]) => {
 				setProjects((pRes.data.data || []).filter(Boolean));
 				setSkills((sRes.data.data || []).filter(Boolean));
@@ -39,7 +40,7 @@ const SearchResult = () => {
 
 	return (
 		<div className="result" style={{ padding: '1rem' }}>
-			<h2>🔎 “{query}” 검색 결과</h2>
+			<h2>🔎 “{query || '전체'}” 검색 결과</h2>
 
 			{/* 프로젝트 */}
 			{projects.length > 0 && (
