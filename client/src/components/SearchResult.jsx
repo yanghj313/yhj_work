@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import '../assets/css/Search.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
@@ -34,10 +35,10 @@ const SearchResult = () => {
 			.finally(() => setLoading(false));
 	}, [query]);
 
-	if (loading) return <p>🔍 검색 중...</p>;
+	if (loading) return <p className="p_loading">🔍 검색 중...</p>;
 
 	return (
-		<div style={{ padding: '1rem' }}>
+		<div className="result" style={{ padding: '1rem' }}>
 			<h2>🔎 “{query}” 검색 결과</h2>
 
 			{/* 프로젝트 */}
@@ -97,7 +98,7 @@ const SearchResult = () => {
 			)}
 
 			{/* 결과 없음 */}
-			{projects.length === 0 && skills.length === 0 && experiences.length === 0 && galleries.length === 0 && <p>😢 검색 결과가 없습니다.</p>}
+			{projects.length === 0 && skills.length === 0 && experiences.length === 0 && galleries.length === 0 && <p className="fail_massage">😢 검색 결과가 없습니다.</p>}
 		</div>
 	);
 };
