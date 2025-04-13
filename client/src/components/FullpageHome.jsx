@@ -17,7 +17,6 @@ const FullPageReact = () => {
 			autoScrolling: true,
 			navigation: true,
 			anchors: sections.map(s => s.id),
-			scrollHorizontally: true,
 		});
 
 		return () => {
