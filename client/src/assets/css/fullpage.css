@@ -232,7 +232,7 @@
 	position: relative;
 	width: 100%;
 	padding-top: 56.25%; /* 16:9 비율 */
-	background-image: url('/assets/img/map.svg');
+	background-image: url('../img/map.svg');
 	background-size: cover;
 	background-position: center;
 }
