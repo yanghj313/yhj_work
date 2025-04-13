@@ -16,8 +16,6 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import FullpageHome from './components/FullpageHome';
 import SearchResult from './components/SearchResult';
-
-import './components/fullpage-style-full.scss'; // 👉 Fullpage 스타일 여기서 불러옴
 import './index.css'; // 공통 스타일
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

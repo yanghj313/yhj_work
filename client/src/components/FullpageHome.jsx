@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.min.css';
 import './fullpage.css';
@@ -11,18 +12,23 @@ const sections = [
 ];
 
 const FullPageReact = () => {
-	useEffect(() => {
-		new fullpage('#fullpage', {
-			licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM', // 'OPEN-SOURCE-GPLV3-USE' 무료용 키
-			autoScrolling: true,
-			navigation: true,
-			anchors: sections.map(s => s.id),
-		});
+	const location = useLocation();
 
-		return () => {
-			fullpage.destroy('all');
-		};
-	}, []);
+	useEffect(() => {
+		// only run fullpage.js if on homepage
+		if (location.pathname === '/' || location.pathname === '/home') {
+			const instance = new fullpage('#fullpage', {
+				licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
+				autoScrolling: true,
+				navigation: true,
+				anchors: sections.map(s => s.id),
+			});
+
+			return () => {
+				instance.destroy('all');
+			};
+		}
+	}, [location.pathname]);
 
 	return (
 		<div id="fullpage">
