@@ -17,14 +17,13 @@ const FullPageReact = () => {
 	const location = useLocation();
 
 	useEffect(() => {
-		if (location.pathname === '/' || location.pathname === '/home') {
-			// Splitting은 딱 1회만 적용
-			setTimeout(() => {
-				document.querySelectorAll('[data-splitting]').forEach(el => {
-					Splitting({ target: el, by: 'chars' });
-				});
-			}, 100);
+		setTimeout(() => {
+			document.querySelectorAll('[data-splitting]').forEach(el => {
+				Splitting({ target: el, by: 'chars' });
+			});
+		}, 100);
 
+		if (location.pathname === '/' || location.pathname === '/home') {
 			const instance = new fullpage('#fullpage', {
 				licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
 				autoScrolling: true,
@@ -32,14 +31,19 @@ const FullPageReact = () => {
 				anchors: sections.map(s => s.id),
 				afterLoad(origin, destination) {
 					document.querySelectorAll('.section').forEach(section => section.setAttribute('data-scroll', 'out'));
-
 					const current = destination.item;
 					current.setAttribute('data-scroll', 'in');
 				},
+				onLeave(origin, destination) {
+					const fromSection = origin.item;
+					fromSection.setAttribute('data-scroll', 'out');
+				},
 			});
 
-			const firstSection = document.querySelector('.section');
-			firstSection?.setAttribute('data-scroll', 'in');
+			requestAnimationFrame(() => {
+				const firstSection = document.querySelector('.section');
+				firstSection?.setAttribute('data-scroll', 'in');
+			});
 
 			return () => {
 				instance.destroy('all');
