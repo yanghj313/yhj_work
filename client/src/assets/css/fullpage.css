@@ -107,73 +107,101 @@
 	overflow: hidden;
 }
 
-/* 전체 감싸는 구조 */
 .interest-section {
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
+	display: block; /* 기본은 block */
 	width: 100%;
 	max-width: 1400px;
 	margin: 0 auto;
 	padding: 2rem;
-	gap: 2rem;
 	transition: all 0.5s ease;
+	text-align: center;
+	position: relative;
 }
 
-/* 💡 설명 박스 보일 때 버블 차트 밀기 */
-.interest-section.with-box .bubble-chart {
-	transform: translateX(-10%);
+/* 설명창 보이면 flex로 전환 */
+.interest-section.with-box {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 2rem;
 }
 
 /* 버블 차트 */
 .bubble-chart {
-	flex: 1;
-	max-width: 50%;
+	width: 100%;
 	transition: all 0.5s ease;
-	text-align: center;
 }
 
-/* 설명 박스 */
+/* 설명창 있을 때만 양쪽 분할 */
+.interest-section.with-box .bubble-chart {
+	width: 50%;
+	transform: translateX(-5%);
+}
+
 .about_keyword {
-	flex: 1;
-	max-width: 50%;
+	width: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: all 0.5s ease;
+	transform: translateX(40px);
+}
+
+.about_keyword.show.desktop {
+	width: 50%;
+	opacity: 1;
+	transform: translateX(0);
+	overflow: visible;
 	background: #fff;
 	color: #333;
 	border-radius: 12px;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 	padding: 1.5rem;
-	opacity: 0;
-	transform: translateX(40px);
-	transition: all 0.5s ease;
+	pointer-events: auto;
+}
+
+.custom-description h2 {
+	font-size: 1.25rem;
+	margin-bottom: 0.75rem;
+}
+
+.custom-description p {
 	font-size: 0.9rem;
+	line-height: 1.5;
+	margin-top: 0.5rem;
 }
 
-/* 박스 보일 때 */
-.about_keyword.show.desktop {
-	opacity: 1;
-	transform: translateX(0);
+.custom-description img {
+	width: 100%;
+	border-radius: 8px;
+	margin-bottom: 1rem;
+	transition: all 0.3s ease;
+	filter: grayscale(50%);
 }
 
-/* ✅ 반응형 모바일 */
+/* 모바일 */
 @media (max-width: 1024px) {
-	.interest-section {
-		flex-direction: column;
+	.interest-section,
+	.interest-section.with-box {
+		display: block;
 		padding: 1rem;
 	}
 
 	.bubble-chart {
-		max-width: 100%;
-		transform: none !important;
+		width: 100%;
+		transform: none;
 	}
 
 	.about_keyword {
-		margin-top: 2rem;
-		max-width: 100%;
+		width: 100%;
+		margin-top: 1.5rem;
 		transform: translateY(30px);
 	}
 
 	.about_keyword.show.mobile {
 		opacity: 1;
 		transform: translateY(0);
+		background: #fff;
+		padding: 1.2rem;
 	}
 }
