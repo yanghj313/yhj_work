@@ -19,15 +19,18 @@ const applySplittingWithReset = el => {
 	// 기존 Splitting span 제거
 	el.innerHTML = el.textContent;
 
-	// Splitting 적용
+	// ✅ splitting 클래스 제거
+	el.classList.remove('splitting');
+
+	// 다시 Splitting 적용
 	Splitting({ target: el, by: 'chars' });
 
-	// animation 재실행
+	// ✅ 애니메이션 재실행
 	const chars = el.querySelectorAll('.char');
 	chars.forEach(char => {
 		char.style.animation = 'none';
-		char.offsetHeight; // 강제 리플로우
-		char.style.animation = ''; // 다시 실행
+		char.offsetHeight;
+		char.style.animation = '';
 	});
 };
 
