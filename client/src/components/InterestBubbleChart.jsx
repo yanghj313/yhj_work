@@ -118,8 +118,12 @@ const InterestBubbleChart = () => {
 	const isMobile = dimensions.width <= 1024;
 
 	return (
-		<div ref={wrapperRef} className={`bubble-chart ${boxVisible ? 'shift-left' : ''}`}>
-			<svg ref={svgRef} className="img-chart"></svg>
+		<div className="interest-chart-wrapper" style={{ position: 'relative' }}>
+			<div ref={wrapperRef} className={`bubble-chart ${boxVisible ? 'shift-left' : ''}`}>
+				<svg ref={svgRef}></svg>
+			</div>
+
+			{/* 👉 버블차트 바깥쪽에 설명 박스 위치 */}
 			<div className={`about_keyword ${boxVisible ? 'show' : ''} ${isMobile ? 'mobile' : 'desktop'}`}>
 				{boxVisible && selected && (
 					<div className="custom-description">
