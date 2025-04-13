@@ -54,14 +54,8 @@ const TravelMap = () => {
 								</div>
 
 								{/* 팝업 */}
-								<div
-									className="map-popup"
-									style={{
-										left: `calc(${marker.x} + 32px)`,
-										top: `calc(${marker.y} - 50%)`,
-									}}
-								>
-									<div className="popup-tail left" />
+								<div className={`active-marker active-marker--${marker.id}`}></div>
+								<div className={`map-popup map-popup--${marker.id}`}>
 									<img src={marker.image} alt={marker.name} />
 									<h3>{marker.name}</h3>
 									<p>{marker.description}</p>
