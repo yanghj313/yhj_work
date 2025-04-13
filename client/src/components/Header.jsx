@@ -72,7 +72,7 @@ const Header = ({ user }) => {
 						<form className="search-bar" onSubmit={handleSearch}>
 							{searchTerm && (
 								<button type="button" className="clear-btn" onClick={() => setSearchTerm('')} aria-label="검색어 지우기">
-									&times;
+									<i className="fas fa-times" aria-hidden="true"></i>
 								</button>
 							)}
 
