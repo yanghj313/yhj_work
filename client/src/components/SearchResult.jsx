@@ -5,17 +5,6 @@ import '../assets/css/Search.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-const normalize = value => {
-	if (!value) return '';
-	if (Array.isArray(value)) {
-		return value.map(block => (Array.isArray(block.children) ? block.children.map(c => c.text).join('') : '')).join(' ');
-	}
-	if (typeof value === 'object') return JSON.stringify(value);
-	return String(value);
-};
-
-const includesQuery = (value, query) => normalize(value).toLowerCase().includes(query.toLowerCase());
-
 const SearchResult = () => {
 	const [projects, setProjects] = useState([]);
 	const [skills, setSkills] = useState([]);
@@ -23,10 +12,10 @@ const SearchResult = () => {
 	const [galleries, setGalleries] = useState([]);
 	const [loading, setLoading] = useState(true);
 
-	const query = new URLSearchParams(useLocation().search).get('q')?.trim() || '';
+	const query = new URLSearchParams(useLocation().search).get('q') || '';
 
 	useEffect(() => {
-		if (!query) {
+		if (!query.trim()) {
 			setProjects([]);
 			setSkills([]);
 			setExperiences([]);
@@ -37,14 +26,14 @@ const SearchResult = () => {
 
 		setLoading(true);
 
-		const getURL = (type, field) => `${API_BASE}/api/${type}?filters[${field}][$containsi]=${encodeURIComponent(query)}&populate=*`;
+		const getURL = (type, field) => `${API_BASE}/api/${type}?filters[${field}][$containsi]=${encodeURIComponent(query)}&pagination[pageSize]=10&populate=*`;
 
 		Promise.all([axios.get(getURL('projects', 'title')), axios.get(getURL('skills', 'name')), axios.get(getURL('experiences', 'position')), axios.get(getURL('galleries', 'title'))])
 			.then(([pRes, sRes, eRes, gRes]) => {
-				setProjects((pRes.data.data || []).filter(p => includesQuery(p.title, query) || includesQuery(p.role, query) || includesQuery(p.description, query)));
-				setSkills((sRes.data.data || []).filter(s => includesQuery(s.name, query) || includesQuery(s.description, query)));
-				setExperiences((eRes.data.data || []).filter(e => includesQuery(e.position, query) || includesQuery(e.Career, query)));
-				setGalleries((gRes.data.data || []).filter(g => includesQuery(g.title, query) || includesQuery(g.description, query) || includesQuery(g.category, query)));
+				setProjects((pRes.data.data || []).filter(Boolean));
+				setSkills((sRes.data.data || []).filter(Boolean));
+				setExperiences((eRes.data.data || []).filter(Boolean));
+				setGalleries((gRes.data.data || []).filter(Boolean));
 			})
 			.catch(err => console.error('❌ 검색 오류:', err))
 			.finally(() => setLoading(false));
@@ -52,20 +41,13 @@ const SearchResult = () => {
 
 	if (loading) return <p className="p_loading">🔍 검색 중...</p>;
 
-	if (!query) {
+	if (!query.trim()) {
 		return <p className="fail_massage">❗ 검색어를 입력해주세요.</p>;
 	}
 
-	const total = projects.length + skills.length + experiences.length + galleries.length;
-
 	return (
 		<div className="result" style={{ padding: '1rem' }}>
-			<h2>
-				🔎 “<span style={{ color: 'blue' }}>{query}</span>” 검색 결과
-			</h2>
-			<p style={{ marginBottom: '2rem' }}>
-				📦 총 <strong>{total}</strong>개의 결과가 검색되었습니다.
-			</p>
+			<h2>🔎 “{query}” 검색 결과</h2>
 
 			{/* 프로젝트 */}
 			{projects.length > 0 && (
@@ -112,7 +94,7 @@ const SearchResult = () => {
 			{/* 갤러리 */}
 			{galleries.length > 0 && (
 				<>
-					<h3>🖼 갤러리</h3>
+					<h3>🖼️ 갤러리</h3>
 					<ul>
 						{galleries.map(g => (
 							<li key={g.id}>
@@ -124,7 +106,7 @@ const SearchResult = () => {
 			)}
 
 			{/* 결과 없음 */}
-			{total === 0 && <p className="fail_massage">😢 검색 결과가 없습니다.</p>}
+			{projects.length === 0 && skills.length === 0 && experiences.length === 0 && galleries.length === 0 && <p className="fail_massage">😢 검색 결과가 없습니다.</p>}
 		</div>
 	);
 };
