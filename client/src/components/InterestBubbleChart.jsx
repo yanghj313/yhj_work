@@ -118,7 +118,7 @@ const InterestBubbleChart = () => {
 	const isMobile = dimensions.width <= 1024;
 
 	return (
-		<div className="interest-chart-wrapper" style={{ position: 'relative' }}>
+		<div className="interest-section" style={{ position: 'relative' }}>
 			<div className="bubble-chart">
 				<svg ref={svgRef} className="img-chart"></svg>
 			</div>
