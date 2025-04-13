@@ -6,6 +6,7 @@ import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 import InterestBubbleChart from './InterestBubbleChart';
+import TravelMap from './TravelMap';
 
 const sections = [
 	{ id: 'welcome', text: 'Welcome', class: 'one', effect: 'text--folding' },
@@ -71,6 +72,13 @@ const FullPageReact = () => {
 								Interest
 							</h1>
 							<InterestBubbleChart />
+						</>
+					) : s.id === 'travel' ? (
+						<>
+							<h1 className="text text--swinging" data-splitting>
+								Travel
+							</h1>
+							<TravelMap />
 						</>
 					) : (
 						<h1 className={`text ${s.effect}`} data-splitting>
