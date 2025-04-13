@@ -4,7 +4,7 @@ import fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.min.css';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
-import '../assets/css/fullpage.css'; // 여기에는 수정된 animation 스타일 포함되어야 함
+import '../assets/css/fullpage.css';
 
 const sections = [
 	{ id: 'welcome', text: 'Welcome', class: 'one', effect: 'text--folding' },
@@ -15,11 +15,6 @@ const sections = [
 
 const FullPageReact = () => {
 	const location = useLocation();
-
-	useEffect(() => {
-		'';
-		document.head.appendChild(style);
-	}, []);
 
 	useEffect(() => {
 		if (location.pathname === '/' || location.pathname === '/home') {
