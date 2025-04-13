@@ -38,20 +38,25 @@ const TravelMap = () => {
 				<div className="map-background"></div>
 
 				{markers.map(marker => (
-					<div key={marker.id} className={`circle-marker ${activeId === marker.id ? 'hidden' : ''} circle-marker--${marker.id}`}></div>
+					<div
+						key={marker.id}
+						className={`circle-marker ${activeId === marker.id ? 'hidden' : ''} circle-marker--${marker.id}`}
+						style={{ left: marker.x, top: marker.y }}
+						onClick={() => setActiveId(marker.id)}
+					/>
 				))}
 
 				{markers.map(
 					marker =>
 						marker.id === activeId && (
 							<React.Fragment key={`active-${marker.id}`}>
-								<div key={`active-${marker.id}`} className={`active-marker active-marker--${marker.id}`}>
+								<div className={`active-marker active-marker--${marker.id}`} style={{ left: marker.x, top: marker.y }}>
 									<FaMapMarkerAlt size={28} />
 									<div className="marker-wave"></div>
 									<div className="marker-wave marker-wave--inner"></div>
 								</div>
-								{/* 팝업 */}
-								<div className={`map-popup map-popup--${marker.id}`}>
+
+								<div className={`map-popup map-popup--${marker.id}`} style={{ left: `calc(${marker.x} + 60px)`, top: `calc(${marker.y} - 30px)` }}>
 									<div className="popup-tail left" />
 									<img src={marker.image} alt={marker.name} />
 									<h3>{marker.name}</h3>
