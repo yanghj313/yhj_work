@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import '../assets/css/fullpage.css';
 
 const markers = [
