@@ -1,47 +1,37 @@
 import React, { useRef } from 'react';
 import '../assets/css/fullpage.css';
-
-const markers = [
-	{
-		id: 'spot1',
-		top: '30%',
-		left: '20%',
-		title: '제주도',
-		description: '한라산과 돌하르방이 유명한 섬',
-		image: 'https://picsum.photos/id/1015/300/200',
-	},
-	{
-		id: 'spot2',
-		top: '60%',
-		left: '70%',
-		title: '부산 해운대',
-		description: '해변과 도심이 만나는 곳',
-		image: 'https://picsum.photos/id/1025/300/200',
-	},
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+const locations = [
+	{ id: 1, name: '부산역', left: '30%', top: '20%', image: '/img/place1.jpg', desc: '부산의 관문, 여행의 시작점' },
+	{ id: 2, name: '해운대', left: '60%', top: '40%', image: '/img/place2.jpg', desc: '부산의 대표 해수욕장' },
+	{ id: 3, name: '감천문화마을', left: '40%', top: '60%', image: '/img/place3.jpg', desc: '알록달록한 벽화마을' },
 ];
 
 const TravelMap = () => {
-	const containerRef = useRef();
-
-	const scrollToMarker = id => {
-		const el = document.getElementById(id);
-		if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-	};
+	const [active, setActive] = useState(null);
 
 	return (
-		<div className="travel-map-wrapper" ref={containerRef}>
-			<img src="/assets/images/travel-map.png" alt="여행 지도" className="map-image" />
-			{markers.map(marker => (
-				<div key={marker.id} id={marker.id} className="map-marker" style={{ top: marker.top, left: marker.left }} onClick={() => scrollToMarker(marker.id)}>
-					<i className="fas fa-map-marker-alt"></i>
-					<div className="marker-popup">
-						<img src={marker.image} alt={marker.title} />
-						<h5>{marker.title}</h5>
-						<p>{marker.description}</p>
-						<span className="marker-wave" />
-					</div>
-				</div>
+		<div className="travel-map">
+			<div className="map-background" />
+
+			{locations.map(loc => (
+				<div key={loc.id} className="circle-marker" style={{ left: loc.left, top: loc.top }} onClick={() => setActive(loc)} />
 			))}
+
+			{active && (
+				<>
+					<div className="active-marker" style={{ left: active.left, top: active.top }}>
+						<FontAwesomeIcon icon={faLocationDot} size="2x" />
+					</div>
+					<div className="map-popup" style={{ left: active.left, top: `calc(${active.top} + 40px)` }}>
+						<img src={active.image} alt={active.name} />
+						<h3>{active.name}</h3>
+						<p>{active.desc}</p>
+						<div className="popup-tail" />
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
