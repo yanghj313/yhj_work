@@ -15,15 +15,19 @@ const SearchResult = () => {
 	const query = new URLSearchParams(useLocation().search).get('q') || '';
 
 	useEffect(() => {
+		if (!query.trim()) {
+			// 검색어 없으면 결과 없음 처리
+			setProjects([]);
+			setSkills([]);
+			setExperiences([]);
+			setGalleries([]);
+			setLoading(false);
+			return;
+		}
+
 		setLoading(true);
 
-		const getURL = (type, field) => {
-			// 검색어 있을 때는 필터, 없으면 전체
-			if (query) {
-				return `${API_BASE}/api/${type}?filters[${field}][$containsi]=${query}&populate=*`;
-			}
-			return `${API_BASE}/api/${type}?populate=*`;
-		};
+		const getURL = (type, field) => `${API_BASE}/api/${type}?filters[${field}][$containsi]=${query}&populate=*`;
 
 		Promise.all([axios.get(getURL('projects', 'title')), axios.get(getURL('skills', 'name')), axios.get(getURL('experiences', 'position')), axios.get(getURL('galleries', 'title'))])
 			.then(([pRes, sRes, eRes, gRes]) => {
@@ -38,9 +42,13 @@ const SearchResult = () => {
 
 	if (loading) return <p className="p_loading">🔍 검색 중...</p>;
 
+	if (!query.trim()) {
+		return <p className="fail_massage">❗ 검색어를 입력해주세요.</p>;
+	}
+
 	return (
 		<div className="result" style={{ padding: '1rem' }}>
-			<h2>🔎 “{query || '전체'}” 검색 결과</h2>
+			<h2>🔎 “{query}” 검색 결과</h2>
 
 			{/* 프로젝트 */}
 			{projects.length > 0 && (
