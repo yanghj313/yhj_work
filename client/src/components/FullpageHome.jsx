@@ -16,18 +16,18 @@ const sections = [
 const applySplittingWithReset = el => {
 	if (!el) return;
 
-	// 기존 애니메이션 span 제거
-	el.innerHTML = el.innerText;
+	// 기존 Splitting span 제거
+	el.innerHTML = el.textContent;
 
 	// Splitting 적용
 	Splitting({ target: el, by: 'chars' });
 
-	// animation 재실행 강제 트리거
+	// animation 재실행
 	const chars = el.querySelectorAll('.char');
 	chars.forEach(char => {
 		char.style.animation = 'none';
-		char.offsetHeight; // 리플로우
-		char.style.animation = '';
+		char.offsetHeight; // 강제 리플로우
+		char.style.animation = ''; // 다시 실행
 	});
 };
 
@@ -37,6 +37,7 @@ const FullPageReact = () => {
 	useEffect(() => {
 		if (location.pathname !== '/' && location.pathname !== '/home') return;
 
+		// fullpage 인스턴스
 		const instance = new fullpage('#fullpage', {
 			licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
 			autoScrolling: true,
@@ -46,16 +47,15 @@ const FullPageReact = () => {
 
 			afterLoad(origin, destination) {
 				const h1 = destination.item.querySelector('[data-splitting]');
-				applySplittingWithReset(h1); // ✅ 효과 재적용
+				applySplittingWithReset(h1);
 			},
 		});
 
-		// 첫 섹션에도 효과 적용
-		setTimeout(() => {
-			const firstSection = document.querySelector('.section');
-			const h1 = firstSection?.querySelector('[data-splitting]');
-			applySplittingWithReset(h1);
-		}, 10); // 약간 지연 줘야 첫 로딩시 적용됨
+		// ✅ 첫 진입 섹션 강제 애니메이션 실행
+		window.addEventListener('load', () => {
+			const firstH1 = document.querySelector('#fullpage .section:first-child h1[data-splitting]');
+			applySplittingWithReset(firstH1);
+		});
 
 		return () => instance.destroy('all');
 	}, [location.pathname]);
