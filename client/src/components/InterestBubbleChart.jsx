@@ -22,7 +22,7 @@ const interests = [
 const InterestBubbleChart = () => {
 	const svgRef = useRef();
 	const wrapperRef = useRef();
-	const [dimensions, setDimensions] = useState({ width: 600, height: 600 });
+	const [dimensions, setDimensions] = useState({ width: 700, height: 700 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
 
@@ -119,10 +119,7 @@ const InterestBubbleChart = () => {
 
 	return (
 		<div ref={wrapperRef} className="bubble-chart">
-			<h1 className={`text text--rolling`} data-splitting>
-				Interest
-			</h1>
-			<svg ref={svgRef}></svg>
+			<svg ref={svgRef} className="img-chart"></svg>
 			<div className={`about_keyword ${boxVisible ? 'show' : ''} ${isMobile ? 'mobile' : 'desktop'}`}>
 				{boxVisible && selected && (
 					<div className="custom-description">
