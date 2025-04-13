@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import '../assets/css/fullpage.css';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+
 const markers = [
 	{
 		id: 1,
 		name: '부산 도서관',
 		description: '부산 시민을 위한 열린 공간과 자료를 제공합니다.',
-		image: 'https://source.unsplash.com/random/400x200?library',
+		image: 'https://source.unsplash.com/400x200/?library',
 		x: '45%',
 		y: '30%',
 	},
@@ -14,7 +15,7 @@ const markers = [
 		id: 2,
 		name: '해운대 해수욕장',
 		description: '부산을 대표하는 바다 관광지입니다.',
-		image: 'https://source.unsplash.com/random/400x200?beach',
+		image: 'https://source.unsplash.com/400x200/?beach',
 		x: '70%',
 		y: '55%',
 	},
@@ -22,7 +23,7 @@ const markers = [
 		id: 3,
 		name: '감천문화마을',
 		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
-		image: 'https://source.unsplash.com/random/400x200?village',
+		image: 'https://source.unsplash.com/400x200/?village',
 		x: '35%',
 		y: '65%',
 	},
@@ -36,32 +37,25 @@ const TravelMap = () => {
 			<div className="travel-map">
 				<div className="map-background"></div>
 
-				{/* 마커들 */}
 				{markers.map(marker => (
 					<div key={marker.id} className="circle-marker" style={{ left: marker.x, top: marker.y }} onClick={() => setActiveId(marker.id)}></div>
 				))}
 
-				{/* 활성화된 마커 아이콘 */}
-				{markers.map(
-					marker =>
-						marker.id === activeId && (
-							<div key={`active-${marker.id}`} className="active-marker" style={{ left: marker.x, top: marker.y }}>
+				{markers.map(marker =>
+					marker.id === activeId ? (
+						<React.Fragment key={`active-${marker.id}`}>
+							<div className="active-marker" style={{ left: marker.x, top: marker.y }}>
 								<FaMapMarkerAlt size={28} />
 							</div>
-						)
-				)}
 
-				{/* 팝업 */}
-				{markers.map(
-					marker =>
-						marker.id === activeId && (
-							<div key={`popup-${marker.id}`} className="map-popup" style={{ left: marker.x, top: `calc(${marker.y} - 130px)` }}>
+							<div className="map-popup" style={{ left: marker.x, top: `calc(${marker.y} - 140px)` }}>
 								<img src={marker.image} alt={marker.name} />
 								<h3>{marker.name}</h3>
 								<p>{marker.description}</p>
 								<div className="popup-tail"></div>
 							</div>
-						)
+						</React.Fragment>
+					) : null
 				)}
 			</div>
 		</div>
