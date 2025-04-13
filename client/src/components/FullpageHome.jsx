@@ -1,3 +1,4 @@
+// FullPageReact.jsx
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import fullpage from 'fullpage.js';
@@ -17,38 +18,41 @@ const FullPageReact = () => {
 	const location = useLocation();
 
 	useEffect(() => {
-		setTimeout(() => {
-			document.querySelectorAll('[data-splitting]').forEach(el => {
-				Splitting({ target: el, by: 'chars' });
-			});
-		}, 100);
+		if (location.pathname !== '/' && location.pathname !== '/home') return;
 
-		if (location.pathname === '/' || location.pathname === '/home') {
-			const instance = new fullpage('#fullpage', {
-				licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
-				autoScrolling: true,
-				navigation: true,
-				anchors: sections.map(s => s.id),
-				afterLoad(origin, destination) {
-					document.querySelectorAll('.section').forEach(section => section.setAttribute('data-scroll', 'out'));
-					const current = destination.item;
-					current.setAttribute('data-scroll', 'in');
-				},
-				onLeave(origin, destination) {
-					const fromSection = origin.item;
-					fromSection.setAttribute('data-scroll', 'out');
-				},
-			});
+		const instance = new fullpage('#fullpage', {
+			licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
+			autoScrolling: true,
+			navigation: true,
+			anchors: sections.map(s => s.id),
+			afterLoad(origin, destination) {
+				document.querySelectorAll('.section').forEach(section => section.setAttribute('data-scroll', 'out'));
+				const current = destination.item;
+				current.setAttribute('data-scroll', 'in');
 
-			requestAnimationFrame(() => {
-				const firstSection = document.querySelector('.section');
-				firstSection?.setAttribute('data-scroll', 'in');
-			});
+				// Splitting re-apply if not already applied
+				const h1 = current.querySelector('[data-splitting]');
+				if (h1 && !h1.classList.contains('splitting')) {
+					Splitting({ target: h1, by: 'chars' });
+				}
+			},
+			onLeave(origin) {
+				origin.item.setAttribute('data-scroll', 'out');
+			},
+		});
 
-			return () => {
-				instance.destroy('all');
-			};
-		}
+		// 최초 섹션 Splitting 적용
+		requestAnimationFrame(() => {
+			const firstSection = document.querySelector('.section');
+			firstSection?.setAttribute('data-scroll', 'in');
+
+			const h1 = firstSection?.querySelector('[data-splitting]');
+			if (h1 && !h1.classList.contains('splitting')) {
+				Splitting({ target: h1, by: 'chars' });
+			}
+		});
+
+		return () => instance.destroy('all');
 	}, [location.pathname]);
 
 	return (
