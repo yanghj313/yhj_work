@@ -1,43 +1,46 @@
 {
-  "kind": "collectionType",
-  "collectionName": "projects",
-  "info": {
-    "singularName": "project",
-    "pluralName": "projects",
-    "displayName": "Project"
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "blocks"
-    },
-    "thumbnail": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
-    },
-    "images": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
-    },
-    "link": {
-      "type": "string"
-    },
-    "period": {
-      "type": "string"
-    },
-    "role": {
-      "type": "enumeration",
-      "enum": ["Publisher", "Designer", "Frontend"]
-    },
-    "tags": {
-      "type": "string"
-    }
-  }
+	"kind": "collectionType",
+	"collectionName": "projects",
+	"info": {
+		"singularName": "project",
+		"pluralName": "projects",
+		"displayName": "Project"
+	},
+	"options": {
+		"draftAndPublish": true
+	},
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"description": {
+			"type": "blocks"
+		},
+		"thumbnail": {
+			"type": "media",
+			"multiple": false,
+			"allowedTypes": ["images", "files", "videos", "audios"]
+		},
+		"images": {
+			"type": "media",
+			"multiple": true,
+			"allowedTypes": ["images", "files", "videos", "audios"]
+		},
+		"link": {
+			"type": "string"
+		},
+		"period": {
+			"type": "string"
+		},
+		"role": {
+			"type": "enumeration",
+			"enum": ["Publisher", "Designer", "Frontend"]
+		},
+		"contribution": {
+			"type": "string"
+		},
+		"tags": {
+			"type": "string"
+		}
+	}
 }
