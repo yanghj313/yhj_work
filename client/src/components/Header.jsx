@@ -7,9 +7,9 @@ const Header = ({ user }) => {
 	const navigate = useNavigate();
 
 	const handleSearch = e => {
-		e.preventDefault();
+		e.preventDefault(); // 폼 기본 동작 방지
 		if (searchTerm.trim()) {
-			navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+			navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
 		}
 	};
 
