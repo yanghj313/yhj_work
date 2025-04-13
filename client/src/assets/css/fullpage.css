@@ -39,6 +39,7 @@
 .char {
 	display: inline-block;
 	white-space: pre;
+	font-family: 'Lato';
 }
 
 /* 효과 1: folding */
