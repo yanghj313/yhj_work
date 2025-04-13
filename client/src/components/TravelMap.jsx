@@ -50,7 +50,7 @@ const TravelMap = () => {
 					marker =>
 						marker.id === activeId && (
 							<React.Fragment key={`active-${marker.id}`}>
-								<div className={`active-marker active-marker--${marker.id}`} style={{ left: marker.x, top: marker.y }}>
+								<div className={`active-marker active-marker--${marker.id}`}>
 									<FaMapMarkerAlt size={28} />
 									<div className="marker-wave"></div>
 									<div className="marker-wave marker-wave--inner"></div>
