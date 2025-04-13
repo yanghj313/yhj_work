@@ -58,40 +58,10 @@ const ProjectDetail = () => {
 							</div>
 						)}
 
-						{Array.isArray(p.description) && p.description.length > 0 && (
+						{typeof p.description === 'string' && p.description.trim() && (
 							<div style={{ marginTop: '2rem' }}>
 								<h4>📘 설명</h4>
-
-								{p.description.map((block, idx) => {
-									const childrenText = Array.isArray(block.children) ? block.children.map(c => c.text).join('') : '';
-
-									switch (block.type) {
-										case 'heading':
-										case 'heading-one':
-										case 'heading-two':
-											return <h3 key={idx}>{childrenText}</h3>;
-
-										case 'paragraph':
-											return <p key={idx}>{childrenText}</p>;
-
-										case 'list':
-										case 'bulleted-list':
-										case 'numbered-list':
-											return (
-												<ul key={idx}>
-													{block.children?.map((li, i) => (
-														<li key={i}>{Array.isArray(li.children) ? li.children.map(c => c.text).join('') : ''}</li>
-													))}
-												</ul>
-											);
-
-										case 'quote':
-											return <blockquote key={idx}>{childrenText}</blockquote>;
-
-										default:
-											return <p key={idx}>{childrenText}</p>;
-									}
-								})}
+								<ul style={{ paddingLeft: '1.25rem', lineHeight: '1.8' }}>{p.description.split('\n').map((line, idx) => (line.trim() ? <li key={idx}>{line.trim()}</li> : null))}</ul>
 							</div>
 						)}
 
