@@ -111,11 +111,11 @@ const InterestBubbleChart = () => {
 
 		const simulation = d3
 			.forceSimulation(interests)
-			.force('x', d3.forceX(width / 2).strength(0.2))
-			.force('y', d3.forceY(height / 2).strength(0.1))
+			.force('x', d3.forceX(width / 2).strength(0.8))
+			.force('y', d3.forceY(height / 2).strength(0.05))
 			.force(
 				'collision',
-				d3.forceCollide().radius(d => d.value / 2 + 4)
+				d3.forceCollide().radius(d => d.value / 2 + 8)
 			)
 			.alpha(1)
 			.restart()
