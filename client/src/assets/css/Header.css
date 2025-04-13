@@ -67,7 +67,6 @@
 	padding: 0.25rem 0;
 }
 
-/* 🔍 검색 바 */
 .search-bar {
 	margin: 0;
 	padding: 0;
@@ -97,6 +96,7 @@
 	position: absolute;
 	z-index: 9;
 	right: 16px;
+	outline: none;
 }
 
 .search-bar input:focus,
