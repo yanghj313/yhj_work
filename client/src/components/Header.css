@@ -103,7 +103,6 @@
 .search-bar input {
 	background: transparent;
 	border-radius: 1.5em;
-	box-shadow: 0 0 0 0.4em #171717 inset;
 	padding: 0.75em;
 	transform: translate(0.5em, 0.5em) scale(0.5);
 	transform-origin: 100% 0;
@@ -125,9 +124,13 @@
 	background: #333;
 	border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
 	padding: 0.75em;
-	position: relative;
-	transform: translate(0.25em, 0.25em) rotate(45deg) scale(0.25, 0.125);
-	transform-origin: 0 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2em; /* 돋보기 크기 */
+	color: white; /* 아이콘 색 */
+	transform: scale(1);
+	cursor: pointer;
 }
 .search-btn:before,
 .search-btn:after {
@@ -136,24 +139,10 @@
 	opacity: 0;
 	position: absolute;
 }
-.search-btn:before {
-	border-radius: 50%;
-	box-shadow: 0 0 0 0.2em #333 inset;
-	top: 0.75em;
-	left: 0.75em;
-	width: 1.2em;
-	height: 1.2em;
+.search-btn i {
+	margin: 0;
 }
-.search-btn:after {
-	background: #333;
-	border-radius: 0 0.25em 0.25em 0;
-	top: 51%;
-	left: 51%;
-	width: 0.75em;
-	height: 0.25em;
-	transform: translate(0.2em, 0) rotate(45deg);
-	transform-origin: 0 50%;
-}
+
 .search-btn span {
 	display: inline-block;
 	overflow: hidden;
@@ -193,14 +182,9 @@
 		background: #171717;
 	}
 	.search-bar input {
-		box-shadow: 0 0 0 0.4em #333 inset;
 	}
 	.search-bar input:focus,
 	.search-bar input:valid {
-		background: #333;
-		box-shadow: 0 0 0 0.1em #333 inset;
-	}
-	.search-btn {
 		background: #333;
 	}
 }
