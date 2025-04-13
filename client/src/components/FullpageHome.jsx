@@ -13,21 +13,19 @@ const sections = [
 	{ id: 'travel', text: 'Travel', class: 'four', effect: 'text--swinging' },
 ];
 
-const applySplittingWithReset = el => {
+const applyAnimationReset = el => {
 	if (!el) return;
 
-	// 기존 Splitting span 제거
-	el.innerHTML = el.textContent;
-
-	// ✅ splitting 클래스 제거
-	el.classList.remove('splitting');
-
-	// 다시 Splitting 적용
-	Splitting({ target: el, by: 'chars' });
-
-	// ✅ 애니메이션 재실행
 	const chars = el.querySelectorAll('.char');
-	chars.forEach(char => {
+
+	// ✅ 처음에는 splitting 적용
+	if (chars.length === 0) {
+		Splitting({ target: el, by: 'chars' });
+	}
+
+	// ✅ 이후 애니메이션만 재실행
+	const updatedChars = el.querySelectorAll('.char');
+	updatedChars.forEach(char => {
 		char.style.animation = 'none';
 		char.offsetHeight;
 		char.style.animation = '';
@@ -40,7 +38,6 @@ const FullPageReact = () => {
 	useEffect(() => {
 		if (location.pathname !== '/' && location.pathname !== '/home') return;
 
-		// fullpage 인스턴스
 		const instance = new fullpage('#fullpage', {
 			licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
 			autoScrolling: true,
@@ -50,15 +47,15 @@ const FullPageReact = () => {
 
 			afterLoad(origin, destination) {
 				const h1 = destination.item.querySelector('[data-splitting]');
-				applySplittingWithReset(h1);
+				applyAnimationReset(h1);
 			},
 		});
 
-		// ✅ 첫 진입 섹션 강제 애니메이션 실행
-		window.addEventListener('load', () => {
+		// 첫 섹션 애니메이션 실행
+		setTimeout(() => {
 			const firstH1 = document.querySelector('#fullpage .section:first-child h1[data-splitting]');
-			applySplittingWithReset(firstH1);
-		});
+			applyAnimationReset(firstH1);
+		}, 0);
 
 		return () => instance.destroy('all');
 	}, [location.pathname]);
