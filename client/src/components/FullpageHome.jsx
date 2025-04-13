@@ -26,6 +26,12 @@ const FullPageReact = () => {
 			anchors: sections.map(s => s.id),
 			afterLoad(origin, destination) {
 				const current = destination.item;
+
+				// 기존 splitting 제거 (재진입 대비)
+				const prevSplits = current.querySelectorAll('.splitting');
+				prevSplits.forEach(el => el.classList.remove('splitting'));
+
+				// 다시 splitting 적용
 				const h1 = current.querySelector('[data-splitting]');
 				if (h1 && !h1.classList.contains('splitting')) {
 					Splitting({ target: h1, by: 'chars' });
