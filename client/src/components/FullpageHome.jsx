@@ -16,28 +16,30 @@ const sections = [
 const FullPageReact = () => {
 	const location = useLocation();
 
+	// ✅ 스타일 동적 주입
+	useEffect(() => {
+		const style = document.createElement('style');
+		style.innerHTML = `...`;
+		document.head.appendChild(style);
+	}, []);
+
+	// ✅ fullpage & splitting 적용
 	useEffect(() => {
 		if (location.pathname === '/' || location.pathname === '/home') {
 			const instance = new fullpage('#fullpage', {
-				licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
-				autoScrolling: true,
-				navigation: true,
-				anchors: sections.map(s => s.id),
-				afterLoad: function (origin, destination) {
+				// ...
+				afterLoad(origin, destination) {
 					document.querySelectorAll('.section').forEach(section => {
 						section.setAttribute('data-scroll', 'out');
 					});
-
 					const current = destination.item;
 					current.setAttribute('data-scroll', 'in');
 
-					// Splitting 적용 (해당 섹션의 h1)
 					const h1 = current.querySelector('[data-splitting]');
 					if (h1) Splitting({ target: h1, by: 'chars' });
 				},
 			});
 
-			// 첫 섹션 초기화
 			const firstSection = document.querySelector('.section');
 			firstSection?.setAttribute('data-scroll', 'in');
 			Splitting({ target: firstSection.querySelector('[data-splitting]'), by: 'chars' });
