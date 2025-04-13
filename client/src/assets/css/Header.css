@@ -83,6 +83,10 @@
 	font-size: 0.9rem;
 	flex: 1;
 	background: transparent;
+	transform: scale(0.5);
+	transition: all 0.3s ease;
+	transform-origin: right center;
+	width: 3em;
 }
 
 .search-bar input:focus {
@@ -111,6 +115,12 @@
 
 .search-btn span {
 	display: none;
+}
+
+.search-bar input:focus,
+.search-bar input:not(:placeholder-shown) {
+	width: 100%;
+	transform: scale(1);
 }
 
 /* 다크모드 대응 */
