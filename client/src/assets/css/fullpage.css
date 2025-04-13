@@ -185,7 +185,6 @@
 	}
 }
 
-/* 모바일 대응 */
 @media (max-width: 1024px) {
 	.interest-section,
 	.interest-section.with-box {
@@ -219,4 +218,50 @@
 	.custom-description p {
 		font-size: 0.5rem;
 	}
+}
+
+/*************지도***************/
+.travel-map-wrapper {
+	position: relative;
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.map-image {
+	position: relative;
+	width: 100%;
+	padding-top: 56.25%; /* 16:9 비율 */
+	background-image: url('/assets/img/map.svg');
+	background-size: cover;
+	background-position: center;
+}
+
+.marker {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: red;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+	border: 2px solid white;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.popup {
+	position: absolute;
+	width: 250px;
+	background: #fff;
+	padding: 1rem;
+	border-radius: 8px;
+	transform: translate(-50%, -100%);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	z-index: 10;
+}
+
+.popup img {
+	width: 100%;
+	border-radius: 4px;
+	margin-top: 0.5rem;
 }
