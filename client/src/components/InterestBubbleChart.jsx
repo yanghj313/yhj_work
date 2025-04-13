@@ -126,7 +126,7 @@ const InterestBubbleChart = () => {
 			<h1 className={`text text--rolling`} data-splitting>
 				Interest
 			</h1>
-			<svg ref={svgRef} style={{ display: 'block', margin: '0 auto' }}></svg>
+			<svg ref={svgRef} style={{ display: 'block', width: '600px', height: '600px', margin: '0 auto' }}></svg>
 			<div
 				className={`about_keyword ${boxVisible ? 'show' : ''}`}
 				style={{
