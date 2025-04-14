@@ -9,7 +9,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: black;
+    background-color: #333;
     color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -25,7 +25,7 @@ body {
     max-height: 800px;
     min-width: 1800px;
     min-height: 800px;
-    background: black;
+    background: #333;
     cursor: pointer;
     visibility: hidden;
 }
@@ -39,7 +39,7 @@ body {
     z-index: 0;
     width: 100%;
     height: 100%;
-    background: #d5cec6;
+    background: #333;
 }
 
 .moon {
