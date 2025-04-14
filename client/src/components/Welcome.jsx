@@ -10,7 +10,7 @@ const Welcome = () => {
 
 		const tl = gsap.timeline({
 			delay: 0.5,
-			repeat: -1,
+			repeat: 0, // ✅ 반복 제거
 			defaults: {
 				ease: 'expo.inOut',
 				duration: 2,
