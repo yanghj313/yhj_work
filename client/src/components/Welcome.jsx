@@ -59,15 +59,6 @@ const Welcome = () => {
 					stagger: 0.2,
 				},
 				'-=1.5'
-			)
-			.from(
-				'.moon__img',
-				{
-					x: '+=200',
-					ease: 'power4',
-					duration: 15,
-				},
-				0
 			);
 
 		gsap.set('.moon__txt-bg rect', {
@@ -97,18 +88,22 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} x="60" y={i * 112.5} width="1680" height="112.5" />
+								<rect key={i} x="60" y={i * 112.5} width="1680" height="100" />
 							))}
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<image className="moon__img" width="1800" height="900" transform="translate(0 0) scale(1)" xlinkHref="https://images.unsplash.com/photo-1549887534-9414c2ffdb4a?fit=crop&w=1800&q=80" />
+						<foreignObject width="1800" height="900">
+							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="900">
+								<source src="/video/main.mp4" type="video/mp4" />
+							</video>
+						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
-						<rect y="315" height="112.5" width="1680" />
-						<rect y="397.5" height="112.5" width="1680" />
-						<rect y="480" height="112.5" width="1680" />
-						<rect y="562.5" height="112.5" width="1680" />
+						<rect y="315" height="76" width="1680" />
+						<rect y="397.5" height="76" width="1680" />
+						<rect y="480" height="76" width="1680" />
+						<rect y="562.5" height="76" width="1680" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(60 0)">
 						<text x="0" y="375">
@@ -125,7 +120,11 @@ const Welcome = () => {
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
-						<image className="moon__img" width="1800" height="900" transform="translate(0 0) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
+						<foreignObject width="1800" height="900">
+							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="900">
+								<source src="/video/main.mp4" type="video/mp4" />
+							</video>
+						</foreignObject>
 						<rect className="moon__txt-overlay" width="1800" height="900" />
 					</g>
 				</svg>
