@@ -1,8 +1,4 @@
 // components/Introduction.jsx
-const Introduction = () => {
-	return (
-	
-	);
-};
+const Introduction = () => {};
 
 export default Introduction;

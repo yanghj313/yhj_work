@@ -9,7 +9,7 @@ import '../assets/css/fullpage.css';
 import InterestBubbleChart from './InterestBubbleChart';
 import TravelMap from './TravelMap';
 import Welcome from './Welcome';
-import Introduction from './Introduction'; // ✅ 추가
+import Introduction from './Introduction';
 
 const sections = [
 	{ id: 'welcome', class: 'one' },
