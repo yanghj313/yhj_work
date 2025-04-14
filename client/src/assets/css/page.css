@@ -1,11 +1,25 @@
+body {
+    background: #fff;
+}
+
 .list {
     padding: 100px 16px 80px 16px;
     margin: 0 60px;
     min-height: 680px;
+    display: block;
+    width: 100%;
+}
+
+.list ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 2rem;
-    width: 100%;
+}
+
+.list ul li ul {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
 /***********************프로젝트 리스트***************************/
