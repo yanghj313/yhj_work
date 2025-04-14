@@ -22,9 +22,9 @@ body {
     align-items: center;
     justify-content: center;
     max-width: 1800px;
-    max-height: 679px;
+    max-height: 900px;
     min-width: 1800px;
-    min-height: 679px;
+    min-height: 900px;
     background: black;
     cursor: pointer;
     visibility: hidden;
@@ -42,7 +42,7 @@ body {
     position: relative;
     z-index: 2;
     width: 1700px;
-    height: 611px;
+    height: 900px;
 }
 
 .moon__svg {
