@@ -6,7 +6,7 @@ const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [1300, 240, 1200, 1440]; // ✅ 텍스트 길이에 맞춰 길이 조정
+		const wArray = [1350, 200, 1280, 1580]; // ✅ 텍스트 길이에 맞춘 정확한 너비
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -82,16 +82,8 @@ const Welcome = () => {
 		const resize = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
-			const wh = container.offsetWidth;
-			let scaleFactor = 1;
-
-			scaleFactor = vw / vh >= 1 ? vh / wh : vw / wh;
-
-			if (scaleFactor < 1) {
-				gsap.set(container, { scale: scaleFactor });
-			} else {
-				gsap.set(container, { scale: 1 });
-			}
+			const scaleFactor = Math.min(vw / 1800, vh / 900);
+			gsap.set(container, { scale: scaleFactor });
 		};
 
 		window.onresize = resize;
@@ -110,42 +102,30 @@ const Welcome = () => {
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<image
-							className="moon__img"
-							width="1800"
-							height="1024"
-							transform="translate(-271 -188) scale(0.98)"
-							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
-						/>
+						<image className="moon__img" width="1800" height="1024" transform="translate(-271 -188) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(-1 0)">
-						<rect y="229" height="76" />
-						<rect y="306" height="76" />
-						<rect y="383" height="76" />
-						<rect y="460" height="76" />
+						<rect y="260" height="76" />
+						<rect y="340" height="76" />
+						<rect y="420" height="76" />
+						<rect y="500" height="76" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(-2 0)">
-						<text x="0" y="303">
+						<text x="0" y="333">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="380">
+						<text x="0" y="413">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="457">
+						<text x="1" y="493">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="534">
+						<text x="1" y="573">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
-						<image
-							className="moon__img"
-							width="1800"
-							height="1024"
-							transform="translate(-271 -188) scale(0.98)"
-							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
-						/>
+						<image className="moon__img" width="1800" height="1024" transform="translate(-271 -188) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 						<rect className="moon__txt-overlay" width="1800" height="900" />
 					</g>
 				</svg>
