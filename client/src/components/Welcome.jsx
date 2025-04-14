@@ -88,7 +88,7 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} x="60" y={i * 112.5} width="1680" height="100" />
+								<rect key={i} x="0" y={i * 100} width="1680" height="100" />
 							))}
 						</clipPath>
 					</defs>
@@ -100,22 +100,22 @@ const Welcome = () => {
 						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
-						<rect y="315" height="76" width="1440" />
-						<rect y="427.5" height="76" width="240" />
-						<rect y="540" height="76" width="1290" />
-						<rect y="652.5" height="76" width="1640" />
+						<rect y="300" height="100" width="1440" />
+						<rect y="400" height="100" width="240" />
+						<rect y="500" height="100" width="1290" />
+						<rect y="600" height="100" width="1640" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(60 0)">
 						<text x="0" y="370">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="482.5">
+						<text x="0" y="470">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="595">
+						<text x="1" y="570">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="707.5">
+						<text x="1" y="670">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
