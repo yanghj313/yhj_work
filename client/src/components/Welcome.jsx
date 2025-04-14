@@ -5,7 +5,7 @@ import '../assets/css/fullpage.css';
 const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
-		const wArray = [310, 160, 420, 520]; // Adjusted to match "DESIGNED", "BY", etc.
+		const wArray = [310, 160, 420, 520];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -41,6 +41,7 @@ const Welcome = () => {
 				},
 				'-=1.5'
 			)
+			.set('text', { opacity: 0 })
 			.to(
 				'.moon__txt-bg rect',
 				{
@@ -49,11 +50,11 @@ const Welcome = () => {
 				},
 				'-=2.2'
 			)
-			.from(
+			.to(
 				'text',
 				{
-					opacity: 0,
-					y: 40,
+					opacity: 1,
+					y: 0,
 					ease: 'power4',
 					stagger: 0.14,
 				},
@@ -124,16 +125,16 @@ const Welcome = () => {
 						<rect y="460" height="76" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(-2 0)">
-						<text x="0" y="303">
+						<text x="0" y="303" opacity="0">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="380">
+						<text x="0" y="380" opacity="0">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="457">
+						<text x="1" y="457" opacity="0">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="534">
+						<text x="1" y="534" opacity="0">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
