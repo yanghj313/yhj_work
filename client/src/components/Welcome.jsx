@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
-import '../assets/css/welcome.css';
+import '../assets/css/fullpage.css';
 
 const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [1400, 210, 1000, 1200];
+		const wArray = [840, 210, 1020, 1240];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -101,18 +101,18 @@ const Welcome = () => {
 	return (
 		<div className="container">
 			<div className="moon">
-				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1700 611">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1800 611">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} y={i * 77} width="1700" height="72" />
+								<rect key={i} y={i * 77} width="1800" height="72" />
 							))}
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
 						<image
 							className="moon__img"
-							width="1920"
+							width="1800"
 							height="1024"
 							transform="translate(-271 -188) scale(0.98)"
 							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
@@ -141,7 +141,7 @@ const Welcome = () => {
 					<g clipPath="url(#moon_txt-mask)">
 						<image
 							className="moon__img"
-							width="1024"
+							width="1800"
 							height="1024"
 							transform="translate(-271 -188) scale(0.98)"
 							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
