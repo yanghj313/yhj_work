@@ -30,6 +30,10 @@ body {
     visibility: hidden;
 }
 
+.container video {
+    object-fit: cover;
+}
+
 .container__base {
     position: absolute;
     z-index: 0;
