@@ -16,15 +16,16 @@ body {
     overflow: hidden;
 }
 
+/* 📏 container 크기를 정확히 1800x740으로 고정 */
 .container {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 1800px;
-    max-height: 800px;
+    max-height: 740px;
     min-width: 1800px;
-    min-height: 800px;
+    min-height: 740px;
     background: #333;
     cursor: pointer;
     visibility: hidden;
@@ -42,11 +43,12 @@ body {
     background: #333;
 }
 
+/* 📏 .moon 높이도 viewBox에 맞게 740px로 변경 */
 .moon {
     position: relative;
     z-index: 2;
     width: 1700px;
-    height: 900px;
+    height: 740px;
 }
 
 .moon__svg {
@@ -54,6 +56,7 @@ body {
     height: 100%;
 }
 
+/* ✅ 텍스트는 줄 높이 조절 없이 유지 가능 (원하는 경우 폰트 크기 줄이기) */
 .moon__txt {
     font-family: 'MonumentExtended';
     font-size: 103px;
@@ -62,6 +65,7 @@ body {
     letter-spacing: 2.1px;
 }
 
+/* 오버레이 효과 유지 */
 .moon__txt-overlay {
     fill: rgba(0, 0, 0, 0.4);
 }

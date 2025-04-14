@@ -73,7 +73,7 @@ const Welcome = () => {
 		const resize = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
-			const scaleFactor = Math.min(vw / 1800, vh / 800);
+			const scaleFactor = Math.min(vw / 1800, vh / 740); // ⬅️ 740 기준
 			gsap.set(container, { scale: scaleFactor });
 		};
 
@@ -81,16 +81,13 @@ const Welcome = () => {
 		resize();
 	}, []);
 
-	// 애니메이션용 rect y 좌표 7개
-	const yMaskPositions = [45, 175, 305, 435, 565, 695, 825];
-
-	// 텍스트/배경용 rect y 좌표 4개
-	const yTextPositions = [305, 435, 565, 695];
+	const yMaskPositions = [30, 145, 260, 375, 490, 605];
+	const yTextPositions = [260, 375, 490, 605];
 
 	return (
 		<div className="container">
 			<div className="moon">
-				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 740">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{yMaskPositions.map((y, i) => (
@@ -99,39 +96,39 @@ const Welcome = () => {
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<foreignObject x="0" y="0" width="1800" height="800">
-							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="800">
+						<foreignObject x="0" y="0" width="1800" height="740">
+							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#333" transform="translate(0 0)">
-						<rect y="304" height="104" width="664" />
-						<rect y="434" height="104" width="120" />
-						<rect y="564" height="104" width="614" />
-						<rect y="694" height="104" width="734" />
+						<rect y="259" height="104" width="724" />
+						<rect y="374" height="104" width="210" />
+						<rect y="489" height="104" width="674" />
+						<rect y="604" height="104" width="794" />
 					</g>
-					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(0 0)">
-						<text x="0" y="355" dominantBaseline="middle">
+					<clipPath id="moon_txt-mask" className="moon__txt">
+						<text x="0" y="309" dominantBaseline="middle">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="485" dominantBaseline="middle">
+						<text x="0" y="424" dominantBaseline="middle">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="615" dominantBaseline="middle">
+						<text x="1" y="539" dominantBaseline="middle">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="745" dominantBaseline="middle">
+						<text x="1" y="654" dominantBaseline="middle">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
-						<foreignObject x="0" y="0" width="1800" height="800">
-							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="800">
+						<foreignObject x="0" y="0" width="1800" height="740">
+							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
-						<rect className="moon__txt-overlay" width="1800" height="800" />
+						<rect className="moon__txt-overlay" width="1800" height="740" />
 					</g>
 				</svg>
 			</div>
