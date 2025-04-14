@@ -81,6 +81,8 @@ const Welcome = () => {
 		resize();
 	}, []);
 
+	const textPositions = [305, 435, 565, 695];
+
 	return (
 		<div className="container">
 			<div className="moon">
@@ -88,7 +90,7 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} x="0" y={i * 110} width="1680" height="100" />
+								<rect key={i} x="60" y={i * 110} width="1680" height="100" />
 							))}
 						</clipPath>
 					</defs>
