@@ -6,7 +6,7 @@ const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [980, 210, 880, 1140];
+		const wArray = [1220, 320, 1100, 1320]; // 🛠️ Rect 길이 수정됨
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -110,13 +110,7 @@ const Welcome = () => {
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<image
-							className="moon__img"
-							width="1800"
-							height="1024"
-							transform="translate(-271 -188) scale(0.98)"
-							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
-						/>
+						<image className="moon__img" width="1800" height="1024" transform="translate(-271 -188)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(-1 0)">
 						<rect y="229" height="76" />
@@ -139,13 +133,7 @@ const Welcome = () => {
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
-						<image
-							className="moon__img"
-							width="1800"
-							height="1024"
-							transform="translate(-271 -188) scale(0.98)"
-							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
-						/>
+						<image className="moon__img" width="1800" height="1024" transform="translate(-271 -188)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 						<rect className="moon__txt-overlay" width="1800" height="900" />
 					</g>
 				</svg>
