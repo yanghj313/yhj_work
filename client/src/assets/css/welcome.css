@@ -5,7 +5,7 @@ body {
     margin: 0;
 }
 
-body {
+.one {
     display: flex;
     align-items: center;
     justify-content: center;
