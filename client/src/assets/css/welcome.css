@@ -1,0 +1,63 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 679px;
+    max-height: 679px;
+    min-width: 679px;
+    min-height: 679px;
+    background: black;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.container__base {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background: #d5cec6;
+}
+
+.moon {
+    position: relative;
+    z-index: 2;
+    width: 611px;
+    height: 611px;
+}
+
+.moon__svg {
+    width: 100%;
+    height: 100%;
+}
+
+.moon__txt {
+    font-family: "MonumentExtended-Ultrabold", sans-serif;
+    font-size: 103px;
+    line-height: 1;
+    fill: black;
+    letter-spacing: 2.1px;
+}
+
+.moon__txt-overlay {
+    fill: rgba(0, 0, 0, 0.6);
+}

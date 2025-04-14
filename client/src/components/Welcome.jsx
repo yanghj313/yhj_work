@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
-import '../assets/css/fullpage.css';
+import '../assets/css/welcome.css';
 
 const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
-		const wArray = [161, 614, 189, 278, 404];
+		const wArray = [350, 600, 300, 250];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -61,7 +61,7 @@ const Welcome = () => {
 		gsap.set(container, { autoAlpha: 1 });
 
 		gsap.set('.moon__txt-bg rect', {
-			width: i => wArray[i],
+			width: i => wArray[i] || 200,
 			scaleX: 0,
 		});
 
@@ -113,23 +113,19 @@ const Welcome = () => {
 						<rect y="306" width="612" height="76" />
 						<rect y="383" width="612" height="76" />
 						<rect y="460" width="612" height="76" />
-						<rect y="537" width="612" height="76" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(-2 0)">
 						<text x="0" y="303">
-							<tspan>13</tspan>
+							<tspan>DESIGNED</tspan>
 						</text>
 						<text x="0" y="380">
-							<tspan>MINUTES</tspan>
+							<tspan>BY</tspan>
 						</text>
 						<text x="1" y="457">
-							<tspan>TO</tspan>
+							<tspan>HYUNJIN</tspan>
 						</text>
 						<text x="1" y="534">
-							<tspan>THE</tspan>
-						</text>
-						<text x="0" y="611">
-							<tspan>MOON</tspan>
+							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
