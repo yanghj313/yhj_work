@@ -100,22 +100,22 @@ const Welcome = () => {
 						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
-						<rect y="300" height="100" width="1440" />
-						<rect y="430" height="100" width="240" />
-						<rect y="560" height="100" width="1290" />
-						<rect y="690" height="100" width="1640" />
+						<rect y="305" height="100" width="1440" />
+						<rect y="435" height="100" width="240" />
+						<rect y="565" height="100" width="1290" />
+						<rect y="695" height="100" width="1640" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(60 0)">
-						<text x="0" y="370">
+						<text x="0" y="375">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="500">
+						<text x="0" y="505">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="630">
+						<text x="1" y="635">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="760">
+						<text x="1" y="765">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
