@@ -4,7 +4,7 @@ import '../assets/css/fullpage.css';
 
 const Welcome = () => {
 	useEffect(() => {
-		const rects = document.querySelectorAll('.graph-rect');
+		const rects = document.querySelectorAll('.clip-rect');
 		gsap.fromTo(
 			rects,
 			{ scaleX: 0, transformOrigin: 'left' },
@@ -18,13 +18,13 @@ const Welcome = () => {
 		);
 
 		gsap.fromTo(
-			'.welcome-text span',
-			{ opacity: 0, y: 40 },
+			'.overlay-text span',
+			{ opacity: 0, x: -50 },
 			{
 				opacity: 1,
-				y: 0,
-				stagger: 0.5,
-				delay: 1.8,
+				x: 0,
+				stagger: 0.4,
+				delay: 1.5,
 				ease: 'power3.out',
 			}
 		);
@@ -38,7 +38,7 @@ const Welcome = () => {
 				yoyo: true,
 				ease: 'power1.inOut',
 				duration: 1.2,
-				delay: 3.5,
+				delay: 3,
 			}
 		);
 
@@ -55,19 +55,24 @@ const Welcome = () => {
 
 	return (
 		<div className="welcome-wrapper">
-			<div className="background-video">
-				<video autoPlay muted loop playsInline>
-					<source src="../../public/video/main.mp4" type="video/mp4" />
-				</video>
-			</div>
+			<svg className="svg-clip" viewBox="0 0 1800 900" preserveAspectRatio="xMidYMid slice">
+				<defs>
+					<clipPath id="clip-path">
+						{[...Array(8)].map((_, i) => (
+							<rect key={i} y={i * 112} width="1800" height="100" className="clip-rect" />
+						))}
+					</clipPath>
+				</defs>
+				<g clipPath="url(#clip-path)">
+					<foreignObject width="100%" height="100%">
+						<video autoPlay muted loop playsInline className="clipped-video">
+							<source src="/video/main.mp4" type="video/mp4" />
+						</video>
+					</foreignObject>
+				</g>
+			</svg>
 
-			<div className="svg-clip">
-				{[...Array(8)].map((_, i) => (
-					<div key={i} className="graph-rect" />
-				))}
-			</div>
-
-			<div className="welcome-text">
+			<div className="overlay-text">
 				<span>DESIGNED & CRAFTED</span>
 				<span>BY HYUNJIN.</span>
 				<span>WELCOME TO MY</span>
