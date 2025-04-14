@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import video01 from '../assets/video/video01.mp4';
+import video01 from '../assets/video/video_01.mp4';
 import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
@@ -22,7 +22,7 @@ const ProjectList = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="board_wrap">
 			<h2>📁 프로젝트 목록</h2>
 			<ul>
 				{projects.map(p =>
