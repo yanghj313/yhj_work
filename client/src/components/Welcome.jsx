@@ -97,12 +97,12 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} x="60" y={i * 112.5} width="1680" height="100" />
+								<rect key={i} x="60" y={i * 112.5} width="1680" height="112.5" />
 							))}
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<image className="moon__img" width="1800" height="900" transform="translate(0 0) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
+						<image className="moon__img" width="1800" height="900" transform="translate(0 0) scale(1)" xlinkHref="https://images.unsplash.com/photo-1549887534-9414c2ffdb4a?fit=crop&w=1800&q=80" />
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
 						<rect y="315" height="112.5" width="1680" />
