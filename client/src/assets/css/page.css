@@ -1,3 +1,13 @@
+.list {
+    padding: 100px 16px 80px 16px;
+    margin: 0 60px;
+    min-height: 680px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 2rem;
+    width: 100%;
+}
+
 /***********************프로젝트 리스트***************************/
 .project-card {
     margin-bottom: 2rem;

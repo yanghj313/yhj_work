@@ -22,8 +22,7 @@ const ProjectList = () => {
 	}, []);
 
 	return (
-		<div className="board_wrap">
-			<h2>📁 프로젝트 목록</h2>
+		<div className="board_wrap list">
 			<ul>
 				{projects.map(p =>
 					p?.title ? (
