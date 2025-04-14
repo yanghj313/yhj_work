@@ -5,27 +5,24 @@ import 'fullpage.js/dist/fullpage.min.css';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
+
 import InterestBubbleChart from './InterestBubbleChart';
 import TravelMap from './TravelMap';
+import Welcome from './Welcome';
+import Introduction from './Introduction'; // ✅ 추가
 
 const sections = [
-	{ id: 'welcome', text: 'Welcome', class: 'one', effect: 'text--folding' },
-	{ id: 'intro', text: 'Introduction', class: 'two', effect: 'text--bubbling' },
-	{ id: 'interest', text: 'Interest', class: 'three', effect: 'text--rolling' },
-	{ id: 'travel', text: 'Travel', class: 'four', effect: 'text--swinging' },
+	{ id: 'welcome', class: 'one' },
+	{ id: 'intro', class: 'two' },
+	{ id: 'interest', class: 'three' },
+	{ id: 'travel', class: 'four' },
 ];
 
 const applyAnimationReset = el => {
 	if (!el) return;
-
 	const chars = el.querySelectorAll('.char');
+	if (chars.length === 0) Splitting({ target: el, by: 'chars' });
 
-	// ✅ 처음에는 splitting 적용
-	if (chars.length === 0) {
-		Splitting({ target: el, by: 'chars' });
-	}
-
-	// ✅ 이후 애니메이션만 재실행
 	const updatedChars = el.querySelectorAll('.char');
 	updatedChars.forEach(char => {
 		char.style.animation = 'none';
@@ -46,14 +43,12 @@ const FullPageReact = () => {
 			navigation: true,
 			scrollOverflow: false,
 			anchors: sections.map(s => s.id),
-
 			afterLoad(origin, destination) {
 				const h1 = destination.item.querySelector('[data-splitting]');
 				applyAnimationReset(h1);
 			},
 		});
 
-		// 첫 섹션 애니메이션 실행
 		setTimeout(() => {
 			const firstH1 = document.querySelector('#fullpage .section:first-child h1[data-splitting]');
 			applyAnimationReset(firstH1);
@@ -66,7 +61,16 @@ const FullPageReact = () => {
 		<div id="fullpage">
 			{sections.map(s => (
 				<div key={s.id} className={`section ${s.class}`}>
-					{s.id === 'interest' ? (
+					{s.id === 'welcome' ? (
+						<Welcome />
+					) : s.id === 'intro' ? (
+						<>
+							<h1 className="text text--bubbling" data-splitting>
+								Introduction
+							</h1>
+							<Introduction />
+						</>
+					) : s.id === 'interest' ? (
 						<>
 							<h1 className="text text--rolling" data-splitting>
 								Interest
@@ -80,11 +84,7 @@ const FullPageReact = () => {
 							</h1>
 							<TravelMap />
 						</>
-					) : (
-						<h1 className={`text ${s.effect}`} data-splitting>
-							{s.text}
-						</h1>
-					)}
+					) : null}
 				</div>
 			))}
 		</div>

@@ -138,3 +138,10 @@
 	font-weight: 900;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'Righteous-Regular';
+	src: url('../font/Righteous-Regular.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+}
