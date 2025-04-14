@@ -90,7 +90,7 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{yPositions.map((y, i) => (
-								<rect key={i} x="60" y={y} width="1680" height="100" />
+								<rect key={i} x="0" y={y} width="1680" height="100" />
 							))}
 						</clipPath>
 					</defs>
@@ -102,12 +102,12 @@ const Welcome = () => {
 						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
-						<rect y="305" height="100" width="1440" />
-						<rect y="435" height="100" width="240" />
-						<rect y="565" height="100" width="1290" />
-						<rect y="695" height="100" width="1640" />
+						<rect y="304" height="104" width="1440" />
+						<rect y="434" height="104" width="240" />
+						<rect y="564" height="104" width="1290" />
+						<rect y="694" height="104" width="1640" />
 					</g>
-					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(60 0)">
+					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(0 0)">
 						<text x="0" y="355" dominantBaseline="middle">
 							<tspan>DESIGNED</tspan>
 						</text>
