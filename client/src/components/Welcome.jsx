@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
-import '../assets/css/fullpage.css';
+import '../assets/css/welcome.css';
 
 const Welcome = () => {
 	useEffect(() => {
