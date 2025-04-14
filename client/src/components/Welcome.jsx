@@ -1,46 +1,48 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
+import SplitType from 'split-type';
 import '../assets/css/fullpage.css';
 
 const Welcome = () => {
 	useEffect(() => {
 		const rects = document.querySelectorAll('.clip-rect');
-		gsap.fromTo(
-			rects,
-			{ scaleX: 0, transformOrigin: 'left' },
-			{
-				scaleX: 1,
-				duration: 1.2,
-				stagger: 0.1,
-				ease: 'expo.out',
-				delay: 0.5,
-			}
-		);
 
-		gsap.fromTo(
-			'.overlay-text span',
-			{ opacity: 0, x: -50 },
+		// Skip Splitting for full section: Welcome uses SVG effect instead of character splitting
+		// If splitting is needed for another section, handle it in FullPageReact afterLoad conditionally
+		// Example:
+		// if (destination.anchor !== 'welcome') Splitting({ target: h1, by: 'chars' });
+		const words = document.querySelectorAll('.overlay-text .word');
+
+		gsap.set(rects, { transformOrigin: 'left center', scaleX: 0 });
+		gsap.set(words, { opacity: 0, y: 40 });
+
+		const tl = gsap.timeline({ delay: 0.5 });
+
+		tl.to(rects, {
+			scaleX: 1,
+			duration: 1.2,
+			stagger: 0.07,
+			ease: 'expo.inOut',
+		}).to(
+			words,
 			{
 				opacity: 1,
-				x: 0,
-				stagger: 0.4,
-				delay: 1.5,
-				ease: 'power3.out',
-			}
+				y: 0,
+				duration: 1,
+				stagger: 0.1,
+				ease: 'expo.out',
+			},
+			'-=1.0'
 		);
 
-		gsap.fromTo(
-			'.scroll-indicator',
-			{ y: 0 },
-			{
-				y: 10,
-				repeat: -1,
-				yoyo: true,
-				ease: 'power1.inOut',
-				duration: 1.2,
-				delay: 3,
-			}
-		);
+		gsap.to('.scroll-indicator', {
+			y: 10,
+			repeat: -1,
+			yoyo: true,
+			ease: 'power1.inOut',
+			duration: 1.2,
+			delay: 3,
+		});
 
 		const indicator = document.querySelector('.scroll-indicator');
 		if (indicator) {
@@ -72,7 +74,7 @@ const Welcome = () => {
 				</g>
 			</svg>
 
-			<div className="overlay-text">
+			<div className="overlay-text" style={{ textShadow: '0 4px 10px rgba(0, 0, 0, 0.6)' }}>
 				<span>DESIGNED & CRAFTED</span>
 				<span>BY HYUNJIN.</span>
 				<span>WELCOME TO MY</span>

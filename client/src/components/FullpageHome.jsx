@@ -45,12 +45,20 @@ const FullPageReact = () => {
 			anchors: sections.map(s => s.id),
 			afterLoad(origin, destination) {
 				const h1 = destination.item.querySelector('[data-splitting]');
+
+				// Splitting은 welcome 섹션 제외하고 적용
+				if (destination.anchor !== 'welcome' && h1) {
+					Splitting({ target: h1, by: 'chars' });
+				}
+
 				applyAnimationReset(h1);
 			},
 		});
-
 		setTimeout(() => {
 			const firstH1 = document.querySelector('#fullpage .section:first-child h1[data-splitting]');
+			if (firstH1 && sections[0].id !== 'welcome') {
+				Splitting({ target: firstH1, by: 'chars' });
+			}
 			applyAnimationReset(firstH1);
 		}, 0);
 
