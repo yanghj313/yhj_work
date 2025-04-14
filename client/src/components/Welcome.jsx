@@ -6,7 +6,7 @@ const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [1440, 240, 1290, 1640];
+		const wArray = [664, 120, 614, 734];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -94,7 +94,7 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{yMaskPositions.map((y, i) => (
-								<rect key={i} x="0" y={y} width="1680" height="100" />
+								<rect key={i} x="0" y={y} width="1800" height="100" />
 							))}
 						</clipPath>
 					</defs>
@@ -106,10 +106,10 @@ const Welcome = () => {
 						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
-						<rect y="304" height="104" width="1440" />
-						<rect y="434" height="104" width="240" />
-						<rect y="564" height="104" width="1290" />
-						<rect y="694" height="104" width="1640" />
+						<rect y="304" height="104" width="664" />
+						<rect y="434" height="104" width="120" />
+						<rect y="564" height="104" width="614" />
+						<rect y="694" height="104" width="734" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(0 0)">
 						<text x="0" y="355" dominantBaseline="middle">
