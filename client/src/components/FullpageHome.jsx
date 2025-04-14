@@ -66,21 +66,21 @@ const FullPageReact = () => {
 					) : s.id === 'intro' ? (
 						<>
 							<h1 className="text text--bubbling" data-splitting>
-								Introduction
+								INTRODUCTION
 							</h1>
 							<Introduction />
 						</>
 					) : s.id === 'interest' ? (
 						<>
 							<h1 className="text text--rolling" data-splitting>
-								Interest
+								INTEREST
 							</h1>
 							<InterestBubbleChart />
 						</>
 					) : s.id === 'travel' ? (
 						<>
 							<h1 className="text text--swinging" data-splitting>
-								Travel
+								TRAVEL
 							</h1>
 							<TravelMap />
 						</>

@@ -145,3 +145,19 @@
 	font-weight: 900;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'MonumentExtended';
+	src: url('../font/MonumentExtended-Regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'MonumentExtended';
+	src: url('../font/MonumentExtended-Ultrabold.otf') format('opentype');
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
