@@ -7,10 +7,8 @@ const Welcome = () => {
 	useEffect(() => {
 		const rects = document.querySelectorAll('.clip-rect');
 
-		// Skip Splitting for full section: Welcome uses SVG effect instead of character splitting
-		// If splitting is needed for another section, handle it in FullPageReact afterLoad conditionally
-		// Example:
-		// if (destination.anchor !== 'welcome') Splitting({ target: h1, by: 'chars' });
+		// ✅ 실제 Split 실행 (단어 기준)
+		const split = new SplitType('.overlay-text', { types: 'words' });
 		const words = document.querySelectorAll('.overlay-text .word');
 
 		gsap.set(rects, { transformOrigin: 'left center', scaleX: 0 });
