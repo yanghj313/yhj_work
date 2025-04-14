@@ -1,0 +1,86 @@
+@charset "utf-8";
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+
+
+
+/* ◇◆ My Reset Style ◇◆ */d
+html{font-size:16px;
+  overflow-y:scroll;
+  -ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;} /* 아이폰의 경우 뷰포트가 변경이 되면 자동으로 폰트 크기를 조절되는것을 방지 */
+
+body{margin:0;background:#fff; font-size:1rem; line-height:1.8; letter-spacing:-0.5px;
+  font-family:'Noto Sans',Helvetica,'맑은 고딕','Malgun Gothic','나눔고딕',NanumGothic,'Nanum Gothic','돋움',Dotum,Arial,sans-serif; font-weight:300; min-width:320px;}
+html[lang='ko'] body,
+html *[lang='ko']{font-family:'Noto Sans',Helvetica,'Apple SD Gothic Neo','Microsoft JhengHei','맑은 고딕','Malgun Gothic','나눔고딕',NanumGothic,'Nanum Gothic','돋움',Dotum, Arial,sans-serif;}
+html[lang='en'] body,
+html *[lang='en']{font-family:'Noto Sans',Helvetica,Arial,sans-serif;}
+
+legend {position:absolute!important;height:1px!important;width:1px!important;overflow:hidden!important;clip:rect(1px 1px 1px 1px)!important;clip:rect(1px,1px,1px,1px)!important}
+
+
+a{text-decoration:none; color:#333; }
+a[href] {cursor:pointer; text-decoration:none;}  /* color:#039;  */
+a[href]:hover,[href]:active,[href]:focus{/* text-decoration:underline; */}
+a[href^='tel']{text-decoration:none !important;cursor:default;}
+strong,b{font-weight:bold;}
+small,sub,sup{font-size:.8em}
+abbr{cursor:help}
+em{color:#007cc4;}
+ol{list-style:decimal-leading-zero;}
+hr{ -moz-box-sizing:content-box; box-sizing:content-box;  height:0;  margin:5em 0;  border-width:0;border-bottom:1px solid #ddd;}
+i,em,cite,dfn,var,address{font-style:normal;}
+label,button,input,select,textarea{font-size:1em;}
+button,input[type='button'],input[type='submit'],input[type='reset'],input[type='image']{overflow:visible;cursor:pointer;}
+img,form,fieldset,iframe,object,embed,video,audio{border:0;vertical-align:top;}
+img{max-width:100%;height:auto;} 
+table,pre{font-size:1em;}
+table{border-collapse:collapse;border-spacing:0;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+pre{white-space:pre-wrap;word-wrap:break-word;}
+th, td {word-wrap:break-word; /*word-break:keep-all;*/ line-height:1.6; vertical-align: middle;}
