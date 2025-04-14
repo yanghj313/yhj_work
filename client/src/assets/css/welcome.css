@@ -21,9 +21,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 679px;
+    max-width: 1800px;
     max-height: 679px;
-    min-width: 679px;
+    min-width: 1800px;
     min-height: 679px;
     background: black;
     cursor: pointer;
@@ -41,7 +41,7 @@ body {
 .moon {
     position: relative;
     z-index: 2;
-    width: 611px;
+    width: 1700px;
     height: 611px;
 }
 
