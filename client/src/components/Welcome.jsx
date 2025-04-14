@@ -5,6 +5,7 @@ import '../assets/css/fullpage.css';
 const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
+		const texts = document.querySelectorAll('text');
 		const wArray = [310, 160, 420, 520];
 
 		const tl = gsap.timeline({
@@ -17,6 +18,7 @@ const Welcome = () => {
 		});
 
 		gsap.set(container, { autoAlpha: 0 });
+		gsap.set(texts, { opacity: 0 });
 
 		tl.to(container, {
 			autoAlpha: 1,
@@ -41,7 +43,6 @@ const Welcome = () => {
 				},
 				'-=1.5'
 			)
-			.set('text', { opacity: 0 })
 			.to(
 				'.moon__txt-bg rect',
 				{
@@ -51,14 +52,13 @@ const Welcome = () => {
 				'-=2.2'
 			)
 			.to(
-				'text',
+				texts,
 				{
 					opacity: 1,
-					y: 0,
 					ease: 'power4',
-					stagger: 0.14,
+					stagger: 0.2,
 				},
-				'-=1.6'
+				'-=1.5'
 			)
 			.from(
 				'.moon__img',
@@ -125,16 +125,16 @@ const Welcome = () => {
 						<rect y="460" height="76" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(-2 0)">
-						<text x="0" y="303" opacity="0">
+						<text x="0" y="303">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="380" opacity="0">
+						<text x="0" y="380">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="457" opacity="0">
+						<text x="1" y="457">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="534" opacity="0">
+						<text x="1" y="534">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
