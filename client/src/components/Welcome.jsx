@@ -81,16 +81,16 @@ const Welcome = () => {
 		resize();
 	}, []);
 
-	const textPositions = [305, 435, 565, 695];
+	const yPositions = [305, 435, 565, 695];
 
 	return (
 		<div className="container">
 			<div className="moon">
-				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1800 900">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
-							{[...Array(8)].map((_, i) => (
-								<rect key={i} x="60" y={i * 110} width="1680" height="100" />
+							{yPositions.map((y, i) => (
+								<rect key={i} x="60" y={y} width="1680" height="100" />
 							))}
 						</clipPath>
 					</defs>
@@ -108,16 +108,16 @@ const Welcome = () => {
 						<rect y="695" height="100" width="1640" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(60 0)">
-						<text x="0" y="355">
+						<text x="0" y="355" dominantBaseline="middle">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="485">
+						<text x="0" y="485" dominantBaseline="middle">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="615">
+						<text x="1" y="615" dominantBaseline="middle">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="745">
+						<text x="1" y="745" dominantBaseline="middle">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
