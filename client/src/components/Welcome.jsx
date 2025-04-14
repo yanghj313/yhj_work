@@ -6,7 +6,7 @@ const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [1350, 200, 1280, 1580]; // ✅ 텍스트 길이에 맞춘 정확한 너비
+		const wArray = [1320, 180, 1170, 1520]; // ✅ 텍스트 길이에 맞춘 정확한 너비
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -97,30 +97,30 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} y={i * 112} width="1800" height="100" />
+								<rect key={i} x="180" y={i * 112} width="1620" height="100" />
 							))}
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
 						<image className="moon__img" width="1800" height="1024" transform="translate(-271 -188) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 					</g>
-					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(-1 0)">
-						<rect y="260" height="76" />
-						<rect y="340" height="76" />
-						<rect y="420" height="76" />
-						<rect y="500" height="76" />
+					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(178 0)">
+						<rect y="275" height="76" />
+						<rect y="355" height="76" />
+						<rect y="435" height="76" />
+						<rect y="515" height="76" />
 					</g>
-					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(-2 0)">
-						<text x="0" y="333">
+					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(176 0)">
+						<text x="0" y="343">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="413">
+						<text x="0" y="423">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="493">
+						<text x="1" y="503">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="573">
+						<text x="1" y="583">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
