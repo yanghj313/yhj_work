@@ -51,7 +51,7 @@ body {
 }
 
 .moon__txt {
-    font-family: "MonumentExtended-Ultrabold", sans-serif;
+    font-family: 'MonumentExtended';
     font-size: 103px;
     line-height: 1;
     fill: black;

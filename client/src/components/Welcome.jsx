@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
-import '../assets/css/welcome.css';
+import '../assets/css/fullpage.css';
 
 const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
-		const wArray = [350, 600, 300, 250];
+		const wArray = [310, 160, 420, 520]; // Adjusted to match "DESIGNED", "BY", etc.
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -16,11 +16,21 @@ const Welcome = () => {
 			},
 		});
 
-		tl.from('.container__base', {
-			scaleX: 0,
-			duration: 2,
-			transformOrigin: 'top right',
+		gsap.set(container, { autoAlpha: 0 });
+
+		tl.to(container, {
+			autoAlpha: 1,
+			duration: 0.4,
 		})
+			.from(
+				'.container__base',
+				{
+					scaleX: 0,
+					duration: 2,
+					transformOrigin: 'top right',
+				},
+				'+=0.1'
+			)
 			.from(
 				'.moon__svg-rects rect',
 				{
@@ -29,7 +39,7 @@ const Welcome = () => {
 					duration: 3,
 					ease: 'expo',
 				},
-				'-=1.0'
+				'-=1.5'
 			)
 			.to(
 				'.moon__txt-bg rect',
@@ -37,12 +47,13 @@ const Welcome = () => {
 					stagger: 0.14,
 					scaleX: 1,
 				},
-				'-=2.5'
+				'-=2.2'
 			)
 			.from(
 				'text',
 				{
-					x: i => -wArray[i],
+					opacity: 0,
+					y: 40,
 					ease: 'power4',
 					stagger: 0.14,
 				},
@@ -57,8 +68,6 @@ const Welcome = () => {
 				},
 				0
 			);
-
-		gsap.set(container, { autoAlpha: 1 });
 
 		gsap.set('.moon__txt-bg rect', {
 			width: i => wArray[i] || 200,
@@ -109,10 +118,10 @@ const Welcome = () => {
 						/>
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(-1 0)">
-						<rect y="229" width="612" height="76" />
-						<rect y="306" width="612" height="76" />
-						<rect y="383" width="612" height="76" />
-						<rect y="460" width="612" height="76" />
+						<rect y="229" height="76" />
+						<rect y="306" height="76" />
+						<rect y="383" height="76" />
+						<rect y="460" height="76" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(-2 0)">
 						<text x="0" y="303">
