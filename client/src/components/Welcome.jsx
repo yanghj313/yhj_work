@@ -6,7 +6,7 @@ const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [840, 210, 1020, 1240];
+		const wArray = [980, 210, 880, 1140];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -101,11 +101,11 @@ const Welcome = () => {
 	return (
 		<div className="container">
 			<div className="moon">
-				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1800 611">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1800 900">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} y={i * 77} width="1800" height="72" />
+								<rect key={i} y={i * 112} width="1800" height="100" />
 							))}
 						</clipPath>
 					</defs>
@@ -146,7 +146,7 @@ const Welcome = () => {
 							transform="translate(-271 -188) scale(0.98)"
 							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
 						/>
-						<rect className="moon__txt-overlay" width="1800" height="611" />
+						<rect className="moon__txt-overlay" width="1800" height="900" />
 					</g>
 				</svg>
 			</div>
