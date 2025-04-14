@@ -81,7 +81,11 @@ const Welcome = () => {
 		resize();
 	}, []);
 
-	const yPositions = [305, 435, 565, 695];
+	// 애니메이션용 rect y 좌표 7개
+	const yMaskPositions = [45, 175, 305, 435, 565, 695, 825];
+
+	// 텍스트/배경용 rect y 좌표 4개
+	const yTextPositions = [305, 435, 565, 695];
 
 	return (
 		<div className="container">
@@ -89,7 +93,7 @@ const Welcome = () => {
 				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
-							{yPositions.map((y, i) => (
+							{yMaskPositions.map((y, i) => (
 								<rect key={i} x="0" y={y} width="1680" height="100" />
 							))}
 						</clipPath>
