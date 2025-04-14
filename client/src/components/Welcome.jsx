@@ -105,10 +105,10 @@ const Welcome = () => {
 						<image className="moon__img" width="1800" height="900" transform="translate(0 0) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 					</g>
 					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
-						<rect y="315" height="76" />
-						<rect y="397.5" height="76" />
-						<rect y="480" height="76" />
-						<rect y="562.5" height="76" />
+						<rect y="315" height="112.5" width="1680" />
+						<rect y="397.5" height="112.5" width="1680" />
+						<rect y="480" height="112.5" width="1680" />
+						<rect y="562.5" height="112.5" width="1680" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(60 0)">
 						<text x="0" y="375">
