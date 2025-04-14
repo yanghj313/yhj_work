@@ -1,89 +1,150 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
-import SplitType from 'split-type';
 import '../assets/css/fullpage.css';
 
 const Welcome = () => {
 	useEffect(() => {
-		const rects = document.querySelectorAll('.clip-rect');
+		const container = document.querySelector('.container');
+		const wArray = [161, 614, 189, 278, 404];
 
-		// ✅ 실제 Split 실행 (단어 기준)
-		const split = new SplitType('.overlay-text', { types: 'words' });
-		const words = document.querySelectorAll('.overlay-text .word');
-
-		gsap.set(rects, { transformOrigin: 'left center', scaleX: 0 });
-		gsap.set(words, { opacity: 0, y: 40 });
-
-		const tl = gsap.timeline({ delay: 0.5 });
-
-		tl.to(rects, {
-			scaleX: 1,
-			duration: 1.2,
-			stagger: 0.07,
-			ease: 'expo.inOut',
-		}).to(
-			words,
-			{
-				opacity: 1,
-				y: 0,
-				duration: 1,
-				stagger: 0.1,
-				ease: 'expo.out',
-			},
-			'-=1.0'
-		);
-
-		gsap.to('.scroll-indicator', {
-			y: 10,
+		const tl = gsap.timeline({
+			delay: 0.5,
 			repeat: -1,
-			yoyo: true,
-			ease: 'power1.inOut',
-			duration: 1.2,
-			delay: 3,
+			defaults: {
+				ease: 'expo.inOut',
+				duration: 2,
+			},
 		});
 
-		const indicator = document.querySelector('.scroll-indicator');
-		if (indicator) {
-			indicator.addEventListener('click', () => {
-				const nextSection = document.querySelector('#fullpage .section:nth-child(2)');
-				if (nextSection) {
-					nextSection.scrollIntoView({ behavior: 'smooth' });
-				}
-			});
-		}
+		tl.from('.container__base', {
+			scaleX: 0,
+			duration: 2,
+			transformOrigin: 'top right',
+		})
+			.from(
+				'.moon__svg-rects rect',
+				{
+					scaleX: 0,
+					stagger: 0.07,
+					duration: 3,
+					ease: 'expo',
+				},
+				'-=1.0'
+			)
+			.to(
+				'.moon__txt-bg rect',
+				{
+					stagger: 0.14,
+					scaleX: 1,
+				},
+				'-=2.5'
+			)
+			.from(
+				'text',
+				{
+					x: i => -wArray[i],
+					ease: 'power4',
+					stagger: 0.14,
+				},
+				'-=1.6'
+			)
+			.from(
+				'.moon__img',
+				{
+					x: '+=200',
+					ease: 'power4',
+					duration: 15,
+				},
+				0
+			);
+
+		gsap.set(container, { autoAlpha: 1 });
+
+		gsap.set('.moon__txt-bg rect', {
+			width: i => wArray[i],
+			scaleX: 0,
+		});
+
+		container.onclick = () => {
+			tl.restart();
+		};
+
+		const resize = () => {
+			const vw = window.innerWidth;
+			const vh = window.innerHeight;
+			const wh = container.offsetWidth;
+			let scaleFactor = 1;
+
+			scaleFactor = vw / vh >= 1 ? vh / wh : vw / wh;
+
+			if (scaleFactor < 1) {
+				gsap.set(container, { scale: scaleFactor });
+			} else {
+				gsap.set(container, { scale: 1 });
+			}
+		};
+
+		window.onresize = resize;
+		resize();
 	}, []);
 
 	return (
-		<div className="welcome-wrapper">
-			<svg className="svg-clip" viewBox="0 0 1800 900" preserveAspectRatio="xMidYMid slice">
-				<defs>
-					<clipPath id="clip-path">
-						{[...Array(8)].map((_, i) => (
-							<rect key={i} y={i * 112} width="1800" height="100" className="clip-rect" />
-						))}
+		<div className="container">
+			<div className="moon">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 611 611">
+					<defs>
+						<clipPath id="clip-path" className="moon__svg-rects">
+							{[...Array(8)].map((_, i) => (
+								<rect key={i} y={i * 77} width="611" height="72" />
+							))}
+						</clipPath>
+					</defs>
+					<g clipPath="url(#clip-path)">
+						<image
+							className="moon__img"
+							width="1024"
+							height="1024"
+							transform="translate(-271 -188) scale(0.98)"
+							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
+						/>
+					</g>
+					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(-1 0)">
+						<rect y="229" width="612" height="76" />
+						<rect y="306" width="612" height="76" />
+						<rect y="383" width="612" height="76" />
+						<rect y="460" width="612" height="76" />
+						<rect y="537" width="612" height="76" />
+					</g>
+					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(-2 0)">
+						<text x="0" y="303">
+							<tspan>13</tspan>
+						</text>
+						<text x="0" y="380">
+							<tspan>MINUTES</tspan>
+						</text>
+						<text x="1" y="457">
+							<tspan>TO</tspan>
+						</text>
+						<text x="1" y="534">
+							<tspan>THE</tspan>
+						</text>
+						<text x="0" y="611">
+							<tspan>MOON</tspan>
+						</text>
 					</clipPath>
-				</defs>
-				<g clipPath="url(#clip-path)">
-					<foreignObject width="100%" height="100%">
-						<video autoPlay muted loop playsInline className="clipped-video">
-							<source src="/video/main.mp4" type="video/mp4" />
-						</video>
-					</foreignObject>
-				</g>
-			</svg>
-
-			<div className="overlay-text" style={{ textShadow: '0 4px 10px rgba(0, 0, 0, 0.6)' }}>
-				<span>DESIGNED & CRAFTED</span>
-				<span>BY HYUNJIN.</span>
-				<span>WELCOME TO MY</span>
-				<span>PORTFOLIO SITE.</span>
-			</div>
-
-			<div className="scroll-indicator">
-				<svg className="scroll-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+					<g clipPath="url(#moon_txt-mask)">
+						<image
+							className="moon__img"
+							width="1024"
+							height="1024"
+							transform="translate(-271 -188) scale(0.98)"
+							xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg"
+						/>
+						<rect className="moon__txt-overlay" width="611" height="611" />
+					</g>
 				</svg>
 			</div>
+			<div className="container__base"></div>
 		</div>
 	);
 };
