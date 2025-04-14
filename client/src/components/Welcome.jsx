@@ -6,7 +6,7 @@ const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [1320, 180, 1170, 1520];
+		const wArray = [1440, 240, 1290, 1640];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -97,35 +97,33 @@ const Welcome = () => {
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{[...Array(8)].map((_, i) => (
-								<rect key={i} x="120" y={i * 112.5} width="1560" height="100" />
+								<rect key={i} x="60" y={i * 112.5} width="1680" height="100" />
 							))}
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
 						<image className="moon__img" width="1800" height="900" transform="translate(0 0) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 					</g>
-					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(120 0)">
-						<rect y="225" height="112.5" /> {/* 3rd */}
-						<rect y="337.5" height="112.5" /> {/* 4th */}
-						<rect y="450" height="112.5" /> {/* 5th */}
-						<rect y="562.5" height="112.5" /> {/* 6th */}
+					<g className="moon__txt-bg" fill="#D5CEC6" transform="translate(60 0)">
+						<rect y="315" height="76" />
+						<rect y="397.5" height="76" />
+						<rect y="480" height="76" />
+						<rect y="562.5" height="76" />
 					</g>
-
-					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(120 0)">
-						<text x="0" y="300">
+					<clipPath id="moon_txt-mask" className="moon__txt" transform="translate(60 0)">
+						<text x="0" y="375">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="412.5">
+						<text x="0" y="457.5">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="525">
+						<text x="1" y="540">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="637.5">
+						<text x="1" y="622.5">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
-
 					<g clipPath="url(#moon_txt-mask)">
 						<image className="moon__img" width="1800" height="900" transform="translate(0 0) scale(1)" xlinkHref="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/moon-01-adjusted-02.jpg" />
 						<rect className="moon__txt-overlay" width="1800" height="900" />
