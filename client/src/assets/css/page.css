@@ -4,10 +4,16 @@
 
 .media-container {
     position: relative;
-    width: 240px;
-    height: 135px;
-    border-radius: 8px;
+    width: 480px;
+    height: 270px;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.project-card:hover .media-container {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
 
 .thumbnail-img {
@@ -15,7 +21,7 @@
     height: 100%;
     object-fit: cover;
     transition: opacity 0.3s ease;
-    border-radius: 8px;
+    border-radius: 12px;
     z-index: 1;
     position: relative;
 }
@@ -32,13 +38,12 @@
     transition: opacity 0.4s ease, transform 0.4s ease;
     pointer-events: none;
     z-index: 2;
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 .project-card:hover .hover-video {
     opacity: 1;
     transform: scale(1.05);
-    /* 살짝 튀어나오는 효과 */
 }
 
 .project-card:hover .thumbnail-img {
