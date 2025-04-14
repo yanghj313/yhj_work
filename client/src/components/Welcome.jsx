@@ -73,7 +73,7 @@ const Welcome = () => {
 		const resize = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
-			const scaleFactor = Math.min(vw / 1800, vh / 900);
+			const scaleFactor = Math.min(vw / 1800, vh / 800);
 			gsap.set(container, { scale: scaleFactor });
 		};
 
@@ -90,7 +90,7 @@ const Welcome = () => {
 	return (
 		<div className="container">
 			<div className="moon">
-				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 900">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{yMaskPositions.map((y, i) => (
@@ -99,8 +99,8 @@ const Welcome = () => {
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<foreignObject x="0" y="0" width="1800" height="900">
-							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="900">
+						<foreignObject x="0" y="0" width="1800" height="800">
+							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="800">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
@@ -126,12 +126,12 @@ const Welcome = () => {
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
-						<foreignObject x="0" y="0" width="1800" height="900">
-							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="900">
+						<foreignObject x="0" y="0" width="1800" height="800">
+							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="800">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
-						<rect className="moon__txt-overlay" width="1800" height="900" />
+						<rect className="moon__txt-overlay" width="1800" height="800" />
 					</g>
 				</svg>
 			</div>
