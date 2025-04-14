@@ -15,6 +15,9 @@
     height: 100%;
     object-fit: cover;
     transition: opacity 0.3s ease;
+    border-radius: 8px;
+    z-index: 1;
+    position: relative;
 }
 
 .hover-video {
@@ -25,13 +28,17 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.4s ease, transform 0.4s ease;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    z-index: 2;
     border-radius: 8px;
 }
 
 .project-card:hover .hover-video {
     opacity: 1;
+    transform: scale(1.05);
+    /* 살짝 튀어나오는 효과 */
 }
 
 .project-card:hover .thumbnail-img {

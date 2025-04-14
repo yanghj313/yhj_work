@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import video01 from '../assets/video/video_01.mp4';
+import video01 from '../../public/video/video_01.mp4';
 import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
@@ -33,7 +33,7 @@ const ProjectList = () => {
 								<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
 
 								{/* Hover 시 보여질 영상 */}
-								<video src={video01} muted loop playsInline className="hover-video" />
+								<video src={video01} muted loop playsInline autoPlay className="hover-video" />
 							</div>
 
 							<strong>
