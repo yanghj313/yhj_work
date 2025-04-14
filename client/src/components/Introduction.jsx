@@ -1,11 +1,7 @@
 import React from 'react';
 
 const Introduction = () => {
-	return (
-		<div className="section two">
-			<h1>Introduction Section</h1>
-		</div>
-	);
+	return <div className="section two"></div>;
 };
 
 export default Introduction;
