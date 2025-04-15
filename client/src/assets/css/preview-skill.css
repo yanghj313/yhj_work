@@ -71,10 +71,10 @@
     transform: translateX(-50%);
     background: rgba(189, 22, 72, 0.85);
     color: white;
-    width: 220px;
+    width: 200px;
     padding: 1rem;
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     z-index: 10;
     opacity: 1;
@@ -108,8 +108,12 @@
     margin-top: 0.5rem;
     padding-left: 1rem;
     list-style: disc;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
 }
+
 
 @media (max-width: 768px) {
     .tooltip-box {

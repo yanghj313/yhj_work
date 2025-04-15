@@ -70,7 +70,7 @@ const SkillMapSection = () => {
 										key={s.id}
 										className={`skill-marker${isActive ? ' active' : ''}`}
 										onClick={() => setActiveIndex(idx)}
-										style={{ left: `${10 + idx * 80}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
+										style={{ left: `${10 + idx * 60}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
 									>
 										{isActive && <div className="ripple"></div>}
 
