@@ -1,53 +1,42 @@
+/* 🌍 전체 맵 영역 */
 .skill-map-container {
     position: relative;
     width: 100%;
     height: 80vh;
-    background-color: #f0f0f0;
-    border-radius: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
     overflow: hidden;
+    border-radius: 12px;
+    background-color: #f8f8f8;
 }
 
+/* 🗺️ 배경 이미지 */
 .skill-map-background {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 12px;
 }
 
+/* 📍 마커 위치 */
 .skill-marker {
     position: absolute;
     transform: translate(-50%, -50%);
     cursor: pointer;
+    z-index: 2;
 }
 
-/* 🎯 기본 상태: 안 보이게 */
-.skill-marker .ripple,
-.skill-marker .tooltip-box {
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-/* 🎯 마우스 오버 시만 보이게 */
-.skill-marker:hover .ripple,
-.skill-marker:hover .tooltip-box {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* 🌊 리플 효과 */
+/* 💧 리플 효과 (hover용 원형 파동) */
 .ripple {
-    width: 18px;
-    height: 18px;
-    background: rgba(255, 87, 34, 0.8);
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 87, 34, 0.7);
     border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: ripple-anim 1.6s infinite;
+    animation: ripple 1.6s infinite;
     z-index: 1;
 }
 
-@keyframes ripple-anim {
+@keyframes ripple {
     0% {
         transform: scale(1);
         opacity: 0.8;
@@ -59,22 +48,26 @@
     }
 }
 
-/* 📦 툴팁 스타일 */
+/* 🎈 툴팁 박스 - 기본은 숨김 */
 .tooltip-box {
     position: absolute;
     top: -140px;
     left: 50%;
     transform: translateX(-50%);
-    width: 220px;
-    padding: 1rem;
     background: rgba(0, 0, 0, 0.85);
     color: white;
-    font-size: 14px;
+    width: 220px;
+    padding: 1rem;
     border-radius: 12px;
-    z-index: 2;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 3;
 }
 
+/* 말풍선 꼬리 */
 .tooltip-box::after {
     content: '';
     position: absolute;
@@ -86,12 +79,52 @@
     border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
 }
 
+/* 🖱️ 마우스 올리면 툴팁 보이게 */
+.skill-marker:hover .tooltip-box {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 아이콘 정렬 */
 .skill-icon {
     text-align: center;
     margin-bottom: 0.5rem;
 }
 
+/* 내용 구성 */
+.skill-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.skill-level {
+    margin-top: 0.25rem;
+    color: #ffcc66;
+    font-size: 0.95rem;
+}
+
 .skill-description {
     margin-top: 0.5rem;
     padding-left: 1rem;
+    list-style: disc;
+    font-size: 0.85rem;
+}
+
+/* 반응형 - 모바일에서는 툴팁 위치 조정 */
+@media (max-width: 768px) {
+    .tooltip-box {
+        top: auto;
+        bottom: -140px;
+    }
+
+    .tooltip-box::after {
+        top: -10px;
+        bottom: auto;
+        transform: translateX(-50%) rotate(180deg);
+        border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+    }
+
+    .skill-map-container {
+        height: 70vh;
+    }
 }
