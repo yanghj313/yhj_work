@@ -61,10 +61,6 @@ const SkillMapSection = () => {
 				</div>
 
 				<div className="skill-right-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
-					<h1 className="text text--bubbling" data-splitting style={{ textAlign: 'center' }}>
-						SKILLS
-					</h1>
-
 					<div className="skill-scroll-wrapper no-scrollbar">
 						<div className="skill-scroll-track" ref={scrollTrackRef}>
 							{skills.map((s, idx) => {
