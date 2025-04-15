@@ -45,18 +45,19 @@ const FullPageReact = () => {
 			navigation: true,
 			scrollOverflow: false,
 			anchors: sections.map(s => s.id),
-			loopHorizontal: false, // ✅ 마지막 슬라이드에서 다음 섹션으로 이동 가능하게 설정
+			loopHorizontal: false,
+			controlArrows: true,
 
 			afterLoad(origin, destination) {
-				const h1 = destination.item.querySelector('[data-splitting]');
+				const h1 = destination.item.querySelector('h1[data-splitting]');
 				if (destination.anchor !== 'welcome' && h1) {
 					Splitting({ target: h1, by: 'chars' });
+					applyAnimationReset(h1);
 				}
-				applyAnimationReset(h1);
 			},
 
 			afterSlideLoad(section, origin, destination) {
-				const h2 = destination.item.querySelector('[data-splitting]');
+				const h2 = destination.item.querySelector('h2[data-splitting]');
 				if (h2) {
 					Splitting({ target: h2, by: 'chars' });
 					applyAnimationReset(h2);
@@ -68,8 +69,8 @@ const FullPageReact = () => {
 			const firstH1 = document.querySelector('#fullpage .section:first-child h1[data-splitting]');
 			if (firstH1 && sections[0].id !== 'welcome') {
 				Splitting({ target: firstH1, by: 'chars' });
+				applyAnimationReset(firstH1);
 			}
-			applyAnimationReset(firstH1);
 		}, 0);
 
 		return () => instance.destroy('all');
@@ -85,7 +86,7 @@ const FullPageReact = () => {
 				<h1 className="text text--bubbling" data-splitting>
 					INTRODUCTION
 				</h1>
-				<div className="slide">
+				<div className="slide" style={{ minHeight: '100vh' }}>
 					<h2 className="text text--fade" data-splitting>
 						ABOUT ME
 					</h2>
@@ -93,13 +94,13 @@ const FullPageReact = () => {
 						<Introduction />
 					</div>
 				</div>
-				<div className="slide slide--skills">
+				<div className="slide slide--skills" style={{ minHeight: '100vh' }}>
 					<h2 className="text text--fade" data-splitting>
 						SKILLS
 					</h2>
 					<SkillPreviewList />
 				</div>
-				<div className="slide slide--projects">
+				<div className="slide slide--projects" style={{ minHeight: '100vh' }}>
 					<h2 className="text text--fade" data-splitting>
 						PROJECTS
 					</h2>
