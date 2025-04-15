@@ -4,7 +4,7 @@ import '../assets/css/preview-skill.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-const SkillList = () => {
+const SkillMapSection = () => {
 	const [skills, setSkills] = useState([]);
 
 	useEffect(() => {
@@ -65,4 +65,4 @@ const SkillList = () => {
 	);
 };
 
-export default SkillList;
+export default SkillMapSection;
