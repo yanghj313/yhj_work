@@ -4,44 +4,60 @@ import '../assets/css/preview-skill.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-const SkillMapSection = () => {
+const SkillList = () => {
 	const [skills, setSkills] = useState([]);
-	const [activeSkill, setActiveSkill] = useState(null);
 
 	useEffect(() => {
 		axios
 			.get(`${API_BASE}/api/skills?populate=*`)
 			.then(res => {
-				const clean = (res.data.data || []).map(s => ({
-					id: s.id,
-					name: s.attributes.name,
-					description: s.attributes.description,
-					icon: s.attributes.icon?.url,
-					x: s.attributes.x || '50%',
-					y: s.attributes.y || '50%',
-				}));
-				setSkills(clean);
+				console.log('🔥 스킬 데이터:', res.data.data);
+				setSkills((res.data.data || []).filter(Boolean));
 			})
-			.catch(err => console.error('❌ 스킬 데이터 오류:', err.message));
+			.catch(err => {
+				console.error('❌ 스킬 데이터 오류:', err.message);
+			});
 	}, []);
 
 	return (
-		<div className="skill-map-wrapper">
+		<div className="skill-tour-section">
 			<h1 className="text text--bubbling" data-splitting>
 				SKILLS
 			</h1>
 			<div className="skill-map-container">
-				<img src="/assets/images/skills-map.png" alt="Skills Map" className="map-bg" />
+				<img src="/assets/images/skills-map.png" alt="기술 맵 배경" className="skill-map-background" />
+
 				{skills.map(s => (
-					<div key={s.id} className="skill-marker" style={{ top: s.y, left: s.x }} onMouseEnter={() => setActiveSkill(s)} onMouseLeave={() => setActiveSkill(null)}>
+					<div key={s.id} className="skill-marker" style={{ top: s.y || '50%', left: s.x || '50%' }}>
+						{/* 마커 효과 */}
 						<div className="ripple"></div>
-						{activeSkill?.id === s.id && (
-							<div className="tooltip-box">
-								<img src={`${API_BASE}${s.icon}`} alt={s.name} />
-								<h3>{s.name}</h3>
-								<p>{s.description}</p>
+
+						{/* 툴팁 */}
+						<div className="tooltip-box">
+							{/* 아이콘 */}
+							{s.icon?.url && (
+								<div className="skill-icon">
+									<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} width="48" />
+								</div>
+							)}
+
+							{/* 내용 */}
+							<div className="tooltip-content">
+								<strong className="skill-name">{s.name}</strong>
+								{s.level && <p className="skill-level">🎯 숙련도: {s.level}</p>}
+								{s.description && (
+									<ul className="skill-description">
+										{s.description
+											.replace(/<[^>]+>/g, '')
+											.split(/\n|\r|\r\n/)
+											.filter(Boolean)
+											.map((line, idx) => (
+												<li key={idx}>{line}</li>
+											))}
+									</ul>
+								)}
 							</div>
-						)}
+						</div>
 					</div>
 				))}
 			</div>
@@ -49,4 +65,4 @@ const SkillMapSection = () => {
 	);
 };
 
-export default SkillMapSection;
+export default SkillList;
