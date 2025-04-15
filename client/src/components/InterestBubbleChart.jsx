@@ -109,17 +109,26 @@ const InterestBubbleChart = () => {
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
 
-			setBoxVisible(false);
-
-			setTimeout(() => {
-				if (isSame) {
+			if (isSame) {
+				setBoxVisible(false);
+				setTimeout(() => {
 					setSelected(null);
-				} else {
+				}, 300);
+				return;
+			}
+
+			if (boxVisible) {
+				setBoxVisible(false);
+				setTimeout(() => {
 					setSelected(d);
 					setBoxVisible(true);
-				}
-			}, 300);
+				}, 300);
+			} else {
+				setSelected(d);
+				setBoxVisible(true);
+			}
 		});
+
 		node
 			.select('circle')
 			.transition()
@@ -152,7 +161,7 @@ const InterestBubbleChart = () => {
 				</div>
 			</div>
 
-			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef} key={selected?.name}>
+			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef} key={selected?.name || 'none'}>
 				{selected && (
 					<div className="custom-description">
 						<h2>{selected.name}</h2>

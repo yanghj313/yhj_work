@@ -175,7 +175,7 @@
 	opacity: 0;
 	transition: transform 0.3s ease, opacity 0.3s ease;
 	box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
-	z-index: 2;
+	z-index: 10;
 	color: #333;
 }
 
