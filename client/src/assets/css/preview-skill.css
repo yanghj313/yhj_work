@@ -17,11 +17,10 @@
 .skill-scroll-track {
     position: relative;
     width: 2500px;
-    /* 필요에 따라 넓히기 */
     height: 100%;
 }
 
-/* 마커 기본 */
+
 .skill-marker {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -30,7 +29,7 @@
     z-index: 2;
 }
 
-/* 아이콘 */
+
 .skill-icon img {
     width: 70px;
     height: 70px;
@@ -41,7 +40,6 @@
     object-fit: cover;
 }
 
-/* 리플 효과 (hover 중인 마커만 나타남) */
 .ripple {
     width: 20px;
     height: 20px;
@@ -66,7 +64,6 @@
     }
 }
 
-/* 툴팁 */
 .tooltip-box {
     position: absolute;
     top: -182%;
@@ -96,7 +93,6 @@
     border-color: rgba(248, 248, 248, 0.85) transparent transparent transparent;
 }
 
-/* 스킬 이름 강조 */
 .skill-name {
     font-weight: bold;
     font-size: 1.1rem;
@@ -115,7 +111,6 @@
     font-size: 0.85rem;
 }
 
-/* 반응형 대응 */
 @media (max-width: 768px) {
     .tooltip-box {
         top: auto;
@@ -152,20 +147,16 @@
     padding: 2rem 7rem;
 }
 
-.skill-right-panel,
-.skill-left-panel {
-    width: 50%;
+.skill-right-panel {
+    width: 52%;
 }
 
-/* 마커 스타일 */
 .skill-marker {
     min-width: 200px;
     margin: 0 40px;
     position: relative;
     transition: transform 0.4s ease;
 }
-
-/* 리플 & 툴팁은 기존대로 유지 */
 
 .skill-nav-buttons {
     display: flex;
