@@ -131,3 +131,54 @@
         height: 65vh;
     }
 }
+
+/* 스크롤바 제거 */
+.no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* 슬라이드 트랙 */
+.skill-scroll-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 2rem 0;
+}
+
+/* 마커 스타일 */
+.skill-marker {
+    min-width: 200px;
+    margin: 0 40px;
+    position: relative;
+    transition: transform 0.4s ease;
+}
+
+/* 리플 & 툴팁은 기존대로 유지 */
+
+.skill-nav-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.skill-nav-buttons button {
+    background: #333;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.skill-nav-buttons button:hover {
+    background: #555;
+}

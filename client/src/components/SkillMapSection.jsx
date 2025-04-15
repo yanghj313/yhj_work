@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import '../assets/css/preview-skill.css';
 
@@ -6,7 +6,9 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const SkillMapSection = () => {
 	const [skills, setSkills] = useState([]);
-	const [activeIndex, setActiveIndex] = useState(null);
+	const [activeIndex, setActiveIndex] = useState(0);
+	const scrollTrackRef = useRef(null);
+	const touchStartX = useRef(null);
 
 	useEffect(() => {
 		axios
@@ -20,25 +22,57 @@ const SkillMapSection = () => {
 			});
 	}, []);
 
+	useEffect(() => {
+		if (scrollTrackRef.current) {
+			const slide = scrollTrackRef.current.children[activeIndex];
+			if (slide) {
+				slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+			}
+		}
+	}, [activeIndex]);
+
+	const handleNext = () => {
+		setActiveIndex(prev => (prev + 1) % skills.length);
+	};
+
+	const handlePrev = () => {
+		setActiveIndex(prev => (prev - 1 + skills.length) % skills.length);
+	};
+
+	const handleTouchStart = e => {
+		touchStartX.current = e.touches[0].clientX;
+	};
+
+	const handleTouchEnd = e => {
+		if (!touchStartX.current) return;
+		const touchEndX = e.changedTouches[0].clientX;
+		const diff = touchEndX - touchStartX.current;
+
+		if (diff > 50) {
+			handlePrev();
+		} else if (diff < -50) {
+			handleNext();
+		}
+
+		touchStartX.current = null;
+	};
+
 	return (
 		<div className="skill-tour-horizontal">
 			<h1 className="text text--bubbling" data-splitting>
 				SKILLS
 			</h1>
 
-			<div className="skill-scroll-wrapper">
-				<div className="skill-scroll-track">
+			<div className="skill-scroll-wrapper no-scrollbar" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+				<div className="skill-scroll-track" ref={scrollTrackRef}>
 					{skills.map((s, idx) => {
-						const x = `${10 + idx * 15}%`;
 						const isActive = activeIndex === idx;
-
 						return (
 							<div
 								key={s.id}
 								className={`skill-marker${isActive ? ' active' : ''}`}
-								style={{ left: x, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
-								onMouseEnter={() => setActiveIndex(idx)}
-								onMouseLeave={() => setActiveIndex(null)}
+								onClick={() => setActiveIndex(idx)}
+								style={{ left: `${10 + idx * 80}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
 							>
 								{isActive && <div className="ripple"></div>}
 
@@ -69,6 +103,11 @@ const SkillMapSection = () => {
 						);
 					})}
 				</div>
+			</div>
+
+			<div className="skill-nav-buttons">
+				<button onClick={handlePrev}>← 이전</button>
+				<button onClick={handleNext}>다음 →</button>
 			</div>
 		</div>
 	);
