@@ -15,3 +15,11 @@
     background: linear-gradient(to bottom, #e0f7fa, #ffffff);
     color: #333;
 }
+
+.intro h2 {
+    font-size: 24px;
+}
+
+.intro p {
+    font-size: 1rem;
+}
