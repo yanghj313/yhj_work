@@ -62,6 +62,18 @@ const FullPageReact = () => {
 					Splitting({ target: h2, by: 'chars' });
 					applyAnimationReset(h2);
 				}
+
+				// 🎯 마지막 슬라이드에서 아래로 스크롤 시 다음 섹션으로 이동
+				const isLastSlide = section.anchor === 'intro' && destination.index === 2;
+				if (isLastSlide) {
+					const slideEl = destination.item;
+					const onWheel = e => {
+						if (e.deltaY > 0) {
+							fullpage_api.moveSectionDown();
+						}
+					};
+					slideEl.addEventListener('wheel', onWheel, { once: true });
+				}
 			},
 		});
 
