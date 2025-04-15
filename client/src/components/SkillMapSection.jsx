@@ -8,7 +8,8 @@ const SkillMapSection = () => {
 	const [skills, setSkills] = useState([]);
 	const [activeIndex, setActiveIndex] = useState(0);
 	const scrollTrackRef = useRef(null);
-	const touchStartX = useRef(null);
+	const dragStartX = useRef(null);
+	const dragEndX = useRef(null);
 
 	useEffect(() => {
 		axios
@@ -40,74 +41,77 @@ const SkillMapSection = () => {
 	};
 
 	const handleTouchStart = e => {
-		touchStartX.current = e.touches[0].clientX;
+		dragStartX.current = e.touches ? e.touches[0].clientX : e.clientX;
 	};
 
 	const handleTouchEnd = e => {
-		if (!touchStartX.current) return;
-		const touchEndX = e.changedTouches[0].clientX;
-		const diff = touchEndX - touchStartX.current;
-
-		if (diff > 50) {
-			handlePrev();
-		} else if (diff < -50) {
-			handleNext();
-		}
-
-		touchStartX.current = null;
+		dragEndX.current = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+		const diff = dragEndX.current - dragStartX.current;
+		if (diff > 50) handlePrev();
+		else if (diff < -50) handleNext();
+		dragStartX.current = null;
+		dragEndX.current = null;
 	};
 
 	return (
-		<div className="skill-tour-horizontal">
-			<h1 className="text text--bubbling" data-splitting>
-				SKILLS
-			</h1>
+		<div className="skill-tour-horizontal" onMouseDown={handleTouchStart} onMouseUp={handleTouchEnd} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+			<div className="skill-tour-inner" style={{ display: 'flex', height: '100vh' }}>
+				<div className="skill-left-panel" style={{ flex: '0 0 50%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+					<img src="/assets/images/left-visual.png" alt="소개 이미지" style={{ width: '80%', maxHeight: '80%' }} />
+				</div>
 
-			<div className="skill-scroll-wrapper no-scrollbar" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-				<div className="skill-scroll-track" ref={scrollTrackRef}>
-					{skills.map((s, idx) => {
-						const isActive = activeIndex === idx;
-						return (
-							<div
-								key={s.id}
-								className={`skill-marker${isActive ? ' active' : ''}`}
-								onClick={() => setActiveIndex(idx)}
-								style={{ left: `${10 + idx * 80}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
-							>
-								{isActive && <div className="ripple"></div>}
+				<div className="skill-right-panel" style={{ flex: '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
+					<h1 className="text text--bubbling" data-splitting style={{ textAlign: 'center' }}>
+						SKILLS
+					</h1>
 
-								{s.icon?.url && (
-									<div className="skill-icon">
-										<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} />
-									</div>
-								)}
+					<div className="skill-scroll-wrapper no-scrollbar">
+						<div className="skill-scroll-track" ref={scrollTrackRef}>
+							{skills.map((s, idx) => {
+								const isActive = activeIndex === idx;
+								return (
+									<div
+										key={s.id}
+										className={`skill-marker${isActive ? ' active' : ''}`}
+										onClick={() => setActiveIndex(idx)}
+										style={{ left: `${10 + idx * 80}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
+									>
+										{isActive && <div className="ripple"></div>}
 
-								{isActive && (
-									<div className="tooltip-box">
-										<strong className="skill-name">{s.name}</strong>
-										{s.level && <p className="skill-level">🎯 숙련도: {s.level}</p>}
-										{s.description && (
-											<ul className="skill-description">
-												{s.description
-													.replace(/<[^>]+>/g, '')
-													.split(/\n|\r|\r\n/)
-													.filter(Boolean)
-													.map((line, idx) => (
-														<li key={idx}>{line}</li>
-													))}
-											</ul>
+										{s.icon?.url && (
+											<div className="skill-icon">
+												<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} style={{ width: '70px', height: '70px' }} />
+											</div>
+										)}
+
+										{isActive && (
+											<div className="tooltip-box">
+												<strong className="skill-name">{s.name}</strong>
+												{s.level && <p className="skill-level">🎯 숙련도: {s.level}</p>}
+												{s.description && (
+													<ul className="skill-description">
+														{s.description
+															.replace(/<[^>]+>/g, '')
+															.split(/\n|\r|\r\n/)
+															.filter(Boolean)
+															.map((line, idx) => (
+																<li key={idx}>{line}</li>
+															))}
+													</ul>
+												)}
+											</div>
 										)}
 									</div>
-								)}
-							</div>
-						);
-					})}
-				</div>
-			</div>
+								);
+							})}
+						</div>
+					</div>
 
-			<div className="skill-nav-buttons">
-				<button onClick={handlePrev}>← 이전</button>
-				<button onClick={handleNext}>다음 →</button>
+					<div className="skill-nav-buttons">
+						<button onClick={handlePrev}>← 이전</button>
+						<button onClick={handleNext}>다음 →</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
