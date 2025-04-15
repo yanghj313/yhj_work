@@ -6,10 +6,12 @@ import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
-import InterestBubbleChart from './InterestBubbleChart';
-import TravelMap from './TravelMap';
 import Welcome from './Welcome';
 import Introduction from './Introduction';
+import SkillPreviewList from './SkillPreviewList';
+import ProjectPreviewList from './ProjectPreviewList';
+import InterestBubbleChart from './InterestBubbleChart';
+import TravelMap from './TravelMap';
 
 const sections = [
 	{ id: 'welcome', class: 'one' },
@@ -43,17 +45,24 @@ const FullPageReact = () => {
 			navigation: true,
 			scrollOverflow: false,
 			anchors: sections.map(s => s.id),
+
 			afterLoad(origin, destination) {
 				const h1 = destination.item.querySelector('[data-splitting]');
-
-				// Splitting은 welcome 섹션 제외하고 적용
 				if (destination.anchor !== 'welcome' && h1) {
 					Splitting({ target: h1, by: 'chars' });
 				}
-
 				applyAnimationReset(h1);
 			},
+
+			afterSlideLoad(section, origin, destination) {
+				const h2 = destination.item.querySelector('[data-splitting]');
+				if (h2) {
+					Splitting({ target: h2, by: 'chars' });
+					applyAnimationReset(h2);
+				}
+			},
 		});
+
 		setTimeout(() => {
 			const firstH1 = document.querySelector('#fullpage .section:first-child h1[data-splitting]');
 			if (firstH1 && sections[0].id !== 'welcome') {
@@ -67,34 +76,47 @@ const FullPageReact = () => {
 
 	return (
 		<div id="fullpage">
-			{sections.map(s => (
-				<div key={s.id} className={`section ${s.class}`}>
-					{s.id === 'welcome' ? (
-						<Welcome />
-					) : s.id === 'intro' ? (
-						<>
-							<h1 className="text text--bubbling" data-splitting>
-								INTRODUCTION
-							</h1>
-							<Introduction />
-						</>
-					) : s.id === 'interest' ? (
-						<>
-							<h1 className="text text--rolling" data-splitting>
-								INTEREST
-							</h1>
-							<InterestBubbleChart />
-						</>
-					) : s.id === 'travel' ? (
-						<>
-							<h1 className="text text--swinging" data-splitting>
-								TRAVEL
-							</h1>
-							<TravelMap />
-						</>
-					) : null}
+			<div className="section one">
+				<Welcome />
+			</div>
+
+			<div className="section two">
+				<h1 className="text text--bubbling" data-splitting>
+					INTRODUCTION
+				</h1>
+				<div className="slide">
+					<h2 className="text text--fade" data-splitting>
+						ABOUT ME
+					</h2>
+					<Introduction />
 				</div>
-			))}
+				<div className="slide slide--skills">
+					<h2 className="text text--fade" data-splitting>
+						SKILLS
+					</h2>
+					<SkillPreviewList />
+				</div>
+				<div className="slide slide--projects">
+					<h2 className="text text--fade" data-splitting>
+						PROJECTS
+					</h2>
+					<ProjectPreviewList />
+				</div>
+			</div>
+
+			<div className="section three">
+				<h1 className="text text--rolling" data-splitting>
+					INTEREST
+				</h1>
+				<InterestBubbleChart />
+			</div>
+
+			<div className="section four">
+				<h1 className="text text--swinging" data-splitting>
+					TRAVEL
+				</h1>
+				<TravelMap />
+			</div>
 		</div>
 	);
 };

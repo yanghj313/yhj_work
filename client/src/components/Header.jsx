@@ -24,9 +24,6 @@ const Header = ({ user }) => {
 						<Link to="/projects">Project</Link>
 					</li>
 					<li>
-						<Link to="/skills">Skill</Link>
-					</li>
-					<li>
 						<Link to="/experiences">Experience</Link>
 					</li>
 					<li>
