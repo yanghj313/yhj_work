@@ -4,22 +4,6 @@ import '../assets/css/preview-skill.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-// 💡 스킬 이름에 따른 좌표 수동 정의
-const skillPositionMap = {
-	HTML: '10%',
-	CSS: '25%',
-	JavaScript: '45%',
-	jQuery: '60%',
-	GSAP: '75%',
-	D3: '90%',
-	React: '110%',
-	Node: '125%',
-	JSP: '140%',
-	Photoshop: '160%',
-	Figma: '175%',
-	PowerPoint: '190%',
-};
-
 const SkillMapSection = () => {
 	const [skills, setSkills] = useState([]);
 
@@ -43,9 +27,8 @@ const SkillMapSection = () => {
 
 			<div className="skill-scroll-wrapper">
 				<div className="skill-scroll-track">
-					{skills.map(s => {
-						const name = s.name;
-						const x = skillPositionMap[name] || '0%'; // ✨ fallback to 0% if not found
+					{skills.map((s, idx) => {
+						const x = `${10 + idx * 15}%`; // ← 자동 계산된 x좌표 (10%, 25%, 40%, ...)
 
 						return (
 							<div key={s.id} className="skill-marker" style={{ left: x, top: '50%' }}>
@@ -66,8 +49,8 @@ const SkillMapSection = () => {
 												.replace(/<[^>]+>/g, '')
 												.split(/\n|\r|\r\n/)
 												.filter(Boolean)
-												.map((line, idx) => (
-													<li key={idx}>{line}</li>
+												.map((line, i) => (
+													<li key={i}>{line}</li>
 												))}
 										</ul>
 									)}
