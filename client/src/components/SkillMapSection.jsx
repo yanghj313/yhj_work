@@ -6,6 +6,7 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const SkillMapSection = () => {
 	const [skills, setSkills] = useState([]);
+	const [activeIndex, setActiveIndex] = useState(null);
 
 	useEffect(() => {
 		axios
@@ -28,11 +29,18 @@ const SkillMapSection = () => {
 			<div className="skill-scroll-wrapper">
 				<div className="skill-scroll-track">
 					{skills.map((s, idx) => {
-						const x = `${10 + idx * 15}%`; // ← 자동 계산된 x좌표 (10%, 25%, 40%, ...)
+						const x = `${10 + idx * 15}%`;
+						const isActive = activeIndex === idx;
 
 						return (
-							<div key={s.id} className="skill-marker" style={{ left: x, top: '50%' }}>
-								<div className="ripple"></div>
+							<div
+								key={s.id}
+								className={`skill-marker${isActive ? ' active' : ''}`}
+								style={{ left: x, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
+								onMouseEnter={() => setActiveIndex(idx)}
+								onMouseLeave={() => setActiveIndex(null)}
+							>
+								{isActive && <div className="ripple"></div>}
 
 								{s.icon?.url && (
 									<div className="skill-icon">
@@ -40,21 +48,23 @@ const SkillMapSection = () => {
 									</div>
 								)}
 
-								<div className="tooltip-box">
-									<strong className="skill-name">{s.name}</strong>
-									{s.level && <p className="skill-level">🎯 숙련도: {s.level}</p>}
-									{s.description && (
-										<ul className="skill-description">
-											{s.description
-												.replace(/<[^>]+>/g, '')
-												.split(/\n|\r|\r\n/)
-												.filter(Boolean)
-												.map((line, i) => (
-													<li key={i}>{line}</li>
-												))}
-										</ul>
-									)}
-								</div>
+								{isActive && (
+									<div className="tooltip-box">
+										<strong className="skill-name">{s.name}</strong>
+										{s.level && <p className="skill-level">🎯 숙련도: {s.level}</p>}
+										{s.description && (
+											<ul className="skill-description">
+												{s.description
+													.replace(/<[^>]+>/g, '')
+													.split(/\n|\r|\r\n/)
+													.filter(Boolean)
+													.map((line, idx) => (
+														<li key={idx}>{line}</li>
+													))}
+											</ul>
+										)}
+									</div>
+								)}
 							</div>
 						);
 					})}
