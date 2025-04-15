@@ -1,40 +1,37 @@
-/* 전체 맵 영역 */
-.skill-map-container {
-    position: relative;
+.skill-scroll-wrapper {
     width: 100%;
-    height: 80vh;
-    max-width: 1200px;
-    margin: 0 auto;
-    background: #f0f0f0;
-    /* 배경 이미지 대신 기본 배경 */
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    position: relative;
+    height: 70vh;
+    background: #f9f9f9;
     border-radius: 12px;
-    overflow: hidden;
 }
 
-/* 배경 이미지 제거 – img 요소 자체 없앰 */
+.skill-scroll-track {
+    position: relative;
+    width: 2000px;
+    /* ← 가로 너비 조절 */
+    height: 100%;
+}
 
-/* 마커 */
 .skill-marker {
     position: absolute;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-/* 아이콘은 항상 보임 */
+/* 아이콘 & ripple 항상 보이게 */
 .skill-icon img {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: white;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     z-index: 3;
 }
 
-/* 리플 효과도 항상 보임 */
 .ripple {
     width: 20px;
     height: 20px;
@@ -42,6 +39,8 @@
     border-radius: 50%;
     animation: ripple 1.6s infinite;
     position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
 }
 
@@ -57,7 +56,7 @@
     }
 }
 
-/* 툴팁 기본은 숨김 */
+/* 툴팁은 hover 시 */
 .tooltip-box {
     position: absolute;
     top: -140px;
@@ -69,63 +68,13 @@
     padding: 1rem;
     border-radius: 12px;
     font-size: 14px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
     z-index: 10;
 }
 
-.tooltip-box::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 10px 10px 0 10px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
-}
-
-/* 호버 시 툴팁만 보여지도록 */
 .skill-marker:hover .tooltip-box {
     opacity: 1;
     pointer-events: auto;
-}
-
-/* 툴팁 내부 콘텐츠 */
-.skill-name {
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-.skill-level {
-    margin-top: 0.25rem;
-    color: #ffcc66;
-    font-size: 0.95rem;
-}
-
-.skill-description {
-    margin-top: 0.5rem;
-    padding-left: 1rem;
-    list-style: disc;
-    font-size: 0.85rem;
-}
-
-/* 반응형 */
-@media (max-width: 768px) {
-    .tooltip-box {
-        top: auto;
-        bottom: -140px;
-    }
-
-    .tooltip-box::after {
-        top: -10px;
-        bottom: auto;
-        transform: translateX(-50%) rotate(180deg);
-    }
-
-    .skill-map-container {
-        height: 70vh;
-    }
 }
