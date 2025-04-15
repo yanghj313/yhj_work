@@ -47,9 +47,6 @@ const FullPageReact = () => {
 			anchors: sections.map(s => s.id),
 			loopHorizontal: false,
 			controlArrows: true,
-			continuousHorizontal: false,
-			scrollHorizontally: true,
-			normalScrollElements: '.slide',
 
 			afterLoad(origin, destination) {
 				const h1 = destination.item.querySelector('h1[data-splitting]');
