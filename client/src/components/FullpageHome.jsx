@@ -45,6 +45,7 @@ const FullPageReact = () => {
 			navigation: true,
 			scrollOverflow: false,
 			anchors: sections.map(s => s.id),
+			loopHorizontal: false, // ✅ 마지막 슬라이드에서 다음 섹션으로 이동 가능하게 설정
 
 			afterLoad(origin, destination) {
 				const h1 = destination.item.querySelector('[data-splitting]');
@@ -88,7 +89,9 @@ const FullPageReact = () => {
 					<h2 className="text text--fade" data-splitting>
 						ABOUT ME
 					</h2>
-					<Introduction />
+					<div style={{ fontSize: '0.9rem' }}>
+						<Introduction />
+					</div>
 				</div>
 				<div className="slide slide--skills">
 					<h2 className="text text--fade" data-splitting>
