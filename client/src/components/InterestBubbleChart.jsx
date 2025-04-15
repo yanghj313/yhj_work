@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
 const interests = [
@@ -54,6 +53,19 @@ const InterestBubbleChart = () => {
 				.attr('cy', 0);
 		});
 
+		// 위치만 계산하는 force simulation
+		const simulation = d3
+			.forceSimulation(interests)
+			.force('x', d3.forceX(width / 2).strength(0.05))
+			.force('y', d3.forceY(height / 2).strength(0.05))
+			.force(
+				'collide',
+				d3.forceCollide().radius(d => d.value / 2 + 4)
+			)
+			.stop();
+
+		for (let i = 0; i < 300; i++) simulation.tick(); // 움직이지 않도록 계산만
+
 		const node = svg
 			.selectAll('g')
 			.data(interests, d => d.name)
@@ -68,11 +80,7 @@ const InterestBubbleChart = () => {
 					.duration(800)
 					.delay((d, i) => i * 80)
 					.attr('opacity', 1)
-					.attr('transform', d => {
-						d.x = Math.random() * (width - d.value) + d.value / 2;
-						d.y = Math.random() * (height - d.value) + d.value / 2;
-						return `translate(${d.x}, ${d.y})`;
-					});
+					.attr('transform', d => `translate(${d.x}, ${d.y})`);
 
 				g.append('circle');
 				g.append('image')
@@ -86,7 +94,6 @@ const InterestBubbleChart = () => {
 					.style('transition', 'opacity 0.3s ease');
 
 				g.append('text');
-
 				return g;
 			});
 

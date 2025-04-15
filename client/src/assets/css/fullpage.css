@@ -123,18 +123,25 @@
 
 .interest-section {
 	display: flex;
-	align-items: flex-start;
+	position: relative;
 	transition: all 0.5s ease;
+	height: 100vh;
 }
 
 .interest-section.with-box .bubble-chart {
-	margin-right: 320px;
-	/* 어바웃 박스 자리 확보 */
+	transform: translateX(-160px);
 }
 
 .bubble-chart {
 	flex: 1;
-	transition: margin-right 0.5s ease;
+	min-width: 0;
+	transition: transform 0.5s ease;
+}
+
+.bubble-chart svg {
+	width: 100%;
+	height: 100%;
+	display: block;
 }
 
 .about_keyword {
@@ -145,80 +152,36 @@
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
+	z-index: 10;
+	background: white;
+	padding: 1.5rem;
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .about_keyword.show {
 	opacity: 1;
 	transform: translateX(0);
-	background: #fff;
-	padding: 1.5rem;
-	border-radius: 12px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .custom-description h2 {
-	font-size: 1.1rem;
 	margin-bottom: 0.5rem;
+	font-size: 1.2rem;
 }
 
 .custom-description p {
-	font-size: 0.7rem;
-	line-height: 1.6;
-	margin-top: 0.3rem;
+	font-size: 0.9rem;
+	line-height: 1.4;
 }
 
 .custom-description img {
 	width: 100%;
 	border-radius: 8px;
 	margin-bottom: 1rem;
-	opacity: 0;
-	transform: translateY(20px) scale(0.98);
-	animation: fadeImageIn 0.6s ease-out forwards;
-	font-size: 1rem;
 }
 
-@keyframes fadeImageIn {
-	to {
-		opacity: 1;
-		transform: translateY(0) scale(1);
-	}
-}
 
-@media (max-width: 1024px) {
 
-	.interest-section,
-	.interest-section.with-box {
-		display: block;
-		padding: 1rem;
-	}
-
-	.bubble-chart {
-		width: 100%;
-		transform: none !important;
-	}
-
-	.about_keyword {
-		position: relative;
-		width: 100%;
-		right: auto;
-		transform: translateY(30px);
-		margin-top: 1rem;
-	}
-
-	.about_keyword.show {
-		opacity: 1;
-		transform: translateY(0);
-		padding: 1.2rem;
-	}
-
-	.custom-description h2 {
-		font-size: 1rem;
-	}
-
-	.custom-description p {
-		font-size: 0.5rem;
-	}
-}
 
 /*************지도***************/
 .travel-map-wrapper {
