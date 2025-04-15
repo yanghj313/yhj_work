@@ -116,7 +116,6 @@ const InterestBubbleChart = () => {
 		svg.select('defs')?.remove();
 		const defs = svg.append('defs');
 
-		// 각 버블마다 클리핑 경로 정의
 		interests.forEach(d => {
 			defs
 				.append('clipPath')
@@ -129,7 +128,7 @@ const InterestBubbleChart = () => {
 
 		const simulation = d3
 			.forceSimulation(interests)
-			.force('x', d3.forceX(width / 2).strength(0.2))
+			.force('x', d3.forceX((d, i) => 100 + i * 130).strength(0.5))
 			.force('y', d3.forceY(height / 2).strength(0.1))
 			.force(
 				'collision',
@@ -143,9 +142,21 @@ const InterestBubbleChart = () => {
 			.selectAll('g')
 			.data(interests, d => d.name)
 			.join(enter => {
-				const g = enter.append('g').style('cursor', 'pointer');
-				g.append('circle');
-				g.append('image')
+				const g = enter
+					.append('g')
+					.style('cursor', 'pointer')
+					.attr('opacity', 0)
+					.attr('transform', d => `translate(${width / 2}, ${height / 2})`)
+					.transition()
+					.duration(800)
+					.delay((d, i) => i * 50)
+					.attr('opacity', 1);
+
+				const group = svg.selectAll('g');
+
+				group.append('circle');
+				group
+					.append('image')
 					.attr('clip-path', d => `url(#clip-${d.name.replace(/\s+/g, '')})`)
 					.attr('preserveAspectRatio', 'xMidYMid slice')
 					.attr('xlink:href', d => d.image)
@@ -155,8 +166,9 @@ const InterestBubbleChart = () => {
 					.attr('y', d => -d.value / 2)
 					.attr('opacity', 0.3)
 					.style('transition', 'opacity 0.3s ease');
-				g.append('text');
-				return g;
+				group.append('text');
+
+				return group;
 			});
 
 		node.call(drag(simulation));
@@ -218,7 +230,7 @@ const InterestBubbleChart = () => {
 	}, [dimensions, selected]);
 
 	return (
-		<div className={`interest-section ${boxVisible ? 'with-box' : ''}`}>
+		<div className={`interest-section ${boxVisible ? 'with-box' : ''}`} ref={wrapperRef}>
 			<div className="bubble-chart">
 				<svg ref={svgRef} className="img-chart"></svg>
 			</div>
@@ -228,16 +240,18 @@ const InterestBubbleChart = () => {
 					<div className="custom-description">
 						<h2>{selected.name}</h2>
 						<img src={selected.image} alt={selected.name} />
-						{selected.name === '코딩' && <p>프론트엔드와 백엔드 전반에 관심이 많고, 주로 React와 Node.js를 다룹니다.</p>}
-						{selected.name === 'UI/UX 디자인' && <p>프로토타입 제작과 사용자 흐름을 고려한 인터페이스를 설계합니다.</p>}
-						{selected.name === '영화' && <p>감성과 스토리 중심의 영화 감상을 즐기며, 감독의 연출력에 집중합니다.</p>}
-						{selected.name === '독서' && <p>자기계발서, 인문학, 고전소설 등 폭넓은 장르를 읽습니다.</p>}
-						{selected.name === '러닝' && <p>아침 러닝으로 하루를 시작하며 체력과 멘탈을 관리합니다.</p>}
-						{selected.name === '필라테스' && <p>균형과 유연성을 위해 꾸준히 수련하며 자세 교정에 집중합니다.</p>}
-						{selected.name === '여행' && <p>자연, 문화, 사람을 경험하며 기록하는 것을 좋아합니다.</p>}
-						{selected.name === '다이어리 꾸미기' && <p>마스킹 테이프, 펜, 스티커로 감성적인 기록을 남깁니다.</p>}
-						{selected.name === '카메라' && <p>필름카메라와 디지털을 넘나들며 풍경과 일상을 담습니다.</p>}
-						{selected.name === '패션' && <p>계절별 스타일링과 트렌드를 연구하며 자신만의 룩을 만듭니다.</p>}
+						{selected.name === 'Coding' && <p>프론트엔드와 백엔드 전반에 관심이 많고, 주로 React와 Node.js를 다룹니다.</p>}
+						{selected.name === 'UI Design' && <p>프로토타입 제작과 사용자 흐름을 고려한 인터페이스를 설계합니다.</p>}
+						{selected.name === 'Movie' && <p>감성과 스토리 중심의 영화 감상을 즐기며, 감독의 연출력에 집중합니다.</p>}
+						{selected.name === 'Book' && <p>자기계발서, 인문학, 고전소설 등 폭넓은 장르를 읽습니다.</p>}
+						{selected.name === 'Running' && <p>아침 러닝으로 하루를 시작하며 체력과 멘탈을 관리합니다.</p>}
+						{selected.name === 'Pilates' && <p>균형과 유연성을 위해 꾸준히 수련하며 자세 교정에 집중합니다.</p>}
+						{selected.name === 'Travel' && <p>자연, 문화, 사람을 경험하며 기록하는 것을 좋아합니다.</p>}
+						{selected.name === 'Stationery' && <p>마스킹 테이프, 펜, 스티커로 감성적인 기록을 남깁니다.</p>}
+						{selected.name === 'Camera' && <p>필름카메라와 디지털을 넘나들며 풍경과 일상을 담습니다.</p>}
+						{selected.name === 'Fashion' && <p>계절별 스타일링과 트렌드를 연구하며 자신만의 룩을 만듭니다.</p>}
+						{selected.name === 'Music' && <p>EDM과 Rock 을 좋아합니다.</p>}
+						{selected.name === 'Perfume' && <p>향수를 즐겨뿌립니다.</p>}
 					</div>
 				)}
 			</div>
