@@ -65,6 +65,24 @@ const interests = [
 		color: '#576574',
 		image: 'https://picsum.photos/seed/fashion/400/400',
 	},
+	{
+		name: 'Soccer',
+		value: 60,
+		color: '#576574',
+		image: 'https://picsum.photos/seed/soccer/400/400',
+	},
+	{
+		name: 'Music',
+		value: 80,
+		color: '#576574',
+		image: 'https://picsum.photos/seed/music/400/400',
+	},
+	{
+		name: 'Perfume',
+		value: 70,
+		color: '#576574',
+		image: 'https://picsum.photos/seed/perfume/400/400',
+	},
 ];
 
 const InterestBubbleChart = () => {

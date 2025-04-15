@@ -10,7 +10,7 @@
     white-space: nowrap;
     height: 70vh;
     position: relative;
-    background: #f8f8f8;
+    background: #333;
     border-radius: 12px;
 }
 
@@ -35,7 +35,7 @@
     width: 70px;
     height: 70px;
     border-radius: 10px;
-    background: white;
+    background: #333;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     z-index: 3;
     object-fit: cover;
@@ -72,7 +72,7 @@
     top: -140px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(189, 22, 72, 0.85);
     color: white;
     width: 220px;
     padding: 1rem;
@@ -93,7 +93,7 @@
     transform: translateX(-50%);
     border-width: 10px 10px 0 10px;
     border-style: solid;
-    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+    border-color: rgba(248, 248, 248, 0.85) transparent transparent transparent;
 }
 
 /* 스킬 이름 강조 */
@@ -171,7 +171,7 @@
 }
 
 .skill-nav-buttons button {
-    background: #333;
+    background: #ebe9e9;
     color: #fff;
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
