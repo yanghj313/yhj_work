@@ -7,10 +7,7 @@ import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
 import Welcome from './Welcome';
-import Introduction from './Introduction';
-import SkillPreviewList from './SkillPreviewList';
-import ProjectPreviewList from './ProjectPreviewList';
-import InterestBubbleChart from './InterestBubbleChart';
+import SkillMapSection from './SkillMapSection';
 import TravelMap from './TravelMap';
 
 const sections = [
@@ -95,29 +92,7 @@ const FullPageReact = () => {
 			</div>
 
 			<div className="section two">
-				<div className="slide" style={{ minHeight: '100vh' }}>
-					<h1 className="text text--bubbling" data-splitting>
-						INTRODUCTION
-					</h1>
-					<h2 className="text text--fade" data-splitting>
-						ABOUT ME
-					</h2>
-					<Introduction />
-				</div>
-
-				<div className="slide slide--skills" style={{ minHeight: '100vh' }}>
-					<h2 className="text text--fade" data-splitting>
-						SKILLS
-					</h2>
-					<SkillPreviewList />
-				</div>
-
-				<div className="slide slide--projects" style={{ minHeight: '100vh' }}>
-					<h2 className="text text--fade" data-splitting>
-						PROJECTS
-					</h2>
-					<ProjectPreviewList />
-				</div>
+				<SkillMapSection />
 			</div>
 
 			<div className="section three">
