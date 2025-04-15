@@ -34,10 +34,11 @@
 .skill-icon img {
     width: 70px;
     height: 70px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: white;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     z-index: 3;
+    object-fit: cover;
 }
 
 /* 리플 효과 (hover 중인 마커만 나타남) */
