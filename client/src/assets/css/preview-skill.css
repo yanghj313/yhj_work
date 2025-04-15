@@ -48,8 +48,8 @@
     background: rgba(255, 87, 34, 0.7);
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -34%;
+    left: 45%;
     animation: ripple 1.6s infinite;
     z-index: 1;
 }
@@ -69,7 +69,7 @@
 /* 툴팁 */
 .tooltip-box {
     position: absolute;
-    top: -140px;
+    top: -182%;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(189, 22, 72, 0.85);
