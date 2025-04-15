@@ -21,6 +21,7 @@ const interests = [
 const InterestBubbleChart = () => {
 	const svgRef = useRef();
 	const wrapperRef = useRef();
+	const aboutRef = useRef();
 	const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
@@ -29,12 +30,24 @@ const InterestBubbleChart = () => {
 		const resizeObserver = new ResizeObserver(entries => {
 			for (let entry of entries) {
 				const { width } = entry.contentRect;
-				setDimensions({ width, height: 600 }); // 고정 높이 600px
+				setDimensions({ width, height: 600 });
 			}
 		});
 		if (wrapperRef.current) resizeObserver.observe(wrapperRef.current);
 		return () => resizeObserver.disconnect();
 	}, []);
+
+	// 외부 클릭 시 어바웃 박스 닫기
+	useEffect(() => {
+		const handleClickOutside = e => {
+			if (boxVisible && aboutRef.current && !aboutRef.current.contains(e.target)) {
+				setBoxVisible(false);
+				setSelected(null);
+			}
+		};
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	}, [boxVisible]);
 
 	useEffect(() => {
 		const { width, height } = dimensions;
@@ -52,7 +65,6 @@ const InterestBubbleChart = () => {
 				.attr('cy', 0);
 		});
 
-		// 위치만 계산 (forceSim 사용)
 		const simulation = d3
 			.forceSimulation(interests)
 			.force('x', d3.forceX(width / 2).strength(0.05))
@@ -129,30 +141,41 @@ const InterestBubbleChart = () => {
 	}, [dimensions, selected]);
 
 	return (
-		<div className={`interest-section ${boxVisible ? 'with-box' : ''}`} ref={wrapperRef}>
-			<div className="bubble-chart">
-				<svg ref={svgRef} className="img-chart"></svg>
+		<div className="full-container">
+			<div className={`interest-section ${boxVisible ? 'with-box' : ''}`} ref={wrapperRef}>
+				<div className="bubble-chart">
+					<svg ref={svgRef} className="img-chart"></svg>
+				</div>
 			</div>
 
-			<div className={`about_keyword ${boxVisible ? 'show' : ''}`}>
-				{boxVisible && selected && (
-					<div className="custom-description">
-						<h2>{selected.name}</h2>
-						<img src={selected.image} alt={selected.name} />
-						{selected.name === 'Coding' && <p>프론트엔드와 백엔드 전반에 관심이 많고, 주로 React와 Node.js를 다룹니다.</p>}
-						{selected.name === 'UI Design' && <p>프로토타입 제작과 사용자 흐름을 고려한 인터페이스를 설계합니다.</p>}
-						{selected.name === 'Movie' && <p>감성과 스토리 중심의 영화 감상을 즐기며, 감독의 연출력에 집중합니다.</p>}
-						{selected.name === 'Book' && <p>자기계발서, 인문학, 고전소설 등 폭넓은 장르를 읽습니다.</p>}
-						{selected.name === 'Running' && <p>아침 러닝으로 하루를 시작하며 체력과 멘탈을 관리합니다.</p>}
-						{selected.name === 'Pilates' && <p>균형과 유연성을 위해 꾸준히 수련하며 자세 교정에 집중합니다.</p>}
-						{selected.name === 'Travel' && <p>자연, 문화, 사람을 경험하며 기록하는 것을 좋아합니다.</p>}
-						{selected.name === 'Stationery' && <p>마스킹 테이프, 펜, 스티커로 감성적인 기록을 남깁니다.</p>}
-						{selected.name === 'Camera' && <p>필름카메라와 디지털을 넘나들며 풍경과 일상을 담습니다.</p>}
-						{selected.name === 'Fashion' && <p>계절별 스타일링과 트렌드를 연구하며 자신만의 룩을 만듭니다.</p>}
-						{selected.name === 'Music' && <p>EDM과 Rock 을 좋아합니다.</p>}
-						{selected.name === 'Perfume' && <p>향수를 즐겨뿌립니다.</p>}
-					</div>
-				)}
+			<div className={`about-wrapper ${boxVisible ? 'show' : ''}`}>
+				<div className="about_keyword" ref={aboutRef}>
+					{selected && (
+						<div className="custom-description">
+							<h2>{selected.name}</h2>
+							<img src={selected.image} alt={selected.name} />
+							<p>
+								{
+									{
+										Coding: 'React와 Node.js 중심의 풀스택 개발에 관심이 많습니다.',
+										'UI Design': '사용자 흐름을 고려한 인터페이스 설계가 주력입니다.',
+										Movie: '감성과 스토리가 있는 영화에 몰입합니다.',
+										Book: '인문학과 자기계발서를 주로 읽습니다.',
+										Running: '러닝으로 체력과 멘탈을 다잡습니다.',
+										Pilates: '자세 교정과 근력 유지를 위해 꾸준히 수련합니다.',
+										Travel: '풍경, 문화, 사람을 경험하고 기록합니다.',
+										Stationery: '다꾸용 문구 수집과 기록을 즐깁니다.',
+										Camera: '필름과 디지털 카메라를 넘나들며 촬영합니다.',
+										Fashion: '계절별 스타일링과 트렌드를 연구합니다.',
+										Music: 'EDM과 록 음악을 자주 듣습니다.',
+										Perfume: '향수로 분위기와 기억을 남깁니다.',
+										Soccer: '직관과 플레이 모두 즐기는 스포츠입니다.',
+									}[selected.name]
+								}
+							</p>
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);
