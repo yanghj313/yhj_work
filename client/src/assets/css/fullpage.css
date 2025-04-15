@@ -131,8 +131,8 @@
 }
 
 .interest-section {
-	flex: 1;
 	transition: all 0.5s ease;
+	width: 800px;
 }
 
 .bubble-chart {
@@ -166,16 +166,16 @@
 
 .about_keyword {
 	position: absolute;
-	right: 0;
 	top: 0;
+	right: 0;
 	width: 500px;
 	height: 100%;
-	background: white;
-	opacity: 0;
+	background: #fff;
 	transform: translateX(100%);
+	opacity: 0;
 	transition: transform 0.3s ease, opacity 0.3s ease;
-	z-index: 100;
 	box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+	z-index: 2;
 	color: #333;
 }
 
