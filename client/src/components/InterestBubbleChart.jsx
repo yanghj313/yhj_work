@@ -105,10 +105,11 @@ const InterestBubbleChart = () => {
 				g.append('text');
 				return g;
 			});
+
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
 
-			// 항상 닫기
+			// 무조건 일단 닫음
 			setBoxVisible(false);
 
 			setTimeout(() => {
@@ -118,8 +119,9 @@ const InterestBubbleChart = () => {
 					setSelected(d);
 					setBoxVisible(true);
 				}
-			}, 300);
+			}, 300); // CSS와 맞춰서 부드럽게 전환
 		});
+
 		node
 			.select('circle')
 			.transition()
@@ -152,7 +154,7 @@ const InterestBubbleChart = () => {
 				</div>
 			</div>
 
-			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef}>
+			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef} key={selected?.name}>
 				{selected && (
 					<div className="custom-description">
 						<h2>{selected.name}</h2>
