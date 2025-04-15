@@ -57,7 +57,7 @@ const SkillMapSection = () => {
 		<div className="skill-tour-horizontal" onMouseDown={handleTouchStart} onMouseUp={handleTouchEnd} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
 			<div className="skill-tour-inner" style={{ display: 'flex', height: '100vh' }}>
 				<div className="skill-left-panel" style={{ flex: '0 0 50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					<img src="/assets/img/profile.jpg" alt="소개 이미지" style={{ width: '80%', maxHeight: '80%' }} />
+					<img src="../assets/img/profile.jpg" alt="소개 이미지" style={{ width: '80%', maxHeight: '80%' }} />
 				</div>
 
 				<div className="skill-right-panel" style={{ flex: '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
