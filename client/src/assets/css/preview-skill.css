@@ -145,10 +145,17 @@
     height: 100%;
     width: 100%;
     padding: 2rem 7rem;
+    padding-right: 300px;
+    padding-left: 300px;
 }
 
 .skill-right-panel {
     width: 54%;
+}
+
+
+.skill-left-panel {
+    width: 46%
 }
 
 .skill-marker {
