@@ -28,8 +28,8 @@ const InterestBubbleChart = () => {
 	useEffect(() => {
 		const resizeObserver = new ResizeObserver(entries => {
 			for (let entry of entries) {
-				const { width, height } = entry.contentRect;
-				setDimensions({ width, height });
+				const { width } = entry.contentRect;
+				setDimensions({ width, height: 600 }); // 고정 높이 600px
 			}
 		});
 		if (wrapperRef.current) resizeObserver.observe(wrapperRef.current);
@@ -39,10 +39,9 @@ const InterestBubbleChart = () => {
 	useEffect(() => {
 		const { width, height } = dimensions;
 		const svg = d3.select(svgRef.current).attr('width', width).attr('height', height);
-
 		svg.select('defs')?.remove();
-		const defs = svg.append('defs');
 
+		const defs = svg.append('defs');
 		interests.forEach(d => {
 			defs
 				.append('clipPath')
@@ -53,7 +52,7 @@ const InterestBubbleChart = () => {
 				.attr('cy', 0);
 		});
 
-		// 위치만 계산하는 force simulation
+		// 위치만 계산 (forceSim 사용)
 		const simulation = d3
 			.forceSimulation(interests)
 			.force('x', d3.forceX(width / 2).strength(0.05))
@@ -63,8 +62,7 @@ const InterestBubbleChart = () => {
 				d3.forceCollide().radius(d => d.value / 2 + 4)
 			)
 			.stop();
-
-		for (let i = 0; i < 300; i++) simulation.tick(); // 움직이지 않도록 계산만
+		for (let i = 0; i < 300; i++) simulation.tick();
 
 		const node = svg
 			.selectAll('g')

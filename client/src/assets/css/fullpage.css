@@ -124,18 +124,20 @@
 .interest-section {
 	display: flex;
 	position: relative;
+	height: 700px;
+	overflow: hidden;
 	transition: all 0.5s ease;
-	height: 100vh;
-}
-
-.interest-section.with-box .bubble-chart {
-	transform: translateX(-160px);
 }
 
 .bubble-chart {
 	flex: 1;
-	min-width: 0;
+	height: 600px;
 	transition: transform 0.5s ease;
+}
+
+.interest-section.with-box .bubble-chart {
+	transform: translateX(-250px);
+	/* 어바웃 박스 공간 확보 */
 }
 
 .bubble-chart svg {
@@ -145,18 +147,18 @@
 }
 
 .about_keyword {
-	width: 300px;
+	width: 500px;
 	opacity: 0;
-	transform: translateX(30px);
+	transform: translateX(100%);
 	transition: opacity 0.5s ease, transform 0.5s ease;
 	position: absolute;
-	right: 1rem;
-	top: 1rem;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: #fff;
+	padding: 2rem;
+	box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
 	z-index: 10;
-	background: white;
-	padding: 1.5rem;
-	border-radius: 12px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .about_keyword.show {
@@ -165,18 +167,18 @@
 }
 
 .custom-description h2 {
-	margin-bottom: 0.5rem;
-	font-size: 1.2rem;
+	font-size: 1.4rem;
+	margin-bottom: 1rem;
 }
 
 .custom-description p {
-	font-size: 0.9rem;
-	line-height: 1.4;
+	font-size: 0.95rem;
+	line-height: 1.6;
 }
 
 .custom-description img {
 	width: 100%;
-	border-radius: 8px;
+	border-radius: 10px;
 	margin-bottom: 1rem;
 }
 
