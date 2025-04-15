@@ -109,7 +109,6 @@ const InterestBubbleChart = () => {
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
 
-			// 무조건 일단 닫음
 			setBoxVisible(false);
 
 			setTimeout(() => {
@@ -119,7 +118,7 @@ const InterestBubbleChart = () => {
 					setSelected(d);
 					setBoxVisible(true);
 				}
-			}, 300); // CSS와 맞춰서 부드럽게 전환
+			}, 300);
 		});
 
 		node

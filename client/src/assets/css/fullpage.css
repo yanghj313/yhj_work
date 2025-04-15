@@ -120,13 +120,14 @@
 
 
 /*************인터레스트 버블 존***************/
-
 .full-container {
 	position: relative;
 	display: flex;
 	width: 100%;
 	height: 700px;
 	overflow: visible;
+	justify-content: center;
+	/* 가운데 정렬 */
 }
 
 .interest-section {
@@ -135,9 +136,12 @@
 }
 
 .bubble-chart {
-	width: 100%;
+	width: 800px;
+	/* 고정 너비 */
 	height: 600px;
 	transition: transform 0.3s ease;
+	position: relative;
+	z-index: 1;
 }
 
 .interest-section.with-box .bubble-chart {
