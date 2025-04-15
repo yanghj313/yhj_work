@@ -105,16 +105,21 @@ const InterestBubbleChart = () => {
 				g.append('text');
 				return g;
 			});
-
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
+
+			// 항상 닫기
 			setBoxVisible(false);
+
 			setTimeout(() => {
-				setSelected(isSame ? null : d);
-				if (!isSame) setBoxVisible(true);
+				if (isSame) {
+					setSelected(null);
+				} else {
+					setSelected(d);
+					setBoxVisible(true);
+				}
 			}, 300);
 		});
-
 		node
 			.select('circle')
 			.transition()

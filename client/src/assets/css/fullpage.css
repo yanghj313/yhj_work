@@ -160,20 +160,20 @@
 
 .about_keyword {
 	position: absolute;
-	right: 0;
 	top: 0;
+	right: 0;
 	width: 500px;
 	height: 100%;
-	background: #fff;
+	background: white;
 	transform: translateX(100%);
 	opacity: 0;
 	transition: transform 0.3s ease, opacity 0.3s ease;
-	box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
 	z-index: 10;
 	color: #333;
+	;
 }
 
-.about-wrapper.show .about_keyword {
+.about_keyword.show {
 	transform: translateX(0);
 	opacity: 1;
 }
