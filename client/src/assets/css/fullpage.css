@@ -130,7 +130,6 @@
 .interest-section {
 	flex: 1;
 	transition: all 0.5s ease;
-	overflow: hidden;
 }
 
 .bubble-chart {
@@ -141,7 +140,6 @@
 
 .interest-section.with-box .bubble-chart {
 	transform: translateX(-250px);
-	/* 어바웃 박스 들어올 공간 확보 */
 }
 
 .bubble-chart svg {
@@ -173,6 +171,7 @@
 	transition: transform 0.5s ease, opacity 0.5s ease;
 	box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
 	z-index: 10;
+	color: #333;
 }
 
 .about-wrapper.show .about_keyword {
