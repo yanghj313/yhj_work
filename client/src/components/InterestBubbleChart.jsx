@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
@@ -104,10 +105,6 @@ const InterestBubbleChart = () => {
 
 	useEffect(() => {
 		const { width, height } = dimensions;
-		const columns = 4;
-		const nodeSpacing = 150;
-		const centerX = width / 2;
-		const centerY = height / 2;
 
 		const svg = d3
 			.select(svgRef.current)
@@ -131,27 +128,11 @@ const InterestBubbleChart = () => {
 
 		const simulation = d3
 			.forceSimulation(interests)
-			.force(
-				'x',
-				d3
-					.forceX((d, i) => {
-						const col = i % columns;
-						return centerX + (col - (columns - 1) / 2) * nodeSpacing;
-					})
-					.strength(0.5)
-			)
-			.force(
-				'y',
-				d3
-					.forceY((d, i) => {
-						const row = Math.floor(i / columns);
-						return centerY + (row - Math.floor(interests.length / columns) / 2) * nodeSpacing;
-					})
-					.strength(0.5)
-			)
+			.force('center', d3.forceCenter(width / 2, height / 2))
+			.force('charge', d3.forceManyBody().strength(10))
 			.force(
 				'collision',
-				d3.forceCollide().radius(d => d.value / 2 + 6)
+				d3.forceCollide().radius(d => d.value / 2 + 4)
 			)
 			.alpha(1)
 			.restart()
@@ -165,18 +146,16 @@ const InterestBubbleChart = () => {
 					.append('g')
 					.style('cursor', 'pointer')
 					.attr('opacity', 0)
-					.attr('transform', d => `translate(${width / 2}, ${height / 2})`)
-					.transition()
+					.attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+				g.transition()
 					.duration(800)
-					.delay((d, i) => i * 50)
+					.delay((d, i) => i * 60)
 					.attr('opacity', 1);
 
-				const group = svg.selectAll('g');
-				group.append('circle');
-				group
-					.append('image')
+				g.append('circle');
+				g.append('image')
 					.attr('clip-path', d => `url(#clip-${d.name.replace(/\s+/g, '')})`)
-					.attr('preserveAspectRatio', 'xMidYMid slice')
 					.attr('xlink:href', d => d.image)
 					.attr('width', d => d.value)
 					.attr('height', d => d.value)
@@ -184,8 +163,10 @@ const InterestBubbleChart = () => {
 					.attr('y', d => -d.value / 2)
 					.attr('opacity', 0.3)
 					.style('transition', 'opacity 0.3s ease');
-				group.append('text');
-				return group;
+
+				g.append('text');
+
+				return g;
 			});
 
 		node.call(drag(simulation));
@@ -223,7 +204,7 @@ const InterestBubbleChart = () => {
 			.style('font-size', d => Math.min(d.value / 6, 12));
 
 		function ticked() {
-			node.attr('transform', d => `translate(${Math.max(d.value / 2, Math.min(width - d.value / 2, d.x))},${Math.max(d.value / 2, Math.min(height - d.value / 2, d.y))})`);
+			node.attr('transform', d => `translate(${d.x},${d.y})`);
 		}
 
 		function drag(simulation) {

@@ -92,11 +92,14 @@ const FullPageReact = () => {
 			</div>
 
 			<div className="section two">
+				<h1 className="text text--rolling" data-splitting>
+					Introduction
+				</h1>
 				<SkillMapSection />
 			</div>
 
 			<div className="section three">
-				<h1 className="text text--rolling" data-splitting>
+				<h1 className="text text--bubbling" data-splitting>
 					INTEREST
 				</h1>
 				<InterestBubbleChart />
