@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
@@ -105,6 +104,10 @@ const InterestBubbleChart = () => {
 
 	useEffect(() => {
 		const { width, height } = dimensions;
+		const columns = 4;
+		const nodeSpacing = 150;
+		const centerX = width / 2;
+		const centerY = height / 2;
 
 		const svg = d3
 			.select(svgRef.current)
@@ -128,11 +131,27 @@ const InterestBubbleChart = () => {
 
 		const simulation = d3
 			.forceSimulation(interests)
-			.force('x', d3.forceX((d, i) => 100 + i * 130).strength(0.5))
-			.force('y', d3.forceY(height / 2).strength(0.1))
+			.force(
+				'x',
+				d3
+					.forceX((d, i) => {
+						const col = i % columns;
+						return centerX + (col - (columns - 1) / 2) * nodeSpacing;
+					})
+					.strength(0.5)
+			)
+			.force(
+				'y',
+				d3
+					.forceY((d, i) => {
+						const row = Math.floor(i / columns);
+						return centerY + (row - Math.floor(interests.length / columns) / 2) * nodeSpacing;
+					})
+					.strength(0.5)
+			)
 			.force(
 				'collision',
-				d3.forceCollide().radius(d => d.value / 2 + 4)
+				d3.forceCollide().radius(d => d.value / 2 + 6)
 			)
 			.alpha(1)
 			.restart()
@@ -153,7 +172,6 @@ const InterestBubbleChart = () => {
 					.attr('opacity', 1);
 
 				const group = svg.selectAll('g');
-
 				group.append('circle');
 				group
 					.append('image')
@@ -167,7 +185,6 @@ const InterestBubbleChart = () => {
 					.attr('opacity', 0.3)
 					.style('transition', 'opacity 0.3s ease');
 				group.append('text');
-
 				return group;
 			});
 
