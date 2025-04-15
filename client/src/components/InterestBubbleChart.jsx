@@ -1,88 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
 
 const interests = [
-	{
-		name: 'Coding',
-		value: 180,
-		color: '#ff6b6b',
-		image: 'https://picsum.photos/seed/coding/400/400',
-	},
-	{
-		name: 'UI Design',
-		value: 150,
-		color: '#feca57',
-		image: 'https://picsum.photos/seed/design/400/400',
-	},
-	{
-		name: 'Movie',
-		value: 80,
-		color: '#48dbfb',
-		image: 'https://picsum.photos/seed/movie/400/400',
-	},
-	{
-		name: 'Book',
-		value: 200,
-		color: '#1dd1a1',
-		image: 'https://picsum.photos/seed/book/400/400',
-	},
-	{
-		name: 'Running',
-		value: 140,
-		color: '#5f27cd',
-		image: 'https://picsum.photos/seed/running/400/400',
-	},
-	{
-		name: 'Pilates',
-		value: 170,
-		color: '#341f97',
-		image: 'https://picsum.photos/seed/pilates/400/400',
-	},
-	{
-		name: 'Travel',
-		value: 80,
-		color: '#ee5253',
-		image: 'https://picsum.photos/seed/travel/400/400',
-	},
-	{
-		name: 'Stationery',
-		value: 150,
-		color: '#ff9ff3',
-		image: 'https://picsum.photos/seed/stationery/400/400',
-	},
-	{
-		name: 'Camera',
-		value: 70,
-		color: '#00d2d3',
-		image: 'https://picsum.photos/seed/camera/400/400',
-	},
-	{
-		name: 'Fashion',
-		value: 80,
-		color: '#576574',
-		image: 'https://picsum.photos/seed/fashion/400/400',
-	},
-	{
-		name: 'Soccer',
-		value: 60,
-		color: '#576574',
-		image: 'https://picsum.photos/seed/soccer/400/400',
-	},
-	{
-		name: 'Music',
-		value: 80,
-		color: '#576574',
-		image: 'https://picsum.photos/seed/music/400/400',
-	},
-	{
-		name: 'Perfume',
-		value: 70,
-		color: '#576574',
-		image: 'https://picsum.photos/seed/perfume/400/400',
-	},
+	{ name: 'Coding', value: 180, color: '#ff6b6b', image: 'https://picsum.photos/seed/coding/400/400' },
+	{ name: 'UI Design', value: 150, color: '#feca57', image: 'https://picsum.photos/seed/design/400/400' },
+	{ name: 'Movie', value: 80, color: '#48dbfb', image: 'https://picsum.photos/seed/movie/400/400' },
+	{ name: 'Book', value: 200, color: '#1dd1a1', image: 'https://picsum.photos/seed/book/400/400' },
+	{ name: 'Running', value: 140, color: '#5f27cd', image: 'https://picsum.photos/seed/running/400/400' },
+	{ name: 'Pilates', value: 170, color: '#341f97', image: 'https://picsum.photos/seed/pilates/400/400' },
+	{ name: 'Travel', value: 80, color: '#ee5253', image: 'https://picsum.photos/seed/travel/400/400' },
+	{ name: 'Stationery', value: 150, color: '#ff9ff3', image: 'https://picsum.photos/seed/stationery/400/400' },
+	{ name: 'Camera', value: 70, color: '#00d2d3', image: 'https://picsum.photos/seed/camera/400/400' },
+	{ name: 'Fashion', value: 80, color: '#576574', image: 'https://picsum.photos/seed/fashion/400/400' },
+	{ name: 'Soccer', value: 60, color: '#576574', image: 'https://picsum.photos/seed/soccer/400/400' },
+	{ name: 'Music', value: 80, color: '#576574', image: 'https://picsum.photos/seed/music/400/400' },
+	{ name: 'Perfume', value: 70, color: '#576574', image: 'https://picsum.photos/seed/perfume/400/400' },
 ];
 
 const InterestBubbleChart = () => {
@@ -105,13 +39,7 @@ const InterestBubbleChart = () => {
 
 	useEffect(() => {
 		const { width, height } = dimensions;
-
-		const svg = d3
-			.select(svgRef.current)
-			.attr('width', width)
-			.attr('height', height)
-			.style('transform', selected ? 'translateX(-120px)' : 'translateX(0)')
-			.style('transition', 'transform 0.5s ease');
+		const svg = d3.select(svgRef.current).attr('width', width).attr('height', height);
 
 		svg.select('defs')?.remove();
 		const defs = svg.append('defs');
@@ -126,18 +54,6 @@ const InterestBubbleChart = () => {
 				.attr('cy', 0);
 		});
 
-		const simulation = d3
-			.forceSimulation(interests)
-			.force('center', d3.forceCenter(width / 2, height / 2))
-			.force('charge', d3.forceManyBody().strength(10))
-			.force(
-				'collision',
-				d3.forceCollide().radius(d => d.value / 2 + 4)
-			)
-			.alpha(1)
-			.restart()
-			.on('tick', ticked);
-
 		const node = svg
 			.selectAll('g')
 			.data(interests, d => d.name)
@@ -150,8 +66,13 @@ const InterestBubbleChart = () => {
 
 				g.transition()
 					.duration(800)
-					.delay((d, i) => i * 60)
-					.attr('opacity', 1);
+					.delay((d, i) => i * 80)
+					.attr('opacity', 1)
+					.attr('transform', d => {
+						d.x = Math.random() * (width - d.value) + d.value / 2;
+						d.y = Math.random() * (height - d.value) + d.value / 2;
+						return `translate(${d.x}, ${d.y})`;
+					});
 
 				g.append('circle');
 				g.append('image')
@@ -168,8 +89,6 @@ const InterestBubbleChart = () => {
 
 				return g;
 			});
-
-		node.call(drag(simulation));
 
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
@@ -202,29 +121,6 @@ const InterestBubbleChart = () => {
 			.attr('dy', '.35em')
 			.style('fill', '#fff')
 			.style('font-size', d => Math.min(d.value / 6, 12));
-
-		function ticked() {
-			node.attr('transform', d => `translate(${d.x},${d.y})`);
-		}
-
-		function drag(simulation) {
-			return d3
-				.drag()
-				.on('start', (event, d) => {
-					if (!event.active) simulation.alphaTarget(0.3).restart();
-					d.fx = d.x;
-					d.fy = d.y;
-				})
-				.on('drag', (event, d) => {
-					d.fx = event.x;
-					d.fy = event.y;
-				})
-				.on('end', (event, d) => {
-					if (!event.active) simulation.alphaTarget(0);
-					d.fx = null;
-					d.fy = null;
-				});
-		}
 	}, [dimensions, selected]);
 
 	return (
