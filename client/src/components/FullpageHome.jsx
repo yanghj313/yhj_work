@@ -5,7 +5,7 @@ import 'fullpage.js/dist/fullpage.min.css';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
 import '../assets/css/fullpage.css';
-
+import InterestBubbleChart from './InterestBubbleChart';
 import Welcome from './Welcome';
 import SkillMapSection from './SkillMapSection';
 import TravelMap from './TravelMap';
