@@ -133,7 +133,7 @@
     }
 }
 
-/* 스크롤바 제거 */
+
 .no-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -143,14 +143,18 @@
     display: none;
 }
 
-/* 슬라이드 트랙 */
 .skill-scroll-track {
     position: relative;
     display: flex;
     align-items: center;
     height: 100%;
     width: 100%;
-    padding: 2rem 0;
+    padding: 2rem 7rem;
+}
+
+.skill-right-panel,
+.skill-left-panel {
+    width: 50%;
 }
 
 /* 마커 스타일 */
