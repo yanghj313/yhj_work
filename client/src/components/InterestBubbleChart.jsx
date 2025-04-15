@@ -38,17 +38,6 @@ const InterestBubbleChart = () => {
 	}, []);
 
 	useEffect(() => {
-		const handleClickOutside = e => {
-			if (boxVisible && aboutRef.current && !aboutRef.current.contains(e.target)) {
-				setBoxVisible(false);
-				setTimeout(() => setSelected(null), 300);
-			}
-		};
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => document.removeEventListener('mousedown', handleClickOutside);
-	}, [boxVisible]);
-
-	useEffect(() => {
 		const { width, height } = dimensions;
 		const svg = d3.select(svgRef.current).attr('width', width).attr('height', height);
 		svg.select('defs')?.remove();
@@ -180,6 +169,15 @@ const InterestBubbleChart = () => {
 						{selected.name === 'Perfume' && <p>향수를 즐겨뿌립니다.</p>}
 					</div>
 				)}
+				<button
+					className="close-btn"
+					onClick={() => {
+						setBoxVisible(false);
+						setTimeout(() => setSelected(null), 300);
+					}}
+				>
+					닫기
+				</button>
 			</div>
 		</div>
 	);
