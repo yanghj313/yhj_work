@@ -3,7 +3,19 @@ import * as d3 from 'd3';
 import '../assets/css/fullpage.css';
 
 const interests = [
-	/* 동일 생략 */
+	{ name: 'Coding', value: 180, color: '#ff6b6b', image: 'https://picsum.photos/seed/coding/400/400' },
+	{ name: 'UI Design', value: 150, color: '#feca57', image: 'https://picsum.photos/seed/design/400/400' },
+	{ name: 'Movie', value: 80, color: '#48dbfb', image: 'https://picsum.photos/seed/movie/400/400' },
+	{ name: 'Book', value: 200, color: '#1dd1a1', image: 'https://picsum.photos/seed/book/400/400' },
+	{ name: 'Running', value: 140, color: '#5f27cd', image: 'https://picsum.photos/seed/running/400/400' },
+	{ name: 'Pilates', value: 170, color: '#341f97', image: 'https://picsum.photos/seed/pilates/400/400' },
+	{ name: 'Travel', value: 80, color: '#ee5253', image: 'https://picsum.photos/seed/travel/400/400' },
+	{ name: 'Stationery', value: 150, color: '#ff9ff3', image: 'https://picsum.photos/seed/stationery/400/400' },
+	{ name: 'Camera', value: 70, color: '#00d2d3', image: 'https://picsum.photos/seed/camera/400/400' },
+	{ name: 'Fashion', value: 80, color: '#576574', image: 'https://picsum.photos/seed/fashion/400/400' },
+	{ name: 'Soccer', value: 60, color: '#576574', image: 'https://picsum.photos/seed/soccer/400/400' },
+	{ name: 'Music', value: 80, color: '#576574', image: 'https://picsum.photos/seed/music/400/400' },
+	{ name: 'Perfume', value: 70, color: '#576574', image: 'https://picsum.photos/seed/perfume/400/400' },
 ];
 
 const InterestBubbleChart = () => {
