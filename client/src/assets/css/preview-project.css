@@ -1,3 +1,7 @@
+.slide {
+    width: 100%
+}
+
 .preview-project-container {
     display: flex;
     flex-wrap: wrap;

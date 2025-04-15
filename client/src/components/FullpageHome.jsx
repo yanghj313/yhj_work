@@ -95,23 +95,23 @@ const FullPageReact = () => {
 			</div>
 
 			<div className="section two">
-				<h1 className="text text--bubbling" data-splitting>
-					INTRODUCTION
-				</h1>
 				<div className="slide" style={{ minHeight: '100vh' }}>
+					<h1 className="text text--bubbling" data-splitting>
+						INTRODUCTION
+					</h1>
 					<h2 className="text text--fade" data-splitting>
 						ABOUT ME
 					</h2>
-					<div style={{ fontSize: '0.9rem' }}>
-						<Introduction />
-					</div>
+					<Introduction />
 				</div>
+
 				<div className="slide slide--skills" style={{ minHeight: '100vh' }}>
 					<h2 className="text text--fade" data-splitting>
 						SKILLS
 					</h2>
 					<SkillPreviewList />
 				</div>
+
 				<div className="slide slide--projects" style={{ minHeight: '100vh' }}>
 					<h2 className="text text--fade" data-splitting>
 						PROJECTS

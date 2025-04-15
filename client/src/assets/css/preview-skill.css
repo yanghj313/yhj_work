@@ -1,3 +1,7 @@
+.slide {
+    width: 100%
+}
+
 .preview-skill-container {
     display: flex;
     flex-wrap: wrap;
