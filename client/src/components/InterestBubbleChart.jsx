@@ -111,16 +111,15 @@ const InterestBubbleChart = () => {
 
 			setBoxVisible(false);
 
-			setSelected(null);
-
-			if (!isSame) {
-				setTimeout(() => {
+			setTimeout(() => {
+				if (isSame) {
+					setSelected(null);
+				} else {
 					setSelected(d);
 					setBoxVisible(true);
-				}, 300);
-			}
+				}
+			}, 300);
 		});
-
 		node
 			.select('circle')
 			.transition()
@@ -153,7 +152,7 @@ const InterestBubbleChart = () => {
 				</div>
 			</div>
 
-			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef} key={selected?.name || 'none'}>
+			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef} key={selected?.name}>
 				{selected && (
 					<div className="custom-description">
 						<h2>{selected.name}</h2>
