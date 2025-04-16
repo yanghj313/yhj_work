@@ -157,6 +157,26 @@ body {
     color: white;
 }
 
+.timeline-position {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* 포지션 없을 때 margin 제거 */
+.timeline-content>h3:empty {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline-logo {
+    margin-top: 1rem;
+    width: 100px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
 @media (max-width: 768px) {
 
     .timeline-item,

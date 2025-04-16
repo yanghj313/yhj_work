@@ -20,17 +20,22 @@ const ExperienceList = () => {
 	}, []);
 
 	return (
-		<div className="timeline-container ex_wrap">
+		<div className="timeline-container">
 			{experiences.map((e, i) => (
 				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id}>
 					<div className="timeline-content">
-						<h3>{e.position || '포지션 미입력'}</h3>
+						{/* ✅ 포지션이 있을 때만 출력 + 여백 포함 */}
+						{e.position && <h3 className="timeline-position">{e.position}</h3>}
+
 						<span className="timeline-date">
 							{e.startDate} ~ {e.endDate || '현재'}
 						</span>
-						<p>{e.description || '설명 없음'}</p>
-						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" />}
+
+						{/* ✅ 로고 이미지 */}
+						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
 					</div>
+
+					{/* ✅ 연도만 중앙 표시 */}
 					<div className="timeline-year">{e.startDate?.slice(0, 4)}</div>
 				</div>
 			))}
