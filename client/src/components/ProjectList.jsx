@@ -44,8 +44,8 @@ const ProjectList = () => {
 							{p.tags && (
 								<ul style={{ paddingLeft: '1rem' }}>
 									{p.tags.split(',').map((tag, index) => {
-										const trimmedTag = tag.trim(); // 공백 제거
-										return <li key={index}>{trimmedTag}</li>; // 태그 텍스트만 li로 출력
+										const trimmedTag = tag.trim();
+										return <li key={index}>{trimmedTag}</li>;
 									})}
 								</ul>
 							)}

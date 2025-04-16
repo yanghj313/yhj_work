@@ -29,9 +29,10 @@ const ExperienceList = () => {
 								<img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt={e.logo.name || '로고'} width="120" style={{ marginBottom: '0.5rem', borderRadius: '6px' }} />
 							</div>
 						)}
-						<strong>{e.position || '포지션 미입력'}</strong> {e.Career ? `(${e.Career})` : ''}
+						<strong>{p.title}</strong>
+						<p>{e.position || ''}</p> {e.Career ? `(${e.Career})` : ''}
 						<br />
-						{e.startDate || '시작일 미입력'} ~ {e.endDate || '종료일 미입력'}
+						{e.startDate || ''} ~ {e.endDate || '재직중'}
 					</li>
 				))}
 			</ul>
