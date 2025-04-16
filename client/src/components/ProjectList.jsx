@@ -28,10 +28,8 @@ const ProjectList = () => {
 					p?.title ? (
 						<li key={p.id} className="project-card">
 							<div className="media-container">
-								{/* 썸네일 이미지 */}
 								<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
 
-								{/* Hover 시 보여질 영상 */}
 								<video src={video01} muted loop playsInline autoPlay className="hover-video" />
 							</div>
 
@@ -43,7 +41,6 @@ const ProjectList = () => {
 							{p.role && <p>👤 역할: {p.role}</p>}
 							{p.period && <p>🗓️ 작업 기간: {p.period}</p>}
 
-							{/* 태그 텍스트만 li로 출력 */}
 							{p.tags && (
 								<ul style={{ paddingLeft: '1rem' }}>
 									{p.tags.split(',').map((tag, index) => {
