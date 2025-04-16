@@ -1,0 +1,93 @@
+diff --git a/server/src/api/gallery/content-types/gallery/schema.json b/server/src/api/gallery/content-types/gallery/schema.json
+index 46a89bd..b796639 100644
+--- a/server/src/api/gallery/content-types/gallery/schema.json
++++ b/server/src/api/gallery/content-types/gallery/schema.json
+@@ -1,29 +1,34 @@
+ {
+-  "kind": "collectionType",
+-  "collectionName": "galleries",
+-  "info": {
+-    "singularName": "gallery",
+-    "pluralName": "galleries",
+-    "displayName": "Gallery"
+-  },
+-  "options": {
+-    "draftAndPublish": true
+-  },
+-  "attributes": {
+-    "title": {
+-      "type": "string"
+-    },
+-    "image": {
+-      "allowedTypes": ["images", "files", "videos", "audios"],
+-      "type": "media",
+-      "multiple": false
+-    },
+-    "description": {
+-      "type": "text"
+-    },
+-    "category": {
+-      "type": "enumeration",
+-      "enum": ["Banner", "Landing Page", "Poster", "Others"]
+-    }
+-  }
++	"kind": "collectionType",
++	"collectionName": "galleries",
++	"info": {
++		"singularName": "gallery",
++		"pluralName": "galleries",
++		"displayName": "Gallery"
++	},
++	"options": {
++		"draftAndPublish": true
++	},
++	"attributes": {
++		"title": {
++			"type": "string"
++		},
++		"image": {
++			"allowedTypes": ["images", "files", "videos", "audios"],
++			"type": "media",
++			"multiple": false
++		},
++		"description": {
++			"type": "text"
++		},
++		"category": {
++			"type": "enumeration",
++			"enum": ["Banner", "Landing Page", "Poster", "Others"]
++		},
++		"images": {
++			"type": "media",
++			"multiple": true,
++			"allowedTypes": ["images", "files", "videos", "audios"]
++		}
++	}
+ }
+diff --git a/server/src/api/project/content-types/project/schema.json b/server/src/api/project/content-types/project/schema.json
+index 0880bca..c1e4ac7 100644
+--- a/server/src/api/project/content-types/project/schema.json
++++ b/server/src/api/project/content-types/project/schema.json
+@@ -36,11 +36,22 @@
+ 			"type": "enumeration",
+ 			"enum": ["Publisher", "Designer", "Frontend"]
+ 		},
++		"add": {
++			"type": "enumeration",
++			"enum": ["Publisher", "Designer", "Frontend"]
++		},
++		"more": {
++			"type": "enumeration",
++			"enum": ["Publisher", "Designer", "Frontend"]
++		},
+ 		"contribution": {
+ 			"type": "string"
+ 		},
+ 		"tags": {
+ 			"type": "string"
++		},
++		"color": {
++			"type": "string"
+ 		}
+ 	}
+ }
