@@ -60,11 +60,10 @@ const FullPageReact = () => {
 						opacity: 0,
 						duration: 1.4,
 						ease: 'power2.out',
-					})
-					.from(
+					}).from(
 						'.skill-panel',
 						{
-							x: 60,
+							x: 40,
 							y: 40,
 							opacity: 0,
 							duration: 1.6,
