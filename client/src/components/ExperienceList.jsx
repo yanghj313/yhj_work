@@ -27,9 +27,7 @@ const ExperienceList = () => {
 						{/* ✅ 포지션이 있을 때만 출력 + 여백 포함 */}
 						{e.position && <h3 className="timeline-position">{e.position}</h3>}
 
-						<span className="timeline-date">
-							{e.startDate} ~ {e.endDate || '현재'}
-						</span>
+						<b>{e.title}</b>
 
 						{/* ✅ 로고 이미지 */}
 						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
