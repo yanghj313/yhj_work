@@ -1,12 +1,8 @@
-.two {
-    overflow-x: visible;
-}
-
 .skill-tour-horizontal {
     width: 100%;
     overflow-x: visible;
     padding: 0 80px;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 .skill-scroll-wrapper {
@@ -16,7 +12,7 @@
     overflow-y: visible;
     white-space: nowrap;
     background: #333;
-    border-radius: 12px;
+    border-radius: 12px
 }
 
 .skill-scroll-track {
@@ -24,6 +20,7 @@
     display: flex;
     align-items: center;
     padding: 2rem 300px;
+    height: 100%;
 }
 
 .skill-marker {
@@ -31,9 +28,9 @@
     margin: 0 30px;
     position: relative;
     transform: translate(-50%, -50%);
-    transition: transform 0.4s ease;
+    transition: transform .4s ease;
     cursor: pointer;
-    z-index: 2;
+    z-index: 2
 }
 
 .skill-icon img {
@@ -42,31 +39,31 @@
     border-radius: 10px;
     background: #333;
     object-fit: cover;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-    z-index: 3;
+    box-shadow: 0 0 6px #0003;
+    z-index: 3
 }
 
 .ripple {
     width: 20px;
     height: 20px;
-    background: rgba(255, 87, 34, 0.7);
+    background: #ff5722b3;
     border-radius: 50%;
     position: absolute;
     top: -34%;
     left: 45%;
     animation: ripple 1.6s infinite;
-    z-index: 1;
+    z-index: 1
 }
 
 @keyframes ripple {
     0% {
         transform: scale(1);
-        opacity: 0.8;
+        opacity: .8
     }
 
-    100% {
+    to {
         transform: scale(2.5);
-        opacity: 0;
+        opacity: 0
     }
 }
 
@@ -74,115 +71,116 @@
     position: absolute;
     top: -182%;
     left: 50%;
-    transform: translateX(-50%);
-    background: rgba(189, 22, 72, 0.85);
-    color: white;
+    transform: translate(-50%);
+    background: #bd1648d9;
+    color: #fff;
     width: 200px;
     max-width: 240px;
     padding: 1rem;
     border-radius: 12px;
     font-size: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px #0003;
     z-index: 10;
     opacity: 1;
     pointer-events: auto;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
     overflow-wrap: break-word;
-    word-break: break-word;
+    word-break: break-word
 }
 
-.tooltip-box::after {
-    content: '';
+.tooltip-box:after {
+    content: "";
     position: absolute;
     bottom: -10px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%);
     border-width: 10px 10px 0 10px;
     border-style: solid;
-    border-color: rgba(248, 248, 248, 0.85) transparent transparent transparent;
+    border-color: rgba(248, 248, 248, .85) transparent transparent transparent
 }
 
 .skill-name {
-    font-weight: bold;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.1rem
 }
 
 .skill-level {
-    margin-top: 0.25rem;
-    color: #ffcc66;
-    font-size: 0.95rem;
+    margin-top: .25rem;
+    color: #fc6;
+    font-size: .95rem
 }
 
 .skill-description {
-    margin-top: 0.5rem;
+    margin-top: .5rem;
     text-align: left;
     list-style: none;
-    font-size: 0.75rem;
+    font-size: .75rem;
     white-space: normal;
     word-wrap: break-word;
-    word-break: break-word;
+    word-break: break-word
 }
 
-/* 반응형 처리 */
 @media (max-width: 768px) {
     .tooltip-box {
         top: auto;
-        bottom: -140px;
+        bottom: -140px
     }
 
-    .tooltip-box::after {
+    .tooltip-box:after {
         top: -10px;
         bottom: auto;
-        transform: translateX(-50%) rotate(180deg);
+        transform: translate(-50%) rotate(180deg)
     }
 
     .skill-scroll-wrapper {
-        height: 65vh;
+        height: 65vh
     }
 }
 
-/* 스크롤바 숨기기 */
 .no-scrollbar {
     scrollbar-width: none;
-    -ms-overflow-style: none;
+    -ms-overflow-style: none
 }
 
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+    display: none
 }
 
 .skill-tour-inner {
     display: block;
     width: 100%;
+    /* text-align: left; */
 }
 
 .skill-right-panel {
-    width: 54%;
-    display: inline-block;
+    width: 65%;
+    display: inline-block !important;
+    float: right;
 }
 
 .skill-left-panel {
-    width: 46%;
-    display: inline-block;
+    width: 30%;
+    display: inline-flex !important;
+    float: left;
 }
 
 .skill-nav-buttons {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
-    gap: 1rem;
+    gap: 1rem
 }
 
 .skill-nav-buttons button {
     background: #ebe9e9;
     color: #fff;
-    padding: 0.6rem 1.2rem;
+    padding: .6rem 1.2rem;
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background .3s
 }
 
 .skill-nav-buttons button:hover {
-    background: #555;
+    background: #555
 }

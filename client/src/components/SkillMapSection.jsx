@@ -57,7 +57,7 @@ const SkillMapSection = () => {
 		<div className="skill-tour-horizontal" onMouseDown={handleTouchStart} onMouseUp={handleTouchEnd} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
 			<div className="skill-tour-inner" style={{ display: 'block', height: '700px' }}>
 				<div className="skill-left-panel" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					<img src="/img/profile.jpg" alt="소개 이미지" style={{ width: 'auto', maxHeight: '80%' }} />
+					<img src="/img/profile.jpg" alt="소개 이미지" style={{ width: '492px', maxHeight: '80%' }} />
 				</div>
 
 				<div className="skill-right-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
@@ -70,7 +70,7 @@ const SkillMapSection = () => {
 										key={s.id}
 										className={`skill-marker${isActive ? ' active' : ''}`}
 										onClick={() => setActiveIndex(idx)}
-										style={{ left: `${10 + idx * 50}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
+										style={{ left: `${10 + idx * 20}px`, right: `${10 + idx * 20}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
 									>
 										{isActive && <div className="ripple"></div>}
 
