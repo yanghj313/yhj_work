@@ -3,6 +3,13 @@ import axios from 'axios';
 import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
+const formatDate = dateString => {
+	if (!dateString) return '';
+	const date = new Date(dateString);
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	return `${year}.${month}`;
+};
 
 const ExperienceList = () => {
 	const [experiences, setExperiences] = useState([]);
@@ -34,7 +41,7 @@ const ExperienceList = () => {
 					</div>
 
 					{/* ✅ 연도만 중앙 표시 */}
-					<div className="timeline-year">{`${e.startDate?.slice(0, 4)} - ${e.endDate ? e.endDate.slice(0, 4) : '현재'}`}</div>
+					<div className="timeline-year">{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}</div>
 				</div>
 			))}
 		</div>
