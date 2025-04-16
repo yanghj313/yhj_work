@@ -20,18 +20,15 @@
 }
 
 .skill-scroll-track {
-    position: relative;
-    height: 100%;
+    width: auto;
     display: flex;
     align-items: center;
     padding: 2rem 300px;
-    width: auto;
-    /* 유동 너비 처리 */
 }
 
 .skill-marker {
     min-width: 190px;
-    margin: 0 80px;
+    margin: 0 30px;
     position: relative;
     transform: translate(-50%, -50%);
     transition: transform 0.4s ease;
@@ -154,12 +151,19 @@
     display: none;
 }
 
+.skill-tour-inner {
+    display: block;
+    width: 100%;
+}
+
 .skill-right-panel {
     width: 54%;
+    display: inline-block;
 }
 
 .skill-left-panel {
     width: 46%;
+    display: inline-block;
 }
 
 .skill-nav-buttons {
