@@ -52,6 +52,19 @@
 	font-size: 4rem;
 }
 
+.two .text {
+	text-align: center;
+	display: inline-block;
+	white-space: normal;
+	word-break: keep-all;
+	overflow: hidden;
+	font-size: 4rem;
+	position: absolute;
+	top: 9%;
+	z-index: 99;
+	right: 4%;
+}
+
 /* char span 공통 설정 */
 .char {
 	display: inline-block;

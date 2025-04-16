@@ -90,7 +90,7 @@
 .tooltip-box:after {
     content: "";
     position: absolute;
-    bottom: -10px;
+    bottom: -9px;
     left: 50%;
     transform: translate(-50%);
     border-width: 10px 10px 0 10px;
