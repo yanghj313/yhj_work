@@ -1,6 +1,10 @@
 .skill-tour-horizontal {
     width: 100%;
     overflow-x: hidden;
+    padding: 0 80px;
+    /* 좌우 여백 추가 */
+    box-sizing: border-box;
+    /* 패딩이 전체 너비 안에 포함되도록 설정 */
 }
 
 .skill-scroll-wrapper {
