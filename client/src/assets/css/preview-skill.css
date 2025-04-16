@@ -1,3 +1,15 @@
+.intro-img {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: none;
+}
+
+.skill-panel {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: none;
+}
+
 .skill-tour-horizontal {
     width: 100%;
     overflow-x: visible;
