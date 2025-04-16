@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import App from './App';
 import ProjectList from './components/ProjectList';
 import ProjectDetail from './components/ProjectDetail';
 import SkillList from './components/SkillList';
@@ -16,7 +15,8 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import FullpageHome from './components/FullpageHome';
 import SearchResult from './components/SearchResult';
-import './index.css'; // 공통 스타일
+import './index.css';
+import './assets/css/font.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

@@ -1,52 +1,44 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const ExperienceList = () => {
-  const [experiences, setExperiences] = useState([]);
+	const [experiences, setExperiences] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`${API_BASE}/api/experiences?populate=*`)
-      .then((res) => {
-        console.log('🔥 경험 데이터:', res.data.data);
-        setExperiences((res.data.data || []).filter(Boolean));
-      })
-      .catch((err) => {
-        console.error('❌ 경험 데이터 오류:', err.message);
-      });
-  }, []);
+	useEffect(() => {
+		axios
+			.get(`${API_BASE}/api/experiences?populate=*&sort=createdAt:asc&pagination[limit]=100`)
+			.then(res => {
+				console.log('🔥 경험 데이터:', res.data.data);
+				setExperiences((res.data.data || []).filter(Boolean));
+			})
+			.catch(err => {
+				console.error('❌ 경험 데이터 오류:', err.message);
+			});
+	}, []);
 
-  return (
-    <div>
-      <h2>📘 경력사항</h2>
-      <ul>
-        {experiences.map((e) =>
-          e?.position ? (
-            <li
-              key={e.id}
-              style={{ marginBottom: '2rem' }}>
-              {/* 로고 먼저 */}
-              {e.logo?.url && (
-                <div>
-                  <img
-                    src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`}
-                    alt={e.logo.name || '로고'}
-                    width="120"
-                    style={{ marginBottom: '0.5rem', borderRadius: '6px' }}
-                  />
-                </div>
-              )}
-              <strong>{e.position}</strong> ({e.Career})
-              <br />
-              {e.startDate} ~ {e.endDate}
-            </li>
-          ) : null
-        )}
-      </ul>
-    </div>
-  );
+	return (
+		<div className="timeline-container">
+			{experiences.map((e, i) => (
+				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id}>
+					<div className="timeline-content">
+						{/* ✅ 포지션이 있을 때만 출력 + 여백 포함 */}
+						{e.position && <h3 className="timeline-position">{e.position}</h3>}
+
+						<b>{e.title}</b>
+
+						{/* ✅ 로고 이미지 */}
+						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
+					</div>
+
+					{/* ✅ 연도만 중앙 표시 */}
+					<div className="timeline-year">{e.endDate?.slice(0, 4)}</div>
+				</div>
+			))}
+		</div>
+	);
 };
 
 export default ExperienceList;

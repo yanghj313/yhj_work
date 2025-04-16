@@ -7,7 +7,13 @@
 	margin: 100px auto;
 	text-align: center;
 }
+
 .fail_massage {
 	margin: 200px auto;
 	text-align: center;
+}
+
+.highlight {
+	color: #007bff;
+	font-weight: bold;
 }

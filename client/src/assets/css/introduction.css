@@ -1,0 +1,38 @@
+/* === 전체 슬라이드 공통 === */
+.slide {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 4rem 2rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-family: 'Pretendard', sans-serif;
+    width: 100%
+}
+
+/* === 슬라이드별 배경 색상 구분 === */
+.slide--intro {
+    background: -webkit-gradient(linear, left top, left bottom, from(#e0f7fa), to(#ffffff));
+    background: -o-linear-gradient(top, #e0f7fa, #ffffff);
+    background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+    color: #333;
+}
+
+.intro h2 {
+    font-size: 24px;
+}
+
+.intro p {
+    font-size: 1rem;
+}
