@@ -29,7 +29,7 @@ const ExperienceList = () => {
 								<img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt={e.logo.name || '로고'} width="120" style={{ marginBottom: '0.5rem', borderRadius: '6px' }} />
 							</div>
 						)}
-						<strong>{p.title}</strong>
+						<strong>{e.title}</strong>
 						<p>{e.position || ''}</p> {e.Career ? `(${e.Career})` : ''}
 						<br />
 						{e.startDate || ''} ~ {e.endDate || '재직중'}
