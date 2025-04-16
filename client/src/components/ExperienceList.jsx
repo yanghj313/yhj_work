@@ -20,23 +20,20 @@ const ExperienceList = () => {
 	}, []);
 
 	return (
-		<div className="ex_wrap">
-			<ul>
-				{experiences.map(e => (
-					<li key={e.id} style={{ marginBottom: '2rem' }}>
-						{/* 로고 먼저 */}
-						{e.logo?.url && (
-							<div>
-								<img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt={e.logo.name || '로고'} width="120" style={{ marginBottom: '0.5rem', borderRadius: '6px' }} />
-							</div>
-						)}
-						<strong>{e.title}</strong>
-						<p>{e.position || ''}</p> {e.Career ? `(${e.Career})` : ''}
-						<br />
-						{e.startDate || ''} ~ {e.endDate || '재직중'}
-					</li>
-				))}
-			</ul>
+		<div className="timeline-container ex_wrap">
+			{experiences.map((e, i) => (
+				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id}>
+					<div className="timeline-content">
+						<h3>{e.position || '포지션 미입력'}</h3>
+						<span className="timeline-date">
+							{e.startDate} ~ {e.endDate || '현재'}
+						</span>
+						<p>{e.description || '설명 없음'}</p>
+						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" />}
+					</div>
+					<div className="timeline-year">{e.startDate?.slice(0, 4)}</div>
+				</div>
+			))}
 		</div>
 	);
 };
