@@ -13,7 +13,7 @@ body {
 .list ul {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[3];
+    -ms-grid-columns: (1fr 1fr 1fr);
     grid-template-columns: repeat(3, 1fr);
     row-gap: 2rem;
 }
@@ -116,6 +116,8 @@ body {
     width: 4px;
     height: 100%;
     background: #00a8a8;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
     transform: translateX(-50%);
 }
 
@@ -139,6 +141,7 @@ body {
     background: white;
     padding: 1rem;
     border-radius: 8px;
+    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -146,6 +149,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     font-size: 2rem;
     font-weight: bold;
