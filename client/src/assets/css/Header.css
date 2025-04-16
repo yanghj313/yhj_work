@@ -167,3 +167,27 @@ input[type='search']::-webkit-search-cancel-button {
 .clear-btn:hover {
 	color: #333;
 }
+
+.fp-viewing-intro .site-header {
+	background-color: #333;
+}
+
+.fp-viewing-intro .site-header .nav li a {
+	color: #fff;
+}
+
+.fp-viewing-interest .site-header {
+	background-color: #fff;
+}
+
+.fp-viewing-interest .site-header .nav li a {
+	color: #000;
+}
+
+.fp-viewing-travel .site-header {
+	background-color: #333;
+}
+
+.fp-viewing-travel .site-header .nav li a {
+	color: #fff;
+}

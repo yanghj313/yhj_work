@@ -170,13 +170,17 @@ const InterestBubbleChart = () => {
 					</div>
 				)}
 				<button
-					className="close-btn"
+					className="custom-close-btn"
+					aria-label="닫기"
 					onClick={() => {
 						setBoxVisible(false);
 						setTimeout(() => setSelected(null), 300);
 					}}
 				>
-					닫기
+					<svg viewBox="0 0 24 24" className="close-icon" xmlns="http://www.w3.org/2000/svg">
+						<line x1="4" y1="4" x2="20" y2="20" />
+						<line x1="20" y1="4" x2="4" y2="20" />
+					</svg>
 				</button>
 			</div>
 		</div>

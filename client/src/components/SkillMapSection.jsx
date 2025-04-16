@@ -104,8 +104,17 @@ const SkillMapSection = () => {
 					</div>
 
 					<div className="skill-nav-buttons">
-						<button onClick={handlePrev}>← 이전</button>
-						<button onClick={handleNext}>다음 →</button>
+						<button className="arrow-btn prev" onClick={handlePrev} aria-label="이전">
+							<svg viewBox="0 0 24 24" className="arrow-icon">
+								<polyline points="15 18 9 12 15 6" />
+							</svg>
+						</button>
+
+						<button className="arrow-btn next" onClick={handleNext} aria-label="다음">
+							<svg viewBox="0 0 24 24" className="arrow-icon">
+								<polyline points="9 6 15 12 9 18" />
+							</svg>
+						</button>
 					</div>
 				</div>
 			</div>
