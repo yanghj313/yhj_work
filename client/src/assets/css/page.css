@@ -128,7 +128,7 @@ body {
 }
 
 .timeline-item.left {
-	left: 0;
+	left: 10%;
 	text-align: right;
 }
 
