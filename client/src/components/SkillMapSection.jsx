@@ -13,7 +13,7 @@ const SkillMapSection = () => {
 
 	useEffect(() => {
 		axios
-			.get(`${API_BASE}/api/skills?populate=*`)
+			.get(`${API_BASE}/api/skills?populate=*&sort=createdAt:asc`)
 			.then(res => {
 				console.log('🔥 스킬 데이터:', res.data.data);
 				setSkills((res.data.data || []).filter(Boolean));
