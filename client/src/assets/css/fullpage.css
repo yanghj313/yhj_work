@@ -2,8 +2,14 @@
 	text-align: center;
 	font-size: 4rem;
 	color: white;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	overflow: hidden;
 }
@@ -15,16 +21,28 @@
 
 .two {
 	background: #333;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	overflow: hidden;
 }
 
 .three {
 	background: #fff;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	overflow: hidden;
 	color: 333;
@@ -32,8 +50,14 @@
 
 .four {
 	background: #333;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	overflow: hidden;
 	color: #fff;
@@ -89,14 +113,27 @@
 /* 효과 1: folding */
 .text--folding .char {
 	opacity: 0;
+	-webkit-transform: translateY(100%);
+	-ms-transform: translateY(100%);
 	transform: translateY(100%);
+	-webkit-animation: foldIn 0.5s ease-out forwards;
 	animation: foldIn 0.5s ease-out forwards;
+	-webkit-animation-delay: calc(0.05s * var(--char-index));
 	animation-delay: calc(0.05s * var(--char-index));
+}
+
+@-webkit-keyframes foldIn {
+	to {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
 }
 
 @keyframes foldIn {
 	to {
 		opacity: 1;
+		-webkit-transform: translateY(0);
 		transform: translateY(0);
 	}
 }
@@ -104,14 +141,27 @@
 /* 효과 2: bubbling */
 .text--bubbling .char {
 	opacity: 0;
+	-webkit-transform: scale(0.2);
+	-ms-transform: scale(0.2);
 	transform: scale(0.2);
+	-webkit-animation: bubbleIn 0.6s ease-out forwards;
 	animation: bubbleIn 0.6s ease-out forwards;
+	-webkit-animation-delay: calc(0.04s * var(--char-index));
 	animation-delay: calc(0.04s * var(--char-index));
+}
+
+@-webkit-keyframes bubbleIn {
+	to {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
 }
 
 @keyframes bubbleIn {
 	to {
 		opacity: 1;
+		-webkit-transform: scale(1);
 		transform: scale(1);
 	}
 }
@@ -119,14 +169,26 @@
 /* 효과 3: rolling */
 .text--rolling .char {
 	opacity: 0;
+	-webkit-transform: rotateX(90deg);
 	transform: rotateX(90deg);
+	-webkit-animation: rollIn 0.5s ease-out forwards;
 	animation: rollIn 0.5s ease-out forwards;
+	-webkit-animation-delay: calc(0.05s * var(--char-index));
 	animation-delay: calc(0.05s * var(--char-index));
+}
+
+@-webkit-keyframes rollIn {
+	to {
+		opacity: 1;
+		-webkit-transform: rotateX(0deg);
+		transform: rotateX(0deg);
+	}
 }
 
 @keyframes rollIn {
 	to {
 		opacity: 1;
+		-webkit-transform: rotateX(0deg);
 		transform: rotateX(0deg);
 	}
 }
@@ -134,14 +196,27 @@
 /* 효과 4: swinging */
 .text--swinging .char {
 	opacity: 0;
+	-webkit-transform: rotateZ(-90deg);
+	-ms-transform: rotate(-90deg);
 	transform: rotateZ(-90deg);
+	-webkit-animation: swingIn 0.5s ease-out forwards;
 	animation: swingIn 0.5s ease-out forwards;
+	-webkit-animation-delay: calc(0.05s * var(--char-index));
 	animation-delay: calc(0.05s * var(--char-index));
+}
+
+@-webkit-keyframes swingIn {
+	to {
+		opacity: 1;
+		-webkit-transform: rotateZ(0deg);
+		transform: rotateZ(0deg);
+	}
 }
 
 @keyframes swingIn {
 	to {
 		opacity: 1;
+		-webkit-transform: rotateZ(0deg);
 		transform: rotateZ(0deg);
 	}
 }
@@ -150,15 +225,21 @@
 /*************인터레스트 버블 존***************/
 .full-container {
 	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	width: 100%;
 	height: 700px;
 	overflow: visible;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 	/* 가운데 정렬 */
 }
 
 .interest-section {
+	-webkit-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 	width: 800px;
 }
@@ -167,12 +248,18 @@
 	width: 800px;
 	/* 고정 너비 */
 	height: 600px;
+	-webkit-transition: -webkit-transform 0.3s ease;
+	transition: -webkit-transform 0.3s ease;
+	-o-transition: transform 0.3s ease;
 	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 	position: relative;
 	z-index: 1;
 }
 
 .interest-section.with-box .bubble-chart {
+	-webkit-transform: translateX(-250px);
+	-ms-transform: translateX(-250px);
 	transform: translateX(-250px);
 }
 
@@ -199,9 +286,16 @@
 	width: 500px;
 	height: 100%;
 	background: #fff;
+	-webkit-transform: translateX(100%);
+	-ms-transform: translateX(100%);
 	transform: translateX(100%);
 	opacity: 0;
+	-webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+	transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+	-o-transition: transform 0.3s ease, opacity 0.3s ease;
 	transition: transform 0.3s ease, opacity 0.3s ease;
+	transition: transform 0.3s ease, opacity 0.3s ease, -webkit-transform 0.3s ease;
+	-webkit-box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
 	box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
 	z-index: 10;
 	color: #333;
@@ -209,6 +303,8 @@
 
 .about_keyword.show {
 	opacity: 1;
+	-webkit-transform: translateX(0);
+	-ms-transform: translateX(0);
 	transform: translateX(0);
 }
 
@@ -233,10 +329,18 @@
 	border: none;
 	cursor: pointer;
 	padding: 0.75rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 	border-radius: 50%;
+	-webkit-transition: background 0.3s ease;
+	-o-transition: background 0.3s ease;
 	transition: background 0.3s ease;
 	position: absolute;
 	left: 1rem;
@@ -252,10 +356,16 @@
 	stroke: #333;
 	stroke-width: 2;
 	stroke-linecap: round;
+	-webkit-transition: stroke 0.3s ease, -webkit-transform 0.3s ease;
+	transition: stroke 0.3s ease, -webkit-transform 0.3s ease;
+	-o-transition: transform 0.3s ease, stroke 0.3s ease;
 	transition: transform 0.3s ease, stroke 0.3s ease;
+	transition: transform 0.3s ease, stroke 0.3s ease, -webkit-transform 0.3s ease;
 }
 
 .custom-close-btn:hover .close-icon {
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
 	transform: rotate(90deg);
 	stroke: #ff4d4f;
 }
@@ -292,13 +402,21 @@
 	border-radius: 50%;
 	background: rgba(255, 255, 255, 0.6);
 	border: 2px solid #555;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	cursor: pointer;
 	z-index: 1;
+	-webkit-transition: -webkit-transform 0.2s ease;
+	transition: -webkit-transform 0.2s ease;
+	-o-transition: transform 0.2s ease;
 	transition: transform 0.2s ease;
+	transition: transform 0.2s ease, -webkit-transform 0.2s ease;
 }
 
 .circle-marker:hover {
+	-webkit-transform: translate(-50%, -50%) scale(1.2);
+	-ms-transform: translate(-50%, -50%) scale(1.2);
 	transform: translate(-50%, -50%) scale(1.2);
 }
 
@@ -307,28 +425,48 @@
 	position: absolute;
 	width: 28px;
 	height: 28px;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	color: #e74c3c;
+	-webkit-animation: pulse 0.8s ease-out;
 	animation: pulse 0.8s ease-out;
 	z-index: 3;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 }
 
 /* 팝업 박스 */
 .map-popup {
 	position: absolute;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
 	background: white;
 	border-radius: 10px;
+	-webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 	width: 220px;
 	padding: 10px;
 	z-index: 4;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-animation: slideIn 0.4s ease-out;
 	animation: slideIn 0.4s ease-out;
 	height: 300px;
 }
@@ -336,6 +474,7 @@
 .map-popup img {
 	width: 100%;
 	height: 120px;
+	-o-object-fit: cover;
 	object-fit: cover;
 	border-radius: 6px;
 	margin-bottom: 0.5rem;
@@ -357,24 +496,44 @@
 	position: absolute;
 	left: -10px;
 	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
 	width: 10px;
 	height: 20px;
 	background: white;
+	-webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
 	clip-path: polygon(0 50%, 100% 0, 100% 100%);
+	-webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.1);
 	box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.1);
 	z-index: 1;
 }
 
 /* 팝업 애니메이션 */
-@keyframes slideIn {
+@-webkit-keyframes slideIn {
 	from {
 		opacity: 0;
+		-webkit-transform: translateY(-50%) translateX(10px);
 		transform: translateY(-50%) translateX(10px);
 	}
 
 	to {
 		opacity: 1;
+		-webkit-transform: translateY(-50%) translateX(0);
+		transform: translateY(-50%) translateX(0);
+	}
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		-webkit-transform: translateY(-50%) translateX(10px);
+		transform: translateY(-50%) translateX(10px);
+	}
+
+	to {
+		opacity: 1;
+		-webkit-transform: translateY(-50%) translateX(0);
 		transform: translateY(-50%) translateX(0);
 	}
 }
@@ -387,8 +546,11 @@
 	background: rgba(231, 76, 60, 0.4);
 	left: 50%;
 	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	z-index: -1;
+	-webkit-animation: ripple 1.8s infinite ease-out;
 	animation: ripple 1.8s infinite ease-out;
 }
 
@@ -396,16 +558,33 @@
 	width: 12px;
 	height: 12px;
 	background: rgba(231, 76, 60, 0.6);
+	-webkit-animation-delay: 0.4s;
 	animation-delay: 0.4s;
 }
 
-@keyframes ripple {
+@-webkit-keyframes ripple {
 	0% {
+		-webkit-transform: translate(-50%, -50%) scale(0.7);
 		transform: translate(-50%, -50%) scale(0.7);
 		opacity: 0.8;
 	}
 
 	100% {
+		-webkit-transform: translate(-50%, -50%) scale(2.2);
+		transform: translate(-50%, -50%) scale(2.2);
+		opacity: 0;
+	}
+}
+
+@keyframes ripple {
+	0% {
+		-webkit-transform: translate(-50%, -50%) scale(0.7);
+		transform: translate(-50%, -50%) scale(0.7);
+		opacity: 0.8;
+	}
+
+	100% {
+		-webkit-transform: translate(-50%, -50%) scale(2.2);
 		transform: translate(-50%, -50%) scale(2.2);
 		opacity: 0;
 	}
