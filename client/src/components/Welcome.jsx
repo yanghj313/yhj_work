@@ -103,10 +103,10 @@ const Welcome = () => {
 						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#fff" transform="translate(0 0)">
-						<rect y="259" height="104" width="728" />
-						<rect y="374" height="104" width="214" />
-						<rect y="489" height="104" width="678" />
-						<rect y="604" height="104" width="798" />
+						<rect y="259" height="104" width="732" x="-2" />
+						<rect y="374" height="104" width="218" x="-2" />
+						<rect y="489" height="104" width="682" x="-2" />
+						<rect y="604" height="104" width="802" x="-2" />
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt">
 						<text x="0" y="309" dominantBaseline="middle">

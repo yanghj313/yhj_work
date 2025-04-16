@@ -16,7 +16,6 @@ body {
     overflow: hidden;
 }
 
-/* 📏 container 크기를 정확히 1800x740으로 고정 */
 .container {
     position: relative;
     display: flex;
@@ -56,7 +55,6 @@ body {
     height: 100%;
 }
 
-/* ✅ 텍스트는 줄 높이 조절 없이 유지 가능 (원하는 경우 폰트 크기 줄이기) */
 .moon__txt {
     font-family: 'MonumentExtended';
     font-size: 103px;
@@ -65,7 +63,6 @@ body {
     letter-spacing: 2.1px;
 }
 
-/* 오버레이 효과 유지 */
 .moon__txt-overlay {
     fill: rgba(0, 0, 0, 0.4);
 }
