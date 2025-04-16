@@ -6,7 +6,7 @@ const Welcome = () => {
 	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [724, 210, 674, 794];
+		const wArray = [726, 212, 676, 796];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
