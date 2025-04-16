@@ -1,29 +1,34 @@
 {
-  "kind": "collectionType",
-  "collectionName": "galleries",
-  "info": {
-    "singularName": "gallery",
-    "pluralName": "galleries",
-    "displayName": "Gallery"
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "image": {
-      "allowedTypes": ["images", "files", "videos", "audios"],
-      "type": "media",
-      "multiple": false
-    },
-    "description": {
-      "type": "text"
-    },
-    "category": {
-      "type": "enumeration",
-      "enum": ["Banner", "Landing Page", "Poster", "Others"]
-    }
-  }
+	"kind": "collectionType",
+	"collectionName": "galleries",
+	"info": {
+		"singularName": "gallery",
+		"pluralName": "galleries",
+		"displayName": "Gallery"
+	},
+	"options": {
+		"draftAndPublish": true
+	},
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"image": {
+			"allowedTypes": ["images", "files", "videos", "audios"],
+			"type": "media",
+			"multiple": false
+		},
+		"description": {
+			"type": "text"
+		},
+		"category": {
+			"type": "enumeration",
+			"enum": ["Banner", "Landing Page", "Poster", "Others"]
+		},
+		"images": {
+			"type": "media",
+			"multiple": true,
+			"allowedTypes": ["images", "files", "videos", "audios"]
+		}
+	}
 }

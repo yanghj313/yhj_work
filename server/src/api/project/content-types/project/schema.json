@@ -36,10 +36,21 @@
 			"type": "enumeration",
 			"enum": ["Publisher", "Designer", "Frontend"]
 		},
+		"add": {
+			"type": "enumeration",
+			"enum": ["Publisher", "Designer", "Frontend"]
+		},
+		"more": {
+			"type": "enumeration",
+			"enum": ["Publisher", "Designer", "Frontend"]
+		},
 		"contribution": {
 			"type": "string"
 		},
 		"tags": {
+			"type": "string"
+		},
+		"color": {
 			"type": "string"
 		}
 	}
