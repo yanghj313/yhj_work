@@ -10,7 +10,7 @@
 .skill-scroll-wrapper {
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     white-space: nowrap;
     height: 70vh;
     position: relative;
@@ -77,6 +77,7 @@
     color: white;
     width: 200px;
     padding: 1rem;
+    overflow-wrap: break-word;
     border-radius: 12px;
     font-size: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -111,7 +112,7 @@
 .skill-description {
     margin-top: 0.5rem;
     padding-left: 1rem;
-    list-style: disc;
+    list-style: none;
     font-size: 0.75rem;
     white-space: normal;
     word-wrap: break-word;
