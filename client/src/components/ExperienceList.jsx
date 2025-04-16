@@ -25,9 +25,9 @@ const ExperienceList = () => {
 				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id}>
 					<div className="timeline-content">
 						{/* ✅ 포지션이 있을 때만 출력 + 여백 포함 */}
-						{e.position && <h3 className="timeline-position">{e.position}</h3>}
+						{e.position && <h5 className="timeline-position">{e.position}</h5>}
 
-						<b>{e.title}</b>
+						<p>{e.title}</p>
 
 						{/* ✅ 로고 이미지 */}
 						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
