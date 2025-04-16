@@ -139,6 +139,12 @@ body {
 	text-align: left;
 }
 
+.timeline-item.right .timeline-content {
+	align-items: flex-start;
+}
+.timeline-item.left .timeline-content {
+	align-items: flex-end;
+}
 .timeline-content {
 	background: rgba(235, 235, 235, 0.771);
 	padding: 1rem;
@@ -163,6 +169,8 @@ body {
 	font-weight: bold;
 	color: #bdbdbd;
 	font-family: 'Outfit';
+	width: 100%;
+	padding: 2rem;
 }
 
 .timeline-position {
