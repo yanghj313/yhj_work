@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import fullpage from 'fullpage.js';
+import gsap from 'gsap';
 import 'fullpage.js/dist/fullpage.min.css';
 import Splitting from 'splitting';
 import 'splitting/dist/splitting.css';
@@ -50,6 +51,12 @@ const FullPageReact = () => {
 				if (destination.anchor !== 'welcome' && h1) {
 					Splitting({ target: h1, by: 'chars' });
 					applyAnimationReset(h1);
+				}
+			},
+			afterLoad(origin, destination) {
+				if (destination.anchor === 'intro') {
+					const tl = gsap.timeline();
+					tl.from('.intro-img', { x: -80, opacity: 0, duration: 1.2 }).from('.skill-panel', { x: 80, opacity: 0, duration: 1.2 }, '-=0.8');
 				}
 			},
 
