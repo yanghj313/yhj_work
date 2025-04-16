@@ -60,7 +60,7 @@ const SkillMapSection = () => {
 					<img src="/img/profile.jpg" alt="소개 이미지" style={{ width: '492px', maxHeight: '80%' }} />
 				</div>
 
-				<div className="skill-right-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
+				<div className="skill-right-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'absolute', left: '33%' }}>
 					<div className="skill-scroll-wrapper no-scrollbar">
 						<div className="skill-scroll-track" ref={scrollTrackRef}>
 							{skills.map((s, idx) => {
@@ -70,7 +70,7 @@ const SkillMapSection = () => {
 										key={s.id}
 										className={`skill-marker${isActive ? ' active' : ''}`}
 										onClick={() => setActiveIndex(idx)}
-										style={{ left: `${10 + idx * 20}px`, right: `${10 + idx * 20}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
+										style={{ right: `${10 + idx + 10}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
 									>
 										{isActive && <div className="ripple"></div>}
 
