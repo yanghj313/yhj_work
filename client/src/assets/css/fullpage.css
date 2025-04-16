@@ -166,7 +166,6 @@
 	}
 }
 
-/* 효과 3: rolling */
 .text--rolling .char {
 	opacity: 0;
 	-webkit-transform: rotateX(90deg);
@@ -246,7 +245,6 @@
 
 .bubble-chart {
 	width: 800px;
-	/* 고정 너비 */
 	height: 600px;
 	-webkit-transition: -webkit-transform 0.3s ease;
 	transition: -webkit-transform 0.3s ease;
