@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../assets/css/preview-skill.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
@@ -24,20 +25,34 @@ const SkillMapSection = () => {
 			});
 	}, []);
 
-	useEffect(() => {
-		const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.2 } });
+	gsap.registerPlugin(ScrollTrigger);
 
-		tl.from('.intro-img', {
-			x: -80,
-			opacity: 0,
-		}).from(
-			'.skill-panel',
-			{
+	useEffect(() => {
+		const ctx = gsap.context(() => {
+			gsap.from('.intro-img', {
+				x: -80,
+				opacity: 0,
+				duration: 1.2,
+				scrollTrigger: {
+					trigger: '.skill-tour-inner',
+					start: 'top 80%',
+					toggleActions: 'play none none reset', // 진입 시마다 다시 실행
+				},
+			});
+
+			gsap.from('.skill-panel', {
 				x: 80,
 				opacity: 0,
-			},
-			'-=0.8'
-		);
+				duration: 1.2,
+				scrollTrigger: {
+					trigger: '.skill-tour-inner',
+					start: 'top 80%',
+					toggleActions: 'play none none reset',
+				},
+			});
+		}, scrollTrackRef); // cleanup context로 메모리 누수 방지
+
+		return () => ctx.revert();
 	}, []);
 
 	useEffect(() => {
