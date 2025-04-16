@@ -1,201 +1,200 @@
 body {
-    background: #fff;
+	background: #fff;
 }
 
 .list,
 .ex_wrap {
-    padding: 100px 16px 80px 16px;
-    margin: 0 60px;
-    min-height: 680px;
-    display: block;
+	padding: 100px 16px 80px 16px;
+	margin: 0 60px;
+	min-height: 680px;
+	display: block;
 }
 
 .list ul {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: (1fr 1fr 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 2rem;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr 1fr 1fr);
+	grid-template-columns: repeat(3, 1fr);
+	row-gap: 2rem;
 }
 
 .list ul li ul {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    gap: 5px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	gap: 5px;
 }
 
 /***********************프로젝트 리스트***************************/
 .project-card {
-    margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
 .media-container {
-    position: relative;
-    width: 480px;
-    height: 270px;
-    border-radius: 12px;
-    overflow: hidden;
-    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    -webkit-transition: -webkit-box-shadow 0.3s ease;
-    transition: -webkit-box-shadow 0.3s ease;
-    -o-transition: box-shadow 0.3s ease;
-    transition: box-shadow 0.3s ease;
-    transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
+	position: relative;
+	width: 480px;
+	height: 270px;
+	border-radius: 12px;
+	overflow: hidden;
+	-webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+	-webkit-transition: -webkit-box-shadow 0.3s ease;
+	transition: -webkit-box-shadow 0.3s ease;
+	-o-transition: box-shadow 0.3s ease;
+	transition: box-shadow 0.3s ease;
+	transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
 }
 
 .project-card:hover .media-container {
-    -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
 
 .thumbnail-img {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
-    -webkit-transition: opacity 0.3s ease;
-    -o-transition: opacity 0.3s ease;
-    transition: opacity 0.3s ease;
-    border-radius: 12px;
-    z-index: 1;
-    position: relative;
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
+	-webkit-transition: opacity 0.3s ease;
+	-o-transition: opacity 0.3s ease;
+	transition: opacity 0.3s ease;
+	border-radius: 12px;
+	z-index: 1;
+	position: relative;
 }
 
 .hover-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
-    opacity: 0;
-    -webkit-transform: scale(0.98);
-    -ms-transform: scale(0.98);
-    transform: scale(0.98);
-    -webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
-    transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
-    -o-transition: opacity 0.4s ease, transform 0.4s ease;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    transition: opacity 0.4s ease, transform 0.4s ease, -webkit-transform 0.4s ease;
-    pointer-events: none;
-    z-index: 2;
-    border-radius: 12px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
+	opacity: 0;
+	-webkit-transform: scale(0.98);
+	-ms-transform: scale(0.98);
+	transform: scale(0.98);
+	-webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
+	transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
+	-o-transition: opacity 0.4s ease, transform 0.4s ease;
+	transition: opacity 0.4s ease, transform 0.4s ease;
+	transition: opacity 0.4s ease, transform 0.4s ease, -webkit-transform 0.4s ease;
+	pointer-events: none;
+	z-index: 2;
+	border-radius: 12px;
 }
 
 .project-card:hover .hover-video {
-    opacity: 1;
-    -webkit-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    transform: scale(1.05);
+	opacity: 1;
+	-webkit-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	transform: scale(1.05);
 }
 
 .project-card:hover .thumbnail-img {
-    opacity: 0;
+	opacity: 0;
 }
 
 /***********************경력 사항***************************/
 
 .timeline-container {
-    position: relative;
-    padding: 9rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+	position: relative;
+	padding: 9rem 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .timeline-container::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    width: 4px;
-    height: 100%;
-    background: #00a8a8;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
+	content: '';
+	position: absolute;
+	left: 50%;
+	width: 2px;
+	height: 100%;
+	background: #ff5722b3;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
 }
 
 .timeline-item {
-    position: relative;
-    width: 40%;
-    padding: 2rem;
+	position: relative;
+	width: 40%;
+	padding: 2rem;
 }
 
 .timeline-item.left {
-    left: 0;
-    text-align: right;
+	left: 0;
+	text-align: right;
 }
 
 .timeline-item.right {
-    left: 50%;
-    text-align: left;
+	left: 50%;
+	text-align: left;
 }
 
 .timeline-content {
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+	background: white;
+	padding: 1rem;
+	border-radius: 8px;
+	-webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .timeline-year {
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
+	position: absolute;
+	top: 0%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	font-size: 2rem;
+	font-weight: bold;
+	color: #333;
 }
 
 .timeline-position {
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
+	margin-bottom: 0.5rem;
+	font-size: 1.2rem;
+	font-weight: 600;
 }
 
 /* 포지션 없을 때 margin 제거 */
-.timeline-content>h3:empty {
-    display: none;
-    margin: 0;
-    padding: 0;
+.timeline-content > h3:empty {
+	display: none;
+	margin: 0;
+	padding: 0;
 }
 
 .timeline-logo {
-    margin-top: 1rem;
-    width: 100px;
-    border-radius: 8px;
-    object-fit: contain;
+	margin-top: 1rem;
+	width: 100px;
+	border-radius: 8px;
+	object-fit: contain;
 }
 
 @media (max-width: 768px) {
+	.timeline-item,
+	.timeline-item.left,
+	.timeline-item.right {
+		width: 100%;
+		left: 0;
+		text-align: left;
+	}
 
-    .timeline-item,
-    .timeline-item.left,
-    .timeline-item.right {
-        width: 100%;
-        left: 0;
-        text-align: left;
-    }
+	.timeline-container::before {
+		left: 8px;
+	}
 
-    .timeline-container::before {
-        left: 8px;
-    }
-
-    .timeline-year {
-        left: 20px;
-    }
+	.timeline-year {
+		left: 20px;
+	}
 }
