@@ -238,6 +238,8 @@
 	justify-content: center;
 	border-radius: 50%;
 	transition: background 0.3s ease;
+	position: absolute;
+	left: 1rem;
 }
 
 .custom-close-btn:hover {
@@ -247,8 +249,8 @@
 .close-icon {
 	width: 24px;
 	height: 24px;
-	stroke: #fff;
-	stroke-width: 2.5;
+	stroke: #333;
+	stroke-width: 2;
 	stroke-linecap: round;
 	transition: transform 0.3s ease, stroke 0.3s ease;
 }

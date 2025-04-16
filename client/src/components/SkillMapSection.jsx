@@ -24,6 +24,22 @@ const SkillMapSection = () => {
 	}, []);
 
 	useEffect(() => {
+		const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.2 } });
+
+		tl.from('.intro-img', {
+			x: -80,
+			opacity: 0,
+		}).from(
+			'.skill-panel',
+			{
+				x: 80,
+				opacity: 0,
+			},
+			'-=0.8'
+		);
+	}, []);
+
+	useEffect(() => {
 		if (scrollTrackRef.current) {
 			const slide = scrollTrackRef.current.children[activeIndex];
 			if (slide) {
@@ -56,11 +72,11 @@ const SkillMapSection = () => {
 	return (
 		<div className="skill-tour-horizontal" onMouseDown={handleTouchStart} onMouseUp={handleTouchEnd} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
 			<div className="skill-tour-inner" style={{ display: 'block', height: '700px' }}>
-				<div className="skill-left-panel" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+				<div className="skill-left-panel intro-img" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 					<img src="/img/profile.jpg" alt="소개 이미지" style={{ width: '492px', maxHeight: '80%' }} />
 				</div>
 
-				<div className="skill-right-panel" style={{ flexDirection: 'column', justifyContent: 'center', position: 'absolute', left: '33%' }}>
+				<div className="skill-right-panel skill-panel" style={{ flexDirection: 'column', justifyContent: 'center', position: 'absolute', left: '33%' }}>
 					<div className="skill-scroll-wrapper no-scrollbar">
 						<div className="skill-scroll-track" ref={scrollTrackRef}>
 							{skills.map((s, idx) => {

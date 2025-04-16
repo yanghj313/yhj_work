@@ -153,6 +153,19 @@ const InterestBubbleChart = () => {
 			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef} key={selected?.name || 'none'}>
 				{selected && (
 					<div className="custom-description">
+						<button
+							className="custom-close-btn"
+							aria-label="닫기"
+							onClick={() => {
+								setBoxVisible(false);
+								setTimeout(() => setSelected(null), 300);
+							}}
+						>
+							<svg viewBox="0 0 24 24" className="close-icon" xmlns="http://www.w3.org/2000/svg">
+								<line x1="4" y1="4" x2="20" y2="20" />
+								<line x1="20" y1="4" x2="4" y2="20" />
+							</svg>
+						</button>
 						<h2>{selected.name}</h2>
 						<img src={selected.image} alt={selected.name} />
 						{selected.name === 'Coding' && <p>프론트엔드와 백엔드 전반에 관심이 많고, 주로 React와 Node.js를 다룹니다.</p>}
@@ -169,19 +182,6 @@ const InterestBubbleChart = () => {
 						{selected.name === 'Perfume' && <p>향수를 즐겨뿌립니다.</p>}
 					</div>
 				)}
-				<button
-					className="custom-close-btn"
-					aria-label="닫기"
-					onClick={() => {
-						setBoxVisible(false);
-						setTimeout(() => setSelected(null), 300);
-					}}
-				>
-					<svg viewBox="0 0 24 24" className="close-icon" xmlns="http://www.w3.org/2000/svg">
-						<line x1="4" y1="4" x2="20" y2="20" />
-						<line x1="20" y1="4" x2="4" y2="20" />
-					</svg>
-				</button>
 			</div>
 		</div>
 	);

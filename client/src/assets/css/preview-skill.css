@@ -35,11 +35,10 @@
 .skill-icon img {
     width: 70px;
     height: 70px;
-    border-radius: 10px;
     background: #333;
     object-fit: cover;
-    box-shadow: 0 0 6px #0003;
-    z-index: 3
+    z-index: 3;
+    overflow: visible;
 }
 
 .ripple {
@@ -71,7 +70,7 @@
     top: -182%;
     left: 50%;
     transform: translate(-50%);
-    background: #bd1648d9;
+    background: #ff4d4f;
     color: #fff;
     width: 200px;
     max-width: 240px;
@@ -95,7 +94,7 @@
     transform: translate(-50%);
     border-width: 10px 10px 0 10px;
     border-style: solid;
-    border-color: #bd1648d9 transparent transparent transparent
+    border-color: #ff4d4f transparent transparent transparent
 }
 
 .skill-name {
@@ -191,7 +190,7 @@
     width: 24px;
     height: 24px;
     stroke: #fff;
-    stroke-width: 2.5;
+    stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
@@ -199,5 +198,5 @@
 }
 
 .arrow-btn:hover .arrow-icon {
-    stroke: #ffcc66;
+    stroke: #ff4d4f;
 }
