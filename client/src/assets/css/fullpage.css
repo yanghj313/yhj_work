@@ -66,6 +66,19 @@
 	right: 4%;
 }
 
+.three .text {
+	text-align: center;
+	display: inline-block;
+	word-break: keep-all;
+	font-size: 4rem;
+	position: absolute;
+	top: 9%;
+	z-index: 99;
+	left: 4%;
+	white-space: normal;
+	overflow: hidden;
+}
+
 /* char span 공통 설정 */
 .char {
 	display: inline-block;
