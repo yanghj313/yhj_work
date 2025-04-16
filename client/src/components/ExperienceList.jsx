@@ -34,7 +34,7 @@ const ExperienceList = () => {
 					</div>
 
 					{/* ✅ 연도만 중앙 표시 */}
-					<div className="timeline-year">{e.startDate?.slice(0, 4)}</div>
+					<div className="timeline-year">{e.endDate?.slice(0, 4)}</div>
 				</div>
 			))}
 		</div>
