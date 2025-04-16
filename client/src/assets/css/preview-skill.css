@@ -1,3 +1,7 @@
+.two {
+    overflow-x: visible;
+}
+
 .skill-tour-horizontal {
     width: 100%;
     overflow-x: visible;
