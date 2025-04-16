@@ -52,14 +52,28 @@ const FullPageReact = () => {
 					Splitting({ target: h1, by: 'chars' });
 					applyAnimationReset(h1);
 				}
-			},
-			afterLoad(origin, destination) {
 				if (destination.anchor === 'intro') {
 					const tl = gsap.timeline();
-					tl.from('.intro-img', { x: -80, opacity: 0, duration: 1.2 }).from('.skill-panel', { x: 80, opacity: 0, duration: 1.2 }, '-=0.8');
+
+					tl.from('.intro-img', {
+						y: -30,
+						opacity: 0,
+						duration: 1.4,
+						ease: 'power2.out',
+					})
+					.from(
+						'.skill-panel',
+						{
+							x: 60,
+							y: 40,
+							opacity: 0,
+							duration: 1.6,
+							ease: 'power3.out',
+						},
+						'-=1.0'
+					);
 				}
 			},
-
 			afterSlideLoad(section, origin, destination) {
 				const h2 = destination.item.querySelector('h2[data-splitting]');
 				if (h2) {
