@@ -22,20 +22,21 @@
 }
 
 .three {
-	background: #e3aa59;
+	background: #fff;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
+	color: 333;
 }
 
 .four {
-	background: #ffffff;
+	background: #333;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	color: #333;
+	color: #fff;
 }
 
 .fp-overflow {
