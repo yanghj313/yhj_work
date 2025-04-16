@@ -70,13 +70,13 @@ const SkillMapSection = () => {
 										key={s.id}
 										className={`skill-marker${isActive ? ' active' : ''}`}
 										onClick={() => setActiveIndex(idx)}
-										style={{ left: `${10 + idx * 60}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
+										style={{ left: `${10 + idx * 50}px`, top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
 									>
 										{isActive && <div className="ripple"></div>}
 
 										{s.icon?.url && (
 											<div className="skill-icon">
-												<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} style={{ width: '70px', height: '70px' }} />
+												<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} style={{ width: '60px', height: '60px' }} />
 											</div>
 										)}
 
