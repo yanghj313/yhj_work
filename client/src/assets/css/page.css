@@ -264,3 +264,37 @@ body {
 		left: 20px;
 	}
 }
+
+
+/***********************갤러리 게시판***************************/
+.gallery-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 1.5rem;
+	padding: 2rem;
+}
+
+.gallery-card {
+	background-color: white;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	transition: transform 0.2s;
+}
+
+.gallery-card:hover {
+	transform: translateY(-4px);
+}
+
+.gallery-image {
+	width: 100%;
+	height: auto;
+	border-bottom: 1px solid #eee;
+	object-fit: cover;
+}
+
+.gallery-info {
+	padding: 1rem;
+	font-size: 0.9rem;
+	line-height: 1.4;
+}

@@ -1,6 +1,8 @@
+// GalleryList.jsx
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
@@ -11,7 +13,6 @@ const GalleryList = () => {
 		axios
 			.get(`${API_BASE}/api/galleries?populate=*`)
 			.then(res => {
-				console.log('🔥 갤러리 데이터:', res.data.data);
 				setGalleries((res.data.data || []).filter(Boolean));
 			})
 			.catch(err => {
@@ -20,32 +21,20 @@ const GalleryList = () => {
 	}, []);
 
 	return (
-		<div>
-			<ul>
-				{galleries.map(g =>
-					g?.title ? (
-						<li key={g.id} style={{ marginBottom: '2rem' }}>
-							{/* 이미지 먼저 */}
-							{g.image?.url && (
-								<div>
-									<img
-										src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`}
-										alt={g.image.name || '갤러리 이미지'}
-										width="240"
-										style={{ marginBottom: '0.5rem', borderRadius: '8px' }}
-									/>
-								</div>
-							)}
-
+		<div className="gallery-grid">
+			{galleries.map(g =>
+				g?.title ? (
+					<div className="gallery-card" key={g.id}>
+						{g.image?.url && <img src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`} alt={g.image.name || '갤러리 이미지'} className="gallery-image" />}
+						<div className="gallery-info">
 							<strong>
-								{' '}
 								<Link to={`/gallery/${g.documentId}`}>{g.title}</Link>
 							</strong>
-							{g.category && <p>📂 카테고리: {g.category}</p>}
-						</li>
-					) : null
-				)}
-			</ul>
+							{g.category && <p> {g.category}</p>}
+						</div>
+					</div>
+				) : null
+			)}
 		</div>
 	);
 };
