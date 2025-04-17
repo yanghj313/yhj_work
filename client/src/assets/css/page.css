@@ -175,12 +175,12 @@ body {
 	align-items: center;
 	gap: 0.5rem;
 }
-.dot {
+.timeline-dot {
 	width: 8px;
 	height: 8px;
 	background-color: #ff5722b3; /* 예쁜 보라색 */
 	border-radius: 50%;
-	display: inline-block;
+	position: absolute;
 }
 
 .timeline-position {
