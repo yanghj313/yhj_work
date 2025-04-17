@@ -132,11 +132,15 @@ const Header = ({ user }) => {
 					</li>
 				</ul>
 				<button className="hamburger" onClick={() => setIsMenuOpen(true)} aria-label="메뉴 열기">
-					<i className="fas fa-bars"></i>
+					<div className="hamburger_mark">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
 				</button>
 				<div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
 					<button className="close-btn" onClick={() => setIsMenuOpen(false)}>
-						<i className="fa-solid fa-xmark"></i>
+						<span class="close-icon"></span>
 					</button>
 					<ul className="mobile-menu-links">
 						<li>
