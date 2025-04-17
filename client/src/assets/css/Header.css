@@ -24,6 +24,7 @@
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	align-items: center;
 }
 
 
@@ -260,8 +261,12 @@ input[type='search']::-webkit-search-cancel-button {
 
 	.nav {
 		margin: 0;
+		max-width: 100%;
 	}
 
+	.mobile-menu {
+		display: block;
+	}
 
 	.nav .nav-links {
 		display: none;
