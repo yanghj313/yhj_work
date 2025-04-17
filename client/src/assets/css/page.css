@@ -190,8 +190,12 @@ body {
 
 .timeline-position {
 	margin-bottom: 0.5rem;
-	font-size: 1.2rem;
-	font-weight: 600;
+	font-size: 1rem;
+	font-weight: 500;
+	background: #ff5722;
+	padding: 0 1rem;
+	color: #fff;
+	border-radius: 6px;
 }
 
 /* 포지션 없을 때 margin 제거 */
