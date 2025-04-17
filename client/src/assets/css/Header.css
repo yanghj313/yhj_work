@@ -1,5 +1,5 @@
 .site-header {
-	background-color: #fff;
+	background-color: #333;
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -19,7 +19,6 @@
 	box-sizing: border-box;
 }
 
-
 .nav .nav-links {
 	display: flex;
 	gap: 20px;
@@ -29,11 +28,9 @@
 	align-items: center;
 }
 
-
 .hamburger {
 	display: none;
 }
-
 
 .nav li a {
 	color: #000;
@@ -52,7 +49,7 @@
 	width: 100%;
 	max-width: 100vw;
 	height: 100vh;
-	background: white;
+	background: #333;
 	transform: translateX(-100%);
 	transition: transform 0.4s ease-in-out;
 	z-index: 999;
@@ -199,7 +196,8 @@
 }
 
 /* 다크모드 대응 */
-@media (prefers-color-scheme: dark) {}
+@media (prefers-color-scheme: dark) {
+}
 
 input[type='search']::-webkit-search-cancel-button {
 	display: none;
@@ -230,11 +228,8 @@ input[type='search']::-webkit-search-cancel-button {
 	z-index: 999;
 }
 
-
-
-
 .clear-btn:hover {
-	color: #333;
+	color: #fff;
 }
 
 .fp-viewing-intro .site-header {
@@ -246,11 +241,11 @@ input[type='search']::-webkit-search-cancel-button {
 }
 
 .fp-viewing-interest .site-header {
-	background-color: #fff;
+	background-color: #333;
 }
 
 .fp-viewing-interest .site-header .nav li a {
-	color: #000;
+	color: #fff;
 }
 
 .fp-viewing-travel .site-header {
@@ -261,13 +256,10 @@ input[type='search']::-webkit-search-cancel-button {
 	color: #fff;
 }
 
-
 @media (max-width: 768px) {
-
 	.site-header {
 		box-sizing: border-box;
 		padding: 0;
-		;
 	}
 
 	.nav {
@@ -296,7 +288,6 @@ input[type='search']::-webkit-search-cancel-button {
 		display: none;
 	}
 
-
 	.hamburger_mark {
 		display: flex;
 		flex-direction: column;
@@ -310,7 +301,7 @@ input[type='search']::-webkit-search-cancel-button {
 		display: block;
 		width: 100%;
 		height: 1px;
-		background: #333;
+		background: #fff;
 	}
 
 	.close-icon {
@@ -328,18 +319,15 @@ input[type='search']::-webkit-search-cancel-button {
 		left: 50%;
 		width: 30px;
 		height: 1px;
-		background-color: #333;
+		background-color: #fff;
 		transform-origin: center;
 	}
-
 
 	.close-icon::before {
 		transform: translate(-50%, -50%) rotate(45deg);
 	}
 
-
 	.close-icon::after {
 		transform: translate(-50%, -50%) rotate(-45deg);
 	}
-
 }
