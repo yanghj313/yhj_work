@@ -65,6 +65,23 @@ const InterestBubbleChart = () => {
 			.stop();
 		for (let i = 0; i < 300; i++) simulation.tick();
 
+		const drag = d3
+			.drag()
+			.on('start', (event, d) => {
+				if (!event.active) simulation.alphaTarget(0.3).restart();
+				d.fx = d.x;
+				d.fy = d.y;
+			})
+			.on('drag', (event, d) => {
+				d.fx = event.x;
+				d.fy = event.y;
+			})
+			.on('end', (event, d) => {
+				if (!event.active) simulation.alphaTarget(0);
+				d.fx = null;
+				d.fy = null;
+			});
+		node.call(drag);
 		const node = svg
 			.selectAll('g')
 			.data(interests, d => d.name)
