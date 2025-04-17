@@ -61,10 +61,11 @@ const InterestBubbleChart = () => {
 			.force(
 				'collide',
 				d3.forceCollide().radius(d => d.value / 2 + 4)
-			)
-			.stop();
+			);
 		for (let i = 0; i < 300; i++) simulation.tick();
-
+		simulation.on('tick', () => {
+			svg.selectAll('g').attr('transform', d => `translate(${d.x}, ${d.y})`);
+		});
 		const drag = d3
 			.drag()
 			.on('start', (event, d) => {
