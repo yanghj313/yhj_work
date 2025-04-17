@@ -267,19 +267,26 @@ body {
 
 
 /***********************갤러리 게시판***************************/
-.gallery-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	gap: 1.5rem;
-	padding: 2rem;
+/* GalleryList.css */
+.masonry-grid {
+	display: flex;
+	margin-left: -16px;
+	/* gutter 사이 간격 */
+	width: auto;
+}
+
+.masonry-column {
+	padding-left: 16px;
+	background-clip: padding-box;
 }
 
 .gallery-card {
-	background-color: white;
+	background: #fff;
+	margin-bottom: 16px;
 	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	overflow: hidden;
-	transition: transform 0.2s;
+	transition: transform 0.2s ease;
 }
 
 .gallery-card:hover {
@@ -288,13 +295,11 @@ body {
 
 .gallery-image {
 	width: 100%;
-	height: auto;
-	border-bottom: 1px solid #eee;
+	display: block;
 	object-fit: cover;
+	border-bottom: 1px solid #eee;
 }
 
 .gallery-info {
 	padding: 1rem;
-	font-size: 0.9rem;
-	line-height: 1.4;
 }
