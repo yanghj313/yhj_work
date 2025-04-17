@@ -13,7 +13,7 @@
 	position: relative;
 }
 
-.nav ul {
+.nav .nav-links {
 	list-style: none;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -33,26 +33,27 @@
 
 
 @media (max-width: 768px) {
-	.nav-links {
+	.nav .nav-links {
 		display: none;
 		flex-direction: column;
 		position: absolute;
-		top: 60px;
 		right: 10px;
-		background-color: white;
-		border: 1px solid #ddd;
+		top: 60px;
+		background: white;
+		width: 200px;
 		padding: 1rem;
+		border: 1px solid #ddd;
 	}
 
-	.nav-links.open {
+	.nav .nav-links.open {
 		display: flex;
 	}
 
 	.hamburger {
 		display: block;
+		font-size: 24px;
 		background: none;
 		border: none;
-		font-size: 24px;
 		cursor: pointer;
 	}
 

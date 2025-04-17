@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../assets/css/Header.css';
 
 const Header = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const navRef = useRef();
 	const navigate = useNavigate();
 
 	const handleSearch = e => {
@@ -12,20 +13,42 @@ const Header = ({ user }) => {
 		if (searchTerm.trim()) {
 			navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
 		}
-		// 검색 시 메뉴 닫기 (모바일 UX 개선)
+
 		setIsMenuOpen(false);
 	};
 
+	useEffect(() => {
+		const handleClickOutside = e => {
+			if (isMenuOpen && navRef.current && !navRef.current.contains(e.target)) {
+				setIsMenuOpen(false);
+			}
+		};
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isMenuOpen]);
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth > 768) {
+				setIsMenuOpen(false);
+			}
+		};
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
 	return (
 		<header className="site-header">
-			<nav className="nav">
-				{/* ✅ 햄버거 버튼: ul 바깥으로 빼기 */}
+			<nav className="nav" ref={navRef}>
 				<button className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
 					<i className="fas fa-bars"></i>
 				</button>
 
 				<ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-					{/* ✅ Home은 NavLink 대신 Link로 */}
 					<li>
 						<Link to="/">Home</Link>
 					</li>
