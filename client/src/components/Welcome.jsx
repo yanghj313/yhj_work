@@ -102,7 +102,7 @@ const Welcome = () => {
 							</video>
 						</foreignObject>
 					</g>
-					<g className="moon__txt-bg" fill="#fff" transform="translate(0 0)">
+					<g className="moon__txt-bg" fill="#333" transform="translate(0 0)">
 						<rect y="259" height="104" width="732" x="-2" />
 						<rect y="374" height="104" width="218" x="-2" />
 						<rect y="489" height="104" width="682" x="-2" />
