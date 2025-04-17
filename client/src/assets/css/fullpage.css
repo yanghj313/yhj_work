@@ -1,7 +1,7 @@
 .section {
 	text-align: center;
 	font-size: 4rem;
-	color: white;
+	color: #fff;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -33,7 +33,7 @@
 }
 
 .three {
-	background: #fff;
+	background: #333;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -44,7 +44,7 @@
 	-ms-flex-align: center;
 	align-items: center;
 	overflow: hidden;
-	color: 333;
+	color: #fff;
 }
 
 .four {
