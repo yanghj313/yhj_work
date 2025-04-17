@@ -66,10 +66,10 @@ const Header = ({ user }) => {
 					{!user ? (
 						<>
 							<li>
-								<Link to="/login">Login</Link>
+								<NavLink to="/login">Login</NavLink>
 							</li>
 							<li>
-								<Link to="/signup">Join</Link>
+								<NavLink to="/signup">Join</NavLink>
 							</li>
 						</>
 					) : (
