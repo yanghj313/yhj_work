@@ -65,10 +65,8 @@
 }
 
 .mobile-menu.open {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	opacity: 1;
+	visibility: visible;
 }
 
 .mobile-menu-links {
