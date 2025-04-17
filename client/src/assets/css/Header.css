@@ -1,6 +1,5 @@
 .site-header {
 	background-color: #fff;
-	padding: 16px;
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -10,7 +9,7 @@
 }
 
 .nav {
-	margin: 0 auto;
+	margin: 60px;
 	max-width: 1800px;
 	position: relative;
 	display: flex;
