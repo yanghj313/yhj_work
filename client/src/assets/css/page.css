@@ -175,7 +175,7 @@ body {
 .timeline-dot {
 	width: 17px;
 	height: 17px;
-	background-color: #ff5722b3; /* 예쁜 보라색 */
+	background-color: #ff5722; /* 예쁜 보라색 */
 	border-radius: 50%;
 	position: absolute;
 	top: -2%;
