@@ -44,6 +44,93 @@ const Header = ({ user }) => {
 	return (
 		<header className="site-header">
 			<nav className="nav" ref={navRef}>
+				<ul className="nav-links">
+					<li>
+						<Link to="/">Home</Link>
+					</li>
+					<li>
+						<NavLink
+							to="/projects"
+							style={({ isActive }) => ({
+								fontWeight: isActive ? 'bold' : 'normal',
+								color: isActive ? '#ff5722' : '#000',
+							})}
+						>
+							Project
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							to="/experiences"
+							style={({ isActive }) => ({
+								fontWeight: isActive ? 'bold' : 'normal',
+								color: isActive ? '#ff5722' : '#000',
+							})}
+						>
+							Experience
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							to="/galleries"
+							style={({ isActive }) => ({
+								fontWeight: isActive ? 'bold' : 'normal',
+								color: isActive ? '#ff5722' : '#000',
+							})}
+						>
+							Gallery
+						</NavLink>
+					</li>
+
+					{!user ? (
+						<>
+							<li>
+								<NavLink to="/login">Login</NavLink>
+							</li>
+							<li>
+								<NavLink to="/signup">Join</NavLink>
+							</li>
+						</>
+					) : (
+						<>
+							<li>
+								<span>{user.username}님</span>
+							</li>
+							{user.email?.toLowerCase() === 'lawork313@gmail.com' && (
+								<li>
+									<a href="https://yhjwork-production.up.railway.app/admin" target="_blank" rel="noopener noreferrer">
+										⚙ Settings
+									</a>
+								</li>
+							)}
+							<li>
+								<a
+									href="/"
+									onClick={() => {
+										localStorage.removeItem('token');
+										localStorage.removeItem('user');
+										window.location.reload();
+									}}
+								>
+									Logout
+								</a>
+							</li>
+						</>
+					)}
+					<li>
+						<form className="search-bar" onSubmit={handleSearch}>
+							{searchTerm && (
+								<button type="button" className="clear-btn" onClick={() => setSearchTerm('')} aria-label="검색어 지우기">
+									<i className="fa-solid fa-xmark" aria-hidden="true"></i>
+								</button>
+							)}
+							<input type="search" name="q" required placeholder="검색어 입력" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+							<button className="search-btn" type="submit">
+								<i className="fas fa-search" aria-hidden="true"></i>
+							</button>
+						</form>
+					</li>
+				</ul>
 				<div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
 					<button className="hamburger" onClick={() => setIsMenuOpen(true)} aria-label="메뉴 열기">
 						<i className="fas fa-bars"></i>
