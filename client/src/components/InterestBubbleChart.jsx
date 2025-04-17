@@ -124,7 +124,7 @@ const InterestBubbleChart = () => {
 			.transition()
 			.duration(300)
 			.attr('r', d => d.value / 2)
-			.attr('fill', d => (selected?.name === d.name ? d.color : '##ff5722'));
+			.attr('fill', d => (selected?.name === d.name ? d.color : '#ff5722'));
 		node
 			.select('image')
 			.transition()
