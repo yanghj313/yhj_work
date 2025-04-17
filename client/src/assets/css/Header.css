@@ -264,10 +264,6 @@ input[type='search']::-webkit-search-cancel-button {
 		max-width: 100%;
 	}
 
-	.mobile-menu {
-		display: block;
-	}
-
 	.nav .nav-links {
 		display: none;
 	}
