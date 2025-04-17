@@ -41,7 +41,10 @@ const ExperienceList = () => {
 					</div>
 
 					{/* ✅ 연도만 중앙 표시 */}
-					<div className="timeline-year">{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}</div>
+					<div className="timeline-year">
+						<div className="timeline-dot" />
+						{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}
+					</div>
 				</div>
 			))}
 		</div>

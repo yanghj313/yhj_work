@@ -167,10 +167,20 @@ body {
 	transform: translate(-50%, -50%);
 	font-size: 2rem;
 	font-weight: bold;
-	color: #bdbdbd;
+	color: #ff5722b3;
 	font-family: 'Outfit';
 	width: 100%;
 	padding: 2rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.dot {
+	width: 8px;
+	height: 8px;
+	background-color: #ff5722b3; /* 예쁜 보라색 */
+	border-radius: 50%;
+	display: inline-block;
 }
 
 .timeline-position {
