@@ -178,6 +178,14 @@ body {
 	background-color: #ff5722b3; /* 예쁜 보라색 */
 	border-radius: 50%;
 	position: absolute;
+	top: 50%;
+}
+
+.timeline-item.right .timeline-dot {
+	left: 0;
+}
+.timeline-item.left .timeline-dot {
+	right: 0;
 }
 
 .timeline-position {

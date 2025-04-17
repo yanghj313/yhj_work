@@ -30,6 +30,7 @@ const ExperienceList = () => {
 		<div className="timeline-container">
 			{experiences.map((e, i) => (
 				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id}>
+					<div className="timeline-dot" />
 					<div className="timeline-content">
 						{/* ✅ 포지션이 있을 때만 출력 + 여백 포함 */}
 						{e.position && <h5 className="timeline-position">{e.position}</h5>}
@@ -41,10 +42,7 @@ const ExperienceList = () => {
 					</div>
 
 					{/* ✅ 연도만 중앙 표시 */}
-					<div className="timeline-year">
-						<div className="timeline-dot" />
-						{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}
-					</div>
+					<div className="timeline-year">{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}</div>
 				</div>
 			))}
 		</div>
