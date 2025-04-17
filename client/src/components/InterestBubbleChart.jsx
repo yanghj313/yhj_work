@@ -82,7 +82,7 @@ const InterestBubbleChart = () => {
 				d.fx = null;
 				d.fy = null;
 			});
-		node.call(drag);
+
 		const node = svg
 			.selectAll('g')
 			.data(interests, d => d.name)
@@ -113,7 +113,7 @@ const InterestBubbleChart = () => {
 				g.append('text');
 				return g;
 			});
-
+		node.call(drag);
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
 
