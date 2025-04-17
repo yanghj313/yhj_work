@@ -53,7 +53,7 @@ const Header = ({ user }) => {
 							to="/projects"
 							style={({ isActive }) => ({
 								fontWeight: isActive ? 'bold' : 'normal',
-								color: isActive ? '#ff5722' : '#000',
+								color: isActive ? '#ff5722' : '#fff',
 							})}
 						>
 							Project
@@ -64,7 +64,7 @@ const Header = ({ user }) => {
 							to="/experiences"
 							style={({ isActive }) => ({
 								fontWeight: isActive ? 'bold' : 'normal',
-								color: isActive ? '#ff5722' : '#000',
+								color: isActive ? '#ff5722' : '#fff',
 							})}
 						>
 							Experience
@@ -75,7 +75,7 @@ const Header = ({ user }) => {
 							to="/galleries"
 							style={({ isActive }) => ({
 								fontWeight: isActive ? 'bold' : 'normal',
-								color: isActive ? '#ff5722' : '#000',
+								color: isActive ? '#ff5722' : '#fff',
 							})}
 						>
 							Gallery
@@ -151,7 +151,7 @@ const Header = ({ user }) => {
 								to="/projects"
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
-									color: isActive ? '#ff5722' : '#000',
+									color: isActive ? '#ff5722' : '#fff',
 								})}
 							>
 								Project
@@ -162,7 +162,7 @@ const Header = ({ user }) => {
 								to="/experiences"
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
-									color: isActive ? '#ff5722' : '#000',
+									color: isActive ? '#ff5722' : '#fff',
 								})}
 							>
 								Experience
@@ -173,7 +173,7 @@ const Header = ({ user }) => {
 								to="/galleries"
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
-									color: isActive ? '#ff5722' : '#000',
+									color: isActive ? '#ff5722' : '#fff',
 								})}
 							>
 								Gallery
