@@ -32,16 +32,13 @@ const ExperienceList = () => {
 				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id}>
 					<div className="timeline-dot" />
 					<div className="timeline-content">
-						{/* ✅ 포지션이 있을 때만 출력 + 여백 포함 */}
 						{e.position && <h5 className="timeline-position">{e.position}</h5>}
 
 						<p>{e.title}</p>
 
-						{/* ✅ 로고 이미지 */}
 						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
 					</div>
 
-					{/* ✅ 연도만 중앙 표시 */}
 					<div className="timeline-year">{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}</div>
 				</div>
 			))}

@@ -104,13 +104,12 @@
 	color: #333;
 }
 
-/* char span 공통 설정 */
 .char {
 	display: inline-block;
 	white-space: pre;
 }
 
-/* 효과 1: folding */
+
 .text--folding .char {
 	opacity: 0;
 	-webkit-transform: translateY(100%);
@@ -138,7 +137,7 @@
 	}
 }
 
-/* 효과 2: bubbling */
+
 .text--bubbling .char {
 	opacity: 0;
 	-webkit-transform: scale(0.2);
@@ -192,7 +191,7 @@
 	}
 }
 
-/* 효과 4: swinging */
+
 .text--swinging .char {
 	opacity: 0;
 	-webkit-transform: rotateZ(-90deg);

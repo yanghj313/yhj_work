@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../assets/css/Header.css';
 
+const [isMenuOpen, setIsMenuOpen] = useState(false);
 const Header = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState('');
 	const navigate = useNavigate();
 
 	const handleSearch = e => {
-		e.preventDefault(); // 폼 기본 동작 방지
+		e.preventDefault();
 		if (searchTerm.trim()) {
 			navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
 		}
@@ -16,18 +17,50 @@ const Header = ({ user }) => {
 	return (
 		<header className="site-header">
 			<nav className="nav">
-				<ul>
+				<ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
 					<li>
-						<Link to="/">Home</Link>
+						<NavLink
+							to="/"
+							style={({ isActive }) => ({
+								fontWeight: isActive ? 'bold' : 'normal',
+								color: isActive ? '#ff5722' : '#000',
+							})}
+						>
+							Home
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/projects">Project</Link>
+						<NavLink
+							to="/projects"
+							style={({ isActive }) => ({
+								fontWeight: isActive ? 'bold' : 'normal',
+								color: isActive ? '#ff5722' : '#000',
+							})}
+						>
+							Project
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/experiences">Experience</Link>
+						<NavLink
+							to="/experiences"
+							style={({ isActive }) => ({
+								fontWeight: isActive ? 'bold' : 'normal',
+								color: isActive ? '#ff5722' : '#000',
+							})}
+						>
+							Experience
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/galleries">Gallery</Link>
+						<NavLink
+							to="/galleries"
+							style={({ isActive }) => ({
+								fontWeight: isActive ? 'bold' : 'normal',
+								color: isActive ? '#ff5722' : '#000',
+							})}
+						>
+							Gallery
+						</NavLink>
 					</li>
 
 					{!user ? (

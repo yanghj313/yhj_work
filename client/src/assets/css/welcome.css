@@ -55,7 +55,6 @@ body {
     background: #fff;
 }
 
-/* 📏 .moon 높이도 viewBox에 맞게 740px로 변경 */
 .moon {
     position: relative;
     z-index: 2;

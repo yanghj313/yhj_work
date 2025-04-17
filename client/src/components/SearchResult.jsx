@@ -75,10 +75,8 @@ const SearchResult = () => {
 		<div className="result" style={{ padding: '1rem' }}>
 			<h2>🔎 “{query}” 검색 결과</h2>
 
-			{/* 프로젝트 */}
 			{projects.length > 0 && (
 				<>
-					<h3>📁 프로젝트</h3>
 					<ul>
 						{projects.map(p => (
 							<li key={p.id}>
@@ -97,10 +95,8 @@ const SearchResult = () => {
 				</>
 			)}
 
-			{/* 스킬 */}
 			{skills.length > 0 && (
 				<>
-					<h3>💡 기술 스택</h3>
 					<ul>
 						{skills.map(s => (
 							<li key={s.id}>
@@ -111,10 +107,8 @@ const SearchResult = () => {
 				</>
 			)}
 
-			{/* 경력 */}
 			{experiences.length > 0 && (
 				<>
-					<h3>📘 경력사항</h3>
 					<ul>
 						{experiences.map(e => (
 							<li key={e.id}>
@@ -125,10 +119,8 @@ const SearchResult = () => {
 				</>
 			)}
 
-			{/* 갤러리 */}
 			{galleries.length > 0 && (
 				<>
-					<h3>🖼️ 갤러리</h3>
 					<ul>
 						{galleries.map(g => (
 							<li key={g.id}>
@@ -148,7 +140,6 @@ const SearchResult = () => {
 				</>
 			)}
 
-			{/* 결과 없음 */}
 			{projects.length === 0 && skills.length === 0 && experiences.length === 0 && galleries.length === 0 && <p className="fail_massage">😢 검색 결과가 없습니다.</p>}
 		</div>
 	);

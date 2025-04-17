@@ -25,7 +25,6 @@ const SkillList = () => {
 				{skills.map(s =>
 					s?.name ? (
 						<li key={s.id} style={{ marginBottom: '2rem' }}>
-							{/* 아이콘 먼저 */}
 							{s.icon?.url && (
 								<div>
 									<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} width="64" style={{ marginBottom: '0.5rem' }} />

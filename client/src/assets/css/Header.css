@@ -29,6 +29,44 @@
 	align-items: center;
 }
 
+
+
+
+@media (max-width: 768px) {
+	.nav-links {
+		display: none;
+		flex-direction: column;
+		position: absolute;
+		top: 60px;
+		right: 10px;
+		background-color: white;
+		border: 1px solid #ddd;
+		padding: 1rem;
+	}
+
+	.nav-links.open {
+		display: flex;
+	}
+
+	.hamburger {
+		display: block;
+		background: none;
+		border: none;
+		font-size: 24px;
+		cursor: pointer;
+	}
+
+	.nav-links {
+		transition: all 0.3s ease-in-out;
+	}
+}
+
+
+.hamburger {
+	display: none;
+}
+
+
 .nav li a {
 	color: #000;
 	text-decoration: none;
@@ -134,8 +172,7 @@
 .search-btn {
 	height: 34px;
 	width: 34px;
-	background: -o-linear-gradient(315deg, #74ebd5, #9face6);
-	background: linear-gradient(135deg, #74ebd5, #9face6);
+	background: #ff5722b3;
 	color: white;
 	border: none;
 	border-radius: 50%;
