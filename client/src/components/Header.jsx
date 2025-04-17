@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import '../assets/css/Header.css';
 
-const [isMenuOpen, setIsMenuOpen] = useState(false);
 const Header = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState('');
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navigate = useNavigate();
 
 	const handleSearch = e => {
@@ -112,6 +112,9 @@ const Header = ({ user }) => {
 							</button>
 						</form>
 					</li>
+					<button className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+						<i className="fas fa-bars"></i>
+					</button>
 				</ul>
 			</nav>
 		</header>
