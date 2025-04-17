@@ -16,6 +16,7 @@ const interests = [
 	{ name: 'Soccer', value: 60, color: '#576574', image: 'https://picsum.photos/seed/soccer/400/400' },
 	{ name: 'Music', value: 80, color: '#576574', image: 'https://picsum.photos/seed/music/400/400' },
 	{ name: 'Perfume', value: 70, color: '#576574', image: 'https://picsum.photos/seed/perfume/400/400' },
+	{ name: 'ENTJ', value: 70, color: '#576574', image: 'https://picsum.photos/seed/teach/400/400' },
 ];
 
 const InterestBubbleChart = () => {
@@ -123,10 +124,7 @@ const InterestBubbleChart = () => {
 			.transition()
 			.duration(300)
 			.attr('r', d => d.value / 2)
-			.attr('fill', d => (selected?.name === d.name ? d.color : '#bbb'))
-			.attr('stroke', '#333')
-			.attr('stroke-width', 1.5);
-
+			.attr('fill', d => (selected?.name === d.name ? d.color : '##ff5722'));
 		node
 			.select('image')
 			.transition()
@@ -180,6 +178,7 @@ const InterestBubbleChart = () => {
 						{selected.name === 'Fashion' && <p>계절별 스타일링과 트렌드를 연구하며 자신만의 룩을 만듭니다.</p>}
 						{selected.name === 'Music' && <p>EDM과 Rock 을 좋아합니다.</p>}
 						{selected.name === 'Perfume' && <p>향수를 즐겨뿌립니다.</p>}
+						{selected.name === 'ENTJ' && <p>지도자형 입니다.</p>}
 					</div>
 				)}
 			</div>
