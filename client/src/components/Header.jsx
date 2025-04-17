@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../assets/css/Header.css';
 
 const Header = ({ user }) => {
@@ -12,22 +12,22 @@ const Header = ({ user }) => {
 		if (searchTerm.trim()) {
 			navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
 		}
+		// 검색 시 메뉴 닫기 (모바일 UX 개선)
+		setIsMenuOpen(false);
 	};
 
 	return (
 		<header className="site-header">
 			<nav className="nav">
+				{/* ✅ 햄버거 버튼: ul 바깥으로 빼기 */}
+				<button className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+					<i className="fas fa-bars"></i>
+				</button>
+
 				<ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+					{/* ✅ Home은 NavLink 대신 Link로 */}
 					<li>
-						<NavLink
-							to="/"
-							style={({ isActive }) => ({
-								fontWeight: isActive ? 'bold' : 'normal',
-								color: isActive ? '#ff5722' : '#000',
-							})}
-						>
-							Home
-						</NavLink>
+						<Link to="/">Home</Link>
 					</li>
 					<li>
 						<NavLink
@@ -105,16 +105,12 @@ const Header = ({ user }) => {
 									<i className="fa-solid fa-xmark" aria-hidden="true"></i>
 								</button>
 							)}
-
 							<input type="search" name="q" required placeholder="검색어 입력" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
 							<button className="search-btn" type="submit">
 								<i className="fas fa-search" aria-hidden="true"></i>
 							</button>
 						</form>
 					</li>
-					<button className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-						<i className="fas fa-bars"></i>
-					</button>
 				</ul>
 			</nav>
 		</header>
