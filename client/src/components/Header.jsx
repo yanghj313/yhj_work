@@ -44,15 +44,12 @@ const Header = ({ user }) => {
 	return (
 		<header className="site-header">
 			<nav className="nav" ref={navRef}>
-				{/* 햄버거 버튼 */}
-				<button className="hamburger" onClick={() => setIsMenuOpen(true)} aria-label="메뉴 열기">
-					<i className="fas fa-bars"></i>
-				</button>
-
-				{/* 전체화면 오픈 메뉴 */}
 				<div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-					{/* 닫기 버튼 */}
-					<button className="close-btn" onClick={() => setIsMenuOpen(false)} aria-label="메뉴 닫기">
+					<button className="hamburger" onClick={() => setIsMenuOpen(true)} aria-label="메뉴 열기">
+						<i className="fas fa-bars"></i>
+					</button>
+
+					<button className="close-btn" onClick={() => setIsMenuOpen(false)}>
 						<i className="fa-solid fa-xmark"></i>
 					</button>
 					<ul className="mobile-menu-links">
