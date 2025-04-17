@@ -184,8 +184,8 @@ body {
 	content: '';
 	position: absolute;
 	display: block;
-	width: 19px;
-	height: 19px;
+	width: 17px;
+	height: 17px;
 	background: #ff5722;
 	z-index: -1;
 	border-radius: 50%;
@@ -197,7 +197,7 @@ body {
 
 /* 호버 시 파동 애니메이션 작동 */
 .timeline-dot:hover::before {
-	animation: wave 0.6s ease-out forwards;
+	animation: wave 0.6s ease-out infinite;
 }
 
 /* 파동 애니메이션 정의 */
