@@ -110,9 +110,6 @@ body {
 	pointer-events: auto;
 }
 
-.project-card:hover .thumbnail-img {
-	opacity: 0;
-}
 .video-icon {
 	position: absolute;
 	top: 8px;
