@@ -70,9 +70,9 @@ const ProjectList = () => {
 							{p.period && <p>🗓️ {p.period}</p>}
 
 							{p.tags && (
-								<p>
+								<p style={{ display: 'inline-block' }}>
 									💻
-									<ul style={{ display: 'inline-block' }}>
+									<ul>
 										{p.tags.split(',').map((tag, index) => {
 											const trimmedTag = tag.trim();
 											return <li key={index}>{trimmedTag}</li>;

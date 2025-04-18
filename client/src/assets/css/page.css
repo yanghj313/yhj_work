@@ -20,9 +20,9 @@ body {
 }
 
 .list ul li ul {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;
 	-ms-flex-direction: row;
@@ -145,10 +145,14 @@ body {
 }
 
 .timeline-item.right .timeline-content {
+	-webkit-box-align: start;
+	-ms-flex-align: start;
 	align-items: flex-start;
 }
 
 .timeline-item.left .timeline-content {
+	-webkit-box-align: end;
+	-ms-flex-align: end;
 	align-items: flex-end;
 }
 
@@ -158,9 +162,18 @@ body {
 	border-radius: 8px;
 	-webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	color: #101010;
 }
@@ -200,21 +213,40 @@ body {
 	border-radius: 50%;
 	left: 50%;
 	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	opacity: 0;
 }
 
 .timeline-dot:hover::before {
+	-webkit-animation: wave 0.6s ease-out infinite;
 	animation: wave 0.6s ease-out infinite;
 }
 
-@keyframes wave {
+@-webkit-keyframes wave {
 	0% {
+		-webkit-transform: translate(-50%, -50%) scale(1);
 		transform: translate(-50%, -50%) scale(1);
 		opacity: 0.6;
 	}
 
 	100% {
+		-webkit-transform: translate(-50%, -50%) scale(2.5);
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 0;
+	}
+}
+
+@keyframes wave {
+	0% {
+		-webkit-transform: translate(-50%, -50%) scale(1);
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0.6;
+	}
+
+	100% {
+		-webkit-transform: translate(-50%, -50%) scale(2.5);
 		transform: translate(-50%, -50%) scale(2.5);
 		opacity: 0;
 	}
@@ -248,16 +280,33 @@ body {
 	margin-top: 1rem;
 	width: 100px;
 	border-radius: 8px;
+	-o-object-fit: contain;
 	object-fit: contain;
 }
 
-@keyframes fadeInUp {
+@-webkit-keyframes fadeInUp {
 	from {
+		-webkit-transform: translateY(20px);
 		transform: translateY(20px);
 		opacity: 0;
 	}
 
 	to {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInUp {
+	from {
+		-webkit-transform: translateY(20px);
+		transform: translateY(20px);
+		opacity: 0;
+	}
+
+	to {
+		-webkit-transform: translateY(0);
 		transform: translateY(0);
 		opacity: 1;
 	}
@@ -287,6 +336,8 @@ body {
 /***********************갤러리 게시판***************************/
 /* GalleryList.css */
 .masonry-grid {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	width: auto;
 	margin: 120px auto 200px;
@@ -303,21 +354,30 @@ body {
 	background: #fff;
 	margin-bottom: 16px;
 	border-radius: 12px;
+	-webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	overflow: hidden;
+	-webkit-transition: -webkit-transform 0.2s ease;
+	transition: -webkit-transform 0.2s ease;
+	-o-transition: transform 0.2s ease;
 	transition: transform 0.2s ease;
+	transition: transform 0.2s ease, -webkit-transform 0.2s ease;
 }
 
 .gallery-card:hover {
+	-webkit-transform: translateY(-4px);
+	-ms-transform: translateY(-4px);
 	transform: translateY(-4px);
 }
 
 .gallery-image {
 	width: 100%;
 	display: block;
+	-o-object-fit: cover;
 	object-fit: cover;
 	border-bottom: 1px solid #eee;
 	max-height: 600px;
+	-o-object-position: top;
 	object-position: top;
 }
 
