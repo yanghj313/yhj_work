@@ -70,13 +70,16 @@ const ProjectList = () => {
 							{p.period && <p>🗓️ 작업 기간: {p.period}</p>}
 
 							{p.tags && (
-								<ul style={{ paddingLeft: '1rem' }}>
-									💻
-									{p.tags.split(',').map((tag, index) => {
-										const trimmedTag = tag.trim();
-										return <li key={index}>{trimmedTag}</li>;
-									})}
-								</ul>
+								<p>
+									💻 (
+									<ul style={{ paddingLeft: '1rem' }}>
+										{p.tags.split(',').map((tag, index) => {
+											const trimmedTag = tag.trim();
+											return <li key={index}>{trimmedTag}</li>;
+										})}
+									</ul>
+									)
+								</p>
 							)}
 						</li>
 					) : null
