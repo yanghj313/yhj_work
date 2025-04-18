@@ -72,7 +72,7 @@ const ProjectList = () => {
 							{p.tags && (
 								<p>
 									💻 (
-									<ul style={{ paddingLeft: '1rem' }}>
+									<ul>
 										{p.tags.split(',').map((tag, index) => {
 											const trimmedTag = tag.trim();
 											return <li key={index}>{trimmedTag}</li>;
