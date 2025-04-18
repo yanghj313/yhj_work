@@ -42,9 +42,16 @@ const ProjectList = () => {
 					p?.title ? (
 						<li key={p.id} className="project-card">
 							<div className="media-container">
-								<div className="thumbnail-wrapper">
-									<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
+								<div className="thumbnail-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
+									{/* 썸네일 이미지 */}
+									<img
+										src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`}
+										alt={p.thumbnail.name || '프로젝트 이미지'}
+										className="thumbnail-img"
+										style={{ width: '100%', display: 'block' }}
+									/>
 
+									{/* 비디오가 있을 경우만 렌더링 */}
 									{p.video?.url && (
 										<video
 											src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}
@@ -54,7 +61,18 @@ const ProjectList = () => {
 											className="hover-video"
 											preload="metadata"
 											onMouseOver={e => e.target.play()}
-											onMouseOut={e => e.target.pause()}
+											onMouseOut={e => {
+												e.target.pause();
+												e.target.currentTime = 0;
+												e.target.style.opacity = 0;
+											}}
+											onPlay={e => {
+												e.target.style.opacity = 1;
+											}}
+											onEnded={e => {
+												e.target.style.opacity = 0;
+												e.target.currentTime = 0;
+											}}
 										/>
 									)}
 								</div>

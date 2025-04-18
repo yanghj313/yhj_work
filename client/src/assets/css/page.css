@@ -63,6 +63,7 @@ body {
 }
 
 .thumbnail-img {
+	display: block;
 	width: 100%;
 	height: 100%;
 	-webkit-transition: opacity 0.3s ease;
@@ -73,6 +74,8 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
+	position: relative;
+	overflow: hidden;
 }
 
 .hover-video {
