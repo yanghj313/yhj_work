@@ -16,6 +16,13 @@ button {
 	width: 30px;
 }
 
+.loading-container p {
+	font-size: 1.2rem;
+	color: #fff;
+	margin-top: 10px;
+	text-align: center;
+}
+
 .spinner {
 	margin: 16px auto;
 	width: 40px;
