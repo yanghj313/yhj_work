@@ -61,6 +61,7 @@ const ProjectList = () => {
 							</div>
 
 							<strong>
+								💡
 								<Link to={`/projects/${p.documentId}`}>{p.title}</Link>
 							</strong>
 							<br />
@@ -70,6 +71,7 @@ const ProjectList = () => {
 
 							{p.tags && (
 								<ul style={{ paddingLeft: '1rem' }}>
+									💻
 									{p.tags.split(',').map((tag, index) => {
 										const trimmedTag = tag.trim();
 										return <li key={index}>{trimmedTag}</li>;

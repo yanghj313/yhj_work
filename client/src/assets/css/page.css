@@ -35,6 +35,10 @@ body {
 	margin-bottom: 2rem;
 }
 
+.project-card strong {
+	color: #fff;
+}
+
 .media-container {
 	position: relative;
 	width: 480px;
