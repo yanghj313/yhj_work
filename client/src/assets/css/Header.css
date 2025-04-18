@@ -12,17 +12,17 @@
 	color: #fff;
 	text-decoration: none;
 	font-size: 1.5rem;
-	font-weight: bold;
-	padding: 0 20px;
+	font-weight: 700;
+	padding: 0 60px;
 	display: flex;
 	align-items: center;
 	height: 100%;
+	position: absolute;
 }
 
 .site-header .logo img {
 	height: 40px;
 	width: auto;
-	margin-right: 10px;
 }
 
 .nav {
@@ -34,6 +34,7 @@
 	align-items: center;
 	height: 60px;
 	box-sizing: border-box;
+	padding-left: 50px;
 }
 
 .nav .nav-links {
