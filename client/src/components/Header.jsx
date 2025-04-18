@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../assets/css/Header.css';
-import logoImg from '../assets/img/bunny-wh.svg';
 
 const Header = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -51,7 +50,7 @@ const Header = ({ user }) => {
 		<header className="site-header">
 			<div className="logo-container">
 				<Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-					<img src={logoImg} alt="로고" className="logo-img" />
+					<img src="public/assets/img/bunny-wh.svg" alt="로고" className="logo-img" />
 				</Link>
 			</div>
 			<nav className="nav" ref={navRef}>
