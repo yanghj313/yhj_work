@@ -72,7 +72,7 @@ const ProjectList = () => {
 							{p.tags && (
 								<p>
 									💻
-									<ul>
+									<ul style={{ display: 'inline-block' }}>
 										{p.tags.split(',').map((tag, index) => {
 											const trimmedTag = tag.trim();
 											return <li key={index}>{trimmedTag}</li>;
