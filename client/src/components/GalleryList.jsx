@@ -8,16 +8,22 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const GalleryList = () => {
 	const [galleries, setGalleries] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		axios
-			.get(`${API_BASE}/api/galleries?populate=*`)
-			.then(res => {
+		const fetchGalleries = async () => {
+			try {
+				setLoading(true);
+				const res = await axios.get(`${API_BASE}/api/galleries?populate=*`);
 				setGalleries((res.data.data || []).filter(Boolean));
-			})
-			.catch(err => {
+			} catch (err) {
 				console.error('❌ 갤러리 데이터 오류:', err.message);
-			});
+			} finally {
+				setTimeout(() => setLoading(false), 500); // UX적으로 부드럽게
+			}
+		};
+
+		fetchGalleries();
 	}, []);
 
 	const breakpoints = {
@@ -26,6 +32,15 @@ const GalleryList = () => {
 		768: 4,
 		480: 3,
 	};
+
+	if (loading) {
+		return (
+			<div className="loading-container">
+				<p>Loading</p>
+				<div className="spinner" />
+			</div>
+		);
+	}
 
 	return (
 		<Masonry breakpointCols={breakpoints} className="masonry-grid" columnClassName="masonry-column">
