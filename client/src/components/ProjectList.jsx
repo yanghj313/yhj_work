@@ -42,19 +42,11 @@ const ProjectList = () => {
 					p?.title ? (
 						<li key={p.id} className="project-card">
 							<div className="media-container">
-								<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
+								<div className="thumbnail-wrapper">
+									<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
 
-								{p.video?.url && (
-									<video
-										src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}
-										muted
-										loop
-										playsInline
-										className="hover-video"
-										onMouseOver={e => e.target.play()}
-										onMouseOut={e => e.target.pause()}
-									/>
-								)}
+									{p.video?.url && <video src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`} muted loop playsInline className="hover-video" preload="none" />}
+								</div>
 							</div>
 
 							<strong>
