@@ -299,8 +299,10 @@ body {
 	display: block;
 	object-fit: cover;
 	border-bottom: 1px solid #eee;
+	max-height: 600px;
+	object-position: top;
 }
 
 .gallery-info {
-	padding: 1rem;
+	padding: 0.6rem;
 }
