@@ -124,7 +124,7 @@
 	border: 1px solid #ccc;
 	opacity: 0;
 	background: transparent;
-	color: #333;
+	color: #fff;
 	font-size: 0.9rem;
 	border-radius: 2em 0 0 2em;
 	-webkit-transform: scale(0);
@@ -196,8 +196,7 @@
 }
 
 /* 다크모드 대응 */
-@media (prefers-color-scheme: dark) {
-}
+@media (prefers-color-scheme: dark) {}
 
 input[type='search']::-webkit-search-cancel-button {
 	display: none;
