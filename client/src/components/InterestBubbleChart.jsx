@@ -26,6 +26,7 @@ const InterestBubbleChart = () => {
 	const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
+	const [hasEntered, setHasEntered] = useState(false);
 
 	useEffect(() => {
 		const resizeObserver = new ResizeObserver(entries => {
@@ -39,6 +40,21 @@ const InterestBubbleChart = () => {
 	}, []);
 
 	useEffect(() => {
+		if (!wrapperRef.current) return;
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting && !hasEntered) {
+					setHasEntered(true);
+				}
+			},
+			{ threshold: 0.3 }
+		);
+		observer.observe(wrapperRef.current);
+		return () => observer.disconnect();
+	}, [hasEntered]);
+
+	useEffect(() => {
+		if (!hasEntered) return;
 		const { width, height } = dimensions;
 		const svg = d3.select(svgRef.current).attr('width', width).attr('height', height);
 		svg.select('defs')?.remove();
@@ -66,6 +82,7 @@ const InterestBubbleChart = () => {
 		simulation.on('tick', () => {
 			svg.selectAll('g').attr('transform', d => `translate(${d.x}, ${d.y})`);
 		});
+
 		const drag = d3
 			.drag()
 			.on('start', (event, d) => {
@@ -113,18 +130,15 @@ const InterestBubbleChart = () => {
 				g.append('text');
 				return g;
 			});
+
 		node.call(drag);
 		node.on('click', (event, d) => {
 			const isSame = selected?.name === d.name;
-
 			if (isSame) {
 				setBoxVisible(false);
-				setTimeout(() => {
-					setSelected(null);
-				}, 300);
+				setTimeout(() => setSelected(null), 300);
 				return;
 			}
-
 			if (boxVisible) {
 				setBoxVisible(false);
 				setTimeout(() => {
@@ -143,6 +157,7 @@ const InterestBubbleChart = () => {
 			.duration(300)
 			.attr('r', d => d.value / 2)
 			.attr('fill', d => (selected?.name === d.name ? d.color : '#ff5722'));
+
 		node
 			.select('image')
 			.transition()
@@ -156,7 +171,7 @@ const InterestBubbleChart = () => {
 			.attr('dy', '.35em')
 			.style('fill', '#fff')
 			.style('font-size', d => Math.min(d.value / 6, 12));
-	}, [dimensions, selected]);
+	}, [dimensions, selected, hasEntered]);
 
 	return (
 		<div className="full-container">
@@ -165,13 +180,11 @@ const InterestBubbleChart = () => {
 					<svg ref={svgRef} className="img-chart"></svg>
 				</div>
 			</div>
-
 			<div className={`about_keyword ${boxVisible ? 'show' : ''}`} ref={aboutRef} key={selected?.name || 'none'}>
 				{selected && (
 					<div className="custom-description">
 						<button
 							className="custom-close-btn"
-							aria-label="닫기"
 							onClick={() => {
 								setBoxVisible(false);
 								setTimeout(() => setSelected(null), 300);
