@@ -42,38 +42,41 @@ const ProjectList = () => {
 					p?.title ? (
 						<li key={p.id} className="project-card">
 							<div className="media-container">
-								<div className="thumbnail-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
-									{/* 썸네일 이미지 */}
-									<img
-										src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`}
-										alt={p.thumbnail.name || '프로젝트 이미지'}
-										className="thumbnail-img"
-										style={{ width: '100%', display: 'block' }}
-									/>
+								<div className="thumbnail-wrapper">
+									<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
 
-									{/* 비디오가 있을 경우만 렌더링 */}
 									{p.video?.url && (
-										<video
-											src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}
-											muted
-											loop
-											playsInline
-											className="hover-video"
-											preload="metadata"
-											onMouseOver={e => e.target.play()}
-											onMouseOut={e => {
-												e.target.pause();
-												e.target.currentTime = 0;
-												e.target.style.opacity = 0;
-											}}
-											onPlay={e => {
-												e.target.style.opacity = 1;
-											}}
-											onEnded={e => {
-												e.target.style.opacity = 0;
-												e.target.currentTime = 0;
-											}}
-										/>
+										<>
+											<video
+												src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}
+												muted
+												loop
+												playsInline
+												className="hover-video"
+												preload="metadata"
+												onMouseOver={e => {
+													if (!window.matchMedia('(hover: none)').matches) e.target.play();
+												}}
+												onMouseOut={e => {
+													if (!window.matchMedia('(hover: none)').matches) {
+														e.target.pause();
+														e.target.currentTime = 0;
+													}
+												}}
+												onClick={e => {
+													if (window.matchMedia('(hover: none)').matches) {
+														const video = e.target;
+														if (video.paused) {
+															video.play();
+														} else {
+															video.pause();
+															video.currentTime = 0;
+														}
+													}
+												}}
+											/>
+											<div className="video-icon">🎬</div> {/* 👈 여기 추가 */}
+										</>
 									)}
 								</div>
 							</div>
