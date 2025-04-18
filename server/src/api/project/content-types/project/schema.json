@@ -21,6 +21,11 @@
 			"multiple": false,
 			"allowedTypes": ["images", "files", "videos", "audios"]
 		},
+		"video": {
+			"type": "media",
+			"multiple": false,
+			"allowedTypes": ["images", "files", "videos", "audios"]
+		},
 		"images": {
 			"type": "media",
 			"multiple": true,
