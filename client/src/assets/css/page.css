@@ -17,6 +17,7 @@ body {
 	-ms-grid-columns: (1fr 1fr 1fr);
 	grid-template-columns: repeat(3, 510px);
 	row-gap: 2rem;
+	justify-content: space-around;
 }
 
 .list ul li ul {
