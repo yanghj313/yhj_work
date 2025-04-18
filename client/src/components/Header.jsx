@@ -50,7 +50,7 @@ const Header = ({ user }) => {
 		<header className="site-header">
 			<div className="logo-container">
 				<Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-					<img src="public/assets/img/bunny-wh.svg" alt="로고" className="logo-img" />
+					<img src="public/img/bunny-wh.svg" alt="로고" className="logo-img" />
 				</Link>
 			</div>
 			<nav className="nav" ref={navRef}>
