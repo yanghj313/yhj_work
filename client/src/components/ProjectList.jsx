@@ -66,19 +66,18 @@ const ProjectList = () => {
 							</strong>
 							<br />
 
-							{p.role && <p>👤 역할: {p.role}</p>}
-							{p.period && <p>🗓️ 작업 기간: {p.period}</p>}
+							{p.role && <p>🛠️ {p.role}</p>}
+							{p.period && <p>🗓️ {p.period}</p>}
 
 							{p.tags && (
 								<p>
-									💻 (
+									💻
 									<ul>
 										{p.tags.split(',').map((tag, index) => {
 											const trimmedTag = tag.trim();
 											return <li key={index}>{trimmedTag}</li>;
 										})}
 									</ul>
-									)
 								</p>
 							)}
 						</li>
