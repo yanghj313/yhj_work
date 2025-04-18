@@ -1,25 +1,39 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import video01 from '../../public/video/video_01.mp4';
 import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const ProjectList = () => {
 	const [projects, setProjects] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		axios
-			.get(`${API_BASE}/api/projects?populate=*`)
-			.then(res => {
+		const fetchProjects = async () => {
+			try {
+				setLoading(true);
+				const res = await axios.get(`${API_BASE}/api/projects?populate=*`);
 				console.log('🔥 프로젝트 데이터:', res.data.data);
 				setProjects((res.data.data || []).filter(Boolean));
-			})
-			.catch(err => {
+			} catch (err) {
 				console.error('❌ 프로젝트 데이터 오류:', err.message);
-			});
+			} finally {
+				setTimeout(() => setLoading(false), 500);
+			}
+		};
+
+		fetchProjects();
 	}, []);
+
+	if (loading) {
+		return (
+			<div className="loading-container">
+				<p>Loading</p>
+				<div className="spinner" />
+			</div>
+		);
+	}
 
 	return (
 		<div className="board_wrap list">
@@ -30,7 +44,17 @@ const ProjectList = () => {
 							<div className="media-container">
 								<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
 
-								<video src={video01} muted loop playsInline autoPlay className="hover-video" />
+								{p.video?.url && (
+									<video
+										src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}
+										muted
+										loop
+										playsInline
+										className="hover-video"
+										onMouseOver={e => e.target.play()}
+										onMouseOut={e => e.target.pause()}
+									/>
+								)}
 							</div>
 
 							<strong>
