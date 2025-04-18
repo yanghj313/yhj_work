@@ -60,7 +60,7 @@ const SkillMapSection = () => {
 					<img src="/img/profile.jpg" alt="소개 이미지" style={{ width: '492px', maxHeight: '80%' }} />
 				</div>
 
-				<div className="skill-right-panel skill-panel" style={{ position: 'absolute', left: '33%' }}>
+				<div className="skill-right-panel skill-panel" style={{ position: 'absolute', left: '33%', transform: 'translate(0,-50%)' }}>
 					<div className="skill-scroll-wrapper no-scrollbar">
 						<div className="skill-scroll-track" ref={scrollTrackRef}>
 							{skills.map((s, idx) => {

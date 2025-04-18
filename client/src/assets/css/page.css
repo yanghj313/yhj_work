@@ -270,13 +270,14 @@ body {
 /* GalleryList.css */
 .masonry-grid {
 	display: flex;
-	margin-left: -16px;
-	/* gutter 사이 간격 */
 	width: auto;
+	margin: 120px auto 200px;
+	max-width: 1800px;
 }
 
 .masonry-column {
-	padding-left: 16px;
+	padding-left: 8px;
+	padding-right: 8px;
 	background-clip: padding-box;
 }
 

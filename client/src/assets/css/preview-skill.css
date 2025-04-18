@@ -207,6 +207,7 @@
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
+	top: 55%;
 }
 
 .skill-left-panel {
@@ -225,7 +226,6 @@
 	-ms-flex-pack: center;
 	justify-content: center;
 	gap: 1.5rem;
-	margin-top: 2rem;
 }
 
 .arrow-btn {

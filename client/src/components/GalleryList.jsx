@@ -22,10 +22,10 @@ const GalleryList = () => {
 	}, []);
 
 	const breakpoints = {
-		default: 4,
-		1100: 3,
-		768: 2,
-		480: 1,
+		default: 5,
+		1100: 4,
+		768: 3,
+		480: 2,
 	};
 
 	return (
