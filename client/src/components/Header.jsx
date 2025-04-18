@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../assets/css/Header.css';
+import logoImg from '../assets/img/bunny-wh.svg';
 
 const Header = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -43,6 +44,11 @@ const Header = ({ user }) => {
 
 	return (
 		<header className="site-header">
+			<div className="logo-container">
+				<Link to="" className="logo" onClick={() => setIsMenuOpen(false)}>
+					<img src={logoImg} alt="로고" className="logo-img" />
+				</Link>
+			</div>
 			<nav className="nav" ref={navRef}>
 				<ul className="nav-links">
 					<li>
@@ -149,6 +155,10 @@ const Header = ({ user }) => {
 						<li>
 							<NavLink
 								to="/projects"
+								onClick={() => {
+									setIsMenuOpen(false);
+									window.scrollTo({ top: 0, behavior: 'smooth' });
+								}}
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
 									color: isActive ? '#ff5722' : '#fff',
@@ -160,6 +170,10 @@ const Header = ({ user }) => {
 						<li>
 							<NavLink
 								to="/experiences"
+								onClick={() => {
+									setIsMenuOpen(false);
+									window.scrollTo({ top: 0, behavior: 'smooth' });
+								}}
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
 									color: isActive ? '#ff5722' : '#fff',
@@ -171,6 +185,10 @@ const Header = ({ user }) => {
 						<li>
 							<NavLink
 								to="/galleries"
+								onClick={() => {
+									setIsMenuOpen(false);
+									window.scrollTo({ top: 0, behavior: 'smooth' });
+								}}
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
 									color: isActive ? '#ff5722' : '#fff',
@@ -183,10 +201,26 @@ const Header = ({ user }) => {
 						{!user ? (
 							<>
 								<li>
-									<NavLink to="/login">Login</NavLink>
+									<NavLink
+										to="/login"
+										onClick={() => {
+											setIsMenuOpen(false);
+											window.scrollTo({ top: 0, behavior: 'smooth' });
+										}}
+									>
+										Login
+									</NavLink>
 								</li>
 								<li>
-									<NavLink to="/signup">Join</NavLink>
+									<NavLink
+										to="/signup"
+										onClick={() => {
+											setIsMenuOpen(false);
+											window.scrollTo({ top: 0, behavior: 'smooth' });
+										}}
+									>
+										Join
+									</NavLink>
 								</li>
 							</>
 						) : (
