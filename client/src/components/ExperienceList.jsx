@@ -44,7 +44,7 @@ const ExperienceList = () => {
 	return (
 		<div className="timeline-container">
 			{experiences.map((e, i) => (
-				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id} style={{ animation: `fadeInUp 0.4s ease ${i * 0.1}s forwards`, opacity: 0 }}>
+				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id} style={{ animation: `fadeInUp 0.6s ease ${i * 0.1}s forwards`, opacity: 0 }}>
 					<div className="timeline-dot" />
 					<div className="timeline-content">
 						{e.position && <h5 className="timeline-position">{e.position}</h5>}
