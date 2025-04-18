@@ -18,6 +18,11 @@ const Header = ({ user }) => {
 		setIsMenuOpen(false);
 	};
 
+	const handleNavClick = () => {
+		setIsMenuOpen(false);
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
+
 	useEffect(() => {
 		const handleClickOutside = e => {
 			if (isMenuOpen && navRef.current && !navRef.current.contains(e.target)) {
@@ -45,7 +50,7 @@ const Header = ({ user }) => {
 	return (
 		<header className="site-header">
 			<div className="logo-container">
-				<Link to="" className="logo" onClick={() => setIsMenuOpen(false)}>
+				<Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
 					<img src={logoImg} alt="로고" className="logo-img" />
 				</Link>
 			</div>
@@ -57,6 +62,7 @@ const Header = ({ user }) => {
 					<li>
 						<NavLink
 							to="/projects"
+							onClick={handleNavClick}
 							style={({ isActive }) => ({
 								fontWeight: isActive ? 'bold' : 'normal',
 								color: isActive ? '#ff5722' : '#fff',
@@ -68,6 +74,7 @@ const Header = ({ user }) => {
 					<li>
 						<NavLink
 							to="/experiences"
+							onClick={handleNavClick}
 							style={({ isActive }) => ({
 								fontWeight: isActive ? 'bold' : 'normal',
 								color: isActive ? '#ff5722' : '#fff',
@@ -79,6 +86,7 @@ const Header = ({ user }) => {
 					<li>
 						<NavLink
 							to="/galleries"
+							onClick={handleNavClick}
 							style={({ isActive }) => ({
 								fontWeight: isActive ? 'bold' : 'normal',
 								color: isActive ? '#ff5722' : '#fff',
@@ -91,10 +99,14 @@ const Header = ({ user }) => {
 					{!user ? (
 						<>
 							<li>
-								<NavLink to="/login">Login</NavLink>
+								<NavLink to="/login" onClick={handleNavClick}>
+									Login
+								</NavLink>
 							</li>
 							<li>
-								<NavLink to="/signup">Join</NavLink>
+								<NavLink to="/signup" onClick={handleNavClick}>
+									Join
+								</NavLink>
 							</li>
 						</>
 					) : (
@@ -146,7 +158,7 @@ const Header = ({ user }) => {
 				</button>
 				<div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
 					<button className="close-btn" onClick={() => setIsMenuOpen(false)}>
-						<span class="close-icon"></span>
+						<span className="close-icon"></span>
 					</button>
 					<ul className="mobile-menu-links">
 						<li>
@@ -155,10 +167,7 @@ const Header = ({ user }) => {
 						<li>
 							<NavLink
 								to="/projects"
-								onClick={() => {
-									setIsMenuOpen(false);
-									window.scrollTo({ top: 0, behavior: 'smooth' });
-								}}
+								onClick={() => setIsMenuOpen(false)}
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
 									color: isActive ? '#ff5722' : '#fff',
@@ -170,10 +179,7 @@ const Header = ({ user }) => {
 						<li>
 							<NavLink
 								to="/experiences"
-								onClick={() => {
-									setIsMenuOpen(false);
-									window.scrollTo({ top: 0, behavior: 'smooth' });
-								}}
+								onClick={() => setIsMenuOpen(false)}
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
 									color: isActive ? '#ff5722' : '#fff',
@@ -185,10 +191,7 @@ const Header = ({ user }) => {
 						<li>
 							<NavLink
 								to="/galleries"
-								onClick={() => {
-									setIsMenuOpen(false);
-									window.scrollTo({ top: 0, behavior: 'smooth' });
-								}}
+								onClick={() => setIsMenuOpen(false)}
 								style={({ isActive }) => ({
 									fontWeight: isActive ? 'bold' : 'normal',
 									color: isActive ? '#ff5722' : '#fff',
@@ -201,24 +204,12 @@ const Header = ({ user }) => {
 						{!user ? (
 							<>
 								<li>
-									<NavLink
-										to="/login"
-										onClick={() => {
-											setIsMenuOpen(false);
-											window.scrollTo({ top: 0, behavior: 'smooth' });
-										}}
-									>
+									<NavLink to="/login" onClick={() => setIsMenuOpen(false)}>
 										Login
 									</NavLink>
 								</li>
 								<li>
-									<NavLink
-										to="/signup"
-										onClick={() => {
-											setIsMenuOpen(false);
-											window.scrollTo({ top: 0, behavior: 'smooth' });
-										}}
-									>
+									<NavLink to="/signup" onClick={() => setIsMenuOpen(false)}>
 										Join
 									</NavLink>
 								</li>
