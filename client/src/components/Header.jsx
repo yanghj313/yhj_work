@@ -48,11 +48,10 @@ const Header = ({ user }) => {
 
 	return (
 		<header className="site-header">
-			<div className="logo-container">
-				<Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-					<img src="/img/bunny.svg" alt="로고" className="logo-img" />
-				</Link>
-			</div>
+			<Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
+				<img src="/img/bunny.svg" alt="로고" className="logo-img" />
+			</Link>
+
 			<nav className="nav" ref={navRef}>
 				<ul className="nav-links">
 					<li>
