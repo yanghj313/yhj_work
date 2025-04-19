@@ -4,16 +4,12 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
 	plugins: [react()],
 	build: {
-		sourcemap: true, // 💡 반드시 true로 (JS/CSS 모두)
-		cssCodeSplit: true, // 💡 CSS도 파일별로 나뉘게
+		cssCodeSplit: true, // ✅ CSS 분리 필수
+		sourcemap: true,
 		rollupOptions: {
 			output: {
-				entryFileNames: 'entries/[name]-[hash].js',
-				chunkFileNames: 'chunks/[name]-[hash].js',
-				assetFileNames: assetInfo => {
-					if (assetInfo.name?.endsWith('.css')) {
-						return 'styles/[name]-[hash][extname]'; // 💡 파일 이름 유지
-					}
+				assetFileNames: info => {
+					if (info.name?.endsWith('.css')) return 'styles/[name]-[hash][extname]';
 					return 'assets/[name]-[hash][extname]';
 				},
 			},

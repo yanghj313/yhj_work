@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
@@ -9,7 +10,6 @@ const ProjectList = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		import('../assets/css/page.css');
 		const fetchProjects = async () => {
 			try {
 				setLoading(true);
