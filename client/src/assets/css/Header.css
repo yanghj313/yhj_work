@@ -214,7 +214,8 @@
 }
 
 /* 다크모드 대응 */
-@media (prefers-color-scheme: dark) {}
+@media (prefers-color-scheme: dark) {
+}
 
 input[type='search']::-webkit-search-cancel-button {
 	display: none;
@@ -272,8 +273,12 @@ input[type='search']::-webkit-search-cancel-button {
 .fp-viewing-travel .site-header .nav li a {
 	color: #fff;
 }
-
+/*헤더 반응형*/
 @media (max-width: 768px) {
+	.site-header .logo {
+		padding: 0 20px;
+		margin: 10px 0;
+	}
 	.site-header {
 		box-sizing: border-box;
 		padding: 0;
@@ -295,7 +300,6 @@ input[type='search']::-webkit-search-cancel-button {
 		background: none;
 		border: none;
 		cursor: pointer;
-		margin-left: auto;
 		z-index: 998;
 		margin: 10px;
 		position: absolute;
@@ -328,8 +332,8 @@ input[type='search']::-webkit-search-cancel-button {
 		height: 30px;
 	}
 
-	.close-icon::before,
-	.close-icon::after {
+	.close-icon:before,
+	.close-icon:after {
 		content: '';
 		position: absolute;
 		top: 50%;
@@ -340,11 +344,11 @@ input[type='search']::-webkit-search-cancel-button {
 		transform-origin: center;
 	}
 
-	.close-icon::before {
+	.close-icon:before {
 		transform: translate(-50%, -50%) rotate(45deg);
 	}
 
-	.close-icon::after {
+	.close-icon:after {
 		transform: translate(-50%, -50%) rotate(-45deg);
 	}
 }
