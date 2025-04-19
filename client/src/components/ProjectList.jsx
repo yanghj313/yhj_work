@@ -15,7 +15,16 @@ const ProjectList = () => {
 				setLoading(true);
 				const res = await axios.get(`${API_BASE}/api/projects?populate=*`);
 				console.log('🔥 프로젝트 데이터:', res.data.data);
-				setProjects((res.data.data || []).filter(Boolean));
+
+				const rawProjects = (res.data.data || []).filter(Boolean);
+
+				const sortedProjects = [...rawProjects].sort((a, b) => {
+					const dateA = new Date(a.createdAt);
+					const dateB = new Date(b.createdAt);
+					return dateB - dateA;
+				});
+
+				setProjects(sortedProjects);
 			} catch (err) {
 				console.error('❌ 프로젝트 데이터 오류:', err.message);
 			} finally {
