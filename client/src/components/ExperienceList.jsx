@@ -65,12 +65,6 @@ const ExperienceList = () => {
     ${img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} 2x
   `}
 											alt={`image-${idx}`}
-											style={{
-												width: '100%',
-												maxWidth: '500px',
-												height: 'auto',
-												display: 'block',
-											}}
 										/>
 									))
 							) : (
