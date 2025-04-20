@@ -67,9 +67,8 @@ const ExperienceList = () => {
 											alt={`image-${idx}`}
 											style={{
 												width: '100%',
-												maxWidth: '600px',
+												maxWidth: '500px',
 												height: 'auto',
-												objectFit: 'contain',
 												display: 'block',
 											}}
 										/>
