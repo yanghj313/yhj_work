@@ -56,7 +56,23 @@ const ExperienceList = () => {
 							{Array.isArray(e.image) && e.image.length > 0 ? (
 								e.image
 									.filter(img => img?.url)
-									.map((img, idx) => <img key={idx} src={img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} alt={`image-${idx}`} className="timeline-image" />)
+									.map((img, idx) => (
+										<img
+											key={idx}
+											src={img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`}
+											alt={`image-${idx}`}
+											style={{
+												width: '100%',
+												maxWidth: '600px',
+												height: 'auto',
+												aspectRatio: '16 / 9',
+												objectFit: 'cover',
+												borderRadius: '8px',
+												marginBottom: '16px',
+												display: 'block',
+											}}
+										/>
+									))
 							) : (
 								<p>이미지가 없습니다.</p>
 							)}
