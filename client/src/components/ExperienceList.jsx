@@ -52,7 +52,15 @@ const ExperienceList = () => {
 							<p>{e.title}</p>
 							{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
 						</div>
-						<div className="img_wrap">{e.image?.url && <img src={e.image.url.startsWith('http') ? e.image.url : `${API_BASE}${e.image.url}`} alt="image" className="timeline-image" />}</div>
+						<div className="img_wrap">
+							{Array.isArray(e.image) && e.image.length > 0 ? (
+								e.image
+									.filter(img => img?.url)
+									.map((img, idx) => <img key={idx} src={img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} alt={`image-${idx}`} className="timeline-image" />)
+							) : (
+								<p>이미지가 없습니다.</p>
+							)}
+						</div>
 					</div>
 					<div className="timeline-year">{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}</div>
 				</div>
