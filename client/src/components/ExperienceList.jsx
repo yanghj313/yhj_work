@@ -47,9 +47,12 @@ const ExperienceList = () => {
 				<div className={`timeline-item ${i % 2 === 0 ? 'left' : 'right'}`} key={e.id} style={{ animation: `fadeInUp 0.6s ease ${i * 0.1}s forwards`, opacity: 0 }}>
 					<div className="timeline-dot" />
 					<div className="timeline-content">
-						{e.position && <h5 className="timeline-position">{e.position}</h5>}
-						<p>{e.title}</p>
-						{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
+						<div className="timeline-text">
+							{e.position && <h5 className="timeline-position">{e.position}</h5>}
+							<p>{e.title}</p>
+							{e.logo?.url && <img src={e.logo.url.startsWith('http') ? e.logo.url : `${API_BASE}${e.logo.url}`} alt="logo" className="timeline-logo" />}
+						</div>
+						<div className="img_wrap">{e.image?.url && <img src={e.image.url.startsWith('http') ? e.image.url : `${API_BASE}${e.image.url}`} alt="image" className="timeline-image" />}</div>
 					</div>
 					<div className="timeline-year">{e.endDate ? formatDate(e.endDate) : `${formatDate(e.startDate)} - 현재`}</div>
 				</div>
