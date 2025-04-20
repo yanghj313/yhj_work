@@ -60,15 +60,16 @@ const ExperienceList = () => {
 										<img
 											key={idx}
 											src={img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`}
+											srcSet={`
+    ${img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} 1x,
+    ${img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} 2x
+  `}
 											alt={`image-${idx}`}
 											style={{
 												width: '100%',
 												maxWidth: '600px',
 												height: 'auto',
-												aspectRatio: '16 / 9',
-												objectFit: 'cover',
-												borderRadius: '8px',
-												marginBottom: '16px',
+												objectFit: 'contain',
 												display: 'block',
 											}}
 										/>
