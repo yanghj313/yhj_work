@@ -388,7 +388,7 @@
 	width: 14px;
 	height: 14px;
 	border-radius: 50%;
-	background: rgb(255, 255, 255);
+	background: #fc6;
 	border: 2px solid #777;
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
