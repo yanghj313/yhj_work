@@ -480,7 +480,7 @@
 
 .popup-tail.left {
 	position: absolute;
-	left: -10px;
+	left: -9px;
 	top: 50%;
 	-webkit-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
@@ -530,7 +530,7 @@
 	height: 20px;
 	border-radius: 50%;
 	left: 50%;
-	top: 50%;
+	top: 100%;
 	transform: translate(-50%, -50%);
 	z-index: -1;
 	pointer-events: none;
@@ -597,8 +597,8 @@
 }
 
 .map-popup--1 {
-	left: 54%;
-	top: 25%;
+	left: 55%;
+	top: 52%;
 }
 
 .active-marker--2 {
@@ -608,7 +608,7 @@
 
 .map-popup--2 {
 	left: 36%;
-	top: 25%;
+	top: 52%;
 }
 
 .active-marker--3 {
@@ -618,7 +618,7 @@
 
 .map-popup--3 {
 	left: 65.5%;
-	top: 28%;
+	top: 58%;
 }
 
 .active-marker--4 {
@@ -628,7 +628,7 @@
 
 .map-popup--4 {
 	left: 50%;
-	top: 25%;
+	top: 52%;
 }
 
 .active-marker--5 {
@@ -638,7 +638,7 @@
 
 .map-popup--5 {
 	left: 48%;
-	top: 25%;
+	top: 52%;
 }
 
 .active-marker--6 {
@@ -648,7 +648,7 @@
 
 .map-popup--6 {
 	left: 66.5%;
-	top: 25%;
+	top: 55%;
 }
 
 .circle-marker.hidden {
