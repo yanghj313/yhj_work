@@ -72,8 +72,6 @@ const SkillMapSection = () => {
 										onClick={() => setActiveIndex(idx)}
 										style={{ top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
 									>
-										{isActive && <div className="ripple"></div>}
-
 										{s.icon?.url && (
 											<div className="skill-icon">
 												<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} style={{ width: '60px', height: '60px' }} />
@@ -95,6 +93,8 @@ const SkillMapSection = () => {
 															))}
 													</ul>
 												)}
+
+												{isActive && <div className="ripple"></div>}
 											</div>
 										)}
 									</div>
