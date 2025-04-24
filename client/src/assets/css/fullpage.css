@@ -586,8 +586,8 @@
 	top: 50%;
 }
 .circle-marker--3 {
-	left: 36%;
-	top: 55%;
+	left: 64.5%;
+	top: 56%;
 }
 .circle-marker--4 {
 	left: 48.5%;
@@ -595,11 +595,11 @@
 }
 .circle-marker--5 {
 	left: 47.5%;
-	top: 59%;
+	top: 50%;
 }
 .circle-marker--6 {
-	left: 32%;
-	top: 50%;
+	left: 65.5%;
+	top: 53%;
 }
 
 .active-marker--1 {
@@ -623,12 +623,12 @@
 }
 
 .active-marker--3 {
-	left: 36%;
-	top: 55%;
+	left: 64.5%;
+	top: 56%;
 }
 
 .map-popup--3 {
-	left: 37%;
+	left: 65.5%;
 	top: 28%;
 }
 
@@ -653,12 +653,12 @@
 }
 
 .active-marker--6 {
-	left: 32%;
-	top: 50%;
+	left: 65.5%;
+	top: 53%;
 }
 
 .map-popup--6 {
-	left: 33%;
+	left: 66.5%;
 	top: 25%;
 }
 
