@@ -366,6 +366,7 @@ body {
 	padding: 0 1rem;
 	color: #fff;
 	border-radius: 6px;
+	width: fit-content;
 }
 
 .timeline-content > h3:empty {
@@ -429,7 +430,6 @@ body {
 }
 
 /***********************갤러리 게시판***************************/
-/* GalleryList.css */
 .masonry-grid {
 	display: -webkit-box;
 	display: -ms-flexbox;

@@ -68,7 +68,6 @@ const TravelMap = () => {
 								</div>
 
 								<div className={`map-popup map-popup--${marker.id}`} style={{ left: `calc(${marker.x} + 60px)`, top: `calc(${marker.y} - 30px)` }}>
-									{/* ✅ 닫기 버튼 추가 */}
 									<button className="custom-close-btn" aria-label="닫기" onClick={() => setActiveId(null)}>
 										<svg viewBox="0 0 24 24" className="close-icon" xmlns="http://www.w3.org/2000/svg">
 											<line x1="4" y1="4" x2="20" y2="20" stroke="black" strokeWidth="2" />

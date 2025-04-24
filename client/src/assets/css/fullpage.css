@@ -382,7 +382,6 @@
 	z-index: 0;
 }
 
-/* 비활성 마커 */
 .circle-marker {
 	position: absolute;
 	width: 14px;
@@ -408,7 +407,6 @@
 	transform: translate(-50%, -50%) scale(1.2);
 }
 
-/* 활성화 마커 */
 .active-marker {
 	position: absolute;
 	width: 28px;
@@ -431,7 +429,6 @@
 	align-items: center;
 }
 
-/* 팝업 박스 */
 .map-popup {
 	position: absolute;
 	-webkit-transform: translateY(-50%);
@@ -497,7 +494,6 @@
 	z-index: 1;
 }
 
-/* 팝업 애니메이션 */
 @-webkit-keyframes slideIn {
 	from {
 		opacity: 0;
@@ -567,7 +563,6 @@
 	}
 }
 
-/* 마커 위치 수동 지정 */
 .circle-marker--1 {
 	left: 53%;
 	top: 51%;
