@@ -69,7 +69,7 @@
 	background: #ff5722b3;
 	border-radius: 50%;
 	position: absolute;
-	top: -34%;
+	top: 100%;
 	left: 45%;
 	-webkit-animation: ripple 1.6s infinite;
 	animation: ripple 1.6s infinite;
@@ -162,6 +162,21 @@
 	white-space: normal;
 	word-wrap: break-word;
 	word-break: break-word;
+}
+.skill-description li {
+	position: relative;
+	padding-left: 1.5em;
+	list-style: none;
+}
+
+.skill-description li::before {
+	content: '\f00c';
+	font-family: 'Font Awesome 6 Free';
+	font-weight: 900;
+	position: absolute;
+	left: 0;
+	top: 0.1em;
+	color: #fff;
 }
 
 @media (max-width: 768px) {
