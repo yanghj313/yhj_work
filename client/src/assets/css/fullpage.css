@@ -13,7 +13,9 @@
 	align-items: center;
 	overflow: hidden;
 }
-
+.fp-watermark {
+	display: none;
+}
 .section H1 {
 	font-family: 'MonumentExtended';
 }
