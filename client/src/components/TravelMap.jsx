@@ -8,48 +8,36 @@ const markers = [
 		name: '튀르기예',
 		description: '부산 시민을 위한 열린 공간과 자료를 제공합니다.',
 		image: 'https://source.unsplash.com/400x200/?library',
-		x: '53%',
-		y: '51%',
 	},
 	{
 		id: 2,
 		name: '미국',
 		description: '부산을 대표하는 바다 관광지입니다.',
 		image: 'https://source.unsplash.com/400x200/?beach',
-		x: '35%',
-		y: '50%',
 	},
 	{
 		id: 3,
 		name: '중국',
 		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
 		image: 'https://source.unsplash.com/400x200/?village',
-		x: '36%',
-		y: '55%',
 	},
 	{
 		id: 4,
 		name: '스페인',
 		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
 		image: 'https://source.unsplash.com/400x200/?village',
-		x: '48.5%',
-		y: '50%',
 	},
 	{
 		id: 5,
 		name: '포르투갈',
 		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
 		image: 'https://source.unsplash.com/400x200/?village',
-		x: '47.5%',
-		y: '59%',
 	},
 	{
 		id: 6,
 		name: '대한민국',
 		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
 		image: 'https://source.unsplash.com/400x200/?village',
-		x: '32%',
-		y: '50%',
 	},
 ];
 
@@ -62,12 +50,7 @@ const TravelMap = () => {
 				<div className="map-background"></div>
 
 				{markers.map(marker => (
-					<div
-						key={marker.id}
-						className={`circle-marker ${activeId === marker.id ? 'hidden' : ''} circle-marker--${marker.id}`}
-						style={{ left: marker.x, top: marker.y }}
-						onClick={() => setActiveId(marker.id)}
-					/>
+					<div key={marker.id} className={`circle-marker ${activeId === marker.id ? 'hidden' : ''} circle-marker--${marker.id}`} onClick={() => setActiveId(marker.id)} />
 				))}
 
 				{markers.map(
