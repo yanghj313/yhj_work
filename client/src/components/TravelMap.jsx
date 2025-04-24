@@ -59,8 +59,12 @@ const TravelMap = () => {
 							<React.Fragment key={`active-${marker.id}`}>
 								<div className={`active-marker active-marker--${marker.id}`}>
 									<FaMapMarkerAlt size={28} />
-									<div className="marker-wave"></div>
-									<div className="marker-wave marker-wave--inner"></div>
+									<div className="marker-wave">
+										<div class="marker-wave__scale"></div>
+									</div>
+									<div className="marker-wave marker-wave--inner">
+										<div class="marker-wave__scale"></div>
+									</div>
 								</div>
 
 								<div className={`map-popup map-popup--${marker.id}`} style={{ left: `calc(${marker.x} + 60px)`, top: `calc(${marker.y} - 30px)` }}>
