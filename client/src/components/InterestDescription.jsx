@@ -1,4 +1,5 @@
 import React from 'react';
+import '../assets/css/fullpage.css';
 
 const InterestDescription = ({ selected }) => {
 	if (!selected) return null;

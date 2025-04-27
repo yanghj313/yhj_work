@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '../assets/css/fullpage.css';
 
 const ImageModal = ({ images, startIndex, onClose }) => {
 	const settings = {
@@ -11,6 +12,7 @@ const ImageModal = ({ images, startIndex, onClose }) => {
 		arrows: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		speed: 500,
 	};
 
 	return (
@@ -19,8 +21,8 @@ const ImageModal = ({ images, startIndex, onClose }) => {
 				<button className="modal-close" onClick={onClose}>
 					X
 				</button>
-				<Slider initialSlide={currentSlide} slidesToShow={1} slidesToScroll={1} infinite={true} arrows={true} dots={true} speed={500}>
-					{selected.images.map((img, idx) => (
+				<Slider {...settings}>
+					{images.map((img, idx) => (
 						<div key={idx} className="modal-slide-wrapper">
 							<img src={img} alt={`slide-${idx}`} style={{ width: '100%', maxHeight: '80vh', objectFit: 'contain' }} />
 						</div>
