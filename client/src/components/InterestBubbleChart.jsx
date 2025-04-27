@@ -67,7 +67,7 @@ const interests = [
 		name: 'Stationery',
 		value: 150,
 		color: '#576574',
-		image: '/main_img/di_04.jpg',
+		image: '/main_img/di_04.JPG',
 		images: ['/main_img/di_01.JPG', '/main_img/di_02.JPG', '/main_img/di_03.jpg', '/main_img/di_04.JPG', '/main_img/di_05.jpg'],
 	},
 	{
