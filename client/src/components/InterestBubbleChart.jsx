@@ -247,6 +247,7 @@ const InterestBubbleChart = () => {
 				g.append('image')
 					.attr('clip-path', d => `url(#clip-${d.name.replace(/\s+/g, '')})`)
 					.attr('xlink:href', d => d.image)
+					.attr('preserveAspectRatio', 'xMidYMid slice')
 					.attr('width', d => d.value)
 					.attr('height', d => d.value)
 					.attr('x', d => -d.value / 2)
