@@ -149,6 +149,8 @@ const InterestBubbleChart = () => {
 	const [boxVisible, setBoxVisible] = useState(false);
 	const [hasEntered, setHasEntered] = useState(false);
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [modalStartIndex, setModalStartIndex] = useState(0);
 
 	useEffect(() => {
 		const resizeObserver = new ResizeObserver(entries => {
@@ -299,6 +301,11 @@ const InterestBubbleChart = () => {
 			.style('font-size', d => Math.min(d.value / 6, 12));
 	}, [dimensions, selected, hasEntered]);
 
+	const handleThumbnailClick = idx => {
+		setModalStartIndex(idx);
+		setIsModalOpen(true);
+	};
+
 	return (
 		<div className="full-container">
 			<div className={`interest-section ${boxVisible ? 'with-box' : ''}`} ref={wrapperRef}>
@@ -325,23 +332,19 @@ const InterestBubbleChart = () => {
 
 						<h2>{selected.name}</h2>
 
-						{/* 썸네일 */}
+						{/* 썸네일 슬릭 */}
 						<div className="thumbnail-container">
-							{selected.images?.map((thumb, idx) => (
-								<img key={idx} src={thumb} alt={`thumb-${idx}`} className="thumbnail" onClick={() => setCurrentSlide(idx)} />
-							))}
-						</div>
-
-						{/* 슬릭 슬라이더 */}
-						<div className="slider-popup">
-							<Slider dots={true} arrows={true} infinite={true} initialSlide={currentSlide}>
-								{selected.images.map((img, idx) => (
-									<div key={idx}>
-										<img src={img} alt={`slide-${idx}`} style={{ width: '100%', maxHeight: '500px', objectFit: 'contain' }} />
+							<Slider slidesToShow={3} slidesToScroll={1} infinite={selected.images.length > 3} arrows={true}>
+								{selected.images?.map((thumb, idx) => (
+									<div key={idx} className="thumbnail-wrapper">
+										<img src={thumb} alt={`thumb-${idx}`} className="thumbnail" onClick={() => handleThumbnailClick(idx)} />
 									</div>
 								))}
 							</Slider>
 						</div>
+
+						{/* 모달 */}
+						{isModalOpen && <ImageModal images={selected.images} startIndex={modalStartIndex} onClose={() => setIsModalOpen(false)} />}
 
 						{/* 설명 */}
 						<InterestDescription selected={selected} />

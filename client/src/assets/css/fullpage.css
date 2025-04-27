@@ -363,39 +363,62 @@
 }
 
 .thumbnail-container {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
-	margin-bottom: 20px;
-	justify-content: center;
+	margin-top: 20px;
+}
+
+.thumbnail-wrapper {
+	padding: 5px;
 }
 
 .thumbnail {
-	width: 80px;
-	height: 80px;
+	width: 100%;
+	height: 100px;
 	object-fit: cover;
 	cursor: pointer;
 	border-radius: 8px;
-	border: 2px solid transparent;
-	transition: border-color 0.3s;
+	transition: transform 0.3s;
 }
 
 .thumbnail:hover {
-	border-color: #ff5722;
+	transform: scale(1.05);
 }
 
-/* 슬라이더 팝업 */
 .slider-popup {
-	max-width: 600px;
-	margin: 0 auto;
+	margin-top: 20px;
 }
 
-.slider-popup img {
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
-	height: auto;
-	max-height: 500px;
-	object-fit: contain;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
 }
+
+.modal-content {
+	background: white;
+	padding: 20px;
+	border-radius: 12px;
+	position: relative;
+	width: 80%;
+	max-width: 800px;
+}
+
+.modal-close {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+}
+
 
 /*************지도***************/
 .travel-map-wrapper {
