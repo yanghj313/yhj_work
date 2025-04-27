@@ -69,7 +69,7 @@ const interests = [
 		value: 150,
 		color: '#576574',
 		image: '/main_img/di_04.JPG',
-		images: ['/main_img/di_01.JPG', '/main_img/di_02.JPG', '/main_img/di_03.jpg', '/main_img/di_04.JPG', '/main_img/di_05.jpg'],
+		images: ['/main_img/di_01.jpg', '/main_img/di_02.JPG', '/main_img/di_03.jpg', '/main_img/di_04.JPG', '/main_img/di_05.jpg'],
 	},
 	{
 		name: 'Camera',
