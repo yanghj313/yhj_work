@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../assets/css/fullpage.css';
 import InterestDescription from './InterestDescription';
+import ImageModal from './ImageModal';
 
 const interests = [
 	{
