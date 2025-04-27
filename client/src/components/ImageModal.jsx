@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../assets/css/fullpage.css';
 
-const ImageModal = ({ images, startIndex, onClose }) => {
+const ImageModal = ({ images, startIndex = 0, onClose }) => {
 	const settings = {
 		initialSlide: startIndex,
 		dots: true,
@@ -13,6 +13,8 @@ const ImageModal = ({ images, startIndex, onClose }) => {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		speed: 500,
+		swipe: true,
+		draggable: true,
 	};
 
 	return (
