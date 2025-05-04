@@ -20,7 +20,7 @@ const interests = [
 		value: 150,
 		color: '#576574',
 		image: '/main_img/design.JPG',
-		images: ['/main_img/ui_01.jpg', '/main_img/ui_02.jpg', '/main_img/ui_03.jpg', '/main_img/ui_04.jpg', '/main_img/ui_05.jpg'],
+		images: ['/main_img/ui_01.jpg', '/main_img/ui_02.jpg', '/main_img/ui_03.jpg', '/main_img/ui_04.jpg', '/main_img/ui_05.JPG'],
 	},
 	{
 		name: 'Movie',
