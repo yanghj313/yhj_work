@@ -95,7 +95,7 @@ const interests = [
 		name: 'Fashion',
 		value: 80,
 		color: '#576574',
-		image: '/main_img/style_01.jpg',
+		image: '/main_img/style_01.JPG',
 		images: [
 			'/main_img/style_02.JPG',
 			'/main_img/style_03.jpg',
