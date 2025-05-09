@@ -7,7 +7,7 @@ const markers = [
 		id: 1,
 		name: '튀르기예',
 		description: '카파도키아와 파묵칼레에서 봤던 경치는 잊을 수 없는 장관이었습니다. 해외 여행 중 가장 기억에 남는 곳을 묻는다면 단연 튀르기예입니다.',
-		image: '/main_img/tour_01.JPG',
+		image: '/main_img/tur_03.JPG',
 	},
 	{
 		id: 2,
@@ -39,7 +39,7 @@ const markers = [
 		name: '대한민국',
 		description:
 			'국내 여행도 무척 좋아합니다. 서울에 있었을 때는 강원도 여행을 자주 갔었습니다. 삼척의 장호항은 사진으로 그 아름다움이 전해지지 않아 아쉽습니다. 지리산 종주도 힘들었지만, 보람있는 경험이었습니다. 제주도 여행도 즐깁니다. ',
-		image: '/main_img/tur_03.JPG',
+		image: '/main_img/tour_01.JPG',
 	},
 ];
 
