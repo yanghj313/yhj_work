@@ -412,6 +412,10 @@
 	text-align: center;
 	color: #fff;
 	font-family: 'Pretendard';
+	position: absolute;
+	font-size: 1rem;
+	top: 10px;
+	width: 100%;
 }
 
 .map-background {
