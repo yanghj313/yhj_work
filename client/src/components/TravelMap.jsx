@@ -6,38 +6,40 @@ const markers = [
 	{
 		id: 1,
 		name: '튀르기예',
-		description: '부산 시민을 위한 열린 공간과 자료를 제공합니다.',
-		image: 'https://source.unsplash.com/400x200/?library',
+		description: '카파도키아와 파묵칼레에서 봤던 경치는 잊을 수 없는 장관이었습니다. 해외 여행 중 가장 기억에 남는 곳을 묻는다면 단연 튀르기예입니다.',
+		image: '/main_img/tour_01.jpg',
 	},
 	{
 		id: 2,
 		name: '미국',
-		description: '부산을 대표하는 바다 관광지입니다.',
-		image: 'https://source.unsplash.com/400x200/?beach',
+		description: '처음으로 갔던 해외 여행지 입니다. 시카고를 거쳐 켄자스 시티에서 낭만을 즐기고, 커니에서 현지 학생들과 공부를 했던 때가 가끔 그립습니다.',
+		image: '/main_img/ame.jpg',
 	},
 	{
 		id: 3,
 		name: '중국',
-		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
-		image: 'https://source.unsplash.com/400x200/?village',
+		description:
+			'상하이는 현대적인 도시 풍경과 전통적인 문화의 조화가 근사한 곳이었습니다. 특히 동방명주 타워는 야경의 아름다움을 더해줘 황홀했던 기억이 있습니다. 광활한 규모의 디즈니랜드도 인상적이었습니다.',
+		image: '/main_img/sang_01.jpg',
 	},
 	{
 		id: 4,
 		name: '스페인',
-		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
-		image: 'https://source.unsplash.com/400x200/?village',
+		description: '바르셀로나와 마드리드는 각자의 매력이 있었습니다. 마드리드의 광장과 미술관의 예술작품도 근사했고, 사진으로만 보던 바르셀로나의 가우디 건축물은 실물이 훨씬 감동적이었습니다.',
+		image: '/main_img/spa_01.jpg',
 	},
 	{
 		id: 5,
 		name: '포르투갈',
-		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
-		image: 'https://source.unsplash.com/400x200/?village',
+		description: '포르투의 와인과 리스본의 아기자기한 매력을 느꼈습니다. 특히 리스본의 트램은 독특한 경험이었습니다. ',
+		image: '/main_img/port.jpg',
 	},
 	{
 		id: 6,
 		name: '대한민국',
-		description: '예술과 전통이 어우러진 아름다운 마을입니다.',
-		image: 'https://source.unsplash.com/400x200/?village',
+		description:
+			'국내 여행도 무척 좋아합니다. 서울에 있었을 때는 강원도 여행을 자주 갔었습니다. 삼척의 장호항은 사진으로 그 아름다움이 전해지지 않아 아쉽습니다. 지리산 종주도 힘들었지만, 보람있는 경험이었습니다. 제주도 여행도 즐깁니다. ',
+		image: '/main_img/tur_03.jpg',
 	},
 ];
 
