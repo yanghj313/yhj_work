@@ -48,6 +48,7 @@ const TravelMap = () => {
 
 	return (
 		<div className="travel-map-wrapper">
+			<p class="map_description">지도 위 노랑색 마크를 클릭해주세요!</p>
 			<div className="travel-map">
 				<div className="map-background"></div>
 
