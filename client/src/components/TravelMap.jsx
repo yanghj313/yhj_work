@@ -7,20 +7,20 @@ const markers = [
 		id: 1,
 		name: '튀르기예',
 		description: '카파도키아와 파묵칼레에서 봤던 경치는 잊을 수 없는 장관이었습니다. 해외 여행 중 가장 기억에 남는 곳을 묻는다면 단연 튀르기예입니다.',
-		image: '/main_img/tour_01.jpg',
+		image: '/main_img/tour_01.JPG',
 	},
 	{
 		id: 2,
 		name: '미국',
 		description: '처음으로 갔던 해외 여행지 입니다. 시카고를 거쳐 켄자스 시티에서 낭만을 즐기고, 커니에서 현지 학생들과 공부를 했던 때가 가끔 그립습니다.',
-		image: '/main_img/ame.jpg',
+		image: '/main_img/ame.JPG',
 	},
 	{
 		id: 3,
 		name: '중국',
 		description:
 			'상하이는 현대적인 도시 풍경과 전통적인 문화의 조화가 근사한 곳이었습니다. 특히 동방명주 타워는 야경의 아름다움을 더해줘 황홀했던 기억이 있습니다. 광활한 규모의 디즈니랜드도 인상적이었습니다.',
-		image: '/main_img/sang_01.jpg',
+		image: '/main_img/sang_01.JPG',
 	},
 	{
 		id: 4,
@@ -39,7 +39,7 @@ const markers = [
 		name: '대한민국',
 		description:
 			'국내 여행도 무척 좋아합니다. 서울에 있었을 때는 강원도 여행을 자주 갔었습니다. 삼척의 장호항은 사진으로 그 아름다움이 전해지지 않아 아쉽습니다. 지리산 종주도 힘들었지만, 보람있는 경험이었습니다. 제주도 여행도 즐깁니다. ',
-		image: '/main_img/tur_03.jpg',
+		image: '/main_img/tur_03.JPG',
 	},
 ];
 
