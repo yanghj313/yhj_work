@@ -30,7 +30,7 @@ const ProjectDetail = () => {
 	}, [id]);
 
 	return (
-		<div className="project_detail">
+		<div className="project_details">
 			{projects.map(p =>
 				p?.title ? (
 					<div key={p.id}>
