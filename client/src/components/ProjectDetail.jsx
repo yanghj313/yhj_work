@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import '../assets/css/project-details.css';
 import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
@@ -29,15 +30,15 @@ const ProjectDetail = () => {
 	}, [id]);
 
 	return (
-		<div style={{ padding: '1rem' }}>
+		<div className="project_detail">
 			{projects.map(p =>
 				p?.title ? (
 					<div key={p.id}>
-						<h2>{p.title}</h2>
+						<h2 className="project_title">{p.title}</h2>
 
-						{p.role && <p>역할: {p.role}</p>}
-						{p.contribution && <p>기여도: {p.contribution}</p>}
-						{p.period && <p>작업 기간: {p.period}</p>}
+						{p.role && <p className="bullet">역할: {p.role}</p>}
+						{p.contribution && <p className="bullet">기여도: {p.contribution}</p>}
+						{p.period && <p className="bullet">작업 기간: {p.period}</p>}
 						{p.link && (
 							<p>
 								🔗{' '}
@@ -48,7 +49,7 @@ const ProjectDetail = () => {
 						)}
 
 						{p.images?.length > 0 && (
-							<div>
+							<div class="project_images">
 								<h4>상세 이미지</h4>
 								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
 									{p.images.map(img => (
