@@ -419,7 +419,7 @@
 }
 
 .map-background {
-	background: url('/client/src/assets/img/map.svg') no-repeat center center/contain;
+	background: url('/img/map.svg') no-repeat center center / contain;
 	position: absolute;
 	top: 0;
 	right: 0;
