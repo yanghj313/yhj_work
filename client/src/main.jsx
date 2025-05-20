@@ -45,8 +45,8 @@ const AppLayout = ({ user, setUser }) => {
 
 	return (
 		<>
-			{location.pathname === '/' ? <Header user={user} /> : subHeaderInfo ? <SubHeader title={subHeaderInfo.title} backgroundImage={subHeaderInfo.backgroundImage} /> : <Header user={user} />}
-
+			<Header user={user} /> {/* 항상 상단에 고정 */}
+			{subHeaderInfo && <SubHeader title={subHeaderInfo.title} backgroundImage={subHeaderInfo.backgroundImage} />}
 			<Routes>
 				<Route path="/" element={<FullpageHome />} />
 				<Route path="/projects" element={<ProjectList />} />
