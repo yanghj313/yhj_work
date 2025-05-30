@@ -144,7 +144,7 @@ const interests = [
 const InterestBubbleChart = () => {
 	const svgRef = useRef();
 	const wrapperRef = useRef();
-	const aboutRef = useRef();
+	const aboutRef = useRef(); // 설명 박스 참조
 	const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 	const [selected, setSelected] = useState(null);
 	const [boxVisible, setBoxVisible] = useState(false);
@@ -177,6 +177,18 @@ const InterestBubbleChart = () => {
 		observer.observe(wrapperRef.current);
 		return () => observer.disconnect();
 	}, [hasEntered]);
+
+	// ✅ 설명 박스 외부 클릭 시 닫기
+	useEffect(() => {
+		const handleClickOutside = e => {
+			if (boxVisible && aboutRef.current && !aboutRef.current.contains(e.target)) {
+				setBoxVisible(false);
+				setTimeout(() => setSelected(null), 300);
+			}
+		};
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	}, [boxVisible]);
 
 	useEffect(() => {
 		if (!hasEntered) return;
@@ -334,7 +346,6 @@ const InterestBubbleChart = () => {
 
 						<h2>{selected.name}</h2>
 
-						{/* 썸네일 슬릭 */}
 						<div className="thumbnail-container">
 							<Slider slidesToShow={3} slidesToScroll={1} infinite={selected.images.length > 3} arrows={true}>
 								{selected.images?.map((thumb, idx) => (
@@ -345,10 +356,8 @@ const InterestBubbleChart = () => {
 							</Slider>
 						</div>
 
-						{/* 모달 */}
 						{isModalOpen && <ImageModal images={selected.images} startIndex={modalStartIndex} onClose={() => setIsModalOpen(false)} />}
 
-						{/* 설명 */}
 						<InterestDescription selected={selected} />
 					</div>
 				)}

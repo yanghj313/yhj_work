@@ -228,41 +228,41 @@
 	height: 700px;
 	overflow: visible;
 	justify-content: center;
-	margin-top: 120px
+	margin-top: 120px;
 }
 
 .interest-section {
-	transition: all .5s ease;
-	width: 800px
+	transition: all 0.5s ease;
+	width: 800px;
 }
 
 .bubble-chart {
 	width: 800px;
 	height: 600px;
-	transition: transform .3s ease;
+	transition: transform 0.3s ease;
 	position: relative;
-	z-index: 1
+	z-index: 1;
 }
 
 .interest-section.with-box .bubble-chart {
-	transform: translate(-250px)
+	transform: translate(-250px);
 }
 
 .bubble-chart svg {
 	width: 100%;
 	height: 100%;
 	display: block;
-	overflow: visible
+	overflow: visible;
 }
 
 .about-wrapper {
 	position: relative;
 	width: 0;
-	overflow: visible
+	overflow: visible;
 }
 
 .about-wrapper.show {
-	width: 500px
+	width: 500px;
 }
 
 .about_keyword {
@@ -274,20 +274,20 @@
 	background: #333;
 	transform: translate(100%);
 	opacity: 0;
-	transition: transform .3s ease, opacity .3s ease;
+	transition: transform 0.3s ease, opacity 0.3s ease;
 	box-shadow: -4px 0 20px #000000a6;
 	z-index: 10;
 	color: #fff;
-	border-radius: 10px 0 0 10px
+	border-radius: 10px 0 0 10px;
 }
 
 .about_keyword.show {
 	opacity: 1;
-	transform: translate(0)
+	transform: translate(0);
 }
 
 .custom-description h2 {
-	font-size: 1.5rem
+	font-size: 1.5rem;
 }
 
 .custom-description img {
@@ -295,7 +295,7 @@
 	border-radius: 0;
 	margin-bottom: 1rem;
 	height: 300px;
-	margin-top: 4px
+	margin-top: 4px;
 }
 
 .custom-description p {
@@ -308,18 +308,18 @@
 	background: transparent;
 	border: none;
 	cursor: pointer;
-	padding: .75rem;
+	padding: 0.75rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
-	transition: background .3s ease;
+	transition: background 0.3s ease;
 	position: absolute;
-	left: 1rem
+	left: 1rem;
 }
 
 .custom-close-btn:hover {
-	background: #333
+	background: #333;
 }
 
 .close-icon {
@@ -328,20 +328,20 @@
 	stroke: #fff;
 	stroke-width: 2;
 	stroke-linecap: round;
-	transition: transform .3s ease, stroke .3s ease
+	transition: transform 0.3s ease, stroke 0.3s ease;
 }
 
 .custom-close-btn:hover .close-icon {
 	transform: rotate(90deg);
-	stroke: #ff4d4f
+	stroke: #ff4d4f;
 }
 
 .thumbnail-container {
-	margin-top: 20px
+	margin-top: 20px;
 }
 
 .thumbnail-wrapper {
-	padding: 5px
+	padding: 5px;
 }
 
 .thumbnail {
@@ -351,15 +351,15 @@
 	object-fit: cover;
 	cursor: pointer;
 	border-radius: 8px;
-	transition: transform .3s
+	transition: transform 0.3s;
 }
 
 .thumbnail:hover {
-	transform: scale(1.05)
+	transform: scale(1.05);
 }
 
 .slider-popup {
-	margin-top: 20px
+	margin-top: 20px;
 }
 
 .modal-overlay {
@@ -372,7 +372,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 9999
+	z-index: 9999;
 }
 
 .modal-content {
@@ -381,7 +381,7 @@
 	border-radius: 12px;
 	position: relative;
 	width: 80%;
-	max-width: 800px
+	max-width: 800px;
 }
 
 .modal-close {
@@ -391,7 +391,7 @@
 	background: none;
 	border: none;
 	font-size: 20px;
-	cursor: pointer
+	cursor: pointer;
 }
 
 /*******************************지도*******************************/
@@ -399,13 +399,13 @@
 	position: relative;
 	width: 100%;
 	height: 700px;
-	overflow: hidden
+	overflow: hidden;
 }
 
 .travel-map {
 	position: relative;
 	width: 100%;
-	height: 100%
+	height: 100%;
 }
 
 .map_description {
@@ -425,7 +425,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 0
+	z-index: 0;
 }
 
 .circle-marker {
@@ -438,11 +438,11 @@
 	transform: translate(-50%, -50%);
 	cursor: pointer;
 	z-index: 1;
-	transition: transform .2s ease
+	transition: transform 0.2s ease;
 }
 
 .circle-marker:hover {
-	transform: translate(-50%, -50%) scale(1.2)
+	transform: translate(-50%, -50%) scale(1.2);
 }
 
 .active-marker {
@@ -451,11 +451,11 @@
 	height: 28px;
 	transform: translate(-50%, -50%);
 	color: #e74c3c;
-	animation: pulse .8s ease-out;
+	animation: pulse 0.8s ease-out;
 	z-index: 3;
 	display: flex;
 	justify-content: center;
-	align-items: center
+	align-items: center;
 }
 
 .map-popup {
@@ -470,7 +470,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	animation: slideIn .4s ease-out;
+	animation: slideIn 0.4s ease-out;
 	height: auto;
 	padding-top: 50px;
 }
@@ -481,20 +481,20 @@
 	-o-object-fit: cover;
 	object-fit: cover;
 	border-radius: 6px;
-	margin-bottom: .5rem;
+	margin-bottom: 0.5rem;
 	max-height: 180px;
 }
 
 .map-popup h3 {
 	font-size: 1rem;
-	margin: .2rem 0;
-	color: #333
+	margin: 0.2rem 0;
+	color: #333;
 }
 
 .map-popup p {
-	font-size: .85rem;
+	font-size: 0.85rem;
 	color: #555;
-	text-align: center
+	text-align: center;
 }
 
 .popup-tail.left {
@@ -507,18 +507,18 @@
 	background: #fff;
 	clip-path: polygon(0 50%, 100% 0, 100% 100%);
 	box-shadow: -2px 2px 4px #0000001a;
-	z-index: 1
+	z-index: 1;
 }
 
 @keyframes slideIn {
 	0% {
 		opacity: 0;
-		transform: translateY(-50%) translate(10px)
+		transform: translateY(-50%) translate(10px);
 	}
 
 	to {
 		opacity: 1;
-		transform: translateY(-50%) translate(0)
+		transform: translateY(-50%) translate(0);
 	}
 }
 
@@ -531,12 +531,12 @@
 	top: 100%;
 	transform: translate(-50%, -50%);
 	z-index: -1;
-	pointer-events: none
+	pointer-events: none;
 }
 
 .marker-wave--inner {
 	width: 12px;
-	height: 12px
+	height: 12px;
 }
 
 .marker-wave__scale {
@@ -544,118 +544,118 @@
 	height: 100%;
 	border-radius: 50%;
 	background: #e74c3c66;
-	animation: ripple-scale 1.8s infinite ease-out
+	animation: ripple-scale 1.8s infinite ease-out;
 }
 
 .marker-wave--inner .marker-wave__scale {
 	background: #e74c3c99;
-	animation-delay: .4s
+	animation-delay: 0.4s;
 }
 
 @keyframes ripple-scale {
 	0% {
-		transform: scale(.7);
-		opacity: .8
+		transform: scale(0.7);
+		opacity: 0.8;
 	}
 
 	to {
 		transform: scale(2.2);
-		opacity: 0
+		opacity: 0;
 	}
 }
 
 .circle-marker--1 {
 	left: 53%;
-	top: 51%
+	top: 51%;
 }
 
 .circle-marker--2 {
 	left: 35%;
-	top: 50%
+	top: 50%;
 }
 
 .circle-marker--3 {
 	left: 64.5%;
-	top: 56%
+	top: 56%;
 }
 
 .circle-marker--4 {
 	left: 48.5%;
-	top: 50%
+	top: 50%;
 }
 
 .circle-marker--5 {
 	left: 47.5%;
-	top: 50%
+	top: 50%;
 }
 
 .circle-marker--6 {
 	left: 65.5%;
-	top: 53%
+	top: 53%;
 }
 
 .active-marker--1 {
 	left: 53%;
-	top: 51%
+	top: 51%;
 }
 
 .map-popup--1 {
 	left: 54.5%;
-	top: 52%
+	top: 52%;
 }
 
 .active-marker--2 {
 	left: 35%;
-	top: 50%
+	top: 50%;
 }
 
 .map-popup--2 {
 	left: 36.5%;
-	top: 52%
+	top: 52%;
 }
 
 .active-marker--3 {
 	left: 64.5%;
-	top: 56%
+	top: 56%;
 }
 
 .map-popup--3 {
 	left: 66%;
-	top: 58%
+	top: 58%;
 }
 
 .active-marker--4 {
 	left: 48.5%;
-	top: 50%
+	top: 50%;
 }
 
 .map-popup--4 {
 	left: 50%;
-	top: 52%
+	top: 52%;
 }
 
 .active-marker--5 {
 	left: 47.5%;
-	top: 50%
+	top: 50%;
 }
 
 .map-popup--5 {
 	left: 49%;
-	top: 52%
+	top: 52%;
 }
 
 .active-marker--6 {
 	left: 65.5%;
-	top: 53%
+	top: 53%;
 }
 
 .map-popup--6 {
 	left: 67%;
-	top: 55%
+	top: 55%;
 }
 
 .circle-marker.hidden {
-	display: none
+	display: none;
 }
 
 .map-popup .custom-close-btn {
@@ -666,10 +666,33 @@
 	border: none;
 	cursor: pointer;
 	padding: 5px;
-	z-index: 10
+	z-index: 10;
 }
 
 .map-popup .close-icon {
 	width: 20px;
 	height: 20px;
+}
+
+/*노트북 반응형*/
+@media (max-width: 1500px) {
+	.travel-map-wrapper {
+		height: 600px;
+	}
+
+	.travel-map {
+		width: 1668px;
+		height: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.map-background {
+		background: url(/img/map.svg) no-repeat center center / cover;
+		top: 50%;
+		left: 50%;
+		height: 600px;
+		width: 880px;
+		transform: translate(-50%, -50%);
+	}
 }
