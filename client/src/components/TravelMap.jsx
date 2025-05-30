@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../assets/css/fullpage.css';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
