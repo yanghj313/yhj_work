@@ -45,6 +45,22 @@ const markers = [
 
 const TravelMap = () => {
 	const [activeId, setActiveId] = useState(null);
+	const popupRef = useRef(null); // ✅ 팝업 참조용 ref
+
+	// ✅ 외부 클릭 감지
+	useEffect(() => {
+		const handleClickOutside = e => {
+			if (popupRef.current && !popupRef.current.contains(e.target)) {
+				setActiveId(null);
+			}
+		};
+		if (activeId !== null) {
+			document.addEventListener('mousedown', handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [activeId]);
 
 	return (
 		<div className="travel-map-wrapper">
@@ -63,14 +79,18 @@ const TravelMap = () => {
 								<div className={`active-marker active-marker--${marker.id}`}>
 									<FaMapMarkerAlt size={28} />
 									<div className="marker-wave">
-										<div class="marker-wave__scale"></div>
+										<div className="marker-wave__scale"></div>
 									</div>
 									<div className="marker-wave marker-wave--inner">
-										<div class="marker-wave__scale"></div>
+										<div className="marker-wave__scale"></div>
 									</div>
 								</div>
 
-								<div className={`map-popup map-popup--${marker.id}`} style={{ left: `calc(${marker.x} + 60px)`, top: `calc(${marker.y} - 30px)` }}>
+								<div
+									ref={popupRef} // ✅ 팝업에 ref 적용
+									className={`map-popup map-popup--${marker.id}`}
+									style={{ left: `calc(${marker.x} + 60px)`, top: `calc(${marker.y} - 30px)` }}
+								>
 									<button className="custom-close-btn" aria-label="닫기" onClick={() => setActiveId(null)}>
 										<svg viewBox="0 0 24 24" className="close-icon" xmlns="http://www.w3.org/2000/svg">
 											<line x1="4" y1="4" x2="20" y2="20" stroke="black" strokeWidth="2" />
