@@ -178,7 +178,17 @@
 	top: 0;
 	color: #fff;
 }
-
+@media (max-width: 1500px) {
+	.skill-tour-inner {
+		display: block;
+		width: 100%;
+		transform: translate(-50%, -50%);
+		left: 50%;
+		top: 50%;
+		position: relative;
+		height: 550px !important;
+	}
+}
 @media (max-width: 768px) {
 	.tooltip-box {
 		top: auto;
