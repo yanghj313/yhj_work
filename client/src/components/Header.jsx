@@ -94,7 +94,7 @@ const Header = ({ user }) => {
 						</NavLink>
 					</li>
 
-					{!user ? (
+					{/*!user ? (
 						<>
 							<li>
 								<NavLink to="/login" onClick={handleNavClick}>
@@ -132,7 +132,7 @@ const Header = ({ user }) => {
 								</a>
 							</li>
 						</>
-					)}
+					)*/}
 					<li>
 						<form className="search-bar" onSubmit={handleSearch}>
 							{searchTerm && (
@@ -199,7 +199,7 @@ const Header = ({ user }) => {
 							</NavLink>
 						</li>
 
-						{!user ? (
+						{/*!user ? (
 							<>
 								<li>
 									<NavLink to="/login" onClick={() => setIsMenuOpen(false)}>
@@ -237,7 +237,7 @@ const Header = ({ user }) => {
 									</a>
 								</li>
 							</>
-						)}
+						)*/}
 						<li>
 							<form className="search-bar" onSubmit={handleSearch}>
 								{searchTerm && (
