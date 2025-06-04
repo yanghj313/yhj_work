@@ -134,6 +134,16 @@ body {
 }
 
 /*프로젝트 리스트 반응형*/
+
+@media (max-width: 1500px) {
+	.list ul {
+		grid-template-columns: repeat(3, 410px);
+	}
+
+	.media-container {
+		max-width: 410px;
+	}
+}
 @media (max-width: 1400px) {
 	.list ul {
 		grid-template-columns: repeat(3, 380px);
