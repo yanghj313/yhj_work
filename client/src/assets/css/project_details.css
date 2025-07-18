@@ -8,6 +8,7 @@
 
 .bullet {
     position: relative;
+    padding-left: 16px;
 }
 
 .bullet::before {
@@ -21,4 +22,5 @@
     margin-right: 8px;
     top: 50%;
     transform: translateY(-50%);
+    left: 0;
 }
