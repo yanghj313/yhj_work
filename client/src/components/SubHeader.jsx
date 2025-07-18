@@ -7,10 +7,9 @@ const SubHeader = ({ title = '서브페이지 타이틀', backgroundImage = '/im
 			<h1 className="sub-header-title">{title}</h1>
 
 			{/* 바다와 파도 */}
-			<div className="ocean">
-				<div className="wave"></div>
-				<div className="wave"></div>
-			</div>
+
+			<div className="wave"></div>
+			<div className="wave second"></div>
 		</header>
 	);
 };

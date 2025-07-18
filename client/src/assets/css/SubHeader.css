@@ -1,4 +1,3 @@
-/* 서브헤더 스타일 */
 .sub-header-simple {
     width: 100%;
     height: 260px;
@@ -10,7 +9,6 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    /* 파도가 넘치지 않게 */
 }
 
 .sub-header-title {
@@ -23,33 +21,22 @@
     position: relative;
 }
 
-/* 바다 + 파도 애니메이션 */
-.ocean {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    /* 적당한 파도 높이 */
-    background: #015871;
-    overflow: hidden;
-    z-index: 1;
-}
-
+/* 파도 */
 .wave {
     background: url('/img/wave.svg') repeat-x;
     position: absolute;
-    top: -198px;
+    bottom: 0;
     width: 6400px;
     height: 198px;
     animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
     transform: translate3d(0, 0, 0);
+    z-index: 1;
+    opacity: 0.8;
 }
 
-.wave:nth-of-type(2) {
-    top: -175px;
-    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
-        swell 7s ease -1.25s infinite;
+.wave.second {
+    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
+    bottom: 0;
     opacity: 1;
 }
 
