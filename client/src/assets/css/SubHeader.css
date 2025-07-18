@@ -42,86 +42,85 @@
 
 .wave1 {
     fill: #ffb687;
-    animation: waveMove1 16s linear infinite, waveFloat1 6s ease-in-out infinite;
+    animation: waveDrift1 10s ease-in-out infinite;
     z-index: 1;
 }
 
 .wave2 {
     fill: #ff896e;
-    animation: waveMove2 12s linear infinite, waveFloat2 5s ease-in-out infinite;
+    animation: waveDrift2 8s ease-in-out infinite;
     z-index: 2;
 }
 
 .wave3 {
     fill: #ff5e6c;
-    animation: waveMove3 9s linear infinite, waveFloat3 4s ease-in-out infinite;
+    animation: waveDrift3 6s ease-in-out infinite;
     z-index: 3;
 }
 
-/* 좌우 애니메이션 (조금 더 빠르게) */
-@keyframes waveMove1 {
+/* X+Y를 함께 움직이는 애니메이션 */
+@keyframes waveDrift1 {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
     }
 
-    100% {
-        transform: translateX(-25%);
-    }
-}
-
-@keyframes waveMove2 {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-@keyframes waveMove3 {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-75%);
-    }
-}
-
-/* 상하 출렁임 (세로 곡선 강조) */
-@keyframes waveFloat1 {
-
-    0%,
-    100% {
-        transform: translateY(0);
+    25% {
+        transform: translateX(-15px) translateY(10px);
     }
 
     50% {
-        transform: translateY(12px);
+        transform: translateX(-30px) translateY(0);
+    }
+
+    75% {
+        transform: translateX(-15px) translateY(-10px);
+    }
+
+    100% {
+        transform: translateX(0) translateY(0);
     }
 }
 
-@keyframes waveFloat2 {
+@keyframes waveDrift2 {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
 
-    0%,
-    100% {
-        transform: translateY(0);
+    25% {
+        transform: translateX(-20px) translateY(12px);
     }
 
     50% {
-        transform: translateY(18px);
+        transform: translateX(-40px) translateY(0);
+    }
+
+    75% {
+        transform: translateX(-20px) translateY(-12px);
+    }
+
+    100% {
+        transform: translateX(0) translateY(0);
     }
 }
 
-@keyframes waveFloat3 {
+@keyframes waveDrift3 {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
 
-    0%,
-    100% {
-        transform: translateY(0);
+    25% {
+        transform: translateX(-25px) translateY(14px);
     }
 
     50% {
-        transform: translateY(24px);
+        transform: translateX(-50px) translateY(0);
+    }
+
+    75% {
+        transform: translateX(-25px) translateY(-14px);
+    }
+
+    100% {
+        transform: translateX(0) translateY(0);
     }
 }
