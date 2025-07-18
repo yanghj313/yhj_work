@@ -34,7 +34,9 @@ const ProjectDetail = () => {
 			{projects.map(p =>
 				p?.title ? (
 					<div key={p.id}>
-						<h2 className="project_title">{p.title}</h2>
+						<h2 className="project_title" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+							{p.title}
+						</h2>
 
 						{p.role && <p className="bullet">역할: {p.role}</p>}
 						{p.contribution && <p className="bullet">기여도: {p.contribution}</p>}
@@ -42,7 +44,7 @@ const ProjectDetail = () => {
 						{p.link && (
 							<p>
 								🔗{' '}
-								<a href={p.link} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '18px' }}>
+								<a href={p.link} target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}>
 									프로젝트 링크
 								</a>
 							</p>
@@ -50,7 +52,6 @@ const ProjectDetail = () => {
 
 						{p.images?.length > 0 && (
 							<div class="project_images">
-								<h4>상세 이미지</h4>
 								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
 									{p.images.map(img => (
 										<img key={img.id} src={img.url.startsWith('http') ? img.url : `${API_BASE}${img.url}`} alt={img.name} style={{ width: '100%', borderRadius: '6px' }} />
