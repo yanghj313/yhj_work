@@ -6,15 +6,26 @@ const SubHeader = ({ title = '서브 타이틀', backgroundImage }) => {
 		<header className="sub-header-simple" style={backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : {}}>
 			<h1 className="sub-header-title">{title}</h1>
 
-			<div className="wave-wrapper">
-				<svg className="wave-svg wave1" viewBox="0 0 1440 320" preserveAspectRatio="none">
-					<path d="M0,160 C240,320 480,0 720,160 C960,320 1200,0 1440,160 C1200,320 960,160 720,320 C480,480 240,160 0,320 Z" />
-				</svg>
-				<svg className="wave-svg wave2" viewBox="0 0 1440 320" preserveAspectRatio="none">
-					<path d="M0,180 C240,300 480,60 720,180 C960,300 1200,60 1440,180 C1200,300 960,180 720,300 C480,420 240,180 0,300 Z" />
-				</svg>
-				<svg className="wave-svg wave3" viewBox="0 0 1440 320" preserveAspectRatio="none">
-					<path d="M0,200 C240,280 480,120 720,200 C960,280 1200,120 1440,200 C1200,280 960,200 720,280 C480,360 240,200 0,280 Z" />
+			{/* 주황빛 SVG 파도 (3겹) */}
+			<div className="wave">
+				<svg className="gnb_wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+					<defs>
+						<path
+							id="gentle-wave"
+							d="
+                M-160 44
+                c30 0 58-18 88-18
+                s58 18 88 18
+                58-18 88-18
+                58 18 88 18
+                v44h-352z"
+						/>
+					</defs>
+					<g className="parallax">
+						<use xlinkHref="#gentle-wave" x="50" y="0" fill="rgba(255, 163, 100, 0.3)" />
+						<use xlinkHref="#gentle-wave" x="50" y="3" fill="rgba(255, 122, 89, 0.5)" />
+						<use xlinkHref="#gentle-wave" x="50" y="6" fill="rgba(255, 85, 70, 0.8)" />
+					</g>
 				</svg>
 			</div>
 		</header>
