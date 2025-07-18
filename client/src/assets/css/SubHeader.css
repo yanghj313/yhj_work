@@ -1,6 +1,7 @@
 .sub-header-simple {
     width: 100%;
-    height: 260px;
+    height: 280px;
+    /* 필요에 따라 조정 가능 */
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -21,43 +22,45 @@
     position: relative;
 }
 
-/* 파도 */
-.wave {
-    background: url('/img/wave.svg') repeat-x;
+/* wave container */
+.wave-container {
     position: absolute;
     bottom: 0;
-    width: 6400px;
-    height: 198px;
-    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-    transform: translate3d(0, 0, 0);
+    left: 0;
+    width: 100%;
+    height: 80px;
+    /* 파도 보일 영역 */
+    overflow: hidden;
     z-index: 1;
-    opacity: 0.8;
 }
 
-.wave.second {
-    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
+/* 파도 1 */
+.wave {
+    position: absolute;
     bottom: 0;
-    opacity: 1;
+    width: 200%;
+    /* 이동 애니메이션용 넉넉한 너비 */
+    height: 100px;
+    border-radius: 100% 50%;
+    background: rgba(255, 255, 255, 0.4);
+    /* 밝은 파도 */
+    animation: waveMove 8s linear infinite;
 }
 
-@keyframes wave {
+/* 파도 2 (겹치게) */
+.wave2 {
+    background: rgba(255, 255, 255, 0.6);
+    /* 좀 더 뚜렷한 파도 */
+    animation-delay: -4s;
+}
+
+/* wave 애니메이션 */
+@keyframes waveMove {
     0% {
-        margin-left: 0;
+        transform: translateX(0);
     }
 
     100% {
-        margin-left: -1600px;
-    }
-}
-
-@keyframes swell {
-
-    0%,
-    100% {
-        transform: translate3d(0, -25px, 0);
-    }
-
-    50% {
-        transform: translate3d(0, 5px, 0);
+        transform: translateX(-50%);
     }
 }
