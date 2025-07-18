@@ -42,7 +42,7 @@ const ProjectDetail = () => {
 						{p.link && (
 							<p>
 								🔗{' '}
-								<a href={p.link} target="_blank" rel="noopener noreferrer">
+								<a href={p.link} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '18px' }}>
 									프로젝트 링크
 								</a>
 							</p>
@@ -53,7 +53,7 @@ const ProjectDetail = () => {
 								<h4>상세 이미지</h4>
 								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
 									{p.images.map(img => (
-										<img key={img.id} src={img.url.startsWith('http') ? img.url : `${API_BASE}${img.url}`} alt={img.name} style={{ width: '200px', borderRadius: '6px' }} />
+										<img key={img.id} src={img.url.startsWith('http') ? img.url : `${API_BASE}${img.url}`} alt={img.name} style={{ width: '100%', borderRadius: '6px' }} />
 									))}
 								</div>
 							</div>
