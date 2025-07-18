@@ -1,4 +1,4 @@
-.sub-header-simple {
+.subTop {
     position: relative;
     width: 100%;
     height: 280px;
@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: transparent;
+    background: linear-gradient(to bottom, rgba(255, 100, 50, 0.4), rgba(255, 100, 50, 0.1));
 }
 
 .sub-header-title {
@@ -18,65 +18,76 @@
     z-index: 2;
 }
 
-.wave {
+/* 이미지 파도 (background repeat-x style) */
+.subTop::before,
+.subTop::after {
+    content: '';
+    display: block;
     position: absolute;
-    bottom: 0;
+    width: 300vw;
+    background-size: 100vw;
+    animation: footerwave 10s linear infinite;
+    z-index: -1;
+}
+
+.subTop::before {
+    top: -47px;
+    left: 0;
+    height: 48px;
+    background: url('/img/top_wave2.svg') repeat-x bottom right;
+    animation-duration: 13s;
+}
+
+.subTop::after {
+    bottom: -47px;
+    left: 0;
+    height: 48px;
+    background: url('/img/top_wave.svg') repeat-x top left;
+    animation-duration: 10s;
+}
+
+@keyframes footerwave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100vw);
+    }
+}
+
+/* SVG 파도 */
+.wave_before {
     width: 100%;
-    height: 100px;
-    overflow: hidden;
-    z-index: 1;
-    pointer-events: none;
+    height: 20px;
+    position: absolute;
+    bottom: 61px;
+    z-index: -1;
+}
+
+.wave_after {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 52px;
+    z-index: -1;
 }
 
 .gnb_wave {
-    width: 200%;
-    /* 넓게 만들어 부드러운 밀림 허용 */
+    width: 100%;
     height: 100%;
 }
 
-.parallax use {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+.parallax>use {
+    animation: move-forever2 6s linear infinite;
 }
 
-.wave1 {
-    animation: waveMove1 12s linear infinite;
-}
-
-.wave2 {
-    animation: waveMove2 9s linear infinite;
-}
-
-.wave3 {
-    animation: waveMove3 6s linear infinite;
-}
-
-@keyframes waveMove1 {
+@keyframes move-forever2 {
     0% {
-        transform: translateX(0);
+        transform: translate(-90px, 0%);
     }
 
     100% {
-        transform: translateX(-50px);
-    }
-}
-
-@keyframes waveMove2 {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-100px);
-    }
-}
-
-@keyframes waveMove3 {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-150px);
+        transform: translate(85px, 0%);
     }
 }
