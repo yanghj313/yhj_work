@@ -24,7 +24,7 @@
 .subTop::before {
     content: '';
     position: absolute;
-    top: -47px;
+    top: 66%;
     left: 0;
     width: 300vw;
     height: 48px;
@@ -39,7 +39,7 @@
 .subTop::after {
     content: '';
     position: absolute;
-    bottom: -47px;
+    bottom: 2%;
     left: 0;
     width: 300vw;
     height: 48px;
