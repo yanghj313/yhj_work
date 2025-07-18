@@ -7,10 +7,18 @@
 }
 
 .bullet {
+    position: relative;
+}
+
+.bullet::before {
+    content: '';
+    position: absolute;
     display: inline-block;
     width: 8px;
     height: 8px;
     background-color: #ff5722;
     border-radius: 50%;
     margin-right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
 }
