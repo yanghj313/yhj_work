@@ -2,11 +2,11 @@
     position: relative;
     width: 100%;
     height: 280px;
-    background: linear-gradient(to bottom, rgba(255, 163, 80, 0.8), rgba(255, 122, 89, 0.4), rgba(255, 122, 89, 0));
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-color: transparent;
 }
 
 .sub-header-title {
@@ -18,48 +18,47 @@
     z-index: 3;
 }
 
-/* 파도 wrapper */
+/* 파도 전체 wrapper */
 .wave-wrapper {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100px;
+    height: 150px;
     overflow: hidden;
-    z-index: 2;
+    z-index: 1;
     pointer-events: none;
 }
 
-/* 공통 파도 스타일 */
+/* 파도 기본 공통 */
 .wave-svg {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 200%;
     height: 100%;
-    pointer-events: none;
+    fill-opacity: 0.5;
 }
 
-/* 각 파도 색상 */
 .wave1 {
-    fill: rgba(255, 190, 120, 0.4);
-    animation: waveMove1 30s linear infinite;
+    fill: #ffb687;
+    animation: waveMove1 16s linear infinite, waveFloat1 6s ease-in-out infinite;
     z-index: 1;
 }
 
 .wave2 {
-    fill: rgba(255, 145, 100, 0.5);
-    animation: waveMove2 20s linear infinite;
+    fill: #ff896e;
+    animation: waveMove2 12s linear infinite, waveFloat2 5s ease-in-out infinite;
     z-index: 2;
 }
 
 .wave3 {
-    fill: rgba(255, 100, 80, 0.7);
-    animation: waveMove3 12s linear infinite, waveFloat 6s ease-in-out infinite;
+    fill: #ff5e6c;
+    animation: waveMove3 9s linear infinite, waveFloat3 4s ease-in-out infinite;
     z-index: 3;
 }
 
-/* 좌우 애니메이션 */
+/* 좌우 애니메이션 (조금 더 빠르게) */
 @keyframes waveMove1 {
     0% {
         transform: translateX(0);
@@ -90,8 +89,8 @@
     }
 }
 
-/* 출렁이는 효과 */
-@keyframes waveFloat {
+/* 상하 출렁임 (세로 곡선 강조) */
+@keyframes waveFloat1 {
 
     0%,
     100% {
@@ -99,6 +98,30 @@
     }
 
     50% {
-        transform: translateY(6px);
+        transform: translateY(12px);
+    }
+}
+
+@keyframes waveFloat2 {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(18px);
+    }
+}
+
+@keyframes waveFloat3 {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(24px);
     }
 }
