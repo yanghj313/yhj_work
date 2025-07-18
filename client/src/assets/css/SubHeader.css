@@ -5,8 +5,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: transparent;
     overflow: hidden;
+    background-color: transparent;
 }
 
 .sub-header-title {
@@ -18,63 +18,104 @@
     z-index: 2;
 }
 
-/* 파도 전체 wrapper */
+/* 파도 wrapper */
 .wave {
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
-    height: 60px;
-    overflow: hidden;
+    height: 120px;
     z-index: 1;
     pointer-events: none;
+    overflow: hidden;
 }
 
-/* SVG 파도 기본 설정 */
-.gnb_wave {
-    width: 100%;
+/* 각 wave 레이어 */
+.wave-layer {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
     height: 100%;
-    display: block;
 }
 
-.parallax>use:nth-child(1) {
-    animation: waveParallax1 12s linear infinite;
+.wave1 {
+    fill: rgba(255, 163, 100, 0.3);
+    animation: drift1 10s ease-in-out infinite;
 }
 
-.parallax>use:nth-child(2) {
-    animation: waveParallax2 8s linear infinite;
+.wave2 {
+    fill: rgba(255, 122, 89, 0.5);
+    animation: drift2 7s ease-in-out infinite;
 }
 
-.parallax>use:nth-child(3) {
-    animation: waveParallax3 6s linear infinite;
+.wave3 {
+    fill: rgba(255, 85, 70, 0.8);
+    animation: drift3 5s ease-in-out infinite;
 }
 
-/* 파도 움직임 */
-@keyframes waveParallax1 {
+/* 통합된 X+Y 출렁임 애니메이션 */
+@keyframes drift1 {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
+    }
+
+    25% {
+        transform: translateX(-20px) translateY(10px);
+    }
+
+    50% {
+        transform: translateX(-40px) translateY(0px);
+    }
+
+    75% {
+        transform: translateX(-20px) translateY(-10px);
     }
 
     100% {
-        transform: translateX(-30px);
+        transform: translateX(0) translateY(0);
     }
 }
 
-@keyframes waveParallax2 {
+@keyframes drift2 {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
+    }
+
+    25% {
+        transform: translateX(-30px) translateY(12px);
+    }
+
+    50% {
+        transform: translateX(-60px) translateY(0px);
+    }
+
+    75% {
+        transform: translateX(-30px) translateY(-12px);
     }
 
     100% {
-        transform: translateX(-60px);
+        transform: translateX(0) translateY(0);
     }
 }
 
-@keyframes waveParallax3 {
+@keyframes drift3 {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
+    }
+
+    25% {
+        transform: translateX(-40px) translateY(14px);
+    }
+
+    50% {
+        transform: translateX(-80px) translateY(0px);
+    }
+
+    75% {
+        transform: translateX(-40px) translateY(-14px);
     }
 
     100% {
-        transform: translateX(-90px);
+        transform: translateX(0) translateY(0);
     }
 }

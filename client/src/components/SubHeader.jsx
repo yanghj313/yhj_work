@@ -6,26 +6,16 @@ const SubHeader = ({ title = '서브 타이틀', backgroundImage }) => {
 		<header className="sub-header-simple" style={backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : {}}>
 			<h1 className="sub-header-title">{title}</h1>
 
-			{/* 주황빛 SVG 파도 (3겹) */}
+			{/* 아래가 곡선으로 마감된 파도 */}
 			<div className="wave">
-				<svg className="gnb_wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
-					<defs>
-						<path
-							id="gentle-wave"
-							d="
-                M-160 44
-                c30 0 58-18 88-18
-                s58 18 88 18
-                58-18 88-18
-                58 18 88 18
-                v44h-352z"
-						/>
-					</defs>
-					<g className="parallax">
-						<use xlinkHref="#gentle-wave" x="50" y="0" fill="rgba(255, 163, 100, 0.3)" />
-						<use xlinkHref="#gentle-wave" x="50" y="3" fill="rgba(255, 122, 89, 0.5)" />
-						<use xlinkHref="#gentle-wave" x="50" y="6" fill="rgba(255, 85, 70, 0.8)" />
-					</g>
+				<svg className="wave-layer" viewBox="0 0 1440 320" preserveAspectRatio="none">
+					<path className="wave1" d="M0,160 C360,320 1080,0 1440,160 C1080,320 360,0 0,160 Z" />
+				</svg>
+				<svg className="wave-layer" viewBox="0 0 1440 320" preserveAspectRatio="none">
+					<path className="wave2" d="M0,180 C360,300 1080,60 1440,180 C1080,300 360,60 0,180 Z" />
+				</svg>
+				<svg className="wave-layer" viewBox="0 0 1440 320" preserveAspectRatio="none">
+					<path className="wave3" d="M0,200 C360,280 1080,120 1440,200 C1080,280 360,120 0,200 Z" />
 				</svg>
 			</div>
 		</header>
