@@ -1,30 +1,24 @@
-/* SubHeader 헤더 전체 스타일 */
 .sub-header-simple {
+    position: relative;
     width: 100%;
     height: 280px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 163, 80, 0.8), rgba(255, 122, 89, 0.4), rgba(255, 122, 89, 0));
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     overflow: hidden;
-    background-color: #fbc687;
-    /* 노을빛 배경 기본값 */
 }
 
-/* 타이틀 스타일 */
 .sub-header-title {
     color: white;
     font-size: 2.8rem;
     font-weight: bold;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
-/* wave container */
+/* 파도 wrapper */
 .wave-wrapper {
     position: absolute;
     bottom: 0;
@@ -32,20 +26,51 @@
     width: 100%;
     height: 100px;
     overflow: hidden;
-    z-index: 1;
+    z-index: 2;
     pointer-events: none;
 }
 
-/* SVG 파도 스타일 */
+/* 공통 파도 스타일 */
 .wave-svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 200%;
     height: 100%;
-    display: block;
-    animation: waveMove 16s linear infinite, waveFloat 6s ease-in-out infinite;
+    pointer-events: none;
 }
 
-/* 애니메이션: 좌우 흐름 */
-@keyframes waveMove {
+/* 각 파도 색상 */
+.wave1 {
+    fill: rgba(255, 190, 120, 0.4);
+    animation: waveMove1 30s linear infinite;
+    z-index: 1;
+}
+
+.wave2 {
+    fill: rgba(255, 145, 100, 0.5);
+    animation: waveMove2 20s linear infinite;
+    z-index: 2;
+}
+
+.wave3 {
+    fill: rgba(255, 100, 80, 0.7);
+    animation: waveMove3 12s linear infinite, waveFloat 6s ease-in-out infinite;
+    z-index: 3;
+}
+
+/* 좌우 애니메이션 */
+@keyframes waveMove1 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-25%);
+    }
+}
+
+@keyframes waveMove2 {
     0% {
         transform: translateX(0);
     }
@@ -55,15 +80,25 @@
     }
 }
 
-/* 애니메이션: 위아래 출렁임 */
+@keyframes waveMove3 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-75%);
+    }
+}
+
+/* 출렁이는 효과 */
 @keyframes waveFloat {
 
     0%,
     100% {
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
 
     50% {
-        transform: translateX(-50%) translateY(6px);
+        transform: translateY(6px);
     }
 }
