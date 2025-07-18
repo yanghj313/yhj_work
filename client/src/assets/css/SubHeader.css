@@ -16,13 +16,12 @@
     font-size: 2.8rem;
     font-weight: bold;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
-    margin: 0;
     z-index: 2;
     position: relative;
 }
 
-/* Wave wrapper */
-.svg-waves {
+/* 파도 스타일 */
+.pic-wave-wrapper {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -32,45 +31,29 @@
     z-index: 1;
 }
 
-/* 공통 wave 스타일 */
-.wave {
-    position: absolute;
-    bottom: 0;
+.pic-wave {
     width: 200%;
-    height: 100px;
-    background-repeat: repeat-x;
-    background-size: 50% 100%;
-    opacity: 0.6;
-    transform: translate3d(0, 0, 0);
+    height: 100%;
+    animation: picWaveMove 20s linear infinite;
 }
 
-/* 파도 이미지 (CSS로 직접 SVG 삽입) */
-.wave1 {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C150,100 350,0 600,50 C850,100 1050,0 1200,50 L1200,100 L0,100 Z' fill='%231b82a7'/%3E%3C/svg%3E");
-    animation: waveMove 10s linear infinite, waveSwell 4s ease-in-out infinite;
-    z-index: 1;
-}
-
-.wave2 {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C150,0 350,100 600,50 C850,0 1050,100 1200,50 L1200,100 L0,100 Z' fill='%236bd4e1'/%3E%3C/svg%3E");
-    animation: waveMove 14s linear infinite, waveSwell 6s ease-in-out infinite;
-    opacity: 0.4;
-    z-index: 2;
-}
-
-/* 좌우 이동 */
-@keyframes waveMove {
+/* 좌우 흐름 애니메이션 */
+@keyframes picWaveMove {
     0% {
-        transform: translateX(0) translateY(0);
+        transform: translateX(0);
     }
 
     100% {
-        transform: translateX(-50%) translateY(0);
+        transform: translateX(-50%);
     }
 }
 
-/* 위아래 넘실 */
-@keyframes waveSwell {
+
+.pic-wave {
+    animation: picWaveMove 20s linear infinite, picWaveFloat 6s ease-in-out infinite;
+}
+
+@keyframes picWaveFloat {
 
     0%,
     100% {
@@ -78,6 +61,6 @@
     }
 
     50% {
-        transform: translateY(-10px);
+        transform: translateY(8px);
     }
 }
