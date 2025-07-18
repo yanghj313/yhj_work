@@ -1,3 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="36" viewBox="0 0 1920 36">
-  <path id="패스_19702" data-name="패스 19702" d="M401.067,276.573h1920v-22.2c-58.133,4.037-119.441,7-178,6.894-198.365-.376-395.642-21.5-594-20.673-155.936.656-309.064,24.59-465,25.268-197.457.855-322.541-21.733-520-21.439-35.807.054-136.092,8.886-163,9.954Z" transform="translate(-401.066 -240.572)" fill="#212c92" fill-rule="evenodd"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1920 36">
+  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #ff5722;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="_패스_19702" data-name="패스_19702" class="st0" d="M0,36h1920V13.8c-58.13,4.04-119.44,7-178,6.89C1543.64,20.32,1346.36-.81,1148,.02c-155.94.66-309.06,24.59-465,25.27C485.54,26.14,360.46,3.56,163,3.85,127.19,3.9,26.91,12.74,0,13.8v22.2Z"/>
 </svg>
