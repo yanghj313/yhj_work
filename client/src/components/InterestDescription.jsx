@@ -1,5 +1,6 @@
 import React from 'react';
 import '../assets/css/fullpage.css';
+import '../assets/css/bubble.css';
 
 const InterestDescription = ({ selected }) => {
 	if (!selected) return null;

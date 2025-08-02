@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../assets/css/fullpage.css';
+import '../assets/css/bubble.css';
+import '../assets/css/map.css';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 const markers = [
