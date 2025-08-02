@@ -300,3 +300,123 @@
         transform: translate(-50%, -50%);
     }
 }
+
+@media (max-width: 768px) {
+    .map_description {
+        position: unset;
+    }
+
+    .travel-map {
+        /* height:200px; */
+    }
+
+    .map-background {
+        height: 280px;
+        background-size: contain;
+        width: 100%;
+        position: relative;
+        top: 22%;
+    }
+
+    .circle-marker--1 {
+        left: 52%;
+        top: 25%;
+    }
+
+    .circle-marker--2 {
+        left: 43%;
+        top: 23%;
+    }
+
+    .circle-marker--3 {
+        left: 56%;
+        top: 26%;
+    }
+
+    .circle-marker--4 {
+        left: 49.5%;
+        top: 23%;
+    }
+
+    .circle-marker--5 {
+        left: 48.5%;
+        top: 23%;
+    }
+
+    .circle-marker--6 {
+        left: 57%;
+        top: 24%;
+    }
+
+    .active-marker--1 {
+        left: 52%;
+        top: 23%;
+    }
+
+    .map-popup--1 {
+        left: 50%;
+        top: 0%;
+        transform: translateX(-50%);
+    }
+
+    .popup-tail.left {
+        display: none;
+    }
+
+    .active-marker--2 {
+        left: 43%;
+        top: 23%;
+    }
+
+    .map-popup--2 {
+        left: 50%;
+        top: 0%;
+        transform: translateX(-50%);
+    }
+
+    .active-marker--3 {
+        left: 56%;
+        top: 26%;
+    }
+
+    .map-popup--3 {
+        left: 50%;
+        top: 0%;
+        transform: translateX(-50%);
+    }
+
+    .active-marker--4 {
+        left: 49.5%;
+        top: 23%;
+    }
+
+    .map-popup--4 {
+        left: 50%;
+        top: 0%;
+        transform: translateX(-50%);
+    }
+
+    .active-marker--5 {
+        left: 48.5%;
+        top: 23%;
+    }
+
+    .map-popup--5 {
+        left: 50%;
+        top: 0%;
+        transform: translateX(-50%);
+    }
+
+    .active-marker--6 {
+        left: 57%;
+        top: 24%;
+    }
+
+    .map-popup--6 {
+        left: 50%;
+        top: 0%;
+        transform: translateX(-50%);
+    }
+
+
+}
