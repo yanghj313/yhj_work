@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import fullpage from 'fullpage.js';
 import gsap from 'gsap';
@@ -34,8 +34,22 @@ const applyAnimationReset = el => {
 const FullPageReact = () => {
 	const location = useLocation();
 
+	// ✅ 모바일 여부 감지
+	const [isMobile, setIsMobile] = useState(false);
+
 	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
+
+	useEffect(() => {
+		// ✅ 홈이 아니거나 모바일이면 fullPage 적용 X
 		if (location.pathname !== '/' && location.pathname !== '/home') return;
+		if (isMobile) return;
 
 		const instance = new fullpage('#fullpage', {
 			licenseKey: 'OGTN9-MB4LK-5YI08-4B2K9-KWMTM',
@@ -102,7 +116,7 @@ const FullPageReact = () => {
 		}, 0);
 
 		return () => instance.destroy('all');
-	}, [location.pathname]);
+	}, [location.pathname, isMobile]);
 
 	return (
 		<div id="fullpage">
