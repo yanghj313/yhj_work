@@ -171,3 +171,21 @@
 	font-size: 20px;
 	cursor: pointer;
 }
+
+@media (max-width: 768px) {
+	.full-container {
+		margin-top: 10px;
+	}
+
+	.about_keyword {
+		width: 100%;
+		right: 0;
+	}
+
+	.thumbnail-wrapper {}
+
+	.custom-description img {
+		object-fit: cover;
+
+	}
+}

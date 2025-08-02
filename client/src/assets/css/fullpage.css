@@ -229,8 +229,13 @@
 		display: block !important;
 	}
 
-	#fullpage .text {
-		position: unset;
+	#fullpage .one {
+		display: flex !important;
+		height: 400px !important
 	}
 
+	#fullpage .text {
+		position: unset;
+		font-size: 2.5rem;
+	}
 }

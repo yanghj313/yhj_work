@@ -163,6 +163,7 @@
 	word-wrap: break-word;
 	word-break: break-word;
 }
+
 .skill-description li {
 	position: relative;
 	padding-left: 1.5em;
@@ -178,6 +179,7 @@
 	top: 0;
 	color: #fff;
 }
+
 @media (max-width: 1500px) {
 	.skill-tour-inner {
 		display: block;
@@ -189,22 +191,21 @@
 		height: 550px !important;
 	}
 }
+
 @media (max-width: 768px) {
 	.tooltip-box {
 		top: auto;
-		bottom: -140px;
+		bottom: -204px;
 	}
 
 	.tooltip-box:after {
-		top: -10px;
+		top: -9px;
 		bottom: auto;
-		-webkit-transform: translate(-50%) rotate(180deg);
-		-ms-transform: translate(-50%) rotate(180deg);
-		transform: translate(-50%) rotate(180deg);
+		transform: translate(-50%) rotate(180deg)
 	}
 
 	.skill-scroll-wrapper {
-		height: 65vh;
+		/* height: 65vh; */
 	}
 }
 
@@ -297,4 +298,49 @@
 
 .arrow-btn:hover .arrow-icon {
 	stroke: #ff4d4f;
+}
+
+/*******************************************************반응형******************************************************************/
+@media screen and (max-width: 768px) {
+	.skill-tour-horizontal {
+		padding: 0 20px;
+		display: block;
+	}
+
+	.skill-left-panel {
+		width: 100%;
+	}
+
+	.skill-tour-inner {
+		height: auto !important;
+		position: unset;
+		transform: unset;
+	}
+
+	.skill-right-panel {
+		position: unset !important;
+		transform: unset !important;
+		height: auto;
+	}
+
+	.skill-scroll-wrapper {
+		height: auto;
+		margin: 50px auto;
+		overflow: hidden;
+	}
+
+	.skill-scroll-track {
+		margin: 0 60px;
+		/* height: auto; */
+		padding: 81px 80px 184px 80px;
+	}
+
+	.skill-marker,
+	.skill-icon {
+		height: 80px;
+	}
+
+	.ripple {
+		top: -19px;
+	}
 }
