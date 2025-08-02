@@ -229,14 +229,8 @@
 		display: block !important;
 	}
 
-	.fp-tableCell {
-		display: block !important;
-		vertical-align: top !important;
+	#fullpage .text {
+		position: unset;
 	}
 
-	.fp-controlArrow,
-	.fp-slidesNav,
-	.fp-nav {
-		display: none !important;
-	}
 }
