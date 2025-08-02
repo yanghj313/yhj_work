@@ -60,3 +60,38 @@
         transform: translateX(-100vw);
     }
 }
+
+
+@media (max-width: 1700px) {
+    .subTop:after {
+        bottom: 5%;
+    }
+
+    .subTop:before {
+        background-size: inherit;
+        top: 60%;
+    }
+}
+
+@media (max-width: 1700px) {
+    .subTop:after {
+        bottom: 4%;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+    .sub-header-title {
+        font-size: 2rem;
+    }
+
+    .subTop:before {
+        top: 60%;
+    }
+
+    .subTop:after {
+        bottom: 11%;
+    }
+
+}

@@ -122,12 +122,14 @@ body {
 	z-index: 10;
 	pointer-events: none;
 }
+
 @media (hover: none) {
 	.project-card:hover .hover-video {
 		opacity: 0;
 		transform: none;
 		pointer-events: none;
 	}
+
 	.project-card:hover .thumbnail-img {
 		opacity: 1;
 	}
@@ -137,57 +139,68 @@ body {
 
 @media (max-width: 1500px) {
 	.list ul {
-		grid-template-columns: repeat(3, 410px);
+		grid-template-columns: repeat(3, 410px)
 	}
 
 	.media-container {
-		max-width: 410px;
+		max-width: 410px
 	}
 }
+
 @media (max-width: 1400px) {
 	.list ul {
 		grid-template-columns: repeat(3, 380px);
-		row-gap: 1.6rem;
+		row-gap: 1.6rem
 	}
 }
 
 @media (max-width: 1290px) {
 	.list ul {
 		grid-template-columns: repeat(3, 330px);
-		row-gap: 1.6rem;
+		row-gap: 1.6rem
 	}
 }
 
 @media (max-width: 1025px) {
 	.list ul {
 		grid-template-columns: repeat(3, 410px);
-		row-gap: 1rem;
+		row-gap: 1rem
 	}
 }
 
 @media (max-width: 1000px) {
+
 	.list,
 	.ex_wrap {
-		margin: 0 30px;
+		margin: 0 30px
 	}
+
 	.list ul {
 		grid-template-columns: repeat(2, 1fr);
-		gap: 1rem;
+		gap: 1rem
 	}
 }
 
 @media (max-width: 580px) {
+
 	.list,
 	.ex_wrap {
 		margin: 0 20px;
+		padding: 60px 0;
+	}
+
+	.media-container {
+		width: 100%;
+		max-width: 100%;
 	}
 
 	.list ul {
 		grid-template-columns: repeat(1, 1fr);
-		row-gap: 0.75rem;
-		justify-content: space-between;
+		row-gap: .75rem;
+		justify-content: space-between
 	}
 }
+
 
 /***********************경력 사항***************************/
 
@@ -379,7 +392,7 @@ body {
 	width: fit-content;
 }
 
-.timeline-content > h3:empty {
+.timeline-content>h3:empty {
 	display: none;
 	margin: 0;
 	padding: 0;
@@ -422,6 +435,7 @@ body {
 }
 
 @media (max-width: 768px) {
+
 	.timeline-item,
 	.timeline-item.left,
 	.timeline-item.right {
