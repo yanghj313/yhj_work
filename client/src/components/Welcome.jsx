@@ -97,7 +97,7 @@ const Welcome = () => {
 					</defs>
 					<g clipPath="url(#clip-path)">
 						<foreignObject x="0" y="0" width="1800" height="740">
-							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
+							<video autoPlay muted loop playsInline className="moon__video">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
