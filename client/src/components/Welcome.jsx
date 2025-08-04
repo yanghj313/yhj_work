@@ -74,7 +74,7 @@ const Welcome = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
 			const scaleFactor = Math.min(vw / 1800, vh / 740); // ⬅️ 740 기준
-			//gsap.set(container, { scale: scaleFactor });
+			gsap.set(container, { scale: scaleFactor });
 		};
 
 		window.onresize = resize;
@@ -97,7 +97,7 @@ const Welcome = () => {
 					</defs>
 					<g clipPath="url(#clip-path)">
 						<foreignObject x="0" y="0" width="1800" height="740">
-							<video autoPlay muted loop playsInline className="moon__video">
+							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>

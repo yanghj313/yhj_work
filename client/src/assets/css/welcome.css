@@ -47,13 +47,6 @@ body {
 	object-fit: cover;
 }
 
-.moon__video {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	display: block;
-}
-
 .container__base {
 	position: absolute;
 	z-index: 0;
@@ -71,10 +64,7 @@ body {
 
 .moon__svg {
 	width: 100%;
-	height: auto;
-	display: block;
-	max-width: 100vw;
-	max-height: 100dvh;
+	height: 100%;
 }
 
 .moon__txt {
@@ -87,18 +77,4 @@ body {
 
 .moon__txt-overlay {
 	fill: rgba(255, 255, 255, 0.405);
-}
-
-
-@media (max-width: 768px) {
-	.container {
-		width: 100%;
-		max-width: 100vw;
-		height: auto;
-		max-height: 100dvh;
-		overflow: hidden;
-		position: relative;
-		min-height: fit-content;
-		min-width: fit-content;
-	}
 }
