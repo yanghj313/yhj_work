@@ -33,13 +33,20 @@ const Welcome = () => {
 		});
 
 		gsap.set(container, { autoAlpha: 0 });
-		gsap.set(texts, { opacity: 0 });
+
+		if (!isMobile) {
+			// 데스크톱에서만 텍스트 애니메이션 적용
+			gsap.set(texts, { opacity: 0 });
+		}
 
 		tl.to(container, {
 			autoAlpha: 1,
 			duration: 0.4,
-		})
-			.from(
+		});
+
+		if (!isMobile) {
+			// 데스크톱에서만 원래 애니메이션 적용
+			tl.from(
 				'.container__base',
 				{
 					scaleX: 0,
@@ -48,38 +55,39 @@ const Welcome = () => {
 				},
 				'+=0.1'
 			)
-			.from(
-				'.moon__svg-rects rect',
-				{
-					scaleX: 0,
-					stagger: 0.07,
-					duration: 3,
-					ease: 'expo',
-				},
-				'-=1.5'
-			)
-			.to(
-				'.moon__txt-bg rect',
-				{
-					stagger: 0.14,
-					scaleX: 1,
-				},
-				'-=2.2'
-			)
-			.to(
-				texts,
-				{
-					opacity: 1,
-					ease: 'power4',
-					stagger: 0.2,
-				},
-				'-=1.5'
-			);
+				.from(
+					'.moon__svg-rects rect',
+					{
+						scaleX: 0,
+						stagger: 0.07,
+						duration: 3,
+						ease: 'expo',
+					},
+					'-=1.5'
+				)
+				.to(
+					'.moon__txt-bg rect',
+					{
+						stagger: 0.14,
+						scaleX: 1,
+					},
+					'-=2.2'
+				)
+				.to(
+					texts,
+					{
+						opacity: 1,
+						ease: 'power4',
+						stagger: 0.2,
+					},
+					'-=1.5'
+				);
 
-		gsap.set('.moon__txt-bg rect', {
-			width: i => wArray[i] || 200,
-			scaleX: 0,
-		});
+			gsap.set('.moon__txt-bg rect', {
+				width: i => wArray[i] || 200,
+				scaleX: 0,
+			});
+		}
 
 		container.onclick = () => {
 			tl.restart();
@@ -119,7 +127,7 @@ const Welcome = () => {
 	// 반응형 위치 계산
 	const getResponsivePositions = () => {
 		if (isMobile) {
-			// 1024px 이하: 새로운 구조 - "HYUN JIN PORT"
+			// 1024px 이하: 새로운 구조 - "HYUN JIN'S WORK"
 			return {
 				yMaskPositions: [30, 145, 260, 375, 490, 605],
 				yTextPositions: [260, 375, 490, 605],
@@ -130,7 +138,7 @@ const Welcome = () => {
 					{ y: 489, height: 104, width: 350, x: -2 },
 					{ y: 604, height: 104, width: 450, x: -2 },
 				],
-				texts: ['HYUN', 'JIN'S', 'WORK'],
+				texts: ['HYUN', "JIN'S", 'WORK'],
 			};
 		} else {
 			// 1024px 초과: 원래 구조 - "DESIGNED BY HYUNJIN PORTFOLIO"
@@ -169,13 +177,13 @@ const Welcome = () => {
 							{/* 두 번째 파란색 밴드 */}
 							<rect x="0" y="145" width="1800" height="100" fill="url(#blueGradient)" />
 
-							{/* JIN 텍스트와 옆 파란색 블록 */}
+							{/* JIN'S 텍스트와 옆 파란색 블록 */}
 							<text x="50" y="424" className="moon__txt" dominantBaseline="middle">
 								<tspan>JIN'S</tspan>
 							</text>
 							<rect x="1200" y="374" width="400" height="100" fill="url(#blueGradient)" />
 
-							{/* PORT 텍스트와 옆 파란색 블록 */}
+							{/* WORK 텍스트와 옆 파란색 블록 */}
 							<text x="50" y="539" className="moon__txt" dominantBaseline="middle">
 								<tspan>WORK</tspan>
 							</text>
