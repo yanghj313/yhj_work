@@ -1,19 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import '../assets/css/welcome.css';
 
 const Welcome = () => {
+	const [isMobile, setIsMobile] = useState(false);
+	const [isTablet, setIsTablet] = useState(false);
+
 	useEffect(() => {
+		const checkDevice = () => {
+			const vw = window.innerWidth;
+			const vh = window.innerHeight;
+			setIsMobile(vw <= 768);
+			setIsTablet(vw > 768 && vw <= 1024);
+		};
+
+		checkDevice();
+		window.addEventListener('resize', checkDevice);
+
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = [726, 212, 676, 796];
+
+		// 모바일과 데스크톱에 따른 다른 width 배열
+		const wArray = isMobile ? [300, 80, 280, 320] : isTablet ? [500, 150, 450, 550] : [726, 212, 676, 796];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
 			repeat: 0,
 			defaults: {
 				ease: 'expo.inOut',
-				duration: 2,
+				duration: isMobile ? 1.5 : 2,
 			},
 		});
 
@@ -28,7 +43,7 @@ const Welcome = () => {
 				'.container__base',
 				{
 					scaleX: 0,
-					duration: 2,
+					duration: isMobile ? 1.5 : 2,
 					transformOrigin: 'top right',
 				},
 				'+=0.1'
@@ -37,8 +52,8 @@ const Welcome = () => {
 				'.moon__svg-rects rect',
 				{
 					scaleX: 0,
-					stagger: 0.07,
-					duration: 3,
+					stagger: isMobile ? 0.05 : 0.07,
+					duration: isMobile ? 2 : 3,
 					ease: 'expo',
 				},
 				'-=1.5'
@@ -46,7 +61,7 @@ const Welcome = () => {
 			.to(
 				'.moon__txt-bg rect',
 				{
-					stagger: 0.14,
+					stagger: isMobile ? 0.1 : 0.14,
 					scaleX: 1,
 				},
 				'-=2.2'
@@ -56,7 +71,7 @@ const Welcome = () => {
 				{
 					opacity: 1,
 					ease: 'power4',
-					stagger: 0.2,
+					stagger: isMobile ? 0.15 : 0.2,
 				},
 				'-=1.5'
 			);
@@ -73,62 +88,121 @@ const Welcome = () => {
 		const resize = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
-			const scaleFactor = Math.min(vw / 1800, vh / 740); // ⬅️ 740 기준
-			gsap.set(container, { scale: scaleFactor });
+
+			// 모바일에서는 전체 화면을 사용
+			if (isMobile) {
+				gsap.set(container, {
+					scale: 1,
+					width: '100vw',
+					height: '100vh',
+				});
+			} else if (isTablet) {
+				// 태블릿에서는 적절한 비율 유지
+				const scaleFactor = Math.min(vw / 1200, vh / 800);
+				gsap.set(container, { scale: scaleFactor });
+			} else {
+				// 데스크톱에서는 원래 비율 유지
+				const scaleFactor = Math.min(vw / 1800, vh / 740);
+				gsap.set(container, { scale: scaleFactor });
+			}
 		};
 
-		window.onresize = resize;
+		window.addEventListener('resize', resize);
 		resize();
-	}, []);
 
-	const yMaskPositions = [30, 145, 260, 375, 490, 605];
-	const yTextPositions = [260, 375, 490, 605];
+		return () => {
+			window.removeEventListener('resize', checkDevice);
+			window.removeEventListener('resize', resize);
+		};
+	}, [isMobile, isTablet]);
+
+	// 반응형 위치 계산
+	const getResponsivePositions = () => {
+		if (isMobile) {
+			return {
+				yMaskPositions: [20, 80, 140, 200, 260, 320],
+				yTextPositions: [140, 200, 260, 320],
+				textYPositions: [90, 150, 210, 270],
+				rectPositions: [
+					{ y: 139, height: 60, width: 300, x: -2 },
+					{ y: 199, height: 60, width: 80, x: -2 },
+					{ y: 259, height: 60, width: 280, x: -2 },
+					{ y: 319, height: 60, width: 320, x: -2 },
+				],
+			};
+		} else if (isTablet) {
+			return {
+				yMaskPositions: [25, 100, 175, 250, 325, 400],
+				yTextPositions: [175, 250, 325, 400],
+				textYPositions: [125, 200, 275, 350],
+				rectPositions: [
+					{ y: 174, height: 80, width: 500, x: -2 },
+					{ y: 249, height: 80, width: 150, x: -2 },
+					{ y: 324, height: 80, width: 450, x: -2 },
+					{ y: 399, height: 80, width: 550, x: -2 },
+				],
+			};
+		} else {
+			return {
+				yMaskPositions: [30, 145, 260, 375, 490, 605],
+				yTextPositions: [260, 375, 490, 605],
+				textYPositions: [309, 424, 539, 654],
+				rectPositions: [
+					{ y: 259, height: 104, width: 732, x: -2 },
+					{ y: 374, height: 104, width: 218, x: -2 },
+					{ y: 489, height: 104, width: 682, x: -2 },
+					{ y: 604, height: 104, width: 802, x: -2 },
+				],
+			};
+		}
+	};
+
+	const { yMaskPositions, yTextPositions, textYPositions, rectPositions } = getResponsivePositions();
 
 	return (
 		<div className="container">
 			<div className="moon">
-				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 740">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox={isMobile ? '0 0 375 667' : isTablet ? '0 0 768 1024' : '0 0 1800 740'} preserveAspectRatio="xMidYMid meet">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{yMaskPositions.map((y, i) => (
-								<rect key={i} x="0" y={y} width="1800" height="100" />
+								<rect key={i} x="0" y={y} width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '60' : isTablet ? '80' : '100'} />
 							))}
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<foreignObject x="0" y="0" width="1800" height="740">
-							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
+						<foreignObject x="0" y="0" width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '667' : isTablet ? '1024' : '740'}>
+							<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
 					</g>
 					<g className="moon__txt-bg" fill="#333" transform="translate(0 0)">
-						<rect y="259" height="104" width="732" x="-2" />
-						<rect y="374" height="104" width="218" x="-2" />
-						<rect y="489" height="104" width="682" x="-2" />
-						<rect y="604" height="104" width="802" x="-2" />
+						{rectPositions.map((rect, i) => (
+							<rect key={i} y={rect.y} height={rect.height} width={rect.width} x={rect.x} />
+						))}
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt">
-						<text x="0" y="309" dominantBaseline="middle">
+						<text x="0" y={textYPositions[0]} dominantBaseline="middle">
 							<tspan>DESIGNED</tspan>
 						</text>
-						<text x="0" y="424" dominantBaseline="middle">
+						<text x="0" y={textYPositions[1]} dominantBaseline="middle">
 							<tspan>BY</tspan>
 						</text>
-						<text x="1" y="539" dominantBaseline="middle">
+						<text x="1" y={textYPositions[2]} dominantBaseline="middle">
 							<tspan>HYUNJIN</tspan>
 						</text>
-						<text x="1" y="654" dominantBaseline="middle">
+						<text x="1" y={textYPositions[3]} dominantBaseline="middle">
 							<tspan>PORTFOLIO</tspan>
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
-						<foreignObject x="0" y="0" width="1800" height="740">
-							<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
+						<foreignObject x="0" y="0" width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '667' : isTablet ? '1024' : '740'}>
+							<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
-						<rect className="moon__txt-overlay" width="1800" height="740" />
+						<rect className="moon__txt-overlay" width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '667' : isTablet ? '1024' : '740'} />
 					</g>
 				</svg>
 			</div>
