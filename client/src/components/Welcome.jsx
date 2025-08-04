@@ -120,26 +120,26 @@ const Welcome = () => {
 	const getResponsivePositions = () => {
 		if (isMobile) {
 			return {
-				yMaskPositions: [20, 80, 140, 200, 260, 320],
-				yTextPositions: [140, 200, 260, 320],
-				textYPositions: [90, 150, 210, 270],
+				yMaskPositions: [30, 145, 260, 375, 490, 605],
+				yTextPositions: [260, 375, 490, 605],
+				textYPositions: [309, 424, 539, 654],
 				rectPositions: [
-					{ y: 139, height: 60, width: 300, x: -2 },
-					{ y: 199, height: 60, width: 80, x: -2 },
-					{ y: 259, height: 60, width: 280, x: -2 },
-					{ y: 319, height: 60, width: 320, x: -2 },
+					{ y: 259, height: 104, width: 300, x: -2 },
+					{ y: 374, height: 104, width: 80, x: -2 },
+					{ y: 489, height: 104, width: 280, x: -2 },
+					{ y: 604, height: 104, width: 320, x: -2 },
 				],
 			};
 		} else if (isTablet) {
 			return {
-				yMaskPositions: [25, 100, 175, 250, 325, 400],
-				yTextPositions: [175, 250, 325, 400],
-				textYPositions: [125, 200, 275, 350],
+				yMaskPositions: [30, 145, 260, 375, 490, 605],
+				yTextPositions: [260, 375, 490, 605],
+				textYPositions: [309, 424, 539, 654],
 				rectPositions: [
-					{ y: 174, height: 80, width: 500, x: -2 },
-					{ y: 249, height: 80, width: 150, x: -2 },
-					{ y: 324, height: 80, width: 450, x: -2 },
-					{ y: 399, height: 80, width: 550, x: -2 },
+					{ y: 259, height: 104, width: 500, x: -2 },
+					{ y: 374, height: 104, width: 150, x: -2 },
+					{ y: 489, height: 104, width: 450, x: -2 },
+					{ y: 604, height: 104, width: 550, x: -2 },
 				],
 			};
 		} else {
@@ -162,16 +162,16 @@ const Welcome = () => {
 	return (
 		<div className="container">
 			<div className="moon">
-				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox={isMobile ? '0 0 375 667' : isTablet ? '0 0 768 1024' : '0 0 1800 740'} preserveAspectRatio="xMidYMid meet">
+				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 740" preserveAspectRatio="xMidYMid meet">
 					<defs>
 						<clipPath id="clip-path" className="moon__svg-rects">
 							{yMaskPositions.map((y, i) => (
-								<rect key={i} x="0" y={y} width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '60' : isTablet ? '80' : '100'} />
+								<rect key={i} x="0" y={y} width="1800" height="100" />
 							))}
 						</clipPath>
 					</defs>
 					<g clipPath="url(#clip-path)">
-						<foreignObject x="0" y="0" width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '667' : isTablet ? '1024' : '740'}>
+						<foreignObject x="0" y="0" width="1800" height="740">
 							<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
@@ -197,12 +197,12 @@ const Welcome = () => {
 						</text>
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
-						<foreignObject x="0" y="0" width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '667' : isTablet ? '1024' : '740'}>
+						<foreignObject x="0" y="0" width="1800" height="740">
 							<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
 								<source src="/video/main.mp4" type="video/mp4" />
 							</video>
 						</foreignObject>
-						<rect className="moon__txt-overlay" width={isMobile ? '375' : isTablet ? '768' : '1800'} height={isMobile ? '667' : isTablet ? '1024' : '740'} />
+						<rect className="moon__txt-overlay" width="1800" height="740" />
 					</g>
 				</svg>
 			</div>
