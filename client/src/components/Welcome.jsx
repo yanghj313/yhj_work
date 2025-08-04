@@ -74,7 +74,7 @@ const Welcome = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
 			const scaleFactor = Math.min(vw / 1800, vh / 740); // ⬅️ 740 기준
-			gsap.set(container, { scale: scaleFactor });
+			//gsap.set(container, { scale: scaleFactor });
 		};
 
 		window.onresize = resize;

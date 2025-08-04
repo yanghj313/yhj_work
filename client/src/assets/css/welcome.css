@@ -54,7 +54,6 @@ body {
 	display: block;
 }
 
-
 .container__base {
 	position: absolute;
 	z-index: 0;
@@ -73,8 +72,9 @@ body {
 .moon__svg {
 	width: 100%;
 	height: auto;
-	max-height: 100dvh;
 	display: block;
+	max-width: 100vw;
+	max-height: 100dvh;
 }
 
 .moon__txt {
@@ -89,8 +89,16 @@ body {
 	fill: rgba(255, 255, 255, 0.405);
 }
 
+
 @media (max-width: 768px) {
 	.container {
-		transform: none !important;
+		width: 100%;
+		max-width: 100vw;
+		height: auto;
+		max-height: 100dvh;
+		overflow: hidden;
+		position: relative;
+		min-height: fit-content;
+		min-width: fit-content;
 	}
 }
