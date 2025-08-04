@@ -89,28 +89,14 @@ const Welcome = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
 
-			// 모든 디바이스에서 전체 화면을 사용하되, 비율은 유지
-			if (isMobile) {
-				gsap.set(container, {
-					scale: 1,
-					width: '100vw',
-					height: '100vh',
-				});
-			} else if (isTablet) {
-				gsap.set(container, {
-					scale: 1,
-					width: '100vw',
-					height: '100vh',
-				});
-			} else {
-				// 데스크톱에서는 화면 크기에 따라 적응
-				const scaleFactor = Math.min(vw / 1800, vh / 740);
-				gsap.set(container, {
-					scale: scaleFactor,
-					width: '100vw',
-					height: '100vh',
-				});
-			}
+			// 모든 디바이스에서 원래 비율(1800:740)을 유지하면서 화면에 맞춤
+			const scaleFactor = Math.min(vw / 1800, vh / 740);
+
+			gsap.set(container, {
+				scale: scaleFactor,
+				width: '100vw',
+				height: '100vh',
+			});
 		};
 
 		window.addEventListener('resize', resize);

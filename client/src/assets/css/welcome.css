@@ -79,7 +79,7 @@ body {
 
 .moon__txt {
 	font-family: 'MonumentExtended', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	font-size: clamp(24px, 8vw, 103px);
+	font-size: clamp(32px, 8vw, 103px);
 	line-height: 1;
 	fill: black;
 	letter-spacing: 2.1px;
@@ -99,6 +99,7 @@ body {
 		max-height: 100vh;
 		min-width: 100vw;
 		min-height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon {
@@ -106,16 +107,18 @@ body {
 		height: 100vh;
 		max-width: 100vw;
 		max-height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__svg {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__txt {
-		font-size: clamp(18px, 6vw, 48px);
-		letter-spacing: 1px;
+		font-size: clamp(28px, 8vw, 72px);
+		letter-spacing: 1.5px;
 	}
 }
 
@@ -126,6 +129,7 @@ body {
 		height: 100vh;
 		max-width: 100vw;
 		max-height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon {
@@ -133,16 +137,18 @@ body {
 		height: 100vh;
 		max-width: 100vw;
 		max-height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__svg {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__txt {
-		font-size: clamp(32px, 7vw, 72px);
-		letter-spacing: 1.5px;
+		font-size: clamp(40px, 8vw, 85px);
+		letter-spacing: 1.8px;
 	}
 }
 
@@ -151,21 +157,24 @@ body {
 	.container {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__svg {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__txt {
-		font-size: clamp(16px, 5vw, 36px);
-		letter-spacing: 0.8px;
+		font-size: clamp(24px, 7vw, 48px);
+		letter-spacing: 1.2px;
 	}
 }
 
@@ -174,29 +183,32 @@ body {
 	.container {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__svg {
 		width: 100vw;
 		height: 100vh;
+		aspect-ratio: 1800 / 740;
 	}
 
 	.moon__txt {
-		font-size: clamp(14px, 4vw, 28px);
-		letter-spacing: 0.6px;
+		font-size: clamp(20px, 6vw, 36px);
+		letter-spacing: 1px;
 	}
 }
 
 /* 매우 작은 화면 최적화 */
 @media (max-width: 375px) {
 	.moon__txt {
-		font-size: clamp(14px, 4.5vw, 24px);
-		letter-spacing: 0.5px;
+		font-size: clamp(20px, 7vw, 32px);
+		letter-spacing: 0.8px;
 	}
 }
 
