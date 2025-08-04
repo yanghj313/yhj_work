@@ -20,15 +20,15 @@ const Welcome = () => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
 
-		// 모바일과 데스크톱에 따른 다른 width 배열
-		const wArray = isMobile ? [300, 80, 280, 320] : isTablet ? [500, 150, 450, 550] : [726, 212, 676, 796];
+		// 모든 디바이스에서 동일한 width 배열 사용
+		const wArray = [726, 212, 676, 796];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
 			repeat: 0,
 			defaults: {
 				ease: 'expo.inOut',
-				duration: isMobile ? 1.5 : 2,
+				duration: 2,
 			},
 		});
 
@@ -43,7 +43,7 @@ const Welcome = () => {
 				'.container__base',
 				{
 					scaleX: 0,
-					duration: isMobile ? 1.5 : 2,
+					duration: 2,
 					transformOrigin: 'top right',
 				},
 				'+=0.1'
@@ -52,8 +52,8 @@ const Welcome = () => {
 				'.moon__svg-rects rect',
 				{
 					scaleX: 0,
-					stagger: isMobile ? 0.05 : 0.07,
-					duration: isMobile ? 2 : 3,
+					stagger: 0.07,
+					duration: 3,
 					ease: 'expo',
 				},
 				'-=1.5'
@@ -61,7 +61,7 @@ const Welcome = () => {
 			.to(
 				'.moon__txt-bg rect',
 				{
-					stagger: isMobile ? 0.1 : 0.14,
+					stagger: 0.14,
 					scaleX: 1,
 				},
 				'-=2.2'
@@ -71,7 +71,7 @@ const Welcome = () => {
 				{
 					opacity: 1,
 					ease: 'power4',
-					stagger: isMobile ? 0.15 : 0.2,
+					stagger: 0.2,
 				},
 				'-=1.5'
 			);
@@ -89,21 +89,27 @@ const Welcome = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
 
-			// 모바일에서는 전체 화면을 사용
+			// 모든 디바이스에서 전체 화면을 사용하되, 비율은 유지
 			if (isMobile) {
 				gsap.set(container, {
 					scale: 1,
 					width: '100vw',
 					height: '100vh',
-				});
+				});[
 			} else if (isTablet) {
-				// 태블릿에서는 적절한 비율 유지
-				const scaleFactor = Math.min(vw / 1200, vh / 800);
-				gsap.set(container, { scale: scaleFactor });
+				gsap.set(container, {
+					scale: 1,
+					width: '100vw',
+					height: '100vh',
+				});
 			} else {
-				// 데스크톱에서는 원래 비율 유지
+				// 데스크톱에서는 화면 크기에 따라 적응
 				const scaleFactor = Math.min(vw / 1800, vh / 740);
-				gsap.set(container, { scale: scaleFactor });
+				gsap.set(container, {
+					scale: scaleFactor,
+					width: '100vw',
+					height: '100vh',
+				});
 			}
 		};
 
@@ -116,45 +122,19 @@ const Welcome = () => {
 		};
 	}, [isMobile, isTablet]);
 
-	// 반응형 위치 계산
+	// 모든 디바이스에서 동일한 위치 계산 사용
 	const getResponsivePositions = () => {
-		if (isMobile) {
-			return {
-				yMaskPositions: [30, 145, 260, 375, 490, 605],
-				yTextPositions: [260, 375, 490, 605],
-				textYPositions: [309, 424, 539, 654],
-				rectPositions: [
-					{ y: 259, height: 104, width: 300, x: -2 },
-					{ y: 374, height: 104, width: 80, x: -2 },
-					{ y: 489, height: 104, width: 280, x: -2 },
-					{ y: 604, height: 104, width: 320, x: -2 },
-				],
-			};
-		} else if (isTablet) {
-			return {
-				yMaskPositions: [30, 145, 260, 375, 490, 605],
-				yTextPositions: [260, 375, 490, 605],
-				textYPositions: [309, 424, 539, 654],
-				rectPositions: [
-					{ y: 259, height: 104, width: 500, x: -2 },
-					{ y: 374, height: 104, width: 150, x: -2 },
-					{ y: 489, height: 104, width: 450, x: -2 },
-					{ y: 604, height: 104, width: 550, x: -2 },
-				],
-			};
-		} else {
-			return {
-				yMaskPositions: [30, 145, 260, 375, 490, 605],
-				yTextPositions: [260, 375, 490, 605],
-				textYPositions: [309, 424, 539, 654],
-				rectPositions: [
-					{ y: 259, height: 104, width: 732, x: -2 },
-					{ y: 374, height: 104, width: 218, x: -2 },
-					{ y: 489, height: 104, width: 682, x: -2 },
-					{ y: 604, height: 104, width: 802, x: -2 },
-				],
-			};
-		}
+		return {
+			yMaskPositions: [30, 145, 260, 375, 490, 605],
+			yTextPositions: [260, 375, 490, 605],
+			textYPositions: [309, 424, 539, 654],
+			rectPositions: [
+				{ y: 259, height: 104, width: 732, x: -2 },
+				{ y: 374, height: 104, width: 218, x: -2 },
+				{ y: 489, height: 104, width: 682, x: -2 },
+				{ y: 604, height: 104, width: 802, x: -2 },
+			],
+		};
 	};
 
 	const { yMaskPositions, yTextPositions, textYPositions, rectPositions } = getResponsivePositions();
