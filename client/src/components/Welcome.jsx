@@ -119,7 +119,7 @@ const Welcome = () => {
 	// 반응형 위치 계산
 	const getResponsivePositions = () => {
 		if (isMobile) {
-			// 1024px 이하: 새로운 구조 - "HYUN JIN'S WORK"
+			// 1024px 이하: 새로운 구조 - "HYUN JIN PORT"
 			return {
 				yMaskPositions: [30, 145, 260, 375, 490, 605],
 				yTextPositions: [260, 375, 490, 605],
@@ -130,7 +130,7 @@ const Welcome = () => {
 					{ y: 489, height: 104, width: 350, x: -2 },
 					{ y: 604, height: 104, width: 450, x: -2 },
 				],
-				texts: ['HYUN', "JIN'S", 'WORK'],
+				texts: ['HYUN', 'JIN'S', 'WORK'],
 			};
 		} else {
 			// 1024px 초과: 원래 구조 - "DESIGNED BY HYUNJIN PORTFOLIO"
@@ -155,49 +155,92 @@ const Welcome = () => {
 		<div className="container">
 			<div className="moon">
 				<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 740" preserveAspectRatio="xMidYMid meet">
-					<defs>
-						<clipPath id="clip-path" className="moon__svg-rects">
-							{yMaskPositions.map((y, i) => (
-								<rect key={i} x="0" y={y} width="1800" height="100" />
-							))}
-						</clipPath>
-					</defs>
-					<g clipPath="url(#clip-path)">
-						<foreignObject x="0" y="0" width="1800" height="740">
-							<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
-								<source src="/video/main.mp4" type="video/mp4" />
-							</video>
-						</foreignObject>
-					</g>
-					<g className="moon__txt-bg" fill="#333" transform="translate(0 0)">
-						{rectPositions.map((rect, i) => (
-							<rect key={i} y={rect.y} height={rect.height} width={rect.width} x={rect.x} />
-						))}
-					</g>
-					<clipPath id="moon_txt-mask" className="moon__txt">
-						<text x="0" y={textYPositions[0]} dominantBaseline="middle">
-							<tspan>{texts[0]}</tspan>
-						</text>
-						<text x="0" y={textYPositions[1]} dominantBaseline="middle">
-							<tspan>{texts[1]}</tspan>
-						</text>
-						<text x="1" y={textYPositions[2]} dominantBaseline="middle">
-							<tspan>{texts[2]}</tspan>
-						</text>
-						{texts[3] && (
-							<text x="1" y={textYPositions[3]} dominantBaseline="middle">
-								<tspan>{texts[3]}</tspan>
+					{isMobile ? (
+						// 모바일: 새로운 레이아웃 - 세로 배치 + 파란색 블록
+						<>
+							{/* 상단 파란색 밴드 */}
+							<rect x="0" y="0" width="1800" height="100" fill="url(#blueGradient)" />
+
+							{/* HYUN 텍스트 */}
+							<text x="50" y="309" className="moon__txt" dominantBaseline="middle">
+								<tspan>HYUN</tspan>
 							</text>
-						)}
-					</clipPath>
-					<g clipPath="url(#moon_txt-mask)">
-						<foreignObject x="0" y="0" width="1800" height="740">
-							<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
-								<source src="/video/main.mp4" type="video/mp4" />
-							</video>
-						</foreignObject>
-						<rect className="moon__txt-overlay" width="1800" height="740" />
-					</g>
+
+							{/* 두 번째 파란색 밴드 */}
+							<rect x="0" y="145" width="1800" height="100" fill="url(#blueGradient)" />
+
+							{/* JIN 텍스트와 옆 파란색 블록 */}
+							<text x="50" y="424" className="moon__txt" dominantBaseline="middle">
+								<tspan>JIN'S</tspan>
+							</text>
+							<rect x="1200" y="374" width="400" height="100" fill="url(#blueGradient)" />
+
+							{/* PORT 텍스트와 옆 파란색 블록 */}
+							<text x="50" y="539" className="moon__txt" dominantBaseline="middle">
+								<tspan>WORK</tspan>
+							</text>
+							<rect x="1200" y="489" width="350" height="100" fill="url(#blueGradient)" />
+
+							{/* 하단 파란색 밴드 */}
+							<rect x="0" y="640" width="1800" height="100" fill="url(#blueGradient)" />
+
+							{/* 그라데이션 정의 */}
+							<defs>
+								<linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+									<stop offset="0%" style={{ stopColor: '#0066cc', stopOpacity: 1 }} />
+									<stop offset="50%" style={{ stopColor: '#0099ff', stopOpacity: 1 }} />
+									<stop offset="100%" style={{ stopColor: '#0066cc', stopOpacity: 1 }} />
+								</linearGradient>
+							</defs>
+						</>
+					) : (
+						// 데스크톱: 원래 레이아웃
+						<>
+							<defs>
+								<clipPath id="clip-path" className="moon__svg-rects">
+									{yMaskPositions.map((y, i) => (
+										<rect key={i} x="0" y={y} width="1800" height="100" />
+									))}
+								</clipPath>
+							</defs>
+							<g clipPath="url(#clip-path)">
+								<foreignObject x="0" y="0" width="1800" height="740">
+									<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
+										<source src="/video/main.mp4" type="video/mp4" />
+									</video>
+								</foreignObject>
+							</g>
+							<g className="moon__txt-bg" fill="#333" transform="translate(0 0)">
+								{rectPositions.map((rect, i) => (
+									<rect key={i} y={rect.y} height={rect.height} width={rect.width} x={rect.x} />
+								))}
+							</g>
+							<clipPath id="moon_txt-mask" className="moon__txt">
+								<text x="0" y={textYPositions[0]} dominantBaseline="middle">
+									<tspan>{texts[0]}</tspan>
+								</text>
+								<text x="0" y={textYPositions[1]} dominantBaseline="middle">
+									<tspan>{texts[1]}</tspan>
+								</text>
+								<text x="1" y={textYPositions[2]} dominantBaseline="middle">
+									<tspan>{texts[2]}</tspan>
+								</text>
+								{texts[3] && (
+									<text x="1" y={textYPositions[3]} dominantBaseline="middle">
+										<tspan>{texts[3]}</tspan>
+									</text>
+								)}
+							</clipPath>
+							<g clipPath="url(#moon_txt-mask)">
+								<foreignObject x="0" y="0" width="1800" height="740">
+									<video autoPlay muted loop playsInline className="moon__video" width="100%" height="100%">
+										<source src="/video/main.mp4" type="video/mp4" />
+									</video>
+								</foreignObject>
+								<rect className="moon__txt-overlay" width="1800" height="740" />
+							</g>
+						</>
+					)}
 				</svg>
 			</div>
 			<div className="container__base"></div>
