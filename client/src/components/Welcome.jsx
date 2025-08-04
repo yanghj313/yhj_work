@@ -10,8 +10,8 @@ const Welcome = () => {
 		const checkDevice = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
-			setIsMobile(vw <= 768);
-			setIsTablet(vw > 768 && vw <= 1024);
+			setIsMobile(vw <= 1024);
+			setIsTablet(vw > 1024 && vw <= 1200);
 		};
 
 		checkDevice();
@@ -20,7 +20,7 @@ const Welcome = () => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
 
-		// 모바일과 웹에 따른 다른 width 배열
+		// 1024px 이하와 웹에 따른 다른 width 배열
 		const wArray = isMobile ? [400, 300, 350, 450] : [726, 212, 676, 796];
 
 		const tl = gsap.timeline({
@@ -89,14 +89,22 @@ const Welcome = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
 
-			// 모든 디바이스에서 원래 비율(1800:740)을 유지하면서 화면에 맞춤
-			const scaleFactor = Math.min(vw / 1800, vh / 740);
-
-			gsap.set(container, {
-				scale: scaleFactor,
-				width: '100vw',
-				height: '100vh',
-			});
+			if (isMobile) {
+				// 1024px 이하: 상하좌우 꽉 찬 효과
+				gsap.set(container, {
+					scale: 1,
+					width: '100vw',
+					height: '100vh',
+				});
+			} else {
+				// 1024px 초과: 원래 비율 유지
+				const scaleFactor = Math.min(vw / 1800, vh / 740);
+				gsap.set(container, {
+					scale: scaleFactor,
+					width: '100vw',
+					height: '100vh',
+				});
+			}
 		};
 
 		window.addEventListener('resize', resize);
@@ -111,7 +119,7 @@ const Welcome = () => {
 	// 반응형 위치 계산
 	const getResponsivePositions = () => {
 		if (isMobile) {
-			// 모바일: 새로운 구조 - "HYUN JIN'S WORK"
+			// 1024px 이하: 새로운 구조 - "HYUN JIN'S WORK"
 			return {
 				yMaskPositions: [30, 145, 260, 375, 490, 605],
 				yTextPositions: [260, 375, 490, 605],
@@ -125,7 +133,7 @@ const Welcome = () => {
 				texts: ['HYUN', "JIN'S", 'WORK'],
 			};
 		} else {
-			// 웹/태블릿/노트북: 원래 구조 - "DESIGNED BY HYUNJIN PORTFOLIO"
+			// 1024px 초과: 원래 구조 - "DESIGNED BY HYUNJIN PORTFOLIO"
 			return {
 				yMaskPositions: [30, 145, 260, 375, 490, 605],
 				yTextPositions: [260, 375, 490, 605],
