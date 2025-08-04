@@ -231,7 +231,7 @@
 
 	#fullpage .one {
 		display: flex !important;
-		height: 400px !important
+		min-height: 100dvh !important;
 	}
 
 	#fullpage .text {
