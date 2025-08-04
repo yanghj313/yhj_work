@@ -95,7 +95,7 @@ const Welcome = () => {
 					scale: 1,
 					width: '100vw',
 					height: '100vh',
-				});[
+				});
 			} else if (isTablet) {
 				gsap.set(container, {
 					scale: 1,
