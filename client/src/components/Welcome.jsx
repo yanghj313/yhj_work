@@ -20,8 +20,8 @@ const Welcome = () => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
 
-		// 모든 디바이스에서 동일한 width 배열 사용
-		const wArray = [726, 212, 676, 796];
+		// 모바일과 웹에 따른 다른 width 배열
+		const wArray = isMobile ? [400, 300, 350, 450] : [726, 212, 676, 796];
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -108,22 +108,40 @@ const Welcome = () => {
 		};
 	}, [isMobile, isTablet]);
 
-	// 모든 디바이스에서 동일한 위치 계산 사용
+	// 반응형 위치 계산
 	const getResponsivePositions = () => {
-		return {
-			yMaskPositions: [30, 145, 260, 375, 490, 605],
-			yTextPositions: [260, 375, 490, 605],
-			textYPositions: [309, 424, 539, 654],
-			rectPositions: [
-				{ y: 259, height: 104, width: 732, x: -2 },
-				{ y: 374, height: 104, width: 218, x: -2 },
-				{ y: 489, height: 104, width: 682, x: -2 },
-				{ y: 604, height: 104, width: 802, x: -2 },
-			],
-		};
+		if (isMobile) {
+			// 모바일: 새로운 구조 - "HYUN JIN'S WORK"
+			return {
+				yMaskPositions: [30, 145, 260, 375, 490, 605],
+				yTextPositions: [260, 375, 490, 605],
+				textYPositions: [309, 424, 539, 654],
+				rectPositions: [
+					{ y: 259, height: 104, width: 400, x: -2 },
+					{ y: 374, height: 104, width: 300, x: -2 },
+					{ y: 489, height: 104, width: 350, x: -2 },
+					{ y: 604, height: 104, width: 450, x: -2 },
+				],
+				texts: ['HYUN', "JIN'S", 'WORK'],
+			};
+		} else {
+			// 웹/태블릿/노트북: 원래 구조 - "DESIGNED BY HYUNJIN PORTFOLIO"
+			return {
+				yMaskPositions: [30, 145, 260, 375, 490, 605],
+				yTextPositions: [260, 375, 490, 605],
+				textYPositions: [309, 424, 539, 654],
+				rectPositions: [
+					{ y: 259, height: 104, width: 732, x: -2 },
+					{ y: 374, height: 104, width: 218, x: -2 },
+					{ y: 489, height: 104, width: 682, x: -2 },
+					{ y: 604, height: 104, width: 802, x: -2 },
+				],
+				texts: ['DESIGNED', 'BY', 'HYUNJIN', 'PORTFOLIO'],
+			};
+		}
 	};
 
-	const { yMaskPositions, yTextPositions, textYPositions, rectPositions } = getResponsivePositions();
+	const { yMaskPositions, yTextPositions, textYPositions, rectPositions, texts } = getResponsivePositions();
 
 	return (
 		<div className="container">
@@ -150,17 +168,19 @@ const Welcome = () => {
 					</g>
 					<clipPath id="moon_txt-mask" className="moon__txt">
 						<text x="0" y={textYPositions[0]} dominantBaseline="middle">
-							<tspan>DESIGNED</tspan>
+							<tspan>{texts[0]}</tspan>
 						</text>
 						<text x="0" y={textYPositions[1]} dominantBaseline="middle">
-							<tspan>BY</tspan>
+							<tspan>{texts[1]}</tspan>
 						</text>
 						<text x="1" y={textYPositions[2]} dominantBaseline="middle">
-							<tspan>HYUNJIN</tspan>
+							<tspan>{texts[2]}</tspan>
 						</text>
-						<text x="1" y={textYPositions[3]} dominantBaseline="middle">
-							<tspan>PORTFOLIO</tspan>
-						</text>
+						{texts[3] && (
+							<text x="1" y={textYPositions[3]} dominantBaseline="middle">
+								<tspan>{texts[3]}</tspan>
+							</text>
+						)}
 					</clipPath>
 					<g clipPath="url(#moon_txt-mask)">
 						<foreignObject x="0" y="0" width="1800" height="740">
