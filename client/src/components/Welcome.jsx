@@ -5,7 +5,7 @@ import '../assets/css/welcome.css';
 const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
-	viewBox: '0 0 768 750',
+	viewBox: '0 0 736 750',
 	scaleBase: { width: 736, height: 750 },
 	yTextPositions: [160, 260, 360],
 };
@@ -53,25 +53,25 @@ const MobileLayout = () => {
 			</g>
 
 			<g className="moon__txt-bg" fill="#333">
-				<rect y="110" height="80" width="320" x="0" />
-				<rect y="210" height="80" width="240" x="0" />
-				<rect y="310" height="80" width="360" x="0" />
+				<rect y="90" height="110" width="320" x="0" />
+				<rect y="190" height="110" width="240" x="0" />
+				<rect y="290" height="110" width="360" x="0" />
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				<text x="0" y="160" fontSize="48" dominantBaseline="middle">
+				<text x="0" y="140" fontSize="48" dominantBaseline="middle">
 					<tspan>HYUN</tspan>
 				</text>
-				<text x="0" y="260" fontSize="48" dominantBaseline="middle">
+				<text x="0" y="240" fontSize="48" dominantBaseline="middle">
 					<tspan>JIN'S</tspan>
 				</text>
-				<text x="0" y="360" fontSize="48" dominantBaseline="middle">
+				<text x="0" y="340" fontSize="48" dominantBaseline="middle">
 					<tspan>WORK</tspan>
 				</text>
 			</clipPath>
 
 			<g clipPath="url(#moon_txt-mask)">
-				<foreignObject x="0" y="0" width="768" height="750">
+				<foreignObject x="0" y="0" width="736" height="750">
 					<video autoPlay muted loop playsInline className="moon__video" width="736" height="750">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
