@@ -440,6 +440,12 @@
 
 /* 480px 이하 모바일 추가 최적화 */
 @media screen and (max-width: 480px) {
+
+	.skill-scroll-track>* {
+		scroll-snap-align: start;
+		flex-shrink: 0;
+	}
+
 	.skill-tour-horizontal {
 		padding: 0 10px
 	}
@@ -467,7 +473,14 @@
 	}
 
 	.skill-scroll-track {
-		padding: 15px 0px 30px;
+		scroll-padding-left: 0;
+	}
+
+	.skill-scroll-track {
+		margin-top: 15px;
+		margin-bottom: 30px;
+		padding: 0;
+		padding: 0px;
 		gap: 0;
 		flex-wrap: nowrap;
 		overflow-x: auto;
