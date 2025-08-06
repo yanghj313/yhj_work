@@ -5,10 +5,11 @@ import '../assets/css/welcome.css';
 const MOBILE_WIDTH = 736;
 const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
-	yMaskPositions: [0, 100, 200, 300, 400],
+	yMaskPositions: [90, 190, 290],
 	viewBox: `0 0 ${MOBILE_WIDTH} 700`,
 	scaleBase: { width: MOBILE_WIDTH, height: 700 },
-	yTextPositions: [160, 260, 360],
+	yTextPositions: [140, 240, 340],
+	textLabels: ['HYUN', "JIN'S", 'WORK'],
 };
 
 const DESKTOP_CONFIG = {
@@ -20,19 +21,21 @@ const DESKTOP_CONFIG = {
 };
 
 const MobileLayout = () => {
-	const { wArray, yMaskPositions, viewBox, scaleBase } = MOBILE_CONFIG;
+	const { yMaskPositions, viewBox, scaleBase, yTextPositions, textLabels } = MOBILE_CONFIG;
+	const textRefs = useRef([]);
 
 	useEffect(() => {
 		const rects = document.querySelectorAll('.moon__txt-bg rect');
-		const texts = document.querySelectorAll('.moon__txt text');
 
-		texts.forEach((text, i) => {
-			const length = text.getComputedTextLength(); // ✅ 실제 너비 측정
-			const rect = rects[i];
-			if (rect) {
-				rect.style.transformOrigin = '0px 0px';
-				rect.style.transformBox = 'fill-box';
-				rect.style.width = `${length}px`; // ✅ 텍스트 길이 기준으로 width 지정
+		textRefs.current.forEach((textEl, i) => {
+			if (textEl) {
+				const length = textEl.getComputedTextLength();
+				const rect = rects[i];
+				if (rect) {
+					rect.setAttribute('width', length);
+					rect.style.transformOrigin = '0px 0px';
+					rect.style.transformBox = 'fill-box';
+				}
 			}
 		});
 
@@ -45,11 +48,11 @@ const MobileLayout = () => {
 		gsap.set(container, { scale: scaleFactor });
 	}, []);
 	return (
-		<svg className="moon__svg" viewBox={`0 0 ${MOBILE_WIDTH} 700`} preserveAspectRatio="xMidYMid slice">
+		<svg className="moon__svg" viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
 					{yMaskPositions.map((y, i) => (
-						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="80" />
+						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="110" />
 					))}
 				</clipPath>
 			</defs>
@@ -63,26 +66,31 @@ const MobileLayout = () => {
 			</g>
 
 			<g className="moon__txt-bg" fill="#333">
-				<rect y="90" height="110" width="320" x="0" />
-				<rect y="190" height="110" width="240" x="0" />
-				<rect y="290" height="110" width="360" x="0" />
+				{yMaskPositions.map((y, i) => (
+					<rect key={i} y={y} height="110" width="0" x="0" />
+				))}
+			</g>
+
+			{/* 측정용 텍스트 (화면에는 안 보임) */}
+			<g className="moon__txt-hidden" style={{ visibility: 'hidden', position: 'absolute' }}>
+				{textLabels.map((text, i) => (
+					<text key={i} x="30" y={yTextPositions[i]} fontSize="50" dominantBaseline="middle" textAnchor="start" ref={el => (textRefs.current[i] = el)}>
+						<tspan>{text}</tspan>
+					</text>
+				))}
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				<text x="30" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
-					<tspan>HYUN</tspan>
-				</text>
-				<text x="30" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
-					<tspan>JIN'S</tspan>
-				</text>
-				<text x="30" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
-					<tspan>WORK</tspan>
-				</text>
+				{textLabels.map((text, i) => (
+					<text key={i} x="30" y={yTextPositions[i]} fontSize="50" dominantBaseline="middle" textAnchor="start">
+						<tspan>{text}</tspan>
+					</text>
+				))}
 			</clipPath>
 
 			<g clipPath="url(#moon_txt-mask)">
 				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
-					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="700">
+					<video autoPlay muted loop playsInline preload="auto" className="moon__video" width={MOBILE_WIDTH} height="700">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>

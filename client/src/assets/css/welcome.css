@@ -132,4 +132,10 @@ body {
 		transform-origin: left center;
 		transform-box: fill-box;
 	}
+
+	.moon__txt-hidden {
+		visibility: hidden;
+		position: absolute;
+		pointer-events: none;
+	}
 }
