@@ -4,35 +4,29 @@ import '../assets/css/welcome.css';
 
 const MOBILE_WIDTH = 736;
 const MOBILE_CONFIG = {
-	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
 	viewBox: `0 0 ${MOBILE_WIDTH} 700`,
 	scaleBase: { width: MOBILE_WIDTH, height: 700 },
-	yTextPositions: [160, 260, 360],
 };
 
 const DESKTOP_CONFIG = {
-	wArray: [726, 212, 676, 796],
 	yMaskPositions: [30, 145, 260, 375, 490, 605],
 	viewBox: `0 0 1800 740`,
 	scaleBase: { width: 1800, height: 740 },
-	yTextPositions: [260, 375, 490, 605],
 };
 
 const MobileLayout = () => {
-	const { yMaskPositions } = MOBILE_CONFIG;
-
 	useEffect(() => {
 		const rects = document.querySelectorAll('.moon__txt-bg rect');
 		const texts = document.querySelectorAll('.moon__txt text');
+
+		const padding = 20;
 
 		texts.forEach((text, i) => {
 			const length = text.getComputedTextLength();
 			const rect = rects[i];
 			if (rect) {
-				rect.setAttribute('width', length);
-				rect.style.transformOrigin = '0px 0px';
-				rect.style.transformBox = 'fill-box';
+				rect.setAttribute('width', length + padding); // ✅ width만 조정
 			}
 		});
 
@@ -94,19 +88,17 @@ const MobileLayout = () => {
 };
 
 const DesktopLayout = () => {
-	const { yMaskPositions, viewBox } = DESKTOP_CONFIG;
-
 	useEffect(() => {
 		const rects = document.querySelectorAll('.moon__txt-bg rect');
 		const texts = document.querySelectorAll('.moon__txt text');
+
+		const padding = 20;
 
 		texts.forEach((text, i) => {
 			const length = text.getComputedTextLength();
 			const rect = rects[i];
 			if (rect) {
-				rect.setAttribute('width', length);
-				rect.style.transformOrigin = '0px 0px';
-				rect.style.transformBox = 'fill-box';
+				rect.setAttribute('width', length + padding); // ✅ width만 조정
 			}
 		});
 
@@ -114,10 +106,10 @@ const DesktopLayout = () => {
 	}, []);
 
 	return (
-		<svg className="moon__svg" viewBox={viewBox}>
+		<svg className="moon__svg" viewBox={DESKTOP_CONFIG.viewBox}>
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
-					{yMaskPositions.map((y, i) => (
+					{DESKTOP_CONFIG.yMaskPositions.map((y, i) => (
 						<rect key={i} x="0" y={y} width="1800" height="100" />
 					))}
 				</clipPath>
@@ -190,42 +182,10 @@ const Welcome = () => {
 		gsap.set(texts, { opacity: 0 });
 
 		tl.to(container, { autoAlpha: 1, duration: 0.4 })
-			.from(
-				'.container__base',
-				{
-					scaleX: 0,
-					duration: 2,
-					transformOrigin: 'top right',
-				},
-				'+=0.1'
-			)
-			.from(
-				'.moon__svg-rects rect',
-				{
-					scaleX: 0,
-					stagger: 0.07,
-					duration: 3,
-					ease: 'expo',
-				},
-				'-=1.5'
-			)
-			.to(
-				'.moon__txt-bg rect',
-				{
-					stagger: 0.14,
-					scaleX: 1,
-				},
-				'-=2.2'
-			)
-			.to(
-				texts,
-				{
-					opacity: 1,
-					ease: 'power4',
-					stagger: 0.2,
-				},
-				'-=1.5'
-			);
+			.from('.container__base', { scaleX: 0, duration: 2, transformOrigin: 'top right' }, '+=0.1')
+			.from('.moon__svg-rects rect', { scaleX: 0, stagger: 0.07, duration: 3, ease: 'expo' }, '-=1.5')
+			.to('.moon__txt-bg rect', { stagger: 0.14, scaleX: 1 }, '-=2.2')
+			.to(texts, { opacity: 1, ease: 'power4', stagger: 0.2 }, '-=1.5');
 
 		const resize = () => {
 			const vw = window.innerWidth;
