@@ -5,7 +5,7 @@ import '../assets/css/welcome.css';
 const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
-	viewBox: '0 0 768 480',
+	viewBox: '0 0 768 750',
 	scaleBase: { width: 768, height: 480 },
 	yTextPositions: [160, 260, 360],
 };
