@@ -39,6 +39,11 @@ const AppLayout = ({ user, setUser }) => {
 			title: 'Artwork Gallery',
 			backgroundImage: '/img/main_img/gallery_bg.jpg',
 		},
+		{
+			match: path => path.startsWith('/search'),
+			title: 'Search Results',
+			backgroundImage: '/img/main_img/search_bg.jpg',
+		},
 	];
 
 	const subHeaderInfo = subHeaderMap.find(entry => entry.match(location.pathname));

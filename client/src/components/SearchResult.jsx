@@ -80,11 +80,9 @@ const SearchResult = () => {
 
 	return (
 		<div className="search-result-container">
-			<div className="search-header">
-				<h1 className="search-title">🔎 "{query}" 검색 결과</h1>
-				<p className="search-summary">총 {totalResults}개의 결과를 찾았습니다</p>
+			<div className="search-summary">
+				🔎 "{query}" 검색 결과 - 총 {totalResults}개의 결과를 찾았습니다
 			</div>
-
 			<div className="search-content">
 				{projects.length > 0 && (
 					<section className="search-section">
