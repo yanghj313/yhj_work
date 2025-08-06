@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import '../assets/css/welcome.css';
 
+const MOBILE_WIDTH = 704;
 const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
-	viewBox: '0 0 736 750',
-	scaleBase: { width: 736, height: 750 },
+	viewBox: '0 0 ${MOBILE_WIDTH} 750',
+	scaleBase: { width: MOBILE_WIDTH, height: 750 },
 	yTextPositions: [160, 260, 360],
 };
 
@@ -35,18 +36,18 @@ const MobileLayout = () => {
 	}, []);
 
 	return (
-		<svg className="moon__svg" viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
+		<svg className="moon__svg" viewBox={MOBILE_CONFIG.viewBox} preserveAspectRatio="xMidYMid slice">
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
 					{yMaskPositions.map((y, i) => (
-						<rect key={i} x="0" y={y} width="736" height="110" />
+						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="80" />
 					))}
 				</clipPath>
 			</defs>
 
 			<g clipPath="url(#clip-path)">
-				<foreignObject x="0" y="0" width="736" height="750">
-					<video autoPlay muted loop playsInline className="moon__video" width="736" height="750">
+				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="750">
+					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="750">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
@@ -71,12 +72,12 @@ const MobileLayout = () => {
 			</clipPath>
 
 			<g clipPath="url(#moon_txt-mask)">
-				<foreignObject x="0" y="0" width="736" height="750">
-					<video autoPlay muted loop playsInline className="moon__video" width="736" height="750">
+				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="750">
+					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="750">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
-				<rect className="moon__txt-overlay" width="736" height="750" />
+				<rect className="moon__txt-overlay" width={MOBILE_WIDTH} height="750" />
 			</g>
 		</svg>
 	);
