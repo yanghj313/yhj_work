@@ -6,8 +6,8 @@ const MOBILE_WIDTH = 704;
 const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
-	viewBox: '0 0 ${MOBILE_WIDTH} 750',
-	scaleBase: { width: MOBILE_WIDTH, height: 750 },
+	viewBox: '0 0 ${MOBILE_WIDTH} 700',
+	scaleBase: { width: MOBILE_WIDTH, height: 700 },
 	yTextPositions: [160, 260, 360],
 };
 
@@ -36,7 +36,7 @@ const MobileLayout = () => {
 	}, []);
 
 	return (
-		<svg className="moon__svg" viewBox={MOBILE_CONFIG.viewBox} preserveAspectRatio="xMidYMid slice">
+		<svg className="moon__svg" viewBox={`0 0 ${MOBILE_WIDTH} 700`} preserveAspectRatio="xMidYMid slice">
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
 					{yMaskPositions.map((y, i) => (
@@ -46,8 +46,8 @@ const MobileLayout = () => {
 			</defs>
 
 			<g clipPath="url(#clip-path)">
-				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="750">
-					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="750">
+				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
+					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="700">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
@@ -60,24 +60,24 @@ const MobileLayout = () => {
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				<text x="0" y="140" fontSize="48" dominantBaseline="middle">
+				<text x="0" y="140" fontSize="50" dominantBaseline="middle">
 					<tspan>HYUN</tspan>
 				</text>
-				<text x="0" y="240" fontSize="48" dominantBaseline="middle">
+				<text x="0" y="240" fontSize="50" dominantBaseline="middle">
 					<tspan>JIN'S</tspan>
 				</text>
-				<text x="0" y="340" fontSize="48" dominantBaseline="middle">
+				<text x="0" y="340" fontSize="50" dominantBaseline="middle">
 					<tspan>WORK</tspan>
 				</text>
 			</clipPath>
 
 			<g clipPath="url(#moon_txt-mask)">
-				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="750">
-					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="750">
+				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
+					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="700">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
-				<rect className="moon__txt-overlay" width={MOBILE_WIDTH} height="750" />
+				<rect className="moon__txt-overlay" width={MOBILE_WIDTH} height="700" />
 			</g>
 		</svg>
 	);
