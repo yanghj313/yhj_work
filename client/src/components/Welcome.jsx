@@ -80,9 +80,25 @@ const MOBILELayout = () => {
 			<div className="mobile-overlay"></div>
 			<div className="mobile-text">
 				<h1 className="mobile-title">
-					<span className="mobile-title-line">HYUN JIN'S</span>
+					<div className="mobile-title-line">
+						<span className="mobile-char">H</span>
+						<span className="mobile-char">Y</span>
+						<span className="mobile-char">U</span>
+						<span className="mobile-char">N</span>
+						<span className="mobile-char">&nbsp;</span>
+						<span className="mobile-char">J</span>
+						<span className="mobile-char">I</span>
+						<span className="mobile-char">N</span>
+						<span className="mobile-char">'</span>
+						<span className="mobile-char">S</span>
+					</div>
 					<br />
-					<span className="mobile-title-line">WORK</span>
+					<div className="mobile-title-line">
+						<span className="mobile-char">W</span>
+						<span className="mobile-char">O</span>
+						<span className="mobile-char">R</span>
+						<span className="mobile-char">K</span>
+					</div>
 				</h1>
 			</div>
 		</div>
@@ -237,16 +253,71 @@ const Welcome = () => {
 		if (layoutType === 'mobile') {
 			// 모바일 애니메이션
 			gsap.set(container, { autoAlpha: 0 });
-			gsap.set('.mobile-title-line', { opacity: 0, y: 50 });
+			gsap.set('.mobile-title-line::before', { opacity: 0, scale: 0.8 });
+			gsap.set('.mobile-title-line::after', { opacity: 0, scale: 0.8 });
+			gsap.set('.mobile-char', { opacity: 0, y: 30, rotationX: 90 });
 
-			tl.to(container, { autoAlpha: 1, duration: 0.4 }).to('.mobile-title-line', {
-				opacity: 1,
-				y: 0,
-				duration: 1.5,
-				ease: 'power3.out',
-				stagger: 0.3,
-				delay: 0.5,
-			});
+			// 원형 테두리 애니메이션
+			tl.to(container, { autoAlpha: 1, duration: 0.4 })
+				.to(
+					'.mobile-title-line::before',
+					{
+						opacity: 1,
+						scale: 1,
+						duration: 1.5,
+						ease: 'power2.out',
+						stagger: 0.3,
+					},
+					'+=0.2'
+				)
+				.to(
+					'.mobile-title-line::after',
+					{
+						opacity: 1,
+						scale: 1,
+						duration: 0.8,
+						ease: 'power2.out',
+						stagger: 0.3,
+					},
+					'-=0.5'
+				)
+				.to(
+					'.mobile-char',
+					{
+						opacity: 1,
+						y: 0,
+						rotationX: 0,
+						duration: 1.2,
+						ease: 'power3.out',
+						stagger: 0.1,
+					},
+					'-=0.3'
+				);
+
+			// 반복되는 파도 애니메이션
+			const waveAnimation = () => {
+				gsap
+					.timeline({ repeat: -1, repeatDelay: 2 })
+					.to('.mobile-char', {
+						y: -3,
+						duration: 0.3,
+						ease: 'power2.out',
+						stagger: 0.05,
+					})
+					.to(
+						'.mobile-char',
+						{
+							y: 0,
+							duration: 0.3,
+							ease: 'power2.in',
+							stagger: 0.05,
+						},
+						'-=0.2'
+					);
+			};
+
+			// 첫 번째 애니메이션이 끝난 후 반복 애니메이션 시작
+			setTimeout(waveAnimation, 4000);
 		} else {
 			// 데스크톱/태블릿 애니메이션
 			gsap.set(container, { autoAlpha: 0 });
