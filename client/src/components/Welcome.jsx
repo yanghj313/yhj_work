@@ -20,19 +20,19 @@ const DESKTOP_CONFIG = {
 };
 
 const MobileLayout = () => {
-	const { wArray, yMaskPositions, viewBox, scaleBase } = MOBILE_CONFIG;
+	const { yMaskPositions } = MOBILE_CONFIG;
 
 	useEffect(() => {
 		const rects = document.querySelectorAll('.moon__txt-bg rect');
 		const texts = document.querySelectorAll('.moon__txt text');
 
 		texts.forEach((text, i) => {
-			const length = text.getComputedTextLength(); // ✅ 실제 너비 측정
+			const length = text.getComputedTextLength();
 			const rect = rects[i];
 			if (rect) {
+				rect.setAttribute('width', length);
 				rect.style.transformOrigin = '0px 0px';
 				rect.style.transformBox = 'fill-box';
-				rect.style.width = `${length}px`; // ✅ 텍스트 길이 기준으로 width 지정
 			}
 		});
 
@@ -41,14 +41,15 @@ const MobileLayout = () => {
 		const container = document.querySelector('.container');
 		const vw = window.innerWidth;
 		const vh = window.innerHeight;
-		const scaleFactor = Math.min(vw / scaleBase.width, vh / scaleBase.height);
+		const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
 		gsap.set(container, { scale: scaleFactor });
 	}, []);
+
 	return (
-		<svg className="moon__svg" viewBox={`0 0 ${MOBILE_WIDTH} 700`} preserveAspectRatio="xMidYMid slice">
+		<svg className="moon__svg" viewBox={MOBILE_CONFIG.viewBox} preserveAspectRatio="xMidYMid slice">
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
-					{yMaskPositions.map((y, i) => (
+					{MOBILE_CONFIG.yMaskPositions.map((y, i) => (
 						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="80" />
 					))}
 				</clipPath>
@@ -63,9 +64,9 @@ const MobileLayout = () => {
 			</g>
 
 			<g className="moon__txt-bg" fill="#333">
-				<rect y="90" height="110" width="320" x="0" />
-				<rect y="190" height="110" width="240" x="0" />
-				<rect y="290" height="110" width="360" x="0" />
+				<rect y="90" height="110" x="0" />
+				<rect y="190" height="110" x="0" />
+				<rect y="290" height="110" x="0" />
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
@@ -93,13 +94,23 @@ const MobileLayout = () => {
 };
 
 const DesktopLayout = () => {
-	const { wArray, yMaskPositions, viewBox } = DESKTOP_CONFIG;
+	const { yMaskPositions, viewBox } = DESKTOP_CONFIG;
 
 	useEffect(() => {
-		gsap.set('.moon__txt-bg rect', {
-			width: i => wArray[i] || 200,
-			scaleX: 0,
+		const rects = document.querySelectorAll('.moon__txt-bg rect');
+		const texts = document.querySelectorAll('.moon__txt text');
+
+		texts.forEach((text, i) => {
+			const length = text.getComputedTextLength();
+			const rect = rects[i];
+			if (rect) {
+				rect.setAttribute('width', length);
+				rect.style.transformOrigin = '0px 0px';
+				rect.style.transformBox = 'fill-box';
+			}
 		});
+
+		gsap.set(rects, { scaleX: 0 });
 	}, []);
 
 	return (
@@ -121,10 +132,10 @@ const DesktopLayout = () => {
 			</g>
 
 			<g className="moon__txt-bg" fill="#333">
-				<rect y="259" height="104" width="732" x="-2" />
-				<rect y="374" height="104" width="218" x="-2" />
-				<rect y="489" height="104" width="682" x="-2" />
-				<rect y="604" height="104" width="802" x="-2" />
+				<rect y="259" height="104" x="0" />
+				<rect y="374" height="104" x="0" />
+				<rect y="489" height="104" x="0" />
+				<rect y="604" height="104" x="0" />
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
@@ -158,16 +169,13 @@ const Welcome = () => {
 	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
-		const checkDevice = () => {
-			setIsMobile(window.innerWidth <= 768);
-		};
-
+		const checkDevice = () => setIsMobile(window.innerWidth <= 768);
 		checkDevice();
+
 		window.addEventListener('resize', checkDevice);
 
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
-		const wArray = DESKTOP_CONFIG.wArray;
 
 		const tl = gsap.timeline({
 			delay: 0.5,
@@ -218,11 +226,6 @@ const Welcome = () => {
 				},
 				'-=1.5'
 			);
-
-		gsap.set('.moon__txt-bg rect', {
-			width: i => wArray[i] || 200,
-			scaleX: 0,
-		});
 
 		const resize = () => {
 			const vw = window.innerWidth;
