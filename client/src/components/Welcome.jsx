@@ -56,68 +56,32 @@ const useTextRects = () => {
 };
 
 const MOBILELayout = () => {
-	useTextRects();
-	useTextRects();
-
 	useLayoutEffect(() => {
 		const container = document.querySelector('.container');
 		const vw = window.innerWidth;
 		const vh = window.innerHeight;
-		const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
-		gsap.set(container, { scale: scaleFactor });
 
-		// 모바일에서 스케일링이 너무 작아지지 않도록 최소 스케일 설정
+		// 모바일에서는 스케일링 없이 전체 화면으로 설정
 		if (vw <= 480) {
-			const minScale = Math.max(scaleFactor, 0.8);
-			gsap.set(container, { scale: minScale });
+			gsap.set(container, {
+				width: '100vw',
+				height: '100vh',
+				scale: 1,
+				transform: 'none',
+			});
 		}
 	}, []);
 
 	return (
-		<svg className="moon__svg" viewBox={MOBILE_CONFIG.viewBox} preserveAspectRatio="xMidYMid slice">
-			<defs>
-				<clipPath id="clip-path" className="moon__svg-rects">
-					{MOBILE_CONFIG.yMaskPositions.map((y, i) => (
-						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="80" />
-					))}
-				</clipPath>
-			</defs>
-
-			<g clipPath="url(#clip-path)">
-				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
-					<video autoPlay muted loop playsInline preload="auto" className="moon__video" width={MOBILE_WIDTH} height="700">
-						<source src="/video/main.mp4" type="video/mp4" />
-					</video>
-				</foreignObject>
-			</g>
-
-			<g className="moon__txt-bg" fill="#333">
-				<rect y="90" height="110" x="0" />
-				<rect y="190" height="110" x="0" />
-				<rect y="290" height="110" x="0" />
-			</g>
-
-			<clipPath id="moon_txt-mask" className="moon__txt">
-				<text x="30" y="140" fontSize="35" dominantBaseline="middle" textAnchor="start">
-					<tspan>HYUN</tspan>
-				</text>
-				<text x="30" y="240" fontSize="35" dominantBaseline="middle" textAnchor="start">
-					<tspan>JIN'S</tspan>
-				</text>
-				<text x="30" y="340" fontSize="35" dominantBaseline="middle" textAnchor="start">
-					<tspan>WORK</tspan>
-				</text>
-			</clipPath>
-
-			<g clipPath="url(#moon_txt-mask)">
-				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
-					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="700">
-						<source src="/video/main.mp4" type="video/mp4" />
-					</video>
-				</foreignObject>
-				<rect className="moon__txt-overlay" width={MOBILE_WIDTH} height="700" />
-			</g>
-		</svg>
+		<div className="mobile-layout">
+			<video autoPlay muted loop playsInline preload="auto" className="mobile-video">
+				<source src="/video/main.mp4" type="video/mp4" />
+			</video>
+			<div className="mobile-overlay"></div>
+			<div className="mobile-text">
+				<h1 className="mobile-title">HYUN JIN'S WORK</h1>
+			</div>
+		</div>
 	);
 };
 
@@ -265,65 +229,84 @@ const Welcome = () => {
 			},
 		});
 
-		gsap.set(container, { autoAlpha: 0 });
-		gsap.set(texts, { opacity: 0 });
+		// 모바일과 데스크톱 애니메이션 분리
+		if (layoutType === 'mobile') {
+			// 모바일 애니메이션
+			gsap.set(container, { autoAlpha: 0 });
+			gsap.set('.mobile-title', { opacity: 0, y: 30 });
 
-		tl.to(container, { autoAlpha: 1, duration: 0.4 })
-			.from(
-				'.container__base',
-				{
-					scaleX: 0,
-					duration: 2,
-					transformOrigin: 'top right',
-				},
-				'+=0.1'
-			)
-			.from(
-				'.moon__svg-rects rect',
-				{
-					scaleX: 0,
-					stagger: 0.07,
-					duration: 3,
-					ease: 'expo',
-				},
-				'-=1.5'
-			)
-			.to(
-				'.moon__txt-bg rect',
-				{
-					stagger: 0.14,
-					scaleX: 1,
-				},
-				'-=2.2'
-			)
-			.to(
-				texts,
-				{
-					opacity: 1,
-					ease: 'power4',
-					stagger: 0.2,
-				},
-				'-=1.5'
-			);
+			tl.to(container, { autoAlpha: 1, duration: 0.4 }).to('.mobile-title', {
+				opacity: 1,
+				y: 0,
+				duration: 1.2,
+				ease: 'power3.out',
+				delay: 0.3,
+			});
+		} else {
+			// 데스크톱/태블릿 애니메이션
+			gsap.set(container, { autoAlpha: 0 });
+			gsap.set(texts, { opacity: 0 });
+
+			tl.to(container, { autoAlpha: 1, duration: 0.4 })
+				.from(
+					'.container__base',
+					{
+						scaleX: 0,
+						duration: 2,
+						transformOrigin: 'top right',
+					},
+					'+=0.1'
+				)
+				.from(
+					'.moon__svg-rects rect',
+					{
+						scaleX: 0,
+						stagger: 0.07,
+						duration: 3,
+						ease: 'expo',
+					},
+					'-=1.5'
+				)
+				.to(
+					'.moon__txt-bg rect',
+					{
+						stagger: 0.14,
+						scaleX: 1,
+					},
+					'-=2.2'
+				)
+				.to(
+					texts,
+					{
+						opacity: 1,
+						ease: 'power4',
+						stagger: 0.2,
+					},
+					'-=1.5'
+				);
+		}
 
 		const resize = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
-			let base;
-			if (layoutType === 'mobile') {
-				base = MOBILE_CONFIG.scaleBase;
-			} else if (layoutType === 'tablet') {
-				base = TABLET_CONFIG.scaleBase;
-			} else {
-				base = DESKTOP_CONFIG.scaleBase;
-			}
-			const scaleFactor = Math.min(vw / base.width, vh / base.height);
 
-			// 모바일에서 스케일링이 너무 작아지지 않도록 최소 스케일 설정
-			if (layoutType === 'mobile' && vw <= 480) {
-				const minScale = Math.max(scaleFactor, 0.8);
-				gsap.set(container, { scale: minScale });
+			if (layoutType === 'mobile') {
+				// 모바일에서는 스케일링 없이 전체 화면으로 설정
+				gsap.set(container, {
+					width: '100vw',
+					height: '100vh',
+					scale: 1,
+					transform: 'none',
+				});
 			} else {
+				// 데스크톱/태블릿 스케일링
+				let base;
+				if (layoutType === 'tablet') {
+					base = TABLET_CONFIG.scaleBase;
+				} else {
+					base = DESKTOP_CONFIG.scaleBase;
+				}
+				const scaleFactor = Math.min(vw / base.width, vh / base.height);
 				gsap.set(container, { scale: scaleFactor });
 			}
 		};
