@@ -26,6 +26,7 @@ const MobileLayout = () => {
 		gsap.set('.moon__txt-bg rect', {
 			width: i => wArray[i] || 200,
 			scaleX: 0,
+			transformOrigin: 'left center',
 		});
 
 		const container = document.querySelector('.container');
@@ -60,13 +61,13 @@ const MobileLayout = () => {
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				<text x="8" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
+				<text x="30" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
 					<tspan>HYUN</tspan>
 				</text>
-				<text x="8" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
+				<text x="30" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
 					<tspan>JIN'S</tspan>
 				</text>
-				<text x="8" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
+				<text x="30" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
 					<tspan>WORK</tspan>
 				</text>
 			</clipPath>
