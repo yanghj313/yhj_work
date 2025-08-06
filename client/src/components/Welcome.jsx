@@ -6,7 +6,7 @@ const MOBILE_WIDTH = 736;
 const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
-	viewBox: '0 0 ${MOBILE_WIDTH} 700',
+	viewBox: `0 0 ${MOBILE_WIDTH} 700`,
 	scaleBase: { width: MOBILE_WIDTH, height: 700 },
 	yTextPositions: [160, 260, 360],
 };
@@ -14,7 +14,7 @@ const MOBILE_CONFIG = {
 const DESKTOP_CONFIG = {
 	wArray: [726, 212, 676, 796],
 	yMaskPositions: [30, 145, 260, 375, 490, 605],
-	viewBox: '0 0 1800 740',
+	viewBox: `0 0 1800 740`,
 	scaleBase: { width: 1800, height: 740 },
 	yTextPositions: [260, 375, 490, 605],
 };
@@ -23,11 +23,20 @@ const MobileLayout = () => {
 	const { wArray, yMaskPositions, viewBox, scaleBase } = MOBILE_CONFIG;
 
 	useEffect(() => {
-		gsap.set('.moon__txt-bg rect', {
-			width: i => wArray[i] || 200,
-			scaleX: 0,
-			transformOrigin: 'left center',
+		const rects = document.querySelectorAll('.moon__txt-bg rect');
+		const texts = document.querySelectorAll('.moon__txt text');
+
+		texts.forEach((text, i) => {
+			const length = text.getComputedTextLength(); // ✅ 실제 너비 측정
+			const rect = rects[i];
+			if (rect) {
+				rect.style.transformOrigin = '0px 0px';
+				rect.style.transformBox = 'fill-box';
+				rect.style.width = `${length}px`; // ✅ 텍스트 길이 기준으로 width 지정
+			}
 		});
+
+		gsap.set(rects, { scaleX: 0 });
 
 		const container = document.querySelector('.container');
 		const vw = window.innerWidth;
@@ -35,7 +44,6 @@ const MobileLayout = () => {
 		const scaleFactor = Math.min(vw / scaleBase.width, vh / scaleBase.height);
 		gsap.set(container, { scale: scaleFactor });
 	}, []);
-
 	return (
 		<svg className="moon__svg" viewBox={`0 0 ${MOBILE_WIDTH} 700`} preserveAspectRatio="xMidYMid slice">
 			<defs>
