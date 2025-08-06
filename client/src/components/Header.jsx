@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import '../assets/css/Header.css';
 
 const Header = ({ user }) => {
@@ -7,18 +7,30 @@ const Header = ({ user }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navRef = useRef();
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const handleSearch = e => {
 		e.preventDefault();
 		if (searchTerm.trim()) {
 			navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
 		}
-
 		setIsMenuOpen(false);
 	};
 
 	const handleNavClick = () => {
 		setIsMenuOpen(false);
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
+
+	const handleLogoClick = e => {
+		e.preventDefault();
+		setIsMenuOpen(false);
+		if (location.pathname === '/') {
+			// 현재가 홈이면 강제로 새로고침 느낌의 리렌더
+			navigate('/', { replace: true });
+		} else {
+			navigate('/');
+		}
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
@@ -48,14 +60,16 @@ const Header = ({ user }) => {
 
 	return (
 		<header className="site-header">
-			<Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
+			<a href="/" className="logo" onClick={handleLogoClick}>
 				<img src="/img/bunny.svg" alt="로고" className="logo-img" />
-			</Link>
+			</a>
 
 			<nav className="nav" ref={navRef}>
 				<ul className="nav-links">
 					<li>
-						<Link to="/">Home</Link>
+						<NavLink to="/" onClick={handleNavClick}>
+							Home
+						</NavLink>
 					</li>
 					<li>
 						<NavLink
@@ -94,45 +108,6 @@ const Header = ({ user }) => {
 						</NavLink>
 					</li>
 
-					{/*!user ? (
-						<>
-							<li>
-								<NavLink to="/login" onClick={handleNavClick}>
-									Login
-								</NavLink>
-							</li>
-							<li>
-								<NavLink to="/signup" onClick={handleNavClick}>
-									Join
-								</NavLink>
-							</li>
-						</>
-					) : (
-						<>
-							<li>
-								<span>{user.username}님</span>
-							</li>
-							{user.email?.toLowerCase() === 'lawork313@gmail.com' && (
-								<li>
-									<a href="https://yhjwork-production.up.railway.app/admin" target="_blank" rel="noopener noreferrer">
-										⚙ Settings
-									</a>
-								</li>
-							)}
-							<li>
-								<a
-									href="/"
-									onClick={() => {
-										localStorage.removeItem('token');
-										localStorage.removeItem('user');
-										window.location.reload();
-									}}
-								>
-									Logout
-								</a>
-							</li>
-						</>
-					)*/}
 					<li>
 						<form className="search-bar" onSubmit={handleSearch}>
 							{searchTerm && (
@@ -147,6 +122,7 @@ const Header = ({ user }) => {
 						</form>
 					</li>
 				</ul>
+
 				<button className="hamburger" onClick={() => setIsMenuOpen(true)} aria-label="메뉴 열기">
 					<div className="hamburger_mark">
 						<span></span>
@@ -154,13 +130,16 @@ const Header = ({ user }) => {
 						<span></span>
 					</div>
 				</button>
+
 				<div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
 					<button className="close-btn" onClick={() => setIsMenuOpen(false)}>
 						<span className="close-icon"></span>
 					</button>
 					<ul className="mobile-menu-links">
 						<li>
-							<Link to="/">Home</Link>
+							<Link to="/" onClick={handleLogoClick}>
+								Home
+							</Link>
 						</li>
 						<li>
 							<NavLink
@@ -199,45 +178,6 @@ const Header = ({ user }) => {
 							</NavLink>
 						</li>
 
-						{/*!user ? (
-							<>
-								<li>
-									<NavLink to="/login" onClick={() => setIsMenuOpen(false)}>
-										Login
-									</NavLink>
-								</li>
-								<li>
-									<NavLink to="/signup" onClick={() => setIsMenuOpen(false)}>
-										Join
-									</NavLink>
-								</li>
-							</>
-						) : (
-							<>
-								<li>
-									<span>{user.username}님</span>
-								</li>
-								{user.email?.toLowerCase() === 'lawork313@gmail.com' && (
-									<li>
-										<a href="https://yhjwork-production.up.railway.app/admin" target="_blank" rel="noopener noreferrer">
-											⚙ Settings
-										</a>
-									</li>
-								)}
-								<li>
-									<a
-										href="/"
-										onClick={() => {
-											localStorage.removeItem('token');
-											localStorage.removeItem('user');
-											window.location.reload();
-										}}
-									>
-										Logout
-									</a>
-								</li>
-							</>
-						)*/}
 						<li>
 							<form className="search-bar" onSubmit={handleSearch}>
 								{searchTerm && (
