@@ -307,38 +307,161 @@
 
 	.skill-left-panel {
 		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 30px;
+	}
+
+	.skill-left-panel img {
+		max-width: 100%;
+		height: auto;
+		object-fit: contain;
 	}
 
 	.skill-tour-inner {
 		height: auto !important;
 		position: unset;
 		transform: unset;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.skill-right-panel {
 		position: unset !important;
 		transform: unset !important;
 		height: auto;
+		width: 100% !important;
+		left: unset !important;
+		top: unset !important;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.skill-scroll-wrapper {
 		height: auto;
-		margin: 50px auto;
+		margin: 20px auto;
 		overflow: hidden;
+		width: 100%;
+		max-width: 400px;
 	}
 
 	.skill-scroll-track {
-		margin: 0 60px;
-		/* height: auto; */
-		padding: 81px 80px 184px 80px;
+		margin: 0;
+		padding: 40px 20px 60px 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 20px;
 	}
 
-	.skill-marker,
+	.skill-marker {
+		position: relative;
+		transform: none !important;
+		top: unset !important;
+		left: unset !important;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 10px;
+	}
+
+	.skill-marker.active {
+		transform: scale(1.1) !important;
+	}
+
 	.skill-icon {
 		height: 80px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.ripple {
 		top: -19px;
+	}
+
+	.tooltip-box {
+		position: relative;
+		top: auto;
+		bottom: auto;
+		left: auto;
+		transform: none;
+		margin-top: 10px;
+		width: 100%;
+		max-width: 300px;
+	}
+
+	.tooltip-box:after {
+		display: none;
+	}
+
+	.skill-nav-buttons {
+		margin-top: 20px;
+		justify-content: center;
+	}
+}
+
+/* 480px 이하 모바일 추가 최적화 */
+@media screen and (max-width: 480px) {
+	.skill-tour-horizontal {
+		padding: 0 10px;
+	}
+
+	.skill-left-panel {
+		margin-bottom: 20px;
+	}
+
+	.skill-left-panel img {
+		max-width: 90%;
+	}
+
+	.skill-scroll-wrapper {
+		max-width: 350px;
+		margin: 15px auto;
+	}
+
+	.skill-scroll-track {
+		padding: 30px 15px 50px 15px;
+		gap: 15px;
+	}
+
+	.skill-marker {
+		margin: 5px;
+	}
+
+	.skill-icon img {
+		width: 50px;
+		height: 50px;
+	}
+
+	.tooltip-box {
+		max-width: 280px;
+		font-size: 11px;
+		padding: 0.8rem;
+	}
+
+	.skill-name {
+		font-size: 1rem;
+	}
+
+	.skill-level {
+		font-size: 0.9rem;
+	}
+
+	.skill-description {
+		font-size: 0.7rem;
+	}
+
+	.arrow-btn {
+		padding: 0.6rem;
+	}
+
+	.arrow-icon {
+		width: 20px;
+		height: 20px;
 	}
 }
