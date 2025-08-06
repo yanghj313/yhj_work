@@ -39,7 +39,7 @@ const MobileLayout = () => {
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
 					{yMaskPositions.map((y, i) => (
-						<rect key={i} x="0" y={y} width="768" height="80" />
+						<rect key={i} x="0" y={y} width="736" height="110" />
 					))}
 				</clipPath>
 			</defs>
