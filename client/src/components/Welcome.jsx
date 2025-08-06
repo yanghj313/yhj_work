@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import '../assets/css/welcome.css';
 
-const MOBILE_WIDTH = 704;
+const MOBILE_WIDTH = 736;
 const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
@@ -47,7 +47,7 @@ const MobileLayout = () => {
 
 			<g clipPath="url(#clip-path)">
 				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
-					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="700">
+					<video autoPlay muted loop playsInline preload="auto" className="moon__video" width={MOBILE_WIDTH} height="700">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
