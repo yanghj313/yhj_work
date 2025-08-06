@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import '../assets/css/welcome.css';
 
 const MOBILE_WIDTH = 736;
 const MOBILE_CONFIG = {
-	wArray: [320, 240, 360],
 	yMaskPositions: [90, 190, 290],
 	viewBox: `0 0 ${MOBILE_WIDTH} 700`,
 	scaleBase: { width: MOBILE_WIDTH, height: 700 },
@@ -23,14 +22,13 @@ const DESKTOP_CONFIG = {
 const MobileLayout = () => {
 	const { yMaskPositions, viewBox, scaleBase, yTextPositions, textLabels } = MOBILE_CONFIG;
 	const textRefs = useRef([]);
+	const rectRefs = useRef([]);
 
 	useEffect(() => {
-		const rects = document.querySelectorAll('.moon__txt-bg rect');
-
 		textRefs.current.forEach((textEl, i) => {
 			if (textEl) {
 				const length = textEl.getComputedTextLength();
-				const rect = rects[i];
+				const rect = rectRefs.current[i];
 				if (rect) {
 					rect.setAttribute('width', length);
 					rect.style.transformOrigin = '0px 0px';
@@ -39,7 +37,7 @@ const MobileLayout = () => {
 			}
 		});
 
-		gsap.set(rects, { scaleX: 0 });
+		gsap.set(rectRefs.current, { scaleX: 0 });
 
 		const container = document.querySelector('.container');
 		const vw = window.innerWidth;
@@ -47,6 +45,7 @@ const MobileLayout = () => {
 		const scaleFactor = Math.min(vw / scaleBase.width, vh / scaleBase.height);
 		gsap.set(container, { scale: scaleFactor });
 	}, []);
+
 	return (
 		<svg className="moon__svg" viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
 			<defs>
@@ -67,12 +66,11 @@ const MobileLayout = () => {
 
 			<g className="moon__txt-bg" fill="#333">
 				{yMaskPositions.map((y, i) => (
-					<rect key={i} y={y} height="110" width="0" x="0" />
+					<rect key={i} y={y} height="110" width="0" x="0" ref={el => (rectRefs.current[i] = el)} />
 				))}
 			</g>
 
-			{/* 측정용 텍스트 (화면에는 안 보임) */}
-			<g className="moon__txt-hidden" style={{ visibility: 'hidden', position: 'absolute' }}>
+			<g style={{ display: 'none' }}>
 				{textLabels.map((text, i) => (
 					<text key={i} x="30" y={yTextPositions[i]} fontSize="50" dominantBaseline="middle" textAnchor="start" ref={el => (textRefs.current[i] = el)}>
 						<tspan>{text}</tspan>
@@ -180,52 +178,17 @@ const Welcome = () => {
 		const tl = gsap.timeline({
 			delay: 0.5,
 			repeat: 0,
-			defaults: {
-				ease: 'expo.inOut',
-				duration: 2,
-			},
+			defaults: { ease: 'expo.inOut', duration: 2 },
 		});
 
 		gsap.set(container, { autoAlpha: 0 });
 		gsap.set(texts, { opacity: 0 });
 
 		tl.to(container, { autoAlpha: 1, duration: 0.4 })
-			.from(
-				'.container__base',
-				{
-					scaleX: 0,
-					duration: 2,
-					transformOrigin: 'top right',
-				},
-				'+=0.1'
-			)
-			.from(
-				'.moon__svg-rects rect',
-				{
-					scaleX: 0,
-					stagger: 0.07,
-					duration: 3,
-					ease: 'expo',
-				},
-				'-=1.5'
-			)
-			.to(
-				'.moon__txt-bg rect',
-				{
-					stagger: 0.14,
-					scaleX: 1,
-				},
-				'-=2.2'
-			)
-			.to(
-				texts,
-				{
-					opacity: 1,
-					ease: 'power4',
-					stagger: 0.2,
-				},
-				'-=1.5'
-			);
+			.from('.container__base', { scaleX: 0, duration: 2, transformOrigin: 'top right' }, '+=0.1')
+			.from('.moon__svg-rects rect', { scaleX: 0, stagger: 0.07, duration: 3, ease: 'expo' }, '-=1.5')
+			.to('.moon__txt-bg rect', { stagger: 0.14, scaleX: 1 }, '-=2.2')
+			.to(texts, { opacity: 1, ease: 'power4', stagger: 0.2 }, '-=1.5');
 
 		gsap.set('.moon__txt-bg rect', {
 			width: i => wArray[i] || 200,
