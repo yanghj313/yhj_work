@@ -79,7 +79,11 @@ const MOBILELayout = () => {
 			</video>
 			<div className="mobile-overlay"></div>
 			<div className="mobile-text">
-				<h1 className="mobile-title">HYUN JIN'S WORK</h1>
+				<h1 className="mobile-title">
+					<span className="mobile-title-line">HYUN JIN'S</span>
+					<br />
+					<span className="mobile-title-line">WORK</span>
+				</h1>
 			</div>
 		</div>
 	);
@@ -233,13 +237,14 @@ const Welcome = () => {
 		if (layoutType === 'mobile') {
 			// 모바일 애니메이션
 			gsap.set(container, { autoAlpha: 0 });
-			gsap.set('.mobile-title', { opacity: 0, y: 30 });
+			gsap.set('.mobile-title-line', { opacity: 0, y: 30 });
 
-			tl.to(container, { autoAlpha: 1, duration: 0.4 }).to('.mobile-title', {
+			tl.to(container, { autoAlpha: 1, duration: 0.4 }).to('.mobile-title-line', {
 				opacity: 1,
 				y: 0,
 				duration: 1.2,
 				ease: 'power3.out',
+				stagger: 0.2,
 				delay: 0.3,
 			});
 		} else {
