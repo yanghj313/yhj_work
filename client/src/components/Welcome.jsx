@@ -237,15 +237,15 @@ const Welcome = () => {
 		if (layoutType === 'mobile') {
 			// 모바일 애니메이션
 			gsap.set(container, { autoAlpha: 0 });
-			gsap.set('.mobile-title-line', { opacity: 0, y: 30 });
+			gsap.set('.mobile-title-line', { opacity: 0, y: 50 });
 
 			tl.to(container, { autoAlpha: 1, duration: 0.4 }).to('.mobile-title-line', {
 				opacity: 1,
 				y: 0,
-				duration: 1.2,
+				duration: 1.5,
 				ease: 'power3.out',
-				stagger: 0.2,
-				delay: 0.3,
+				stagger: 0.3,
+				delay: 0.5,
 			});
 		} else {
 			// 데스크톱/태블릿 애니메이션
