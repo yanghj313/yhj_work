@@ -133,9 +133,4 @@ body {
 		transform-box: fill-box;
 	}
 
-	.moon__txt-hidden {
-		visibility: hidden;
-		position: absolute;
-		pointer-events: none;
-	}
 }

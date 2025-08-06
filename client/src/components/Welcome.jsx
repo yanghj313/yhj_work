@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import '../assets/css/welcome.css';
 
 const MOBILE_WIDTH = 736;
 const MOBILE_CONFIG = {
-	yMaskPositions: [90, 190, 290],
+	wArray: [320, 240, 360],
+	yMaskPositions: [0, 100, 200, 300, 400],
 	viewBox: `0 0 ${MOBILE_WIDTH} 700`,
 	scaleBase: { width: MOBILE_WIDTH, height: 700 },
-	yTextPositions: [140, 240, 340],
-	textLabels: ['HYUN', "JIN'S", 'WORK'],
+	yTextPositions: [160, 260, 360],
 };
 
 const DESKTOP_CONFIG = {
@@ -20,24 +20,23 @@ const DESKTOP_CONFIG = {
 };
 
 const MobileLayout = () => {
-	const { yMaskPositions, viewBox, scaleBase, yTextPositions, textLabels } = MOBILE_CONFIG;
-	const textRefs = useRef([]);
-	const rectRefs = useRef([]);
+	const { wArray, yMaskPositions, viewBox, scaleBase } = MOBILE_CONFIG;
 
 	useEffect(() => {
-		textRefs.current.forEach((textEl, i) => {
-			if (textEl) {
-				const length = textEl.getComputedTextLength();
-				const rect = rectRefs.current[i];
-				if (rect) {
-					rect.setAttribute('width', length);
-					rect.style.transformOrigin = '0px 0px';
-					rect.style.transformBox = 'fill-box';
-				}
+		const rects = document.querySelectorAll('.moon__txt-bg rect');
+		const texts = document.querySelectorAll('.moon__txt text');
+
+		texts.forEach((text, i) => {
+			const length = text.getComputedTextLength(); // ✅ 실제 너비 측정
+			const rect = rects[i];
+			if (rect) {
+				rect.style.transformOrigin = '0px 0px';
+				rect.style.transformBox = 'fill-box';
+				rect.style.width = `${length}px`; // ✅ 텍스트 길이 기준으로 width 지정
 			}
 		});
 
-		gsap.set(rectRefs.current, { scaleX: 0 });
+		gsap.set(rects, { scaleX: 0 });
 
 		const container = document.querySelector('.container');
 		const vw = window.innerWidth;
@@ -45,13 +44,12 @@ const MobileLayout = () => {
 		const scaleFactor = Math.min(vw / scaleBase.width, vh / scaleBase.height);
 		gsap.set(container, { scale: scaleFactor });
 	}, []);
-
 	return (
-		<svg className="moon__svg" viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
+		<svg className="moon__svg" viewBox={`0 0 ${MOBILE_WIDTH} 700`} preserveAspectRatio="xMidYMid slice">
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
 					{yMaskPositions.map((y, i) => (
-						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="110" />
+						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="80" />
 					))}
 				</clipPath>
 			</defs>
@@ -65,30 +63,26 @@ const MobileLayout = () => {
 			</g>
 
 			<g className="moon__txt-bg" fill="#333">
-				{yMaskPositions.map((y, i) => (
-					<rect key={i} y={y} height="110" width="0" x="0" ref={el => (rectRefs.current[i] = el)} />
-				))}
-			</g>
-
-			<g style={{ display: 'none' }}>
-				{textLabels.map((text, i) => (
-					<text key={i} x="30" y={yTextPositions[i]} fontSize="50" dominantBaseline="middle" textAnchor="start" ref={el => (textRefs.current[i] = el)}>
-						<tspan>{text}</tspan>
-					</text>
-				))}
+				<rect y="90" height="110" width="320" x="0" />
+				<rect y="190" height="110" width="240" x="0" />
+				<rect y="290" height="110" width="360" x="0" />
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				{textLabels.map((text, i) => (
-					<text key={i} x="30" y={yTextPositions[i]} fontSize="50" dominantBaseline="middle" textAnchor="start">
-						<tspan>{text}</tspan>
-					</text>
-				))}
+				<text x="30" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>HYUN</tspan>
+				</text>
+				<text x="30" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>JIN'S</tspan>
+				</text>
+				<text x="30" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>WORK</tspan>
+				</text>
 			</clipPath>
 
 			<g clipPath="url(#moon_txt-mask)">
 				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
-					<video autoPlay muted loop playsInline preload="auto" className="moon__video" width={MOBILE_WIDTH} height="700">
+					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="700">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
@@ -178,17 +172,52 @@ const Welcome = () => {
 		const tl = gsap.timeline({
 			delay: 0.5,
 			repeat: 0,
-			defaults: { ease: 'expo.inOut', duration: 2 },
+			defaults: {
+				ease: 'expo.inOut',
+				duration: 2,
+			},
 		});
 
 		gsap.set(container, { autoAlpha: 0 });
 		gsap.set(texts, { opacity: 0 });
 
 		tl.to(container, { autoAlpha: 1, duration: 0.4 })
-			.from('.container__base', { scaleX: 0, duration: 2, transformOrigin: 'top right' }, '+=0.1')
-			.from('.moon__svg-rects rect', { scaleX: 0, stagger: 0.07, duration: 3, ease: 'expo' }, '-=1.5')
-			.to('.moon__txt-bg rect', { stagger: 0.14, scaleX: 1 }, '-=2.2')
-			.to(texts, { opacity: 1, ease: 'power4', stagger: 0.2 }, '-=1.5');
+			.from(
+				'.container__base',
+				{
+					scaleX: 0,
+					duration: 2,
+					transformOrigin: 'top right',
+				},
+				'+=0.1'
+			)
+			.from(
+				'.moon__svg-rects rect',
+				{
+					scaleX: 0,
+					stagger: 0.07,
+					duration: 3,
+					ease: 'expo',
+				},
+				'-=1.5'
+			)
+			.to(
+				'.moon__txt-bg rect',
+				{
+					stagger: 0.14,
+					scaleX: 1,
+				},
+				'-=2.2'
+			)
+			.to(
+				texts,
+				{
+					opacity: 1,
+					ease: 'power4',
+					stagger: 0.2,
+				},
+				'-=1.5'
+			);
 
 		gsap.set('.moon__txt-bg rect', {
 			width: i => wArray[i] || 200,
