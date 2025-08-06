@@ -244,6 +244,8 @@ body {
 	-webkit-box-align: start;
 	-ms-flex-align: start;
 	align-items: flex-start;
+	text-align: left;
+	justify-content: flex-start;
 }
 
 .timeline-item.left .timeline-content {
