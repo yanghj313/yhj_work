@@ -1,13 +1,13 @@
 .subTop {
     position: relative;
     width: 100%;
-    height: 260px;
+    height: 300px;
     min-height: 320px;
     /* 파도 이미지가 들어갈 공간 확보 */
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: visible;
+    overflow: hidden;
     /* 파도가 넘쳐도 보이도록 */
     background: linear-gradient(to bottom, rgba(255, 87, 34, 0.5), rgba(255, 87, 34, 0.1));
     z-index: 0;
@@ -31,8 +31,8 @@
     top: 180px;
     left: 0;
     width: 300vw;
-    height: 48px;
-    background-image: url('/img/top_wave2.svg');
+    height: 96px;
+    background-image: url('/img/top_wave.svg');
     background-size: 100vw;
     background-repeat: repeat-x;
     animation: footerwave 13s linear infinite;
@@ -40,19 +40,7 @@
 }
 
 /* ::after — 하단 곡선 파도 이미지 */
-.subTop::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 300vw;
-    height: 48px;
-    background-image: url('/img/top_wave.svg');
-    background-size: 100vw;
-    background-repeat: repeat-x;
-    animation: footerwave 10s linear infinite;
-    z-index: 1;
-}
+
 
 /* 파도 흐름 애니메이션 */
 @keyframes footerwave {
