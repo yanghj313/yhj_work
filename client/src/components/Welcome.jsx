@@ -15,13 +15,13 @@ const DESKTOP_CONFIG = {
 	scaleBase: { width: 1800, height: 740 },
 };
 
-const MobileLayout = () => {
+const useTextRects = () => {
 	useLayoutEffect(() => {
-		requestAnimationFrame(() => {
+		const padding = 40;
+
+		const setRectWidths = () => {
 			const rects = document.querySelectorAll('.moon__txt-bg rect');
 			const texts = document.querySelectorAll('.moon__txt text');
-
-			const padding = 40;
 
 			texts.forEach((text, i) => {
 				const length = text.getComputedTextLength();
@@ -30,15 +30,33 @@ const MobileLayout = () => {
 					rect.setAttribute('width', length + padding);
 				}
 			});
+			gsap.set('.moon__txt-bg rect', { scaleX: 0 });
+		};
 
-			gsap.set(rects, { scaleX: 0 });
+		// 폰트 렌더링까지 확실히 기다림
+		setTimeout(() => {
+			requestAnimationFrame(() => {
+				if (document.fonts && document.fonts.ready) {
+					document.fonts.ready.then(() => {
+						setRectWidths();
+					});
+				} else {
+					setRectWidths();
+				}
+			});
+		}, 100);
+	}, []);
+};
 
-			const container = document.querySelector('.container');
-			const vw = window.innerWidth;
-			const vh = window.innerHeight;
-			const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
-			gsap.set(container, { scale: scaleFactor });
-		});
+const MobileLayout = () => {
+	useTextRects();
+
+	useLayoutEffect(() => {
+		const container = document.querySelector('.container');
+		const vw = window.innerWidth;
+		const vh = window.innerHeight;
+		const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
+		gsap.set(container, { scale: scaleFactor });
 	}, []);
 
 	return (
@@ -90,24 +108,7 @@ const MobileLayout = () => {
 };
 
 const DesktopLayout = () => {
-	useLayoutEffect(() => {
-		requestAnimationFrame(() => {
-			const rects = document.querySelectorAll('.moon__txt-bg rect');
-			const texts = document.querySelectorAll('.moon__txt text');
-
-			const padding = 40;
-
-			texts.forEach((text, i) => {
-				const length = text.getComputedTextLength();
-				const rect = rects[i];
-				if (rect) {
-					rect.setAttribute('width', length + padding);
-				}
-			});
-
-			gsap.set(rects, { scaleX: 0 });
-		});
-	}, []);
+	useTextRects();
 
 	return (
 		<svg className="moon__svg" viewBox={DESKTOP_CONFIG.viewBox}>
