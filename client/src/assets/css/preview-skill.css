@@ -341,12 +341,14 @@
 	}
 
 	.skill-scroll-wrapper {
-		height: 240px;
+		height: 280px;
 		margin: 20px auto;
 		overflow: hidden;
 		width: 100%;
 		max-width: 300px;
 		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
 	}
 
 	.skill-scroll-wrapper::-webkit-scrollbar {
@@ -355,7 +357,7 @@
 
 	.skill-scroll-track {
 		margin: 0;
-		padding: 40px 20px 60px 20px;
+		padding: 20px 20px 40px 20px;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
@@ -364,8 +366,14 @@
 		overflow-x: auto;
 		scroll-behavior: smooth;
 		-webkit-overflow-scrolling: touch;
-		height: 200px;
+		height: 240px;
 		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.skill-scroll-track::-webkit-scrollbar {
+		display: none;
 	}
 
 	.skill-marker {
@@ -380,7 +388,7 @@
 		flex-shrink: 0;
 		width: 300px;
 		min-width: 300px;
-		height: 180px;
+		height: 220px;
 		scroll-snap-align: center;
 	}
 
@@ -389,22 +397,25 @@
 	}
 
 	.skill-icon {
-		height: 80px;
+		height: 60px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		margin-bottom: 10px;
 	}
 
 	.ripple {
-		top: -19px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 
 	.tooltip-box {
 		position: absolute;
-		top: 100%;
+		top: 80px;
 		left: 50%;
 		transform: translateX(-50%);
-		margin-top: 15px;
+		margin-top: 10px;
 		width: 260px;
 		max-width: 280px;
 		z-index: 10;
@@ -444,8 +455,10 @@
 	.skill-scroll-wrapper {
 		max-width: 280px;
 		margin: 15px auto;
-		height: 220px;
+		height: 260px;
 		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
 	}
 
 	.skill-scroll-wrapper::-webkit-scrollbar {
@@ -453,24 +466,38 @@
 	}
 
 	.skill-scroll-track {
-		padding: 30px 15px 50px 15px;
+		padding: 15px 15px 30px 15px;
 		gap: 0;
 		flex-wrap: nowrap;
 		overflow-x: auto;
 		scroll-behavior: smooth;
 		-webkit-overflow-scrolling: touch;
-		height: 180px;
+		height: 220px;
 		justify-content: flex-start;
 		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.skill-scroll-track::-webkit-scrollbar {
+		display: none;
 	}
 
 	.skill-marker {
 		flex-shrink: 0;
 		width: 280px;
 		min-width: 280px;
-		height: 160px;
+		height: 200px;
 		margin: 0;
 		scroll-snap-align: center;
+	}
+
+	.skill-icon {
+		height: 50px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 8px;
 	}
 
 	.skill-icon img {
@@ -478,7 +505,18 @@
 		height: 50px;
 	}
 
+	.ripple {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
 	.tooltip-box {
+		position: absolute;
+		top: 70px;
+		left: 50%;
+		transform: translateX(-50%);
+		margin-top: 8px;
 		max-width: 260px;
 		font-size: 11px;
 		padding: 0.8rem;
