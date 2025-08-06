@@ -502,7 +502,7 @@
 	}
 
 	.skill-icon img {
-		width: 50px !important;
+		width: auto !important;
 		height: 50px !important;
 	}
 
