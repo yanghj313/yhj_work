@@ -116,7 +116,6 @@ body {
 	position: relative;
 	z-index: 3;
 	text-align: center;
-	color: white;
 }
 
 .mobile-title {
@@ -126,17 +125,44 @@ body {
 	letter-spacing: 3px;
 	margin: 0;
 	line-height: 1.2;
-	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-	color: white;
+	text-align: center;
+
+	/* 그라데이션 텍스트 */
+	background: linear-gradient(to right,
+			rgba(173, 216, 230, 0.85),
+			/* 연하늘색 (Light Blue) */
+			rgba(0, 191, 255, 0.85),
+			/* Deep Sky Blue */
+			rgba(0, 123, 255, 0.85)
+			/* 더 진한 블루 */
+		);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+
+	/* 투명도 있는 듯한 느낌 + 그림자 */
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+	background-size: 200% auto;
+	animation: shineGradient 5s linear infinite;
+}
+
+@keyframes shineGradient {
+	0% {
+		background-position: 0% center;
+	}
+
+	100% {
+		background-position: -200% center;
+	}
 }
 
 .mobile-title-line {
 	display: inline-block;
 	position: relative;
-	padding: 12px 20px;
+	padding: 0px 20px;
 	margin: 6px 0;
 	border-radius: 50px;
-	color: white;
 	text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 	overflow: hidden;
 }
