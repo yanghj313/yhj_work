@@ -60,13 +60,13 @@ const MobileLayout = () => {
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				<text x="0" y="140" fontSize="50" dominantBaseline="middle">
+				<text x="8" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
 					<tspan>HYUN</tspan>
 				</text>
-				<text x="0" y="240" fontSize="50" dominantBaseline="middle">
+				<text x="8" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
 					<tspan>JIN'S</tspan>
 				</text>
-				<text x="0" y="340" fontSize="50" dominantBaseline="middle">
+				<text x="8" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
 					<tspan>WORK</tspan>
 				</text>
 			</clipPath>
