@@ -69,78 +69,107 @@ const SearchResult = () => {
 			});
 	}, [query]);
 
-	if (loading) return <p className="p_loading">🔍 검색 중...</p>;
+	if (loading)
+		return (
+			<div className="search-loading">
+				<p>🔍 검색 중...</p>
+			</div>
+		);
+
+	const totalResults = projects.length + skills.length + experiences.length + galleries.length;
 
 	return (
-		<div className="result" style={{ padding: '1rem' }}>
-			<h2>🔎 “{query}” 검색 결과</h2>
+		<div className="search-result-container">
+			<div className="search-header">
+				<h1 className="search-title">🔎 "{query}" 검색 결과</h1>
+				<p className="search-summary">총 {totalResults}개의 결과를 찾았습니다</p>
+			</div>
 
-			{projects.length > 0 && (
-				<>
-					<ul>
-						{projects.map(p => (
-							<li key={p.id}>
-								<Link to={`/projects/${p.documentId}`}>{p.title}</Link>
-								{p.description && p.description.toLowerCase().includes(query.toLowerCase()) && (
-									<p
-										style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#444' }}
-										dangerouslySetInnerHTML={{
-											__html: p.description.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>'),
-										}}
-									/>
-								)}
-							</li>
-						))}
-					</ul>
-				</>
-			)}
+			<div className="search-content">
+				{projects.length > 0 && (
+					<section className="search-section">
+						<h2 className="section-title">📁 Projects ({projects.length})</h2>
+						<div className="result-list">
+							{projects.map(p => (
+								<div key={p.id} className="result-item">
+									<Link to={`/projects/${p.documentId}`} className="result-link">
+										{p.title}
+									</Link>
+									{p.description && p.description.toLowerCase().includes(query.toLowerCase()) && (
+										<p
+											className="result-description"
+											dangerouslySetInnerHTML={{
+												__html: p.description.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>'),
+											}}
+										/>
+									)}
+								</div>
+							))}
+						</div>
+					</section>
+				)}
 
-			{skills.length > 0 && (
-				<>
-					<ul>
-						{skills.map(s => (
-							<li key={s.id}>
-								<Link to={`/skills/${s.id}`}>{s.name}</Link>
-							</li>
-						))}
-					</ul>
-				</>
-			)}
+				{skills.length > 0 && (
+					<section className="search-section">
+						<h2 className="section-title">💻 Skills ({skills.length})</h2>
+						<div className="result-list">
+							{skills.map(s => (
+								<div key={s.id} className="result-item">
+									<Link to={`/skills/${s.id}`} className="result-link">
+										{s.name}
+									</Link>
+								</div>
+							))}
+						</div>
+					</section>
+				)}
 
-			{experiences.length > 0 && (
-				<>
-					<ul>
-						{experiences.map(e => (
-							<li key={e.id}>
-								<strong>{e.position}</strong> ({e.Career})
-							</li>
-						))}
-					</ul>
-				</>
-			)}
+				{experiences.length > 0 && (
+					<section className="search-section">
+						<h2 className="section-title">💼 Experience ({experiences.length})</h2>
+						<div className="result-list">
+							{experiences.map(e => (
+								<div key={e.id} className="result-item">
+									<div className="experience-item">
+										<strong className="experience-position">{e.position}</strong>
+										<span className="experience-company">({e.Career})</span>
+									</div>
+								</div>
+							))}
+						</div>
+					</section>
+				)}
 
-			{galleries.length > 0 && (
-				<>
-					<ul>
-						{galleries.map(g => (
-							<li key={g.id}>
-								<Link to={`/gallery/${g.documentId}`}>{g.title}</Link>
+				{galleries.length > 0 && (
+					<section className="search-section">
+						<h2 className="section-title">🖼️ Gallery ({galleries.length})</h2>
+						<div className="result-list">
+							{galleries.map(g => (
+								<div key={g.id} className="result-item">
+									<Link to={`/gallery/${g.documentId}`} className="result-link">
+										{g.title}
+									</Link>
+									{g.description && g.description.toLowerCase().includes(query.toLowerCase()) && (
+										<p
+											className="result-description"
+											dangerouslySetInnerHTML={{
+												__html: g.description.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>'),
+											}}
+										/>
+									)}
+								</div>
+							))}
+						</div>
+					</section>
+				)}
 
-								{g.description && g.description.toLowerCase().includes(query.toLowerCase()) && (
-									<p
-										style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#444' }}
-										dangerouslySetInnerHTML={{
-											__html: g.description.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>'),
-										}}
-									/>
-								)}
-							</li>
-						))}
-					</ul>
-				</>
-			)}
-
-			{projects.length === 0 && skills.length === 0 && experiences.length === 0 && galleries.length === 0 && <p className="fail_massage">😢 검색 결과가 없습니다.</p>}
+				{totalResults === 0 && (
+					<div className="no-results">
+						<p className="no-results-message">😢 검색 결과가 없습니다.</p>
+						<p className="no-results-suggestion">다른 키워드로 검색해보세요.</p>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };
