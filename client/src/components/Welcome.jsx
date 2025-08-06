@@ -35,7 +35,7 @@ const MobileLayout = () => {
 	}, []);
 
 	return (
-		<svg className="moon__svg" viewBox={viewBox}>
+		<svg className="moon__svg" viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
 					{yMaskPositions.map((y, i) => (
