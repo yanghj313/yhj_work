@@ -17,26 +17,28 @@ const DESKTOP_CONFIG = {
 
 const MobileLayout = () => {
 	useLayoutEffect(() => {
-		const rects = document.querySelectorAll('.moon__txt-bg rect');
-		const texts = document.querySelectorAll('.moon__txt text');
+		requestAnimationFrame(() => {
+			const rects = document.querySelectorAll('.moon__txt-bg rect');
+			const texts = document.querySelectorAll('.moon__txt text');
 
-		const padding = 40;
+			const padding = 40;
 
-		texts.forEach((text, i) => {
-			const length = text.getComputedTextLength();
-			const rect = rects[i];
-			if (rect) {
-				rect.setAttribute('width', length + padding); // ✅ width만 조정
-			}
+			texts.forEach((text, i) => {
+				const length = text.getComputedTextLength();
+				const rect = rects[i];
+				if (rect) {
+					rect.setAttribute('width', length + padding);
+				}
+			});
+
+			gsap.set(rects, { scaleX: 0 });
+
+			const container = document.querySelector('.container');
+			const vw = window.innerWidth;
+			const vh = window.innerHeight;
+			const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
+			gsap.set(container, { scale: scaleFactor });
 		});
-
-		gsap.set(rects, { scaleX: 0 });
-
-		const container = document.querySelector('.container');
-		const vw = window.innerWidth;
-		const vh = window.innerHeight;
-		const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
-		gsap.set(container, { scale: scaleFactor });
 	}, []);
 
 	return (
@@ -89,20 +91,22 @@ const MobileLayout = () => {
 
 const DesktopLayout = () => {
 	useLayoutEffect(() => {
-		const rects = document.querySelectorAll('.moon__txt-bg rect');
-		const texts = document.querySelectorAll('.moon__txt text');
+		requestAnimationFrame(() => {
+			const rects = document.querySelectorAll('.moon__txt-bg rect');
+			const texts = document.querySelectorAll('.moon__txt text');
 
-		const padding = 40;
+			const padding = 40;
 
-		texts.forEach((text, i) => {
-			const length = text.getComputedTextLength();
-			const rect = rects[i];
-			if (rect) {
-				rect.setAttribute('width', length + padding); // ✅ width만 조정
-			}
+			texts.forEach((text, i) => {
+				const length = text.getComputedTextLength();
+				const rect = rects[i];
+				if (rect) {
+					rect.setAttribute('width', length + padding);
+				}
+			});
+
+			gsap.set(rects, { scaleX: 0 });
 		});
-
-		gsap.set(rects, { scaleX: 0 });
 	}, []);
 
 	return (
