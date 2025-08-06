@@ -76,8 +76,7 @@
     }
 
     .subTop::before {
-        top: 170px;
-        /* 적절히 맞춰야 함 */
+        top: 212px;
     }
 
     .subTop::after {

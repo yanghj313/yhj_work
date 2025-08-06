@@ -449,17 +449,33 @@ body {
 	.timeline-item.right {
 		width: 100%;
 		left: 0;
-		text-align: left;
+		text-align: left
 	}
 
-	.timeline-container::before {
-		left: 8px;
+	.timeline-container:before {
+		left: 6.5%;
 	}
 
 	.timeline-year {
-		left: 20px;
+		left: 50%;
+	}
+
+	.timeline-item.left .timeline-dot {
+		right: unset;
+		left: -9px;
+		top: -7px;
+	}
+
+	.timeline-item.left .timeline-text {
+		align-items: flex-start;
+	}
+
+	.timeline-item.left .timeline-content {
+		align-items: flex-start;
+		justify-content: flex-start;
 	}
 }
+
 
 /***********************갤러리 게시판***************************/
 .masonry-grid {
