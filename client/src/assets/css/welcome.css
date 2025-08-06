@@ -126,23 +126,17 @@ body {
 	margin: 0;
 	line-height: 1.2;
 	text-align: center;
-
-	/* 그라데이션 텍스트 */
 	background: linear-gradient(to right,
-			rgba(173, 216, 230, 0.85),
-			/* 연하늘색 (Light Blue) */
-			rgba(0, 191, 255, 0.85),
-			/* Deep Sky Blue */
-			rgba(0, 123, 255, 0.85)
-			/* 더 진한 블루 */
-		);
+			rgba(255, 255, 255, 0.95),
+			/* white */
+			rgba(200, 235, 255, 0.95),
+			/* very light sky blue */
+			rgba(255, 255, 255, 0.95));
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	color: transparent;
-
-	/* 투명도 있는 듯한 느낌 + 그림자 */
-	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+	text-shadow: 1px 1px 2px rgba(0, 90, 180, 0.3);
 	background-size: 200% auto;
 	animation: shineGradient 5s linear infinite;
 }
@@ -160,11 +154,12 @@ body {
 .mobile-title-line {
 	display: inline-block;
 	position: relative;
-	padding: 0px 20px;
-	margin: 6px 0;
-	border-radius: 50px;
-	text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-	overflow: hidden;
+	padding: 6px 20px;
+	margin: 8px 0;
+	border-radius: 30px;
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
 }
 
 .mobile-title-line::before {
@@ -198,9 +193,8 @@ body {
 .mobile-char {
 	display: inline-block;
 	opacity: 0;
-	transform: translateY(30px) rotateX(90deg);
-	position: relative;
-	z-index: 2;
+	transform: translateY(10px) rotateX(45deg);
+	transition: all 0.6s ease;
 }
 
 /* 모바일 최적화 */
