@@ -2,49 +2,34 @@ import React, { useLayoutEffect, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import '../assets/css/welcome.css';
 
-const DESKTOP_CONFIG = {
-	yMaskPositions: [30, 145, 260, 375, 490, 605],
-	viewBox: '0 0 1800 740',
-	scaleBase: { width: 1800, height: 740 },
+const MOBILE_WIDTH = 480;
+const MOBILE_CONFIG = {
+	yMaskPositions: [0, 100, 200, 300],
+	viewBox: `0 0 ${MOBILE_WIDTH} 500`,
+	scaleBase: { width: MOBILE_WIDTH, height: 500 },
 };
 
-const getMobileConfig = width => {
-	if (width <= 360) {
-		return {
-			width: 360,
-			viewBox: '0 0 360 600',
-			scaleBase: { width: 360, height: 600 },
-			yMaskPositions: [0, 80, 160],
-			yTextPositions: [100, 180, 260],
-			fontSize: 32,
-		};
-	} else if (width <= 414) {
-		return {
-			width: 414,
-			viewBox: '0 0 414 640',
-			scaleBase: { width: 414, height: 640 },
-			yMaskPositions: [0, 90, 180],
-			yTextPositions: [110, 200, 290],
-			fontSize: 36,
-		};
-	} else {
-		return {
-			width: 736,
-			viewBox: '0 0 736 700',
-			scaleBase: { width: 736, height: 700 },
-			yMaskPositions: [0, 100, 200, 300, 400],
-			yTextPositions: [140, 240, 340],
-			fontSize: 50,
-		};
-	}
+const TABLET_WIDTH = 736;
+const TABLET_CONFIG = {
+	yMaskPositions: [0, 100, 200, 300, 400],
+	viewBox: `0 0 ${TABLET_WIDTH} 700`,
+	scaleBase: { width: TABLET_WIDTH, height: 700 },
+};
+
+const DESKTOP_CONFIG = {
+	yMaskPositions: [30, 145, 260, 375, 490, 605],
+	viewBox: `0 0 1800 740`,
+	scaleBase: { width: 1800, height: 740 },
 };
 
 const useTextRects = () => {
 	useLayoutEffect(() => {
 		const padding = 40;
+
 		const setRectWidths = () => {
 			const rects = document.querySelectorAll('.moon__txt-bg rect');
 			const texts = document.querySelectorAll('.moon__txt text');
+
 			texts.forEach((text, i) => {
 				const length = text.getComputedTextLength();
 				const rect = rects[i];
@@ -55,10 +40,13 @@ const useTextRects = () => {
 			gsap.set('.moon__txt-bg rect', { scaleX: 0 });
 		};
 
+		// 폰트 렌더링까지 확실히 기다림
 		setTimeout(() => {
 			requestAnimationFrame(() => {
 				if (document.fonts && document.fonts.ready) {
-					document.fonts.ready.then(setRectWidths);
+					document.fonts.ready.then(() => {
+						setRectWidths();
+					});
 				} else {
 					setRectWidths();
 				}
@@ -67,71 +55,124 @@ const useTextRects = () => {
 	}, []);
 };
 
-const MobileLayout = () => {
+const MOBILELayout = () => {
 	useTextRects();
-	const [config, setConfig] = useState(() => getMobileConfig(window.innerWidth));
+	useTextRects();
 
 	useLayoutEffect(() => {
-		const update = () => {
-			const newConfig = getMobileConfig(window.innerWidth);
-			setConfig(newConfig);
-			const container = document.querySelector('.container');
-			const vw = window.innerWidth;
-			const vh = window.innerHeight;
-			const scaleFactor = Math.min(vw / newConfig.scaleBase.width, vh / newConfig.scaleBase.height);
-			gsap.set(container, { scale: scaleFactor });
-		};
-
-		update();
-		window.addEventListener('resize', update);
-		return () => window.removeEventListener('resize', update);
+		const container = document.querySelector('.container');
+		const vw = window.innerWidth;
+		const vh = window.innerHeight;
+		const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
+		gsap.set(container, { scale: scaleFactor });
 	}, []);
 
 	return (
-		<svg className="moon__svg" viewBox={config.viewBox} preserveAspectRatio="xMidYMid meet">
+		<svg className="moon__svg" viewBox={MOBILE_CONFIG.viewBox} preserveAspectRatio="xMidYMid slice">
 			<defs>
 				<clipPath id="clip-path" className="moon__svg-rects">
-					{config.yMaskPositions.map((y, i) => (
-						<rect key={i} x="0" y={y} width={config.width} height="80" />
+					{MOBILE_CONFIG.yMaskPositions.map((y, i) => (
+						<rect key={i} x="0" y={y} width={MOBILE_WIDTH} height="80" />
 					))}
 				</clipPath>
 			</defs>
 
 			<g clipPath="url(#clip-path)">
-				<foreignObject x="0" y="0" width={config.width} height="700">
-					<video autoPlay muted loop playsInline preload="auto" className="moon__video" width={config.width} height="700">
+				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
+					<video autoPlay muted loop playsInline preload="auto" className="moon__video" width={MOBILE_WIDTH} height="700">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
 			</g>
 
 			<g className="moon__txt-bg" fill="#333">
-				{config.yTextPositions.map((y, i) => (
-					<rect key={i} y={y - 50} height="100" x="0" />
-				))}
+				<rect y="90" height="110" x="0" />
+				<rect y="190" height="110" x="0" />
+				<rect y="290" height="110" x="0" />
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				{textLabels.map((label, i) => (
-					<text key={i} x="30" y={config.yTextPositions[i]} fontSize={config.fontSize} dominantBaseline="middle" textAnchor="start">
-						<tspan>{label}</tspan>
-					</text>
-				))}
+				<text x="30" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>HYUN</tspan>
+				</text>
+				<text x="30" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>JIN'S</tspan>
+				</text>
+				<text x="30" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>WORK</tspan>
+				</text>
 			</clipPath>
 
 			<g clipPath="url(#moon_txt-mask)">
-				<foreignObject x="0" y="0" width={config.width} height="700">
-					<video autoPlay muted loop playsInline className="moon__video" width={config.width} height="700">
+				<foreignObject x="0" y="0" width={MOBILE_WIDTH} height="700">
+					<video autoPlay muted loop playsInline className="moon__video" width={MOBILE_WIDTH} height="700">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
-				<rect className="moon__txt-overlay" width={config.width} height="700" />
+				<rect className="moon__txt-overlay" width={MOBILE_WIDTH} height="700" />
 			</g>
 		</svg>
 	);
 };
 
-const textLabels = ['HYUN', "JIN'S", 'WORK'];
+const TABLETLayout = () => {
+	useTextRects();
+
+	useLayoutEffect(() => {
+		const container = document.querySelector('.container');
+		const vw = window.innerWidth;
+		const vh = window.innerHeight;
+		const scaleFactor = Math.min(vw / TABLET_CONFIG.scaleBase.width, vh / TABLET_CONFIG.scaleBase.height);
+		gsap.set(container, { scale: scaleFactor });
+	}, []);
+
+	return (
+		<svg className="moon__svg" viewBox={TABLET_CONFIG.viewBox} preserveAspectRatio="xMidYMid slice">
+			<defs>
+				<clipPath id="clip-path" className="moon__svg-rects">
+					{TABLET_CONFIG.yMaskPositions.map((y, i) => (
+						<rect key={i} x="0" y={y} width={TABLET_WIDTH} height="80" />
+					))}
+				</clipPath>
+			</defs>
+
+			<g clipPath="url(#clip-path)">
+				<foreignObject x="0" y="0" width={TABLET_WIDTH} height="700">
+					<video autoPlay muted loop playsInline preload="auto" className="moon__video" width={TABLET_WIDTH} height="700">
+						<source src="/video/main.mp4" type="video/mp4" />
+					</video>
+				</foreignObject>
+			</g>
+
+			<g className="moon__txt-bg" fill="#333">
+				<rect y="90" height="110" x="0" />
+				<rect y="190" height="110" x="0" />
+				<rect y="290" height="110" x="0" />
+			</g>
+
+			<clipPath id="moon_txt-mask" className="moon__txt">
+				<text x="30" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>HYUN</tspan>
+				</text>
+				<text x="30" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>JIN'S</tspan>
+				</text>
+				<text x="30" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
+					<tspan>WORK</tspan>
+				</text>
+			</clipPath>
+
+			<g clipPath="url(#moon_txt-mask)">
+				<foreignObject x="0" y="0" width={TABLET_WIDTH} height="700">
+					<video autoPlay muted loop playsInline className="moon__video" width={TABLET_WIDTH} height="700">
+						<source src="/video/main.mp4" type="video/mp4" />
+					</video>
+				</foreignObject>
+				<rect className="moon__txt-overlay" width={TABLET_WIDTH} height="700" />
+			</g>
+		</svg>
+	);
+};
 
 const DesktopLayout = () => {
 	useTextRects();
@@ -189,10 +230,20 @@ const DesktopLayout = () => {
 };
 
 const Welcome = () => {
-	const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+	const [layoutType, setLayoutType] = useState('desktop'); // 'mobile', 'tablet', 'desktop'
 
 	useEffect(() => {
-		const checkDevice = () => setIsMobile(window.innerWidth <= 768);
+		const checkDevice = () => {
+			const width = window.innerWidth;
+			if (width <= 480) {
+				setLayoutType('mobile');
+			} else if (width <= 768) {
+				setLayoutType('tablet');
+			} else {
+				setLayoutType('desktop');
+			}
+		};
+
 		checkDevice();
 		window.addEventListener('resize', checkDevice);
 
@@ -202,7 +253,10 @@ const Welcome = () => {
 		const tl = gsap.timeline({
 			delay: 0.5,
 			repeat: 0,
-			defaults: { ease: 'expo.inOut', duration: 2 },
+			defaults: {
+				ease: 'expo.inOut',
+				duration: 2,
+			},
 		});
 
 		gsap.set(container, { autoAlpha: 0 });
@@ -246,12 +300,39 @@ const Welcome = () => {
 				'-=1.5'
 			);
 
-		return () => window.removeEventListener('resize', checkDevice);
-	}, []);
+		const resize = () => {
+			const vw = window.innerWidth;
+			const vh = window.innerHeight;
+			let base;
+			if (layoutType === 'mobile') {
+				base = MOBILE_CONFIG.scaleBase;
+			} else if (layoutType === 'tablet') {
+				base = TABLET_CONFIG.scaleBase;
+			} else {
+				base = DESKTOP_CONFIG.scaleBase;
+			}
+			const scaleFactor = Math.min(vw / base.width, vh / base.height);
+			gsap.set(container, { scale: scaleFactor });
+		};
+
+		window.addEventListener('resize', resize);
+		resize();
+
+		return () => {
+			window.removeEventListener('resize', checkDevice);
+			window.removeEventListener('resize', resize);
+		};
+	}, [layoutType]);
+
+	const renderLayout = () => {
+		if (layoutType === 'mobile') return <MOBILELayout />;
+		if (layoutType === 'tablet') return <TABLETLayout />;
+		return <DesktopLayout />;
+	};
 
 	return (
 		<div className="container">
-			<div className="moon">{isMobile ? <MobileLayout /> : <DesktopLayout />}</div>
+			<div className="moon">{renderLayout()}</div>
 			<div className="container__base"></div>
 		</div>
 	);
