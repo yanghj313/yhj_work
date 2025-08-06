@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import '../assets/css/welcome.css';
 
@@ -16,11 +16,11 @@ const DESKTOP_CONFIG = {
 };
 
 const MobileLayout = () => {
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const rects = document.querySelectorAll('.moon__txt-bg rect');
 		const texts = document.querySelectorAll('.moon__txt text');
 
-		const padding = 20;
+		const padding = 40;
 
 		texts.forEach((text, i) => {
 			const length = text.getComputedTextLength();
@@ -88,11 +88,11 @@ const MobileLayout = () => {
 };
 
 const DesktopLayout = () => {
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const rects = document.querySelectorAll('.moon__txt-bg rect');
 		const texts = document.querySelectorAll('.moon__txt text');
 
-		const padding = 20;
+		const padding = 40;
 
 		texts.forEach((text, i) => {
 			const length = text.getComputedTextLength();
@@ -182,10 +182,42 @@ const Welcome = () => {
 		gsap.set(texts, { opacity: 0 });
 
 		tl.to(container, { autoAlpha: 1, duration: 0.4 })
-			.from('.container__base', { scaleX: 0, duration: 2, transformOrigin: 'top right' }, '+=0.1')
-			.from('.moon__svg-rects rect', { scaleX: 0, stagger: 0.07, duration: 3, ease: 'expo' }, '-=1.5')
-			.to('.moon__txt-bg rect', { stagger: 0.14, scaleX: 1 }, '-=2.2')
-			.to(texts, { opacity: 1, ease: 'power4', stagger: 0.2 }, '-=1.5');
+			.from(
+				'.container__base',
+				{
+					scaleX: 0,
+					duration: 2,
+					transformOrigin: 'top right',
+				},
+				'+=0.1'
+			)
+			.from(
+				'.moon__svg-rects rect',
+				{
+					scaleX: 0,
+					stagger: 0.07,
+					duration: 3,
+					ease: 'expo',
+				},
+				'-=1.5'
+			)
+			.to(
+				'.moon__txt-bg rect',
+				{
+					stagger: 0.14,
+					scaleX: 1,
+				},
+				'-=2.2'
+			)
+			.to(
+				texts,
+				{
+					opacity: 1,
+					ease: 'power4',
+					stagger: 0.2,
+				},
+				'-=1.5'
+			);
 
 		const resize = () => {
 			const vw = window.innerWidth;
