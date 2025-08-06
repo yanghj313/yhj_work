@@ -453,7 +453,7 @@ body {
 	}
 
 	.timeline-container:before {
-		left: 6.5%;
+		left: 32px;
 	}
 
 	.timeline-year {
