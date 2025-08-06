@@ -119,23 +119,19 @@ body {
 }
 
 .mobile-title {
-	font-family: 'MonumentExtended', sans-serif;
-	font-size: clamp(32px, 8vw, 64px);
+	font-family: MonumentExtended, sans-serif;
+	font-size: clamp(38px, 8vw, 70px);
 	font-weight: 900;
 	letter-spacing: 2px;
 	margin: 0;
 	line-height: 1.2;
 	text-align: center;
-
-	background: linear-gradient(to right,
-			#ffffff,
-			#add8ff,
-			#66b2ff);
+	background: linear-gradient(to right, #fff, #add8ff, #66b2ff);
 	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	/* -webkit-text-fill-color:transparent; */
 	background-clip: text;
-	color: transparent;
-	text-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
+	color: rgb(3 6 43 / 63%);
+	/* text-shadow: 0 0 2px #007bff91, 0 2px 4px rgb(22 29 121 / 94%); */
 	animation: shineGradient 5s linear infinite;
 }
 
@@ -152,16 +148,10 @@ body {
 .mobile-title-line {
 	display: inline-block;
 	position: relative;
-	padding: 6px 24px;
+	padding: 0px 24px;
 	margin: 10px 0;
 	border-radius: 32px;
-	background: rgba(255, 255, 255, 0.1);
-	/* 아주 약한 배경 */
-	box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-	/* 약한 블루 글로우 */
-	backdrop-filter: blur(2px);
-	/* blur 줄이기 */
-	-webkit-backdrop-filter: blur(2px);
+	background: none
 }
 
 .mobile-title-line::before {
