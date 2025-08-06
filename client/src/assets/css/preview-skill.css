@@ -453,7 +453,7 @@
 	}
 
 	.skill-scroll-wrapper {
-		max-width: 280px;
+		max-width: 300px;
 		margin: 15px auto;
 		height: 400px;
 		-webkit-overflow-scrolling: touch;
