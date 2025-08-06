@@ -24,25 +24,29 @@ const useTextRects = () => {
 			const texts = document.querySelectorAll('.moon__txt text');
 
 			texts.forEach((text, i) => {
-				const length = text.getComputedTextLength();
 				const rect = rects[i];
-				if (rect) {
-					rect.setAttribute('width', length + padding);
+				if (!rect) return;
+
+				let length = text.getComputedTextLength();
+				if (!length || isNaN(length)) {
+					console.warn('getComputedTextLength failed, fallback used');
+					length = 200;
 				}
+				rect.setAttribute('width', length + padding);
 			});
+
 			gsap.set('.moon__txt-bg rect', { scaleX: 0 });
 		};
 
-		// 폰트 렌더링까지 확실히 기다림
 		setTimeout(() => {
 			requestAnimationFrame(() => {
-				if (document.fonts && document.fonts.ready) {
-					document.fonts.ready.then(() => {
+				requestAnimationFrame(() => {
+					if (document.fonts && document.fonts.ready) {
+						document.fonts.ready.then(setRectWidths);
+					} else {
 						setRectWidths();
-					});
-				} else {
-					setRectWidths();
-				}
+					}
+				});
 			});
 		}, 100);
 	}, []);
@@ -166,11 +170,17 @@ const Welcome = () => {
 	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
-		const checkDevice = () => setIsMobile(window.innerWidth <= 768);
+		const checkDevice = () => {
+			const isMobileAgent = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+			setIsMobile(isMobileAgent);
+		};
+
 		checkDevice();
-
 		window.addEventListener('resize', checkDevice);
+		return () => window.removeEventListener('resize', checkDevice);
+	}, []);
 
+	useEffect(() => {
 		const container = document.querySelector('.container');
 		const texts = document.querySelectorAll('text');
 
@@ -236,7 +246,6 @@ const Welcome = () => {
 		resize();
 
 		return () => {
-			window.removeEventListener('resize', checkDevice);
 			window.removeEventListener('resize', resize);
 		};
 	}, [isMobile]);
