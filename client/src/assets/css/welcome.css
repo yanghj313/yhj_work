@@ -117,4 +117,9 @@ body {
 		width: 100vw;
 		height: 100vh;
 	}
+
+	.moon__txt {
+		font-size: clamp(32px, 8vw, 72px);
+		letter-spacing: 1.2px;
+	}
 }
