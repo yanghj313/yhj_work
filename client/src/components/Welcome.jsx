@@ -65,6 +65,12 @@ const MOBILELayout = () => {
 		const vh = window.innerHeight;
 		const scaleFactor = Math.min(vw / MOBILE_CONFIG.scaleBase.width, vh / MOBILE_CONFIG.scaleBase.height);
 		gsap.set(container, { scale: scaleFactor });
+
+		// 모바일에서 스케일링이 너무 작아지지 않도록 최소 스케일 설정
+		if (vw <= 480) {
+			const minScale = Math.max(scaleFactor, 0.8);
+			gsap.set(container, { scale: minScale });
+		}
 	}, []);
 
 	return (
@@ -92,13 +98,13 @@ const MOBILELayout = () => {
 			</g>
 
 			<clipPath id="moon_txt-mask" className="moon__txt">
-				<text x="30" y="140" fontSize="50" dominantBaseline="middle" textAnchor="start">
+				<text x="30" y="140" fontSize="35" dominantBaseline="middle" textAnchor="start">
 					<tspan>HYUN</tspan>
 				</text>
-				<text x="30" y="240" fontSize="50" dominantBaseline="middle" textAnchor="start">
+				<text x="30" y="240" fontSize="35" dominantBaseline="middle" textAnchor="start">
 					<tspan>JIN'S</tspan>
 				</text>
-				<text x="30" y="340" fontSize="50" dominantBaseline="middle" textAnchor="start">
+				<text x="30" y="340" fontSize="35" dominantBaseline="middle" textAnchor="start">
 					<tspan>WORK</tspan>
 				</text>
 			</clipPath>
@@ -312,7 +318,14 @@ const Welcome = () => {
 				base = DESKTOP_CONFIG.scaleBase;
 			}
 			const scaleFactor = Math.min(vw / base.width, vh / base.height);
-			gsap.set(container, { scale: scaleFactor });
+
+			// 모바일에서 스케일링이 너무 작아지지 않도록 최소 스케일 설정
+			if (layoutType === 'mobile' && vw <= 480) {
+				const minScale = Math.max(scaleFactor, 0.8);
+				gsap.set(container, { scale: minScale });
+			} else {
+				gsap.set(container, { scale: scaleFactor });
+			}
 		};
 
 		window.addEventListener('resize', resize);
