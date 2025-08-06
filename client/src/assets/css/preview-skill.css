@@ -393,7 +393,7 @@
 	}
 
 	.skill-marker.active {
-		transform: scale(1.1) !important;
+		/*transform: scale(1.1) !important;*/
 	}
 
 	.skill-icon {
