@@ -6,7 +6,7 @@ const MOBILE_CONFIG = {
 	wArray: [320, 240, 360],
 	yMaskPositions: [0, 100, 200, 300, 400],
 	viewBox: '0 0 768 750',
-	scaleBase: { width: 768, height: 750 },
+	scaleBase: { width: 736, height: 750 },
 	yTextPositions: [160, 260, 360],
 };
 
@@ -45,8 +45,8 @@ const MobileLayout = () => {
 			</defs>
 
 			<g clipPath="url(#clip-path)">
-				<foreignObject x="0" y="0" width="768" height="750">
-					<video autoPlay muted loop playsInline className="moon__video" width="768" height="750">
+				<foreignObject x="0" y="0" width="736" height="750">
+					<video autoPlay muted loop playsInline className="moon__video" width="736" height="750">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
@@ -72,11 +72,11 @@ const MobileLayout = () => {
 
 			<g clipPath="url(#moon_txt-mask)">
 				<foreignObject x="0" y="0" width="768" height="750">
-					<video autoPlay muted loop playsInline className="moon__video" width="768" height="750">
+					<video autoPlay muted loop playsInline className="moon__video" width="736" height="750">
 						<source src="/video/main.mp4" type="video/mp4" />
 					</video>
 				</foreignObject>
-				<rect className="moon__txt-overlay" width="768" height="750" />
+				<rect className="moon__txt-overlay" width="736" height="750" />
 			</g>
 		</svg>
 	);

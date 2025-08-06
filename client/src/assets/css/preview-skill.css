@@ -204,9 +204,7 @@
 		transform: translate(-50%) rotate(180deg)
 	}
 
-	.skill-scroll-wrapper {
-		/* height: 65vh; */
-	}
+
 }
 
 .no-scrollbar {
