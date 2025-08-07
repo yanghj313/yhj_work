@@ -41,6 +41,10 @@
     color: #fff;
 }
 
+.back-to-list:hover {
+    background: #c43c13;
+}
+
 @media (max-width: 768px) {
     .project_images div {
         grid-template-columns: 1fr;
