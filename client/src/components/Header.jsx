@@ -26,6 +26,7 @@ const Header = ({ user }) => {
 		e.preventDefault();
 		setIsMenuOpen(false);
 		// 홈으로 이동하고 페이지 최상단으로 스크롤
+		console.log('로고 클릭됨!'); // 디버깅용
 		navigate('/', { replace: true });
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
@@ -56,9 +57,9 @@ const Header = ({ user }) => {
 
 	return (
 		<header className="site-header">
-			<a href="/" className="logo" onClick={handleLogoClick}>
+			<div className="logo" onClick={handleLogoClick} style={{ pointerEvents: 'auto', cursor: 'pointer' }}>
 				<img src="/img/bunny.svg" alt="로고" className="logo-img" />
-			</a>
+			</div>
 
 			<nav className="nav" ref={navRef}>
 				<ul className="nav-links">

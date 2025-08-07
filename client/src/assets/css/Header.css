@@ -18,6 +18,9 @@
 	align-items: center;
 	height: 100%;
 	position: absolute;
+	cursor: pointer;
+	z-index: 1002;
+	pointer-events: auto;
 }
 
 .site-header .logo img {
