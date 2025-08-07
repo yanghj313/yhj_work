@@ -25,12 +25,8 @@ const Header = ({ user }) => {
 	const handleLogoClick = e => {
 		e.preventDefault();
 		setIsMenuOpen(false);
-		if (location.pathname === '/') {
-			// 현재가 홈이면 강제로 새로고침 느낌의 리렌더
-			navigate('/', { replace: true });
-		} else {
-			navigate('/');
-		}
+		// 홈으로 이동하고 페이지 최상단으로 스크롤
+		navigate('/', { replace: true });
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
@@ -137,7 +133,7 @@ const Header = ({ user }) => {
 					</button>
 					<ul className="mobile-menu-links">
 						<li>
-							<Link to="/" onClick={handleLogoClick}>
+							<Link to="/" onClick={handleNavClick}>
 								Home
 							</Link>
 						</li>
