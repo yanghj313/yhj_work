@@ -67,20 +67,19 @@ const ProjectDetail = () => {
 						{p.images?.length > 0 && (
 							<div className="project_images">
 								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-									{p.images.map(img => {
-										const src = img.url.startsWith('http') ? img.url : `${API_BASE}${img.url}`;
-										return <img key={img.id} src={src} alt={img.name} style={{ width: '100%', borderRadius: '6px', cursor: 'zoom-in' }} onClick={() => setPopupImage(src)} />;
+									{p.images.map(file => {
+										const src = file.url.startsWith('http') ? file.url : `${API_BASE}${file.url}`;
+										const isVideo = file.mime?.startsWith('video');
+
+										return isVideo ? (
+											<video key={file.id} src={src} controls style={{ width: '100%', maxWidth: '800px', borderRadius: '6px' }}>
+												브라우저가 video 태그를 지원하지 않습니다.
+											</video>
+										) : (
+											<img key={file.id} src={src} alt={file.name} style={{ width: '100%', borderRadius: '6px', cursor: 'zoom-in' }} onClick={() => setPopupImage(src)} />
+										);
 									})}
 								</div>
-							</div>
-						)}
-
-						{p.video && (
-							<div className="project_video" style={{ marginTop: '2rem' }}>
-								<h4>🎬 영상</h4>
-								<video controls style={{ width: '100%', maxWidth: '800px', borderRadius: '8px' }} src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}>
-									브라우저가 video 태그를 지원하지 않습니다.
-								</video>
 							</div>
 						)}
 
