@@ -75,6 +75,15 @@ const ProjectDetail = () => {
 							</div>
 						)}
 
+						{p.video && (
+							<div className="project_video" style={{ marginTop: '2rem' }}>
+								<h4>🎬 영상</h4>
+								<video controls style={{ width: '100%', maxWidth: '800px', borderRadius: '8px' }} src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}>
+									브라우저가 video 태그를 지원하지 않습니다.
+								</video>
+							</div>
+						)}
+
 						{typeof p.description === 'string' && p.description.trim() && (
 							<div style={{ marginTop: '2rem' }}>
 								<h4>📘 설명</h4>
