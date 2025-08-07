@@ -169,9 +169,17 @@
 		width: 100%;
 		max-width: 100%;
 		opacity: 1;
-		transform: scale(1);
+		transform: none;
 		border-radius: 2em;
 		padding: 0 3rem 0 1rem;
+		transition: none;
+	}
+
+	.search-bar input:focus,
+	.search-bar input:not(:placeholder-shown) {
+		width: 100%;
+		transform: none;
+		opacity: 1;
 	}
 
 	.search-btn {
