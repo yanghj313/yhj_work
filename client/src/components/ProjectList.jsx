@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../assets/css/page.css';
+import SkeletonProject from './SkeletonProject';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 const tagStyles = {
@@ -47,12 +48,7 @@ const ProjectList = () => {
 	}, []);
 
 	if (loading) {
-		return (
-			<div className="loading-container">
-				<p>Loading</p>
-				<div className="spinner" />
-			</div>
-		);
+		return <SkeletonProject />;
 	}
 
 	return (
