@@ -393,4 +393,50 @@ input[type='search']::-webkit-search-cancel-button {
 	.close-icon:after {
 		transform: translate(-50%, -50%) rotate(-45deg);
 	}
+
+	.search-bar input {
+		position: relative;
+		right: auto;
+		width: 100%;
+		max-width: 100%;
+		opacity: 1;
+		transform: none;
+		border-radius: 2em;
+		padding: 0 3rem 0 1rem;
+		transition: none
+	}
+
+	.search-bar input:not(:-moz-placeholder) {
+		width: 100%;
+		transform: none;
+		opacity: 1
+	}
+
+	.search-bar input:focus,
+	.search-bar input:not(:placeholder-shown) {
+		width: 100%;
+		transform: none;
+		opacity: 1;
+		max-width: 100%;
+	}
+
+	.search-btn {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%)
+	}
+
+	.clear-btn {
+		position: absolute;
+		right: 38px;
+		top: 50%;
+		transform: translateY(-50%)
+	}
+
+	.search-bar input:focus,
+	.search-bar input:not(:placeholder-shown) {
+		max-width: 100% !important;
+		padding: 0 3rem 0 1rem !important;
+	}
 }
