@@ -4,7 +4,16 @@ import '../assets/css/project_details.css';
 import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
-
+const tagStyles = {
+	html: { color: '#e34c26', icon: 'fab fa-html5' },
+	css: { color: '#2965f1', icon: 'fab fa-css3-alt' },
+	js: { color: '#f7df1e', icon: 'fab fa-js-square' },
+	photoshop: { color: '#31a8ff', icon: 'fas fa-image' },
+	illustrator: { color: '#ff9a00', icon: 'fas fa-pen-nib' },
+	figma: { color: '#a259ff', icon: 'fab fa-figma' },
+	react: { color: '#61dafb', icon: 'fab fa-react' },
+	// 필요시 추가
+};
 const ProjectDetail = () => {
 	const { id } = useParams();
 	const [projects, setProjects] = useState([]);
@@ -55,12 +64,53 @@ const ProjectDetail = () => {
 						{p.role && <p className="bullet">역할: {p.role}</p>}
 						{p.contribution && <p className="bullet">기여도: {p.contribution}</p>}
 						{p.period && <p className="bullet">작업 기간: {p.period}</p>}
-						{p.link && (
-							<p>
-								🔗{' '}
-								<a href={p.link} target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}>
-									프로젝트 링크
-								</a>
+
+						{/* 🎨 주조색/보조색 */}
+						{p.color && (
+							<p className="bullet" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+								색상:
+								{p.color.split(',').map((c, i) => (
+									<span
+										key={i}
+										title={i === 0 ? '주조색' : '보조색'}
+										style={{
+											width: '18px',
+											height: '18px',
+											borderRadius: '50%',
+											backgroundColor: c.trim(),
+											border: '1px solid #ccc',
+										}}
+									></span>
+								))}
+							</p>
+						)}
+
+						{/* 🏷️ 태그 */}
+						{p.tags && (
+							<p className="bullet" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+								태그:
+								{p.tags.split(',').map((tagRaw, i) => {
+									const tag = tagRaw.trim().toLowerCase();
+									const tagData = tagStyles[tag] || { color: '#888', icon: 'fas fa-tag' };
+
+									return (
+										<span
+											key={i}
+											style={{
+												backgroundColor: tagData.color,
+												color: '#fff',
+												padding: '2px 6px',
+												borderRadius: '4px',
+												fontSize: '0.75rem',
+												display: 'inline-flex',
+												alignItems: 'center',
+												gap: '4px',
+											}}
+										>
+											<i className={tagData.icon}></i> {tag}
+										</span>
+									);
+								})}
 							</p>
 						)}
 
