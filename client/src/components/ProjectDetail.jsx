@@ -9,6 +9,9 @@ const ProjectDetail = () => {
 	const { id } = useParams();
 	const [projects, setProjects] = useState([]);
 
+	// 팝업 상태 관리
+	const [popupImage, setPopupImage] = useState(null);
+
 	useEffect(() => {
 		if (id) {
 			console.log('🆔 현재 상세 페이지 ID:', id);
@@ -28,6 +31,17 @@ const ProjectDetail = () => {
 				});
 		}
 	}, [id]);
+
+	// ESC 눌러 닫기
+	useEffect(() => {
+		const handleKeyDown = e => {
+			if (e.key === 'Escape') {
+				setPopupImage(null);
+			}
+		};
+		document.addEventListener('keydown', handleKeyDown);
+		return () => document.removeEventListener('keydown', handleKeyDown);
+	}, []);
 
 	return (
 		<div className="project_details">
@@ -51,11 +65,12 @@ const ProjectDetail = () => {
 						)}
 
 						{p.images?.length > 0 && (
-							<div class="project_images">
+							<div className="project_images">
 								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-									{p.images.map(img => (
-										<img key={img.id} src={img.url.startsWith('http') ? img.url : `${API_BASE}${img.url}`} alt={img.name} style={{ width: '100%', borderRadius: '6px' }} />
-									))}
+									{p.images.map(img => {
+										const src = img.url.startsWith('http') ? img.url : `${API_BASE}${img.url}`;
+										return <img key={img.id} src={src} alt={img.name} style={{ width: '100%', borderRadius: '6px', cursor: 'zoom-in' }} onClick={() => setPopupImage(src)} />;
+									})}
 								</div>
 							</div>
 						)}
@@ -68,9 +83,44 @@ const ProjectDetail = () => {
 						)}
 
 						<br />
-						<Link to="/projects">← 목록으로</Link>
+						<Link to="/projects" className="back-to-list">
+							← 목록으로
+						</Link>
 					</div>
 				) : null
+			)}
+
+			{/* 팝업 이미지 오버레이 */}
+			{popupImage && (
+				<div
+					className="popup-overlay"
+					onClick={() => setPopupImage(null)}
+					style={{
+						position: 'fixed',
+						top: 0,
+						left: 0,
+						width: '100vw',
+						height: '100vh',
+						backgroundColor: 'rgba(0,0,0,0.8)',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						zIndex: 9999,
+						cursor: 'zoom-out',
+					}}
+				>
+					<img
+						src={popupImage}
+						alt="확대 이미지"
+						onClick={e => e.stopPropagation()}
+						style={{
+							maxWidth: '90%',
+							maxHeight: '90%',
+							borderRadius: '8px',
+							boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)',
+						}}
+					/>
+				</div>
 			)}
 		</div>
 	);
