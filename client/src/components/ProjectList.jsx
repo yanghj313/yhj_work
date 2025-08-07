@@ -4,7 +4,18 @@ import { Link } from 'react-router-dom';
 import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
-
+const tagStyles = {
+	html: { color: '#e34c26', icon: 'fab fa-html5' },
+	css: { color: '#2965f1', icon: 'fab fa-css3-alt' },
+	js: { color: '#f7df1e', icon: 'fab fa-js' },
+	photoshop: { color: '#31a8ff', icon: 'fas fa-image' },
+	illustrator: { color: '#ff9a00', icon: 'fas fa-pen-nib' },
+	figma: { color: '#a259ff', icon: 'fab fa-figma' },
+	react: { color: '#61dafb', icon: 'fab fa-react' },
+	node: { color: '#3c873a', icon: 'fab fa-node-js' },
+	git: { color: '#f1502f', icon: 'fab fa-git-alt' },
+	vue: { color: '#42b883', icon: 'fab fa-vuejs' },
+};
 const ProjectList = () => {
 	const [projects, setProjects] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -100,14 +111,29 @@ const ProjectList = () => {
 							{p.period && <p>🗓️ {p.period}</p>}
 
 							{p.tags && (
-								<p style={{ display: 'inline-block' }}>
+								<p style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem' }}>
 									💻
-									<ul>
-										{p.tags.split(',').map((tag, index) => {
-											const trimmedTag = tag.trim();
-											return <li key={index}>{trimmedTag}</li>;
-										})}
-									</ul>
+									{p.tags.split(',').map((tag, i) => {
+										const key = tag.trim().toLowerCase();
+										const style = tagStyles[key] || { color: '#aaa', icon: 'fas fa-tag' };
+										return (
+											<span
+												key={i}
+												style={{
+													backgroundColor: style.color,
+													color: '#fff',
+													padding: '2px 6px',
+													borderRadius: '4px',
+													fontSize: '0.75rem',
+													display: 'inline-flex',
+													alignItems: 'center',
+													gap: '4px',
+												}}
+											>
+												<i className={style.icon}></i> {key}
+											</span>
+										);
+									})}
 								</p>
 							)}
 						</li>
