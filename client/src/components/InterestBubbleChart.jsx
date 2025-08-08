@@ -21,7 +21,7 @@ const interests = [
 		name: 'Design',
 		value: 150,
 		color: '#576574',
-		image: '/main_img/0_coding_01.png',
+		image: '/main_img/0_coding_02.png',
 		images: ['/main_img/ui_01.jpg', '/main_img/ui_02.jpg', '/main_img/ui_03.jpg', '/main_img/ui_04.jpg'],
 	},
 	{
