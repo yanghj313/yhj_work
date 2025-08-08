@@ -157,13 +157,18 @@ const Welcome = () => {
 			const vh = window.innerHeight;
 
 			if (isMobile) {
-				// 모바일에서는 transform 제거
+				// 모바일에서는 transform 완전 제거
 				gsap.set(container, {
 					scale: 1,
 					transform: 'none',
 					width: '100vw',
 					height: '100vh',
 				});
+				// CSS 스타일 직접 적용
+				container.style.transform = 'none';
+				container.style.scale = '1';
+				container.style.width = '100vw';
+				container.style.height = '100vh';
 			} else {
 				// 데스크톱에서만 스케일링 적용
 				const scaleFactor = Math.min(vw / 1800, vh / 740);
