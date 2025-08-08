@@ -175,36 +175,54 @@ const Welcome = () => {
 		<div className="container">
 			<div className="moon">
 				{isMobile ? (
-					// 모바일: 동영상 배경 + 캐릭터 애니메이션
-					<div className="mobile-layout">
-						<video autoPlay muted loop playsInline preload="auto" className="mobile-video">
-							<source src="/video/main.mp4" type="video/mp4" />
-						</video>
-						<div className="mobile-overlay"></div>
-						<div className="mobile-text">
-							<h1 className="mobile-title">
-								<div className="mobile-title-line">
-									<span className="mobile-char">H</span>
-									<span className="mobile-char">Y</span>
-									<span className="mobile-char">U</span>
-									<span className="mobile-char">N</span>
-									<span className="mobile-char">&nbsp;</span>
-									<span className="mobile-char">J</span>
-									<span className="mobile-char">I</span>
-									<span className="mobile-char">N</span>
-									<span className="mobile-char">'</span>
-									<span className="mobile-char">S</span>
-								</div>
-								<br />
-								<div className="mobile-title-line">
-									<span className="mobile-char">W</span>
-									<span className="mobile-char">O</span>
-									<span className="mobile-char">R</span>
-									<span className="mobile-char">K</span>
-								</div>
-							</h1>
-						</div>
-					</div>
+					// 모바일: 데스크톱과 동일한 텍스트 클리핑 마스크 효과
+					<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 740">
+						<defs>
+							<clipPath id="clip-path" className="moon__svg-rects">
+								{yMaskPositions.map((y, i) => (
+									<rect key={i} x="0" y={y} width="1800" height="100" />
+								))}
+							</clipPath>
+							{/* 텍스트 클리핑 마스크 추가 */}
+							<clipPath id="moon_txt-mask" className="moon__txt">
+								<text x="0" y="309" dominantBaseline="middle">
+									<tspan>DESIGNED</tspan>
+								</text>
+								<text x="0" y="424" dominantBaseline="middle">
+									<tspan>BY</tspan>
+								</text>
+								<text x="1" y="539" dominantBaseline="middle">
+									<tspan>HYUNJIN</tspan>
+								</text>
+								<text x="1" y="654" dominantBaseline="middle">
+									<tspan>PORTFOLIO</tspan>
+								</text>
+							</clipPath>
+						</defs>
+						<g clipPath="url(#clip-path)">
+							<foreignObject x="0" y="0" width="1800" height="740">
+								<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
+									<source src="/video/main.mp4" type="video/mp4" />
+								</video>
+							</foreignObject>
+						</g>
+						<g className="moon__txt-bg" fill="#333" transform="translate(0 0)">
+							<rect y="259" height="104" width="732" x="-2" />
+							<rect y="374" height="104" width="218" x="-2" />
+							<rect y="489" height="104" width="682" x="-2" />
+							<rect y="604" height="104" width="802" x="-2" />
+						</g>
+						{/* 텍스트 모양으로 클리핑된 비디오 */}
+						<g clipPath="url(#moon_txt-mask)">
+							<foreignObject x="0" y="0" width="1800" height="740">
+								<video autoPlay muted loop playsInline className="moon__video" width="1800" height="740">
+									<source src="/video/main.mp4" type="video/mp4" />
+								</video>
+							</foreignObject>
+							{/* 반투명 흰색 오버레이 추가 */}
+							<rect className="moon__txt-overlay" width="1800" height="740" />
+						</g>
+					</svg>
 				) : (
 					// 데스크톱: 원래 구조 + 텍스트 클리핑 마스크
 					<svg className="moon__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 740">
@@ -250,6 +268,8 @@ const Welcome = () => {
 									<source src="/video/main.mp4" type="video/mp4" />
 								</video>
 							</foreignObject>
+							{/* 반투명 흰색 오버레이 추가 */}
+							<rect className="moon__txt-overlay" width="1800" height="740" />
 						</g>
 					</svg>
 				)}
