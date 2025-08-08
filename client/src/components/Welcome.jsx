@@ -155,8 +155,20 @@ const Welcome = () => {
 		const resize = () => {
 			const vw = window.innerWidth;
 			const vh = window.innerHeight;
-			const scaleFactor = Math.min(vw / 1800, vh / 740);
-			gsap.set(container, { scale: scaleFactor });
+
+			if (isMobile) {
+				// 모바일에서는 transform 제거
+				gsap.set(container, {
+					scale: 1,
+					transform: 'none',
+					width: '100vw',
+					height: '100vh',
+				});
+			} else {
+				// 데스크톱에서만 스케일링 적용
+				const scaleFactor = Math.min(vw / 1800, vh / 740);
+				gsap.set(container, { scale: scaleFactor });
+			}
 		};
 
 		window.addEventListener('resize', resize);
@@ -211,7 +223,7 @@ const Welcome = () => {
 						<defs>
 							<clipPath id="clip-path" className="moon__svg-rects">
 								{yMaskPositions.map((y, i) => (
-									<rect key={i} x="-1" y={y} width="1802" height="100" />
+									<rect key={i} x="-2" y={y} width="1804" height="100" />
 								))}
 							</clipPath>
 							{/* 텍스트 클리핑 마스크 추가 */}
