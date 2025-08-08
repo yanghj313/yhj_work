@@ -211,7 +211,7 @@ const Welcome = () => {
 						<defs>
 							<clipPath id="clip-path" className="moon__svg-rects">
 								{yMaskPositions.map((y, i) => (
-									<rect key={i} x="0" y={y} width="1800" height="100" />
+									<rect key={i} x="-1" y={y} width="1802" height="100" />
 								))}
 							</clipPath>
 							{/* 텍스트 클리핑 마스크 추가 */}
