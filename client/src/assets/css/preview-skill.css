@@ -459,7 +459,7 @@
 	.skill-scroll-wrapper {
 		max-width: 300px;
 		margin: 15px auto;
-		height: 400px;
+		height: 300px;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
 		-ms-overflow-style: none;
@@ -475,7 +475,7 @@
 	}
 
 	.skill-scroll-track {
-		margin-top: 15px;
+		margin-top: 0;
 		margin-bottom: 30px;
 		padding: 0;
 		padding: 0px;
@@ -484,7 +484,7 @@
 		overflow-x: auto;
 		scroll-behavior: smooth;
 		-webkit-overflow-scrolling: touch;
-		height: 400px;
+		height: 300px;
 		justify-content: flex-start;
 		scroll-snap-type: x mandatory;
 		scrollbar-width: none;
