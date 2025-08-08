@@ -258,8 +258,7 @@ const InterestBubbleChart = () => {
 					.attr('transform', d => `translate(${d.x}, ${d.y})`);
 
 				g.append('circle');
-				g.filter(d => !noImageNames.includes(d.name))
-					.append('image')
+				g.append('image')
 					.attr('clip-path', d => `url(#clip-${d.name.replace(/\s+/g, '')})`)
 					.attr('xlink:href', d => d.image)
 					.attr('preserveAspectRatio', 'xMidYMid slice')
@@ -267,7 +266,10 @@ const InterestBubbleChart = () => {
 					.attr('height', d => d.value)
 					.attr('x', d => -d.value / 2)
 					.attr('y', d => -d.value / 2)
-					.attr('opacity', 0.3)
+					.attr('opacity', d => {
+						if (noImageNames.includes(d.name)) return 0; // 단색 버블은 처음엔 숨김
+						return 0.3;
+					})
 					.style('transition', 'opacity 0.3s ease');
 				g.append('text');
 				return g;
@@ -302,17 +304,20 @@ const InterestBubbleChart = () => {
 			.attr('r', d => d.value / 2)
 			.attr('fill', d => {
 				if (noImageNames.includes(d.name)) {
-					return '#f1420a';
+					return selected?.name === d.name ? 'transparent' : '#f1420a';
 				}
 				return selected?.name === d.name ? d.color : '#ff5722';
 			});
-
 		node
 			.select('image')
 			.transition()
 			.duration(300)
-			.attr('opacity', d => (selected?.name === d.name ? 1 : 0.3));
-
+			.attr('opacity', d => {
+				if (noImageNames.includes(d.name)) {
+					return selected?.name === d.name ? 1 : 0;
+				}
+				return selected?.name === d.name ? 1 : 0.3;
+			});
 		node
 			.select('text')
 			.text(d => d.name)
