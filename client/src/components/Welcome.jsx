@@ -170,9 +170,13 @@ const Welcome = () => {
 				container.style.width = '100vw';
 				container.style.height = '100vh';
 			} else {
-				// 데스크톱에서만 스케일링 적용
-				const scaleFactor = Math.min(vw / 1800, vh / 740);
-				gsap.set(container, { scale: scaleFactor });
+				// 데스크톱에서도 스케일링 제거
+				gsap.set(container, {
+					scale: 1,
+					transform: 'none',
+				});
+				container.style.transform = 'none';
+				container.style.scale = '1';
 			}
 		};
 
