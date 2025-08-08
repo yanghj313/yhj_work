@@ -27,54 +27,126 @@ const Welcome = () => {
 			},
 		});
 
-		gsap.set(container, { autoAlpha: 0 });
-		gsap.set(texts, { opacity: 0 });
+		// 모바일과 데스크톱 애니메이션 분리
+		if (isMobile) {
+			// 모바일 애니메이션
+			gsap.set(container, { autoAlpha: 0 });
+			gsap.set('.mobile-title-line::before', { opacity: 0, scale: 0.8 });
+			gsap.set('.mobile-title-line::after', { opacity: 0, scale: 0.8 });
+			gsap.set('.mobile-char', { opacity: 0, y: 30, rotationX: 90 });
 
-		tl.to(container, {
-			autoAlpha: 1,
-			duration: 0.4,
-		})
-			.from(
-				'.container__base',
-				{
-					scaleX: 0,
-					duration: 2,
-					transformOrigin: 'top right',
-				},
-				'+=0.1'
-			)
-			.from(
-				'.moon__svg-rects rect',
-				{
-					scaleX: 0,
-					stagger: 0.07,
-					duration: 3,
-					ease: 'expo',
-				},
-				'-=1.5'
-			)
-			.to(
-				'.moon__txt-bg rect',
-				{
-					stagger: 0.14,
-					scaleX: 1,
-				},
-				'-=2.2'
-			)
-			.to(
-				texts,
-				{
-					opacity: 1,
-					ease: 'power4',
-					stagger: 0.2,
-				},
-				'-=1.5'
-			);
+			// 원형 테두리 애니메이션
+			tl.to(container, { autoAlpha: 1, duration: 0.4 })
+				.to(
+					'.mobile-title-line::before',
+					{
+						opacity: 1,
+						scale: 1,
+						duration: 1.5,
+						ease: 'power2.out',
+						stagger: 0.3,
+					},
+					'+=0.2'
+				)
+				.to(
+					'.mobile-title-line::after',
+					{
+						opacity: 1,
+						scale: 1,
+						duration: 0.8,
+						ease: 'power2.out',
+						stagger: 0.3,
+					},
+					'-=0.5'
+				)
+				.to(
+					'.mobile-char',
+					{
+						opacity: 1,
+						y: 0,
+						rotationX: 0,
+						duration: 1.2,
+						ease: 'power3.out',
+						stagger: 0.1,
+					},
+					'-=0.3'
+				);
 
-		gsap.set('.moon__txt-bg rect', {
-			width: i => wArray[i] || 200,
-			scaleX: 0,
-		});
+			// 반복되는 파도 애니메이션
+			const waveAnimation = () => {
+				gsap
+					.timeline({ repeat: -1, repeatDelay: 2 })
+					.to('.mobile-char', {
+						y: -3,
+						duration: 0.3,
+						ease: 'power2.out',
+						stagger: 0.05,
+					})
+					.to(
+						'.mobile-char',
+						{
+							y: 0,
+							duration: 0.3,
+							ease: 'power2.in',
+							stagger: 0.05,
+						},
+						'-=0.2'
+					);
+			};
+
+			// 첫 번째 애니메이션이 끝난 후 반복 애니메이션 시작
+			setTimeout(waveAnimation, 4000);
+		} else {
+			// 데스크톱 애니메이션
+			gsap.set(container, { autoAlpha: 0 });
+			gsap.set(texts, { opacity: 0 });
+
+			tl.to(container, {
+				autoAlpha: 1,
+				duration: 0.4,
+			})
+				.from(
+					'.container__base',
+					{
+						scaleX: 0,
+						duration: 2,
+						transformOrigin: 'top right',
+					},
+					'+=0.1'
+				)
+				.from(
+					'.moon__svg-rects rect',
+					{
+						scaleX: 0,
+						stagger: 0.07,
+						duration: 3,
+						ease: 'expo',
+					},
+					'-=1.5'
+				)
+				.to(
+					'.moon__txt-bg rect',
+					{
+						stagger: 0.14,
+						scaleX: 1,
+					},
+					'-=2.2'
+				)
+				.to(
+					texts,
+					{
+						opacity: 1,
+						ease: 'power4',
+						stagger: 0.2,
+					},
+					'-=1.5'
+				);
+
+			gsap.set('.moon__txt-bg rect', {
+				width: i => wArray[i] || 200,
+				scaleX: 0,
+			});
+		}
 
 		container.onclick = () => {
 			tl.restart();
@@ -103,12 +175,34 @@ const Welcome = () => {
 		<div className="container">
 			<div className="moon">
 				{isMobile ? (
-					// 모바일: 새로운 구조 (여기에 원하는 레이아웃을 구현하세요)
+					// 모바일: 동영상 배경 + 캐릭터 애니메이션
 					<div className="mobile-layout">
-						{/* 여기에 모바일용 새로운 레이아웃을 구현하세요 */}
-						<div className="mobile-content">
-							<h1>HYUN JIN'S WORK</h1>
-							{/* 원하는 구조로 자유롭게 구현하세요 */}
+						<video autoPlay muted loop playsInline preload="auto" className="mobile-video">
+							<source src="/video/main.mp4" type="video/mp4" />
+						</video>
+						<div className="mobile-overlay"></div>
+						<div className="mobile-text">
+							<h1 className="mobile-title">
+								<div className="mobile-title-line">
+									<span className="mobile-char">H</span>
+									<span className="mobile-char">Y</span>
+									<span className="mobile-char">U</span>
+									<span className="mobile-char">N</span>
+									<span className="mobile-char">&nbsp;</span>
+									<span className="mobile-char">J</span>
+									<span className="mobile-char">I</span>
+									<span className="mobile-char">N</span>
+									<span className="mobile-char">'</span>
+									<span className="mobile-char">S</span>
+								</div>
+								<br />
+								<div className="mobile-title-line">
+									<span className="mobile-char">W</span>
+									<span className="mobile-char">O</span>
+									<span className="mobile-char">R</span>
+									<span className="mobile-char">K</span>
+								</div>
+							</h1>
 						</div>
 					</div>
 				) : (
