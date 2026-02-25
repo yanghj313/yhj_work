@@ -1,7 +1,6 @@
 export default [
 	'strapi::logger',
 	'strapi::errors',
-
 	{
 		name: 'strapi::security',
 		config: {
@@ -9,14 +8,15 @@ export default [
 				useDefaults: true,
 				directives: {
 					'default-src': ["'self'"],
-					'img-src': ["'self'", 'data:', 'https://yhj-work.vercel.app'],
+					'img-src': ["'self'", 'data:', 'blob:', 'res.cloudinary.com', 'https://yhj-work.vercel.app'],
+					'media-src': ["'self'", 'data:', 'blob:', 'res.cloudinary.com'],
 					'script-src': ["'self'", "'unsafe-inline'", 'https://yhj-work.vercel.app'],
 					'frame-src': ["'self'", 'https://yhj-work.vercel.app'],
+					upgradeInsecureRequests: null,
 				},
 			},
 		},
 	},
-
 	{
 		name: 'strapi::cors',
 		config: {
@@ -33,10 +33,19 @@ export default [
 			credentials: true,
 		},
 	},
-
 	'strapi::poweredBy',
 	'strapi::query',
-	'strapi::body',
+	{
+		name: 'strapi::body',
+		config: {
+			formLimit: '256mb',
+			jsonLimit: '256mb',
+			textLimit: '256mb',
+			formidable: {
+				maxFileSize: 256 * 1024 * 1024,
+			},
+		},
+	},
 	'strapi::session',
 	'strapi::favicon',
 	'strapi::public',
