@@ -8,40 +8,41 @@ import '../assets/css/bubble.css';
 import InterestDescription from './InterestDescription';
 import ImageModal from './ImageModal';
 
+const noImageNames = ['Book', 'Music'];
 const interests = [
 	{
 		name: 'Coding',
 		value: 180,
 		color: '#576574',
-		image: '/main_img/coding_01.png',
+		image: '/main_img/0_coding_01.png',
 		images: ['/main_img/coding_02.png', '/main_img/coding_03.png', '/main_img/coding_04.png', '/main_img/coding_05.jpg'],
 	},
 	{
 		name: 'Design',
 		value: 150,
 		color: '#576574',
-		image: '/main_img/design.JPG',
+		image: '/main_img/0_coding_02.png',
 		images: ['/main_img/ui_01.jpg', '/main_img/ui_02.jpg', '/main_img/ui_03.jpg', '/main_img/ui_04.jpg'],
 	},
 	{
 		name: 'Movie',
 		value: 80,
 		color: '#576574',
-		image: '/main_img/movie_02.JPG',
+		image: '/main_img/0_coding_03.png',
 		images: ['/main_img/mov_01.jpg', '/main_img/mov_03.jpg', '/main_img/mov_05.JPG', '/main_img/mov_06.JPG'],
 	},
 	{
 		name: 'Book',
 		value: 200,
 		color: '#576574',
-		image: '/main_img/book_01.jpg',
+		image: '/main_img/0_coding_04.png',
 		images: ['/main_img/book_02.JPG', '/main_img/book_03.jpg', '/main_img/book_04.jpg', '/main_img/book_05.jpg'],
 	},
 	{
 		name: 'Running',
 		value: 140,
 		color: '#576574',
-		image: '/main_img/run.JPG',
+		image: '/main_img/0_coding_05.png',
 		images: [
 			'/main_img/rudding_03.JPG',
 			'/main_img/running_01.JPG',
@@ -56,28 +57,28 @@ const interests = [
 		name: 'Pilates',
 		value: 170,
 		color: '#576574',
-		image: '/main_img/pil_01.jpg',
+		image: '/main_img/0_coding_06.png',
 		images: ['/main_img/pil_01.jpg', '/main_img/pil_02.jpg', '/main_img/pil_03.jpg'],
 	},
 	{
 		name: 'Travel',
 		value: 80,
 		color: '#576574',
-		image: '/main_img/tour_01.JPG',
+		image: '/main_img/0_coding_07.png',
 		images: ['/main_img/tour_01.JPG', '/main_img/tour_02.jpg', '/main_img/tour_03.JPG', '/main_img/tour_04.jpg'],
 	},
 	{
 		name: 'Stationery',
 		value: 150,
 		color: '#576574',
-		image: '/main_img/di_04.JPG',
+		image: '/main_img/0_coding_08.png',
 		images: ['/main_img/di_01.jpg', '/main_img/di_02.JPG', '/main_img/di_03.jpg', '/main_img/di_04.JPG', '/main_img/di_05.jpg'],
 	},
 	{
 		name: 'Camera',
 		value: 70,
 		color: '#576574',
-		image: '/main_img/came_01.jpg',
+		image: '/main_img/0_coding_09.png',
 		images: [
 			'/main_img/came_02.jpg',
 			'/main_img/came_03.jpg',
@@ -96,7 +97,7 @@ const interests = [
 		name: 'Fashion',
 		value: 80,
 		color: '#576574',
-		image: '/main_img/style_01.JPG',
+		image: '/main_img/0_coding_10.png',
 		images: [
 			'/main_img/style_02.JPG',
 			'/main_img/style_03.jpg',
@@ -116,28 +117,28 @@ const interests = [
 		name: 'Soccer',
 		value: 60,
 		color: '#576574',
-		image: '/main_img/soccer.JPG',
+		image: '/main_img/0_coding_11.png',
 		images: ['/main_img/soccer_01.jpg', '/main_img/soccer_02.jpg', '/main_img/soccer_03.png'],
 	},
 	{
 		name: 'Music',
 		value: 80,
 		color: '#576574',
-		image: '/main_img/head.jpg',
+		image: '/main_img/0_coding_12.png',
 		images: ['/main_img/music.jpg', '/main_img/music_02.jpg', '/main_img/music_03.jpg', '/main_img/music_04.PNG', '/main_img/music_04.jpg'],
 	},
 	{
 		name: 'Perfume',
 		value: 70,
 		color: '#576574',
-		image: '/main_img/per_01.JPG',
+		image: '/main_img/0_coding_13.png',
 		images: ['/main_img/per_01.JPG', '/main_img/per_02.jpg', '/main_img/per_03.jpg', '/main_img/per_04.jpg', '/main_img/per_05.jpg'],
 	},
 	{
 		name: 'ENTJ',
 		value: 70,
 		color: '#576574',
-		image: '/main_img/ent_04.png',
+		image: '/main_img/0_coding_14.png',
 		images: ['/main_img/ent_05.png', '/main_img/entj_01.JPG', '/main_img/entj_02.jpg', '/main_img/entj_03.jpg'],
 	},
 ];
@@ -265,9 +266,11 @@ const InterestBubbleChart = () => {
 					.attr('height', d => d.value)
 					.attr('x', d => -d.value / 2)
 					.attr('y', d => -d.value / 2)
-					.attr('opacity', 0.3)
+					.attr('opacity', d => {
+						if (noImageNames.includes(d.name)) return 0; // 단색 버블은 처음엔 숨김
+						return 0.3;
+					})
 					.style('transition', 'opacity 0.3s ease');
-
 				g.append('text');
 				return g;
 			});
@@ -299,14 +302,22 @@ const InterestBubbleChart = () => {
 			.transition()
 			.duration(300)
 			.attr('r', d => d.value / 2)
-			.attr('fill', d => (selected?.name === d.name ? d.color : '#ff5722'));
-
+			.attr('fill', d => {
+				if (noImageNames.includes(d.name)) {
+					return selected?.name === d.name ? 'transparent' : '#f1420a';
+				}
+				return selected?.name === d.name ? d.color : '#ff5722';
+			});
 		node
 			.select('image')
 			.transition()
 			.duration(300)
-			.attr('opacity', d => (selected?.name === d.name ? 1 : 0.3));
-
+			.attr('opacity', d => {
+				if (noImageNames.includes(d.name)) {
+					return selected?.name === d.name ? 1 : 0;
+				}
+				return selected?.name === d.name ? 1 : 0.3;
+			});
 		node
 			.select('text')
 			.text(d => d.name)
