@@ -1,0 +1,249 @@
+/* 스켈레톤 애니메이션 */
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200px 0;
+    }
+
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+.skeleton-base {
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+/* 갤러리 스켈레톤 */
+.skeleton-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 120px auto 200px;
+    max-width: 1800px;
+    padding: 0 20px;
+}
+
+.skeleton-gallery-card {
+    background: #444;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    width: calc(25% - 12px);
+    min-width: 250px;
+}
+
+.skeleton-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+.skeleton-content {
+    padding: 12px;
+}
+
+.skeleton-title {
+    height: 16px;
+    width: 80%;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+.skeleton-category {
+    height: 12px;
+    width: 60%;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+/* 프로젝트 스켈레톤 */
+.skeleton-project {
+    padding: 120px 0 100px;
+    margin: 0 60px;
+    min-height: 680px;
+}
+
+.skeleton-project ul {
+    display: grid;
+    grid-template-columns: repeat(3, 510px);
+    row-gap: 2rem;
+    justify-content: space-around;
+}
+
+.skeleton-project-card {
+    margin-bottom: 2rem;
+}
+
+.skeleton-media-container {
+    position: relative;
+    max-width: 510px;
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1rem;
+}
+
+.skeleton-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 12px;
+}
+
+.skeleton-project-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-title-text {
+    height: 18px;
+    width: 80%;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+.skeleton-role {
+    height: 14px;
+    width: 60%;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+.skeleton-period {
+    height: 14px;
+    width: 50%;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+.skeleton-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.skeleton-tag {
+    height: 20px;
+    width: 60px;
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+/* 반응형 */
+@media (max-width: 1500px) {
+    .skeleton-project ul {
+        grid-template-columns: repeat(3, 410px);
+    }
+
+    .skeleton-media-container {
+        max-width: 410px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .skeleton-project ul {
+        grid-template-columns: repeat(3, 380px);
+    }
+
+    .skeleton-media-container {
+        max-width: 380px;
+    }
+}
+
+@media (max-width: 1290px) {
+    .skeleton-project ul {
+        grid-template-columns: repeat(3, 330px);
+    }
+
+    .skeleton-media-container {
+        max-width: 330px;
+    }
+}
+
+@media (max-width: 1025px) {
+    .skeleton-project ul {
+        grid-template-columns: repeat(3, 410px);
+    }
+
+    .skeleton-media-container {
+        max-width: 410px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .skeleton-project {
+        margin: 0 30px;
+    }
+
+    .skeleton-project ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skeleton-gallery {
+        padding: 0 10px;
+    }
+
+    .skeleton-gallery-card {
+        width: calc(50% - 8px);
+    }
+}
+
+@media (max-width: 768px) {
+    .skeleton-gallery-card {
+        width: calc(100% - 8px);
+    }
+
+    .skeleton-project {
+        margin: 0 20px;
+        padding: 60px 0;
+    }
+
+    .skeleton-project ul {
+        grid-template-columns: 1fr;
+    }
+
+    .skeleton-media-container {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 580px) {
+    .skeleton-gallery {
+        padding: 0 5px;
+    }
+
+    .skeleton-gallery-card {
+        width: 100%;
+    }
+}

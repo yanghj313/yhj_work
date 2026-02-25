@@ -40,6 +40,11 @@ const AppLayout = ({ user, setUser }) => {
 			backgroundImage: '/img/main_img/gallery_bg.jpg',
 		},
 		{
+			match: path => path.startsWith('/gallery'),
+			title: 'Gallery Detail',
+			backgroundImage: '/img/main_img/gallery_bg.jpg',
+		},
+		{
 			match: path => path.startsWith('/search'),
 			title: 'Search Results',
 			backgroundImage: '/img/main_img/search_bg.jpg',

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import '../assets/css/page.css';
+import SkeletonGallery from './SkeletonGallery';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
@@ -34,12 +35,7 @@ const GalleryList = () => {
 	};
 
 	if (loading) {
-		return (
-			<div className="loading-container">
-				<p>Loading</p>
-				<div className="spinner" />
-			</div>
-		);
+		return <SkeletonGallery />;
 	}
 
 	return (

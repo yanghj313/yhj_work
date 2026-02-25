@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import '../assets/css/gallery_details.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const GalleryDetail = () => {
 	const { id } = useParams();
 	const [galleries, setGalleries] = useState([]);
+	const [popupImage, setPopupImage] = useState(null);
 
 	useEffect(() => {
 		if (id) {
@@ -28,35 +30,93 @@ const GalleryDetail = () => {
 		}
 	}, [id]);
 
+	// ESC 눌러 닫기
+	useEffect(() => {
+		const handleKeyDown = e => {
+			if (e.key === 'Escape') {
+				setPopupImage(null);
+			}
+		};
+		document.addEventListener('keydown', handleKeyDown);
+		return () => document.removeEventListener('keydown', handleKeyDown);
+	}, []);
+
 	return (
-		<div style={{ padding: '1rem' }}>
+		<div className="gallery_details">
 			{galleries.map(g =>
 				g?.title ? (
 					<div key={g.id}>
-						<h2>{g.title}</h2>
+						<h2 className="gallery_title" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+							{g.title}
+						</h2>
+
+						{g.category && <p className="bullet">📂 분류: {g.category}</p>}
 
 						{g.image?.url && (
-							<div>
+							<div className="gallery_image_container">
 								<img
 									src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`}
 									alt={g.image.name || '갤러리 이미지'}
-									style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '1rem' }}
+									className="gallery_main_image"
+									onClick={() => setPopupImage(g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`)}
 								/>
 							</div>
 						)}
-						<ul style={{ paddingLeft: '1rem' }}>
-							{g.description &&
-								g.description
-									.replace(/<[^>]+>/g, '')
-									.split(/\n|\r|\r\n/)
-									.filter(Boolean)
-									.map((line, idx) => <li key={idx}>{line}</li>)}
-						</ul>
-						{g.category && <p>📂 분류: {g.category}</p>}
 
-						<Link to="/galleries">← 목록</Link>
+						{typeof g.description === 'string' && g.description.trim() && (
+							<div style={{ marginTop: '2rem' }}>
+								<h4>📘 설명</h4>
+								<ul style={{ paddingLeft: '1.25rem', lineHeight: '1.8' }}>
+									{g.description
+										.replace(/<[^>]+>/g, '')
+										.split(/\n|\r|\r\n/)
+										.filter(Boolean)
+										.map((line, idx) => (
+											<li key={idx}>{line}</li>
+										))}
+								</ul>
+							</div>
+						)}
+
+						<br />
+						<Link to="/galleries" className="back-to-list">
+							← 목록으로
+						</Link>
 					</div>
 				) : null
+			)}
+
+			{/* 팝업 이미지 오버레이 */}
+			{popupImage && (
+				<div
+					className="popup-overlay"
+					onClick={() => setPopupImage(null)}
+					style={{
+						position: 'fixed',
+						top: 0,
+						left: 0,
+						width: '100vw',
+						height: '100vh',
+						backgroundColor: 'rgba(0,0,0,0.8)',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						zIndex: 9999,
+						cursor: 'zoom-out',
+					}}
+				>
+					<img
+						src={popupImage}
+						alt="확대 이미지"
+						onClick={e => e.stopPropagation()}
+						style={{
+							maxWidth: '90%',
+							maxHeight: '90%',
+							borderRadius: '8px',
+							boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)',
+						}}
+					/>
+				</div>
 			)}
 		</div>
 	);

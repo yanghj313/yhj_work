@@ -4,7 +4,16 @@ import '../assets/css/project_details.css';
 import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
-
+const tagStyles = {
+	html: { color: '#e34c26', icon: 'fab fa-html5' },
+	css: { color: '#2965f1', icon: 'fab fa-css3-alt' },
+	js: { color: '#f7df1e', icon: 'fab fa-js-square' },
+	photoshop: { color: '#31a8ff', icon: 'fas fa-image' },
+	illustrator: { color: '#ff9a00', icon: 'fas fa-pen-nib' },
+	figma: { color: '#a259ff', icon: 'fab fa-figma' },
+	react: { color: '#61dafb', icon: 'fab fa-react' },
+	// 필요시 추가
+};
 const ProjectDetail = () => {
 	const { id } = useParams();
 	const [projects, setProjects] = useState([]);
@@ -55,21 +64,70 @@ const ProjectDetail = () => {
 						{p.role && <p className="bullet">역할: {p.role}</p>}
 						{p.contribution && <p className="bullet">기여도: {p.contribution}</p>}
 						{p.period && <p className="bullet">작업 기간: {p.period}</p>}
-						{p.link && (
-							<p>
-								🔗{' '}
-								<a href={p.link} target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}>
-									프로젝트 링크
-								</a>
+
+						{/* 🎨 주조색/보조색 */}
+						{p.color && (
+							<p className="bullet" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+								색상:
+								{p.color.split(',').map((c, i) => (
+									<span
+										key={i}
+										title={i === 0 ? '주조색' : '보조색'}
+										style={{
+											width: '18px',
+											height: '18px',
+											borderRadius: '50%',
+											backgroundColor: c.trim(),
+											border: '1px solid #ccc',
+										}}
+									></span>
+								))}
+							</p>
+						)}
+
+						{/* 🏷️ 태그 */}
+						{p.tags && (
+							<p className="bullet" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+								태그:
+								{p.tags.split(',').map((tagRaw, i) => {
+									const tag = tagRaw.trim().toLowerCase();
+									const tagData = tagStyles[tag] || { color: '#888', icon: 'fas fa-tag' };
+
+									return (
+										<span
+											key={i}
+											style={{
+												backgroundColor: tagData.color,
+												color: '#fff',
+												padding: '2px 6px',
+												borderRadius: '4px',
+												fontSize: '0.75rem',
+												display: 'inline-flex',
+												alignItems: 'center',
+												gap: '4px',
+											}}
+										>
+											<i className={tagData.icon}></i> {tag}
+										</span>
+									);
+								})}
 							</p>
 						)}
 
 						{p.images?.length > 0 && (
 							<div className="project_images">
 								<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-									{p.images.map(img => {
-										const src = img.url.startsWith('http') ? img.url : `${API_BASE}${img.url}`;
-										return <img key={img.id} src={src} alt={img.name} style={{ width: '100%', borderRadius: '6px', cursor: 'zoom-in' }} onClick={() => setPopupImage(src)} />;
+									{p.images.map(file => {
+										const src = file.url.startsWith('http') ? file.url : `${API_BASE}${file.url}`;
+										const isVideo = file.mime?.startsWith('video');
+
+										return isVideo ? (
+											<video key={file.id} src={src} controls style={{ width: '100%', maxWidth: '800px', borderRadius: '6px' }}>
+												브라우저가 video 태그를 지원하지 않습니다.
+											</video>
+										) : (
+											<img key={file.id} src={src} alt={file.name} style={{ width: '100%', borderRadius: '6px', cursor: 'zoom-in' }} onClick={() => setPopupImage(src)} />
+										);
 									})}
 								</div>
 							</div>
