@@ -40,5 +40,8 @@
   },
   "strapi": {
     "uuid": "e2aa3c4a-d7f5-41c4-b148-d5011c055196"
+  },
+  "optionalDependencies": {
+    "@swc/core-linux-x64-gnu": "^1.15.17"
   }
 }
