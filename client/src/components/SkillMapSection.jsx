@@ -4,6 +4,22 @@ import '../assets/css/preview-skill.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
+const flattenItem = (item) => {
+	if (!item) return null;
+	const { id, documentId, attributes } = item;
+	if (!attributes) return item;
+	const flat = { id, documentId, ...attributes };
+	Object.keys(flat).forEach(key => {
+		const val = flat[key];
+		if (val && typeof val === 'object' && val.data !== undefined) {
+			if (val.data === null) flat[key] = null;
+			else if (Array.isArray(val.data)) flat[key] = val.data.map(flattenItem);
+			else flat[key] = flattenItem(val.data);
+		}
+	});
+	return flat;
+};
+
 const SkillMapSection = () => {
 	const [skills, setSkills] = useState([]);
 	const [activeIndex, setActiveIndex] = useState(0);
@@ -15,8 +31,7 @@ const SkillMapSection = () => {
 		axios
 			.get(`${API_BASE}/api/skills?populate=*&sort=createdAt:asc`)
 			.then(res => {
-				console.log('🔥 스킬 데이터:', res.data.data);
-				setSkills((res.data.data || []).filter(Boolean));
+				setSkills((res.data.data || []).filter(Boolean).map(flattenItem));
 			})
 			.catch(err => {
 				console.error('❌ 스킬 데이터 오류:', err.message);
@@ -26,24 +41,13 @@ const SkillMapSection = () => {
 	useEffect(() => {
 		if (scrollTrackRef.current) {
 			const slide = scrollTrackRef.current.children[activeIndex];
-			if (slide) {
-				slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-			}
+			if (slide) slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 		}
 	}, [activeIndex]);
 
-	const handleNext = () => {
-		setActiveIndex(prev => (prev + 1) % skills.length);
-	};
-
-	const handlePrev = () => {
-		setActiveIndex(prev => (prev - 1 + skills.length) % skills.length);
-	};
-
-	const handleTouchStart = e => {
-		dragStartX.current = e.touches ? e.touches[0].clientX : e.clientX;
-	};
-
+	const handleNext = () => setActiveIndex(prev => (prev + 1) % skills.length);
+	const handlePrev = () => setActiveIndex(prev => (prev - 1 + skills.length) % skills.length);
+	const handleTouchStart = e => { dragStartX.current = e.touches ? e.touches[0].clientX : e.clientX; };
 	const handleTouchEnd = e => {
 		dragEndX.current = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
 		const diff = dragEndX.current - dragStartX.current;
@@ -59,41 +63,29 @@ const SkillMapSection = () => {
 				<div className="skill-left-panel intro-img">
 					<img src="/img/profile.jpg" alt="소개 이미지" style={{ width: '492px', maxHeight: '80%' }} />
 				</div>
-
 				<div className="skill-right-panel skill-panel" style={{ position: 'absolute', left: '33%', transform: 'translate(0,-50%)' }}>
 					<div className="skill-scroll-wrapper no-scrollbar">
 						<div className="skill-scroll-track" ref={scrollTrackRef}>
 							{skills.map((s, idx) => {
 								const isActive = activeIndex === idx;
 								return (
-									<div
-										key={s.id}
-										className={`skill-marker${isActive ? ' active' : ''}`}
-										onClick={() => setActiveIndex(idx)}
-										style={{ top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}
-									>
+									<div key={s.id} className={`skill-marker${isActive ? ' active' : ''}`} onClick={() => setActiveIndex(idx)} style={{ top: '50%', transform: isActive ? 'translate(-50%, -50%) scale(1.2)' : 'translate(-50%, -50%)' }}>
 										{s.icon?.url && (
 											<div className="skill-icon">
 												<img src={s.icon.url.startsWith('http') ? s.icon.url : `${API_BASE}${s.icon.url}`} alt={s.icon.name || '아이콘'} style={{ width: '60px', height: '60px' }} />
 											</div>
 										)}
-
 										{isActive && (
 											<div className="tooltip-box">
 												<strong className="skill-name">{s.name}</strong>
 												{s.level && <p className="skill-level">🎯 숙련도: {s.level}</p>}
 												{s.description && (
 													<ul className="skill-description">
-														{s.description
-															.replace(/<[^>]+>/g, '')
-															.split(/\n|\r|\r\n/)
-															.filter(Boolean)
-															.map((line, idx) => (
-																<li key={idx}>{line}</li>
-															))}
+														{s.description.replace(/<[^>]+>/g, '').split(/\n|\r|\r\n/).filter(Boolean).map((line, idx) => (
+															<li key={idx}>{line}</li>
+														))}
 													</ul>
 												)}
-
 												{isActive && <div className="ripple"></div>}
 											</div>
 										)}
@@ -102,18 +94,12 @@ const SkillMapSection = () => {
 							})}
 						</div>
 					</div>
-
 					<div className="skill-nav-buttons">
 						<button className="arrow-btn prev" onClick={handlePrev} aria-label="이전">
-							<svg viewBox="0 0 24 24" className="arrow-icon">
-								<polyline points="15 18 9 12 15 6" />
-							</svg>
+							<svg viewBox="0 0 24 24" className="arrow-icon"><polyline points="15 18 9 12 15 6" /></svg>
 						</button>
-
 						<button className="arrow-btn next" onClick={handleNext} aria-label="다음">
-							<svg viewBox="0 0 24 24" className="arrow-icon">
-								<polyline points="9 6 15 12 9 18" />
-							</svg>
+							<svg viewBox="0 0 24 24" className="arrow-icon"><polyline points="9 6 15 12 9 18" /></svg>
 						</button>
 					</div>
 				</div>

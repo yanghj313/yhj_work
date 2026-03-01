@@ -3,6 +3,23 @@ import axios from 'axios';
 import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
+
+const flattenItem = (item) => {
+	if (!item) return null;
+	const { id, documentId, attributes } = item;
+	if (!attributes) return item;
+	const flat = { id, documentId, ...attributes };
+	Object.keys(flat).forEach(key => {
+		const val = flat[key];
+		if (val && typeof val === 'object' && val.data !== undefined) {
+			if (val.data === null) flat[key] = null;
+			else if (Array.isArray(val.data)) flat[key] = val.data.map(flattenItem);
+			else flat[key] = flattenItem(val.data);
+		}
+	});
+	return flat;
+};
+
 const formatDate = dateString => {
 	if (!dateString) return '';
 	const date = new Date(dateString);
@@ -20,15 +37,13 @@ const ExperienceList = () => {
 			try {
 				setLoading(true);
 				const res = await axios.get(`${API_BASE}/api/experiences?populate=*&sort=createdAt:asc&pagination[limit]=100`);
-				console.log('🔥 경험 데이터:', res.data.data);
-				setExperiences((res.data.data || []).filter(Boolean));
+				setExperiences((res.data.data || []).filter(Boolean).map(flattenItem));
 			} catch (err) {
 				console.error('❌ 경험 데이터 오류:', err.message);
 			} finally {
 				setTimeout(() => setLoading(false), 500);
 			}
 		};
-
 		fetchExperiences();
 	}, []);
 
@@ -60,10 +75,7 @@ const ExperienceList = () => {
 										<img
 											key={idx}
 											src={img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`}
-											srcSet={`
-    ${img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} 1x,
-    ${img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} 2x
-  `}
+											srcSet={`${img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} 1x, ${img.url.startsWith('http') ? img.url : `${API_BASE.replace(/\/$/, '')}${img.url}`} 2x`}
 											alt={`image-${idx}`}
 										/>
 									))

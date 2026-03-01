@@ -7,6 +7,22 @@ import SkeletonGallery from './SkeletonGallery';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
+const flattenItem = (item) => {
+	if (!item) return null;
+	const { id, documentId, attributes } = item;
+	if (!attributes) return item;
+	const flat = { id, documentId, ...attributes };
+	Object.keys(flat).forEach(key => {
+		const val = flat[key];
+		if (val && typeof val === 'object' && val.data !== undefined) {
+			if (val.data === null) flat[key] = null;
+			else if (Array.isArray(val.data)) flat[key] = val.data.map(flattenItem);
+			else flat[key] = flattenItem(val.data);
+		}
+	});
+	return flat;
+};
+
 const GalleryList = () => {
 	const [galleries, setGalleries] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -16,27 +32,19 @@ const GalleryList = () => {
 			try {
 				setLoading(true);
 				const res = await axios.get(`${API_BASE}/api/galleries?populate=*`);
-				setGalleries((res.data.data || []).filter(Boolean));
+				setGalleries((res.data.data || []).filter(Boolean).map(flattenItem));
 			} catch (err) {
 				console.error('❌ 갤러리 데이터 오류:', err.message);
 			} finally {
-				setTimeout(() => setLoading(false), 500); // UX적으로 부드럽게
+				setTimeout(() => setLoading(false), 500);
 			}
 		};
-
 		fetchGalleries();
 	}, []);
 
-	const breakpoints = {
-		default: 7,
-		1100: 5,
-		768: 4,
-		480: 3,
-	};
+	const breakpoints = { default: 7, 1100: 5, 768: 4, 480: 3 };
 
-	if (loading) {
-		return <SkeletonGallery />;
-	}
+	if (loading) return <SkeletonGallery />;
 
 	return (
 		<Masonry breakpointCols={breakpoints} className="masonry-grid" columnClassName="masonry-column">
