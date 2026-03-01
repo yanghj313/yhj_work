@@ -21,7 +21,8 @@
     "@strapi/provider-upload-cloudinary": "4.25.11",
     "@strapi/strapi": "4.25.11",
     "ajv": "^8.18.0",
-    "pg": "^8.18.0",
+    "cloudinary": "^2.9.0",
+    "pg": "^8.19.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^5.3.4",
@@ -30,8 +31,10 @@
   "devDependencies": {
     "@types/follow-redirects": "^1.14.4",
     "@types/node": "^20",
+    "@types/pg": "^8.16.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "engines": {
