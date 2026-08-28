@@ -67,22 +67,39 @@ const tagStyles = {
 };
 
 const ProjectDetail = () => {
-	const { id } = useParams();
+	const params = useParams();
+
+	const id = params.id || params.documentId;
 
 	const [projects, setProjects] = useState([]);
+
 	const [popupImage, setPopupImage] = useState(null);
 
 	useEffect(() => {
-		if (!id) return;
+		console.log('현재 params:', params);
+		console.log('현재 프로젝트 id:', id);
+
+		if (!id) {
+			console.error('❌ 프로젝트 ID가 없습니다.');
+			return;
+		}
 
 		axios
 			.get(`${API_BASE}/api/projects?filters[id][$eq]=${id}&populate=*`)
 			.then(res => {
+				console.log('✅ 상세 API 응답:', res.data);
+
 				const data = res.data.data;
 
 				if (Array.isArray(data) && data.length > 0) {
-					setProjects(data.map(flattenItem));
+					const flattened = data.map(flattenItem);
+
+					console.log('✅ 변환된 프로젝트:', flattened);
+
+					setProjects(flattened);
 				} else {
+					console.error('❌ 프로젝트 데이터 없음');
+
 					setProjects([]);
 				}
 			})
@@ -100,9 +117,7 @@ const ProjectDetail = () => {
 
 		document.addEventListener('keydown', handleKeyDown);
 
-		return () => {
-			document.removeEventListener('keydown', handleKeyDown);
-		};
+		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, []);
 
 	return (

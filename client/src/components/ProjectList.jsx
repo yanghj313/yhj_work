@@ -8,17 +8,31 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
 const flattenItem = item => {
 	if (!item) return null;
+
 	const { id, documentId, attributes } = item;
+
 	if (!attributes) return item;
-	const flat = { id, documentId, ...attributes };
+
+	const flat = {
+		id,
+		documentId,
+		...attributes,
+	};
+
 	Object.keys(flat).forEach(key => {
 		const val = flat[key];
+
 		if (val && typeof val === 'object' && val.data !== undefined) {
-			if (val.data === null) flat[key] = null;
-			else if (Array.isArray(val.data)) flat[key] = val.data.map(flattenItem);
-			else flat[key] = flattenItem(val.data);
+			if (val.data === null) {
+				flat[key] = null;
+			} else if (Array.isArray(val.data)) {
+				flat[key] = val.data.map(flattenItem);
+			} else {
+				flat[key] = flattenItem(val.data);
+			}
 		}
 	});
+
 	return flat;
 };
 
@@ -43,16 +57,21 @@ const ProjectList = () => {
 		const fetchProjects = async () => {
 			try {
 				setLoading(true);
+
 				const res = await axios.get(`${API_BASE}/api/projects?populate=*`);
+
 				const rawProjects = (res.data.data || []).filter(Boolean).map(flattenItem);
+
 				const sortedProjects = [...rawProjects].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
 				setProjects(sortedProjects);
 			} catch (err) {
-				console.error('❌ 프로젝트 데이터 오류:', err.message);
+				console.error('❌ 프로젝트 데이터 오류:', err.response?.data || err.message);
 			} finally {
 				setTimeout(() => setLoading(false), 500);
 			}
 		};
+
 		fetchProjects();
 	}, []);
 
@@ -69,6 +88,7 @@ const ProjectList = () => {
 									{p.thumbnail?.url && (
 										<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
 									)}
+
 									{p.video?.url && (
 										<>
 											<video
@@ -79,7 +99,9 @@ const ProjectList = () => {
 												className="hover-video"
 												preload="metadata"
 												onMouseOver={e => {
-													if (!window.matchMedia('(hover: none)').matches) e.target.play();
+													if (!window.matchMedia('(hover: none)').matches) {
+														e.target.play();
+													}
 												}}
 												onMouseOut={e => {
 													if (!window.matchMedia('(hover: none)').matches) {
@@ -90,37 +112,69 @@ const ProjectList = () => {
 												onClick={e => {
 													if (window.matchMedia('(hover: none)').matches) {
 														const video = e.target;
-														if (video.paused) video.play();
-														else {
+
+														if (video.paused) {
+															video.play();
+														} else {
 															video.pause();
 															video.currentTime = 0;
 														}
 													}
 												}}
 											/>
+
 											<div className="video-icon">🎬</div>
 										</>
 									)}
 								</div>
 							</div>
+
 							<strong>
-								💡<Link to={`/projects/${p.id}`}>{p.title}</Link>
+								💡
+								<Link to={`/projects/${p.id}`}>{p.title}</Link>
 							</strong>
+
 							<br />
-							{p.role && <p>🛠️ {p.role}</p>}
+
+							{(p.role || p.add || p.more) && <p>🛠️ {[p.role, p.add, p.more].filter(Boolean).join(' / ')}</p>}
+
 							{p.period && <p>🗓️ {p.period}</p>}
+
 							{p.tags && (
-								<p style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem' }}>
+								<p
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										flexWrap: 'wrap',
+										gap: '0.4rem',
+									}}
+								>
 									💻
 									{p.tags.split(',').map((tag, i) => {
 										const key = tag.trim().toLowerCase();
-										const style = tagStyles[key] || { color: '#aaa', icon: 'fas fa-tag' };
+
+										const style = tagStyles[key] || {
+											color: '#aaa',
+											icon: 'fas fa-tag',
+										};
+
 										return (
 											<span
 												key={i}
-												style={{ backgroundColor: style.color, color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+												style={{
+													backgroundColor: style.color,
+													color: '#fff',
+													padding: '2px 6px',
+													borderRadius: '4px',
+													fontSize: '0.75rem',
+													display: 'inline-flex',
+													alignItems: 'center',
+													gap: '4px',
+												}}
 											>
-												<i className={style.icon}></i> {key}
+												<i className={style.icon}></i>
+
+												{key}
 											</span>
 										);
 									})}
