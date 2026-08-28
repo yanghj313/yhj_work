@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-const flattenItem = (item) => {
+const flattenItem = item => {
 	if (!item) return null;
 	const { id, documentId, attributes } = item;
 	if (!attributes) return item;
@@ -39,7 +39,7 @@ const ProjectDetail = () => {
 	useEffect(() => {
 		if (id) {
 			axios
-				.get(`${API_BASE}/api/projects?filters[documentId][$eq]=${id}&populate=*`)
+				.get(`${API_BASE}/api/projects?filters[id][$eq]=${id}&populate=*`)
 				.then(res => {
 					const data = res.data.data;
 					if (Array.isArray(data) && data.length > 0) {
@@ -55,7 +55,9 @@ const ProjectDetail = () => {
 	}, [id]);
 
 	useEffect(() => {
-		const handleKeyDown = e => { if (e.key === 'Escape') setPopupImage(null); };
+		const handleKeyDown = e => {
+			if (e.key === 'Escape') setPopupImage(null);
+		};
 		document.addEventListener('keydown', handleKeyDown);
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, []);
@@ -65,7 +67,9 @@ const ProjectDetail = () => {
 			{projects.map(p =>
 				p?.title ? (
 					<div key={p.id}>
-						<h2 className="project_title" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>{p.title}</h2>
+						<h2 className="project_title" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+							{p.title}
+						</h2>
 						{p.role && <p className="bullet">역할: {p.role}</p>}
 						{p.contribution && <p className="bullet">기여도: {p.contribution}</p>}
 						{p.period && <p className="bullet">작업 기간: {p.period}</p>}
@@ -84,7 +88,10 @@ const ProjectDetail = () => {
 									const tag = tagRaw.trim().toLowerCase();
 									const tagData = tagStyles[tag] || { color: '#888', icon: 'fas fa-tag' };
 									return (
-										<span key={i} style={{ backgroundColor: tagData.color, color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+										<span
+											key={i}
+											style={{ backgroundColor: tagData.color, color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+										>
 											<i className={tagData.icon}></i> {tag}
 										</span>
 									);
@@ -111,18 +118,34 @@ const ProjectDetail = () => {
 						{typeof p.description === 'string' && p.description.trim() && (
 							<div style={{ marginTop: '2rem' }}>
 								<h4>📘 설명</h4>
-								<ul style={{ paddingLeft: '1.25rem', lineHeight: '1.8' }}>
-									{p.description.split('\n').map((line, idx) => (line.trim() ? <li key={idx}>{line.trim()}</li> : null))}
-								</ul>
+								<ul style={{ paddingLeft: '1.25rem', lineHeight: '1.8' }}>{p.description.split('\n').map((line, idx) => (line.trim() ? <li key={idx}>{line.trim()}</li> : null))}</ul>
 							</div>
 						)}
 						<br />
-						<Link to="/projects" className="back-to-list">← 목록으로</Link>
+						<Link to="/projects" className="back-to-list">
+							← 목록으로
+						</Link>
 					</div>
 				) : null
 			)}
 			{popupImage && (
-				<div className="popup-overlay" onClick={() => setPopupImage(null)} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, cursor: 'zoom-out' }}>
+				<div
+					className="popup-overlay"
+					onClick={() => setPopupImage(null)}
+					style={{
+						position: 'fixed',
+						top: 0,
+						left: 0,
+						width: '100vw',
+						height: '100vh',
+						backgroundColor: 'rgba(0,0,0,0.8)',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						zIndex: 9999,
+						cursor: 'zoom-out',
+					}}
+				>
 					<img src={popupImage} alt="확대 이미지" onClick={e => e.stopPropagation()} style={{ maxWidth: '90%', maxHeight: '90%', borderRadius: '8px', boxShadow: '0 0 20px rgba(255,255,255,0.4)' }} />
 				</div>
 			)}

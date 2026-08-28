@@ -6,7 +6,7 @@ import SkeletonProject from './SkeletonProject';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-const flattenItem = (item) => {
+const flattenItem = item => {
 	if (!item) return null;
 	const { id, documentId, attributes } = item;
 	if (!attributes) return item;
@@ -73,14 +73,28 @@ const ProjectList = () => {
 										<>
 											<video
 												src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}
-												muted loop playsInline className="hover-video" preload="metadata"
-												onMouseOver={e => { if (!window.matchMedia('(hover: none)').matches) e.target.play(); }}
-												onMouseOut={e => { if (!window.matchMedia('(hover: none)').matches) { e.target.pause(); e.target.currentTime = 0; } }}
+												muted
+												loop
+												playsInline
+												className="hover-video"
+												preload="metadata"
+												onMouseOver={e => {
+													if (!window.matchMedia('(hover: none)').matches) e.target.play();
+												}}
+												onMouseOut={e => {
+													if (!window.matchMedia('(hover: none)').matches) {
+														e.target.pause();
+														e.target.currentTime = 0;
+													}
+												}}
 												onClick={e => {
 													if (window.matchMedia('(hover: none)').matches) {
 														const video = e.target;
 														if (video.paused) video.play();
-														else { video.pause(); video.currentTime = 0; }
+														else {
+															video.pause();
+															video.currentTime = 0;
+														}
 													}
 												}}
 											/>
@@ -89,7 +103,10 @@ const ProjectList = () => {
 									)}
 								</div>
 							</div>
-							<strong>💡<Link to={`/projects/${p.documentId}`}>{p.title}</Link></strong><br />
+							<strong>
+								💡<Link to={`/projects/${p.id}`}>{p.title}</Link>
+							</strong>
+							<br />
 							{p.role && <p>🛠️ {p.role}</p>}
 							{p.period && <p>🗓️ {p.period}</p>}
 							{p.tags && (
@@ -99,7 +116,10 @@ const ProjectList = () => {
 										const key = tag.trim().toLowerCase();
 										const style = tagStyles[key] || { color: '#aaa', icon: 'fas fa-tag' };
 										return (
-											<span key={i} style={{ backgroundColor: style.color, color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+											<span
+												key={i}
+												style={{ backgroundColor: style.color, color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+											>
 												<i className={style.icon}></i> {key}
 											</span>
 										);
