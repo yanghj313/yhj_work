@@ -39,11 +39,12 @@ const ProjectDetail = () => {
 	useEffect(() => {
 		if (id) {
 			axios
-				.get(`${API_BASE}/api/projects?filters[id][$eq]=${id}&populate=*`)
+				.get(`${API_BASE}/api/projects/${id}?populate=*`)
 				.then(res => {
 					const data = res.data.data;
-					if (Array.isArray(data) && data.length > 0) {
-						setProjects(data.map(flattenItem));
+
+					if (data) {
+						setProjects([flattenItem(data)]);
 					} else {
 						setProjects([]);
 					}
