@@ -250,6 +250,10 @@ body {
 	text-align: left;
 }
 
+.timeline-item p {
+	word-break: keep-all;
+}
+
 .timeline-item.right .timeline-content {
 	-webkit-box-align: start;
 	-ms-flex-align: start;
@@ -538,6 +542,7 @@ body {
 	padding: 0.6rem;
 	color: #333;
 	font-size: 0.9rem;
+	word-break: keep-all;
 }
 
 @media (max-width: 1290px) {
