@@ -58,7 +58,7 @@ const ProjectList = () => {
 			try {
 				setLoading(true);
 
-				const res = await axios.get(`${API_BASE}/api/projects?populate=*`);
+				const res = await axios.get(`${API_BASE}/api/projects?populate=*&pagination[pageSize]=100`);
 
 				const rawProjects = (res.data.data || []).filter(Boolean).map(flattenItem);
 
