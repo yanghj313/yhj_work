@@ -56,7 +56,9 @@ body {
 	transition: -webkit-box-shadow 0.3s ease;
 	-o-transition: box-shadow 0.3s ease;
 	transition: box-shadow 0.3s ease;
-	transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
+	transition:
+		box-shadow 0.3s ease,
+		-webkit-box-shadow 0.3s ease;
 	margin-bottom: 1rem;
 }
 
@@ -92,11 +94,22 @@ body {
 	-webkit-transform: scale(0.98);
 	-ms-transform: scale(0.98);
 	transform: scale(0.98);
-	-webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
-	transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
-	-o-transition: opacity 0.4s ease, transform 0.4s ease;
-	transition: opacity 0.4s ease, transform 0.4s ease;
-	transition: opacity 0.4s ease, transform 0.4s ease, -webkit-transform 0.4s ease;
+	-webkit-transition:
+		opacity 0.4s ease,
+		-webkit-transform 0.4s ease;
+	transition:
+		opacity 0.4s ease,
+		-webkit-transform 0.4s ease;
+	-o-transition:
+		opacity 0.4s ease,
+		transform 0.4s ease;
+	transition:
+		opacity 0.4s ease,
+		transform 0.4s ease;
+	transition:
+		opacity 0.4s ease,
+		transform 0.4s ease,
+		-webkit-transform 0.4s ease;
 	pointer-events: none;
 	z-index: 2;
 	border-radius: 12px;
@@ -139,50 +152,48 @@ body {
 
 @media (max-width: 1500px) {
 	.list ul {
-		grid-template-columns: repeat(3, 410px)
+		grid-template-columns: repeat(3, 410px);
 	}
 
 	.media-container {
-		max-width: 410px
+		max-width: 410px;
 	}
 }
 
 @media (max-width: 1400px) {
 	.list ul {
 		grid-template-columns: repeat(3, 380px);
-		row-gap: 1.6rem
+		row-gap: 1.6rem;
 	}
 }
 
 @media (max-width: 1290px) {
 	.list ul {
 		grid-template-columns: repeat(3, 330px);
-		row-gap: 1.6rem
+		row-gap: 1.6rem;
 	}
 }
 
 @media (max-width: 1025px) {
 	.list ul {
 		grid-template-columns: repeat(3, 410px);
-		row-gap: 1rem
+		row-gap: 1rem;
 	}
 }
 
 @media (max-width: 1000px) {
-
 	.list,
 	.ex_wrap {
-		margin: 0 30px
+		margin: 0 30px;
 	}
 
 	.list ul {
 		grid-template-columns: repeat(2, 1fr);
-		gap: 1rem
+		gap: 1rem;
 	}
 }
 
 @media (max-width: 580px) {
-
 	.list,
 	.ex_wrap {
 		margin: 0 20px;
@@ -196,11 +207,10 @@ body {
 
 	.list ul {
 		grid-template-columns: repeat(1, 1fr);
-		row-gap: .75rem;
-		justify-content: space-between
+		row-gap: 0.75rem;
+		justify-content: space-between;
 	}
 }
-
 
 /***********************경력 사항***************************/
 
@@ -400,7 +410,7 @@ body {
 	width: fit-content;
 }
 
-.timeline-content>h3:empty {
+.timeline-content > h3:empty {
 	display: none;
 	margin: 0;
 	padding: 0;
@@ -443,13 +453,12 @@ body {
 }
 
 @media (max-width: 768px) {
-
 	.timeline-item,
 	.timeline-item.left,
 	.timeline-item.right {
 		width: 100%;
 		left: 0;
-		text-align: left
+		text-align: left;
 	}
 
 	.timeline-container:before {
@@ -476,14 +485,13 @@ body {
 	}
 }
 
-
 /***********************갤러리 게시판***************************/
 .masonry-grid {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	width: auto;
-	margin: 120px auto 200px;
+	margin: 120px 60px 200px;
 	max-width: 1800px;
 }
 
@@ -504,7 +512,9 @@ body {
 	transition: -webkit-transform 0.2s ease;
 	-o-transition: transform 0.2s ease;
 	transition: transform 0.2s ease;
-	transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+	transition:
+		transform 0.2s ease,
+		-webkit-transform 0.2s ease;
 }
 
 .gallery-card:hover {
@@ -528,4 +538,16 @@ body {
 	padding: 0.6rem;
 	color: #333;
 	font-size: 0.9rem;
+}
+
+@media (max-width: 1290px) {
+	.masonry-grid {
+		margin: 60px 30px 100px;
+	}
+}
+
+@media (max-width: 768px) {
+	.masonry-grid {
+		margin: 60px auto 100px;
+	}
 }
