@@ -68,6 +68,7 @@
 
 .custom-description h2 {
 	font-size: 1.5rem;
+	padding: 10px;
 }
 
 .custom-description img {
@@ -82,6 +83,7 @@
 	font-size: 1rem;
 	line-height: 1.6;
 	padding: 0 1.5rem;
+	word-break: keep-all;
 }
 
 .custom-close-btn {

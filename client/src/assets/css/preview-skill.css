@@ -47,7 +47,9 @@
 	transition: -webkit-transform 0.4s ease;
 	-o-transition: transform 0.4s ease;
 	transition: transform 0.4s ease;
-	transition: transform 0.4s ease, -webkit-transform 0.4s ease;
+	transition:
+		transform 0.4s ease,
+		-webkit-transform 0.4s ease;
 	cursor: pointer;
 	z-index: 2;
 	display: inline-block;
@@ -168,6 +170,7 @@
 	position: relative;
 	padding-left: 1.5em;
 	list-style: none;
+	word-break: keep-all;
 }
 
 .skill-description li::before {
@@ -201,10 +204,8 @@
 	.tooltip-box:after {
 		top: -9px;
 		bottom: auto;
-		transform: translate(-50%) rotate(180deg)
+		transform: translate(-50%) rotate(180deg);
 	}
-
-
 }
 
 .no-scrollbar {
@@ -258,11 +259,22 @@
 	border-radius: 50%;
 	padding: 0.75rem;
 	cursor: pointer;
-	-webkit-transition: background 0.3s ease, -webkit-transform 0.3s ease;
-	transition: background 0.3s ease, -webkit-transform 0.3s ease;
-	-o-transition: background 0.3s ease, transform 0.3s ease;
-	transition: background 0.3s ease, transform 0.3s ease;
-	transition: background 0.3s ease, transform 0.3s ease, -webkit-transform 0.3s ease;
+	-webkit-transition:
+		background 0.3s ease,
+		-webkit-transform 0.3s ease;
+	transition:
+		background 0.3s ease,
+		-webkit-transform 0.3s ease;
+	-o-transition:
+		background 0.3s ease,
+		transform 0.3s ease;
+	transition:
+		background 0.3s ease,
+		transform 0.3s ease;
+	transition:
+		background 0.3s ease,
+		transform 0.3s ease,
+		-webkit-transform 0.3s ease;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -302,7 +314,7 @@
 @media screen and (max-width: 768px) {
 	.skill-tour-horizontal {
 		padding: 0 20px;
-		display: block
+		display: block;
 	}
 
 	.skill-left-panel {
@@ -310,14 +322,14 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-bottom: 30px
+		margin-bottom: 30px;
 	}
 
 	.skill-left-panel img {
 		max-width: 100%;
 		height: auto;
 		-o-object-fit: contain;
-		object-fit: contain
+		object-fit: contain;
 	}
 
 	.skill-tour-inner {
@@ -326,7 +338,7 @@
 		transform: unset;
 		display: flex;
 		flex-direction: column;
-		align-items: center
+		align-items: center;
 	}
 
 	.skill-right-panel {
@@ -338,7 +350,7 @@
 		top: unset !important;
 		display: flex;
 		flex-direction: column;
-		align-items: center
+		align-items: center;
 	}
 
 	.skill-scroll-wrapper {
@@ -349,11 +361,11 @@
 		max-width: 300px;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
-		-ms-overflow-style: none
+		-ms-overflow-style: none;
 	}
 
 	.skill-scroll-wrapper::-webkit-scrollbar {
-		display: none
+		display: none;
 	}
 
 	.skill-scroll-track {
@@ -370,11 +382,11 @@
 		height: fit-content;
 		scroll-snap-type: x mandatory;
 		scrollbar-width: none;
-		-ms-overflow-style: none
+		-ms-overflow-style: none;
 	}
 
 	.skill-scroll-track::-webkit-scrollbar {
-		display: none
+		display: none;
 	}
 
 	.skill-marker {
@@ -390,7 +402,7 @@
 		width: 300px;
 		min-width: 300px;
 		height: 220px;
-		scroll-snap-align: center
+		scroll-snap-align: center;
 	}
 
 	.skill-icon {
@@ -398,13 +410,13 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-bottom: 10px
+		margin-bottom: 10px;
 	}
 
 	.ripple {
 		top: -20px;
 		left: 46%;
-		transform: translate(-50%, -50%)
+		transform: translate(-50%, -50%);
 	}
 
 	.tooltip-box {
@@ -420,40 +432,39 @@
 	}
 
 	.tooltip-box:after {
-		content: "";
+		content: '';
 		position: absolute;
 		top: -9px;
 		left: 50%;
 		transform: translate(-50%);
 		border-width: 0 10px 10px 10px;
 		border-style: solid;
-		border-color: transparent transparent #ff4d4f transparent
+		border-color: transparent transparent #ff4d4f transparent;
 	}
 
 	.skill-nav-buttons {
 		margin-top: 28px;
-		justify-content: center
+		justify-content: center;
 	}
 }
 
 /* 480px 이하 모바일 추가 최적화 */
 @media screen and (max-width: 480px) {
-
-	.skill-scroll-track>* {
+	.skill-scroll-track > * {
 		scroll-snap-align: start;
 		flex-shrink: 0;
 	}
 
 	.skill-tour-horizontal {
-		padding: 0 10px
+		padding: 0 10px;
 	}
 
 	.skill-left-panel {
-		margin-bottom: 20px
+		margin-bottom: 20px;
 	}
 
 	.skill-left-panel img {
-		max-width: 90%
+		max-width: 90%;
 	}
 
 	.skill-scroll-wrapper {
@@ -467,7 +478,7 @@
 	}
 
 	.skill-scroll-wrapper::-webkit-scrollbar {
-		display: none
+		display: none;
 	}
 
 	.skill-scroll-track {
@@ -488,11 +499,11 @@
 		justify-content: flex-start;
 		scroll-snap-type: x mandatory;
 		scrollbar-width: none;
-		-ms-overflow-style: none
+		-ms-overflow-style: none;
 	}
 
 	.skill-scroll-track::-webkit-scrollbar {
-		display: none
+		display: none;
 	}
 
 	.skill-marker {
@@ -501,7 +512,7 @@
 		min-width: 280px;
 		height: 200px;
 		margin: 0;
-		scroll-snap-align: center
+		scroll-snap-align: center;
 	}
 
 	.skill-icon {
@@ -509,7 +520,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-bottom: 8px
+		margin-bottom: 8px;
 	}
 
 	.skill-icon img {
@@ -520,7 +531,7 @@
 	.ripple {
 		top: -18%;
 		left: 46%;
-		transform: translate(-50%, -50%)
+		transform: translate(-50%, -50%);
 	}
 
 	.tooltip-box {
@@ -531,28 +542,28 @@
 		margin-top: 8px;
 		max-width: 260px;
 		font-size: 11px;
-		padding: .8rem;
+		padding: 0.8rem;
 		height: fit-content;
 	}
 
 	.skill-name {
-		font-size: 1rem
+		font-size: 1rem;
 	}
 
 	.skill-level {
-		font-size: .9rem
+		font-size: 0.9rem;
 	}
 
 	.skill-description {
-		font-size: .7rem
+		font-size: 0.7rem;
 	}
 
 	.arrow-btn {
-		padding: .6rem
+		padding: 0.6rem;
 	}
 
 	.arrow-icon {
 		width: 20px;
-		height: 20px
+		height: 20px;
 	}
 }

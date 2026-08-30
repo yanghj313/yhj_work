@@ -1,77 +1,80 @@
 .project_details {
-    padding: 0 20px 100px;
-    margin: 0 auto;
-    min-height: 680px;
-    display: block;
-    max-width: 1240px;
+	padding: 0 20px 100px;
+	margin: 0 auto;
+	min-height: 680px;
+	display: block;
+	max-width: 1240px;
 }
 
 .bullet {
-    position: relative;
-    padding-left: 16px;
+	position: relative;
+	padding-left: 16px;
 }
 
 .bullet::before {
-    content: '';
-    position: absolute;
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: #ff5722;
-    border-radius: 50%;
-    margin-right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
+	content: '';
+	position: absolute;
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #ff5722;
+	border-radius: 50%;
+	margin-right: 8px;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 0;
 }
 
 .project_images div {
-    padding: 10px 0 10px;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr 1fr;
+	padding: 10px 0 10px;
+	display: grid !important;
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .back-to-list {
-    background: #ff5722;
-    padding: 12px 16px;
-    margin: 10px auto;
-    display: block;
-    max-width: 80px;
-    text-align: center;
-    color: #fff;
+	background: #ff5722;
+	padding: 12px 16px;
+	margin: 10px auto;
+	display: block;
+	max-width: 80px;
+	text-align: center;
+	color: #fff;
 }
 
 .back-to-list:hover {
-    background: #c43c13;
+	background: #c43c13;
 }
 
 .color-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 10px;
-    border: 2px solid #fff;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 10px;
+	border: 2px solid #fff;
 }
 
 .tag-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin: 2px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: white;
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 8px;
+	border-radius: 4px;
+	margin: 2px;
+	font-size: 0.8rem;
+	font-weight: bold;
+	color: white;
 }
 
 .tag-icon {
-    margin-right: 5px;
+	margin-right: 5px;
 }
 
+.project_details li {
+	word-break: keep-all;
+}
 
 @media (max-width: 768px) {
-    .project_images div {
-        grid-template-columns: 1fr;
-    }
+	.project_images div {
+		grid-template-columns: 1fr;
+	}
 }
