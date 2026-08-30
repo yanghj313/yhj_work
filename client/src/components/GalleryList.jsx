@@ -39,6 +39,7 @@ const flattenItem = item => {
 const GalleryList = () => {
 	const [galleries, setGalleries] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [activeCategory, setActiveCategory] = useState('전체');
 
 	useEffect(() => {
 		const fetchGalleries = async () => {
@@ -67,26 +68,85 @@ const GalleryList = () => {
 		480: 3,
 	};
 
+	// 갤러리에 실제로 등록되어 있는 카테고리만 가져오기
+	const categories = ['전체', ...Array.from(new Set(galleries.map(g => g?.category?.trim()).filter(Boolean)))];
+
+	// 선택된 카테고리만 필터링
+	const filteredGalleries = activeCategory === '전체' ? galleries : galleries.filter(g => g?.category?.trim() === activeCategory);
+
 	if (loading) return <SkeletonGallery />;
 
 	return (
-		<Masonry breakpointCols={breakpoints} className="masonry-grid" columnClassName="masonry-column">
-			{galleries.map(g =>
-				g?.title ? (
-					<div className="gallery-card" key={g.id}>
-						{g.image?.url && <img src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`} alt={g.image.name || '갤러리 이미지'} className="gallery-image" loading="lazy" />}
+		<div className="gallery_list">
+			{/* 카테고리 필터 */}
+			<div
+				className="gallery-filter"
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					gap: '8px',
+					flexWrap: 'wrap',
+					marginBottom: '30px',
+				}}
+			>
+				{categories.map(category => {
+					const isActive = activeCategory === category;
 
-						<div className="gallery-info">
-							<strong>
-								<Link to={`/gallery/${g.id}`}>{g.title}</Link>
-							</strong>
+					return (
+						<button
+							key={category}
+							type="button"
+							onClick={() => setActiveCategory(category)}
+							style={{
+								padding: '8px 18px',
+								borderRadius: '30px',
+								border: `1px solid ${isActive ? '#ff5722' : '#ddd'}`,
+								backgroundColor: isActive ? '#ff5722' : '#fff',
+								color: isActive ? '#fff' : '#555',
+								fontSize: '14px',
+								fontWeight: isActive ? '600' : '400',
+								cursor: 'pointer',
+								transition: 'all 0.25s ease',
+							}}
+						>
+							{category}
+						</button>
+					);
+				})}
+			</div>
 
-							{g.category && <p>📂 {g.category}</p>}
+			{/* 갤러리 */}
+			<Masonry breakpointCols={breakpoints} className="masonry-grid" columnClassName="masonry-column">
+				{filteredGalleries.map(g =>
+					g?.title ? (
+						<div className="gallery-card" key={g.id}>
+							{g.image?.url && <img src={g.image.url.startsWith('http') ? g.image.url : `${API_BASE}${g.image.url}`} alt={g.image.name || '갤러리 이미지'} className="gallery-image" loading="lazy" />}
+
+							<div className="gallery-info">
+								<strong>
+									<Link to={`/gallery/${g.id}`}>{g.title}</Link>
+								</strong>
+
+								{g.category && <p>📂 {g.category}</p>}
+							</div>
 						</div>
-					</div>
-				) : null
+					) : null
+				)}
+			</Masonry>
+
+			{/* 필터 결과가 없을 때 */}
+			{filteredGalleries.length === 0 && (
+				<p
+					style={{
+						textAlign: 'center',
+						padding: '60px 0',
+						color: '#999',
+					}}
+				>
+					해당 카테고리의 갤러리가 없습니다.
+				</p>
 			)}
-		</Masonry>
+		</div>
 	);
 };
 
