@@ -499,6 +499,10 @@ body {
 	max-width: 1800px;
 }
 
+.gallery-filter {
+	margin: 30px 60px;
+}
+
 .masonry-column {
 	padding-left: 8px;
 	padding-right: 8px;
@@ -549,10 +553,17 @@ body {
 	.masonry-grid {
 		margin: 60px 30px 100px;
 	}
+	.gallery-filter {
+		margin: 30px 30px;
+	}
 }
 
 @media (max-width: 768px) {
 	.masonry-grid {
 		margin: 60px auto 100px;
+	}
+
+	.gallery-filter {
+		margin: 30px auto;
 	}
 }

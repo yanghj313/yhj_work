@@ -39,7 +39,7 @@ const flattenItem = item => {
 const GalleryList = () => {
 	const [galleries, setGalleries] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [activeCategory, setActiveCategory] = useState('전체');
+	const [activeCategory, setActiveCategory] = useState('All');
 
 	useEffect(() => {
 		const fetchGalleries = async () => {
@@ -69,10 +69,10 @@ const GalleryList = () => {
 	};
 
 	// 갤러리에 실제로 등록되어 있는 카테고리만 가져오기
-	const categories = ['전체', ...Array.from(new Set(galleries.map(g => g?.category?.trim()).filter(Boolean)))];
+	const categories = ['All', ...Array.from(new Set(galleries.map(g => g?.category?.trim()).filter(Boolean)))];
 
 	// 선택된 카테고리만 필터링
-	const filteredGalleries = activeCategory === '전체' ? galleries : galleries.filter(g => g?.category?.trim() === activeCategory);
+	const filteredGalleries = activeCategory === 'All' ? galleries : galleries.filter(g => g?.category?.trim() === activeCategory);
 
 	if (loading) return <SkeletonGallery />;
 
@@ -86,7 +86,6 @@ const GalleryList = () => {
 					alignItems: 'center',
 					gap: '8px',
 					flexWrap: 'wrap',
-					marginBottom: '30px',
 				}}
 			>
 				{categories.map(category => {
