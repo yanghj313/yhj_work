@@ -5,6 +5,9 @@ import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
+/* =========================================================
+   Strapi 데이터 평탄화
+========================================================= */
 const flattenItem = item => {
 	if (!item) return null;
 
@@ -35,6 +38,9 @@ const flattenItem = item => {
 	return flat;
 };
 
+/* =========================================================
+   태그 스타일
+========================================================= */
 const tagStyles = {
 	html: {
 		color: '#e34c26',
@@ -66,15 +72,29 @@ const tagStyles = {
 	},
 };
 
+/* =========================================================
+   이미지 URL
+========================================================= */
+const getFileUrl = file => {
+	if (!file?.url) return null;
+
+	return file.url.startsWith('http') ? file.url : `${API_BASE}${file.url}`;
+};
+
+/* =========================================================
+   ProjectDetail
+========================================================= */
 const ProjectDetail = () => {
 	const params = useParams();
 
 	const id = params.id || params.documentId;
 
 	const [projects, setProjects] = useState([]);
-
 	const [popupImage, setPopupImage] = useState(null);
 
+	/* =====================================================
+	   프로젝트 상세 데이터
+	===================================================== */
 	useEffect(() => {
 		console.log('현재 params:', params);
 		console.log('현재 프로젝트 id:', id);
@@ -105,9 +125,14 @@ const ProjectDetail = () => {
 			})
 			.catch(err => {
 				console.error('❌ 프로젝트 상세 오류:', err.response?.data || err.message);
+
+				setProjects([]);
 			});
 	}, [id]);
 
+	/* =====================================================
+	   ESC로 이미지 팝업 닫기
+	===================================================== */
 	useEffect(() => {
 		const handleKeyDown = e => {
 			if (e.key === 'Escape') {
@@ -125,6 +150,9 @@ const ProjectDetail = () => {
 			{projects.map(p =>
 				p?.title ? (
 					<div key={p.id}>
+						{/* =================================
+						    제목
+						================================= */}
 						<h2
 							className="project_title"
 							style={{
@@ -136,12 +164,24 @@ const ProjectDetail = () => {
 							{p.title}
 						</h2>
 
+						{/* =================================
+						    역할
+						================================= */}
 						{(p.role || p.add || p.more) && <p className="bullet">역할: {[p.role, p.add, p.more].filter(Boolean).join(' / ')}</p>}
 
+						{/* =================================
+						    기여도
+						================================= */}
 						{p.contribution && <p className="bullet">기여도: {p.contribution}</p>}
 
+						{/* =================================
+						    작업 기간
+						================================= */}
 						{p.period && <p className="bullet">작업 기간: {p.period}</p>}
 
+						{/* =================================
+						    색상
+						================================= */}
 						{p.color && (
 							<p
 								className="bullet"
@@ -163,11 +203,14 @@ const ProjectDetail = () => {
 											backgroundColor: c.trim(),
 											border: '1px solid #ccc',
 										}}
-									></span>
+									/>
 								))}
 							</p>
 						)}
 
+						{/* =================================
+						    태그
+						================================= */}
 						{p.tags && (
 							<p
 								className="bullet"
@@ -201,7 +244,7 @@ const ProjectDetail = () => {
 												gap: '4px',
 											}}
 										>
-											<i className={tagData.icon}></i>
+											<i className={tagData.icon} />
 
 											{tag}
 										</span>
@@ -210,12 +253,15 @@ const ProjectDetail = () => {
 							</p>
 						)}
 
-						{/* 설명 - 이미지 위로 이동 */}
+						{/* =================================
+						    설명
+						    ⭐ 이미지보다 위
+						================================= */}
 						{typeof p.description === 'string' && p.description.trim() && (
 							<div
 								style={{
 									marginTop: '2rem',
-									marginBottom: '2rem',
+									marginBottom: '1.5rem',
 								}}
 							>
 								<h4>📘 설명</h4>
@@ -231,7 +277,25 @@ const ProjectDetail = () => {
 							</div>
 						)}
 
-						{/* 이미지 */}
+						{/* =================================
+						    프로젝트 링크
+						    ⭐ 설명 바로 아래
+						================================= */}
+						{p.link && (
+							<div
+								style={{
+									marginBottom: '2rem',
+								}}
+							>
+								<a href={p.link} target="_blank" rel="noopener noreferrer" className="project-site-link">
+									프로젝트 바로가기 ↗
+								</a>
+							</div>
+						)}
+
+						{/* =================================
+						    프로젝트 이미지
+						================================= */}
 						{Array.isArray(p.images) && p.images.length > 0 && (
 							<div className="project_images">
 								<div
@@ -242,7 +306,9 @@ const ProjectDetail = () => {
 									}}
 								>
 									{p.images.map(file => {
-										const src = file.url.startsWith('http') ? file.url : `${API_BASE}${file.url}`;
+										const src = getFileUrl(file);
+
+										if (!src) return null;
 
 										const isVideo = file.mime?.startsWith('video');
 
@@ -277,6 +343,9 @@ const ProjectDetail = () => {
 							</div>
 						)}
 
+						{/* =================================
+						    목록으로
+						================================= */}
 						<br />
 
 						<Link to="/projects" className="back-to-list">
@@ -286,6 +355,9 @@ const ProjectDetail = () => {
 				) : null
 			)}
 
+			{/* =============================================
+			    이미지 확대 팝업
+			============================================= */}
 			{popupImage && (
 				<div
 					className="popup-overlay"
