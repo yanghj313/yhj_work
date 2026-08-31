@@ -1,24 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import '../assets/css/project_details.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import '../assets/css/page.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
-/* =========================================================
-   Strapi 데이터 평탄화
-========================================================= */
 const flattenItem = item => {
 	if (!item) return null;
 
 	const { id, documentId, attributes } = item;
 
-	// Strapi 5 형식
-	if (!attributes) {
-		return {
-			...item,
-		};
-	}
+	if (!attributes) return item;
 
 	const flat = {
 		id,
@@ -43,141 +35,290 @@ const flattenItem = item => {
 	return flat;
 };
 
-/* =========================================================
-   이미지 URL
-========================================================= */
-const getImageUrl = image => {
-	if (!image?.url) return null;
-
-	return image.url.startsWith('http') ? image.url : `${API_BASE}${image.url}`;
+const tagStyles = {
+	html: {
+		color: '#e34c26',
+		icon: 'fab fa-html5',
+	},
+	css: {
+		color: '#2965f1',
+		icon: 'fab fa-css3-alt',
+	},
+	js: {
+		color: '#f7df1e',
+		icon: 'fab fa-js-square',
+	},
+	photoshop: {
+		color: '#31a8ff',
+		icon: 'fas fa-image',
+	},
+	illustrator: {
+		color: '#ff9a00',
+		icon: 'fas fa-pen-nib',
+	},
+	figma: {
+		color: '#a259ff',
+		icon: 'fab fa-figma',
+	},
+	react: {
+		color: '#61dafb',
+		icon: 'fab fa-react',
+	},
 };
 
-/* =========================================================
-   ProjectList
-========================================================= */
-const ProjectList = () => {
+const ProjectDetail = () => {
+	const params = useParams();
+
+	const id = params.id || params.documentId;
+
 	const [projects, setProjects] = useState([]);
-	const [loading, setLoading] = useState(true);
+
+	const [popupImage, setPopupImage] = useState(null);
 
 	useEffect(() => {
-		const fetchProjects = async () => {
-			try {
-				setLoading(true);
+		console.log('현재 params:', params);
+		console.log('현재 프로젝트 id:', id);
 
-				const res = await axios.get(`${API_BASE}/api/projects?populate=*&pagination[pageSize]=100`);
+		if (!id) {
+			console.error('❌ 프로젝트 ID가 없습니다.');
+			return;
+		}
 
-				console.log('✅ 프로젝트 리스트 API:', res.data);
+		axios
+			.get(`${API_BASE}/api/projects?filters[id][$eq]=${id}&populate=*`)
+			.then(res => {
+				console.log('✅ 상세 API 응답:', res.data);
 
-				const projectData = (res.data.data || []).filter(Boolean).map(flattenItem);
+				const data = res.data.data;
 
-				console.log('✅ 변환된 프로젝트:', projectData);
+				if (Array.isArray(data) && data.length > 0) {
+					const flattened = data.map(flattenItem);
 
-				setProjects(projectData);
-			} catch (err) {
-				console.error('❌ 프로젝트 리스트 오류:', err.response?.data || err.message);
+					console.log('✅ 변환된 프로젝트:', flattened);
 
-				setProjects([]);
-			} finally {
-				setLoading(false);
+					setProjects(flattened);
+				} else {
+					console.error('❌ 프로젝트 데이터 없음');
+
+					setProjects([]);
+				}
+			})
+			.catch(err => {
+				console.error('❌ 프로젝트 상세 오류:', err.response?.data || err.message);
+			});
+	}, [id]);
+
+	useEffect(() => {
+		const handleKeyDown = e => {
+			if (e.key === 'Escape') {
+				setPopupImage(null);
 			}
 		};
 
-		fetchProjects();
+		document.addEventListener('keydown', handleKeyDown);
+
+		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, []);
 
-	/* =====================================================
-	   로딩
-	===================================================== */
-	if (loading) {
-		return <div className="project-loading">프로젝트를 불러오는 중...</div>;
-	}
-
-	/* =====================================================
-	   리스트
-	===================================================== */
 	return (
-		<div className="project-list">
-			{projects.length === 0 ? (
-				<div className="project-empty">프로젝트가 없습니다.</div>
-			) : (
-				projects.map(project => {
-					const imageUrl = getImageUrl(project.thumbnail);
+		<div className="project_details">
+			{projects.map(p =>
+				p?.title ? (
+					<div key={p.id}>
+						<h2
+							className="project_title"
+							style={{
+								fontSize: '1.5rem',
+								fontWeight: 'bold',
+								marginBottom: '1rem',
+							}}
+						>
+							{p.title}
+						</h2>
 
-					const roles = [project.role, project.add, project.more].filter(Boolean);
+						{(p.role || p.add || p.more) && <p className="bullet">역할: {[p.role, p.add, p.more].filter(Boolean).join(' / ')}</p>}
 
-					return (
-						<div className="project-card" key={project.documentId || project.id}>
-							{/* =================================
-							    썸네일
-							================================= */}
-							<Link to={`/projects/${project.id}`} className="project-thumbnail-link">
-								{imageUrl ? (
-									<img src={imageUrl} alt={project.thumbnail?.alternativeText || project.thumbnail?.name || project.title || '프로젝트 이미지'} className="project-thumbnail" loading="lazy" />
-								) : (
-									<div className="project-thumbnail-empty">No Image</div>
-								)}
-							</Link>
+						{p.contribution && <p className="bullet">기여도: {p.contribution}</p>}
 
-							{/* =================================
-							    프로젝트 정보
-							================================= */}
-							<div className="project-info">
-								{/* 제목 */}
-								<h3 className="project-title">
-									<Link to={`/projects/${project.id}`}>{project.title}</Link>
-								</h3>
+						{p.period && <p className="bullet">작업 기간: {p.period}</p>}
 
-								{/* 설명 */}
-								{project.description && <p className="project-description">{project.description}</p>}
+						{p.color && (
+							<p
+								className="bullet"
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: '0.75rem',
+								}}
+							>
+								색상:
+								{p.color.split(',').map((c, i) => (
+									<span
+										key={i}
+										title={i === 0 ? '주조색' : '보조색'}
+										style={{
+											width: '18px',
+											height: '18px',
+											borderRadius: '50%',
+											backgroundColor: c.trim(),
+											border: '1px solid #ccc',
+										}}
+									></span>
+								))}
+							</p>
+						)}
 
-								{/* =================================
-								    프로젝트 실제 사이트 링크
-								    ⭐ 설명 바로 아래
-								================================= */}
-								{project.link && (
-									<div className="project-site-link">
-										<a href={project.link} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-											프로젝트 바로가기 ↗
-										</a>
-									</div>
-								)}
+						{p.tags && (
+							<p
+								className="bullet"
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: '0.5rem',
+									flexWrap: 'wrap',
+								}}
+							>
+								태그:
+								{p.tags.split(',').map((tagRaw, i) => {
+									const tag = tagRaw.trim().toLowerCase();
 
-								{/* 역할 */}
-								{roles.length > 0 && (
-									<p className="project-role">
-										<span>역할 :</span> {roles.join(' / ')}
-									</p>
-								)}
+									const tagData = tagStyles[tag] || {
+										color: '#888',
+										icon: 'fas fa-tag',
+									};
 
-								{/* 기여도 */}
-								{project.contribution && (
-									<p className="project-contribution">
-										<span>기여도 :</span> {project.contribution}
-									</p>
-								)}
+									return (
+										<span
+											key={i}
+											style={{
+												backgroundColor: tagData.color,
+												color: '#fff',
+												padding: '2px 6px',
+												borderRadius: '4px',
+												fontSize: '0.75rem',
+												display: 'inline-flex',
+												alignItems: 'center',
+												gap: '4px',
+											}}
+										>
+											<i className={tagData.icon}></i>
 
-								{/* 작업 기간 */}
-								{project.period && (
-									<p className="project-period">
-										<span>기간 :</span> {project.period}
-									</p>
-								)}
+											{tag}
+										</span>
+									);
+								})}
+							</p>
+						)}
 
-								{/* 태그 */}
-								{project.tags && (
-									<div className="project-tags">
-										{project.tags.split(',').map((tag, index) => (
-											<span key={index}>{tag.trim()}</span>
-										))}
-									</div>
-								)}
+						{/* 설명 - 이미지 위로 이동 */}
+						{typeof p.description === 'string' && p.description.trim() && (
+							<div
+								style={{
+									marginTop: '2rem',
+									marginBottom: '2rem',
+								}}
+							>
+								<h4>📘 설명</h4>
+
+								<ul
+									style={{
+										paddingLeft: '1.25rem',
+										lineHeight: '1.8',
+									}}
+								>
+									{p.description.split('\n').map((line, idx) => (line.trim() ? <li key={idx}>{line.trim()}</li> : null))}
+								</ul>
 							</div>
-						</div>
-					);
-				})
+						)}
+
+						{/* 이미지 */}
+						{Array.isArray(p.images) && p.images.length > 0 && (
+							<div className="project_images">
+								<div
+									style={{
+										display: 'flex',
+										flexWrap: 'wrap',
+										gap: '1rem',
+									}}
+								>
+									{p.images.map(file => {
+										const src = file.url.startsWith('http') ? file.url : `${API_BASE}${file.url}`;
+
+										const isVideo = file.mime?.startsWith('video');
+
+										return isVideo ? (
+											<video
+												key={file.id}
+												src={src}
+												controls
+												style={{
+													width: '100%',
+													maxWidth: '800px',
+													borderRadius: '6px',
+												}}
+											>
+												브라우저가 video 태그를 지원하지 않습니다.
+											</video>
+										) : (
+											<img
+												key={file.id}
+												src={src}
+												alt={file.name || '프로젝트 이미지'}
+												style={{
+													width: '100%',
+													borderRadius: '6px',
+													cursor: 'zoom-in',
+												}}
+												onClick={() => setPopupImage(src)}
+											/>
+										);
+									})}
+								</div>
+							</div>
+						)}
+
+						<br />
+
+						<Link to="/projects" className="back-to-list">
+							← 목록으로
+						</Link>
+					</div>
+				) : null
+			)}
+
+			{popupImage && (
+				<div
+					className="popup-overlay"
+					onClick={() => setPopupImage(null)}
+					style={{
+						position: 'fixed',
+						top: 0,
+						left: 0,
+						width: '100vw',
+						height: '100vh',
+						backgroundColor: 'rgba(0,0,0,0.8)',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						zIndex: 9999,
+						cursor: 'zoom-out',
+					}}
+				>
+					<img
+						src={popupImage}
+						alt="확대 이미지"
+						onClick={e => e.stopPropagation()}
+						style={{
+							maxWidth: '90%',
+							maxHeight: '90%',
+							borderRadius: '8px',
+							boxShadow: '0 0 20px rgba(255,255,255,0.4)',
+						}}
+					/>
+				</div>
 			)}
 		</div>
 	);
 };
 
-export default ProjectList;
+export default ProjectDetail;

@@ -2,16 +2,23 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../assets/css/page.css';
-import SkeletonProject from './SkeletonProject';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:1337';
 
+/* =========================================================
+   Strapi 데이터 평탄화
+========================================================= */
 const flattenItem = item => {
 	if (!item) return null;
 
 	const { id, documentId, attributes } = item;
 
-	if (!attributes) return item;
+	// Strapi 5 형식
+	if (!attributes) {
+		return {
+			...item,
+		};
+	}
 
 	const flat = {
 		id,
@@ -36,19 +43,18 @@ const flattenItem = item => {
 	return flat;
 };
 
-const tagStyles = {
-	html: { color: '#e34c26', icon: 'fab fa-html5' },
-	css: { color: '#2965f1', icon: 'fab fa-css3-alt' },
-	js: { color: '#f7df1e', icon: 'fab fa-js' },
-	photoshop: { color: '#31a8ff', icon: 'fas fa-image' },
-	illustrator: { color: '#ff9a00', icon: 'fas fa-pen-nib' },
-	figma: { color: '#a259ff', icon: 'fab fa-figma' },
-	react: { color: '#61dafb', icon: 'fab fa-react' },
-	node: { color: '#3c873a', icon: 'fab fa-node-js' },
-	git: { color: '#f1502f', icon: 'fab fa-git-alt' },
-	vue: { color: '#42b883', icon: 'fab fa-vuejs' },
+/* =========================================================
+   이미지 URL
+========================================================= */
+const getImageUrl = image => {
+	if (!image?.url) return null;
+
+	return image.url.startsWith('http') ? image.url : `${API_BASE}${image.url}`;
 };
 
+/* =========================================================
+   ProjectList
+========================================================= */
 const ProjectList = () => {
 	const [projects, setProjects] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -60,130 +66,116 @@ const ProjectList = () => {
 
 				const res = await axios.get(`${API_BASE}/api/projects?populate=*&pagination[pageSize]=100`);
 
-				const rawProjects = (res.data.data || []).filter(Boolean).map(flattenItem);
+				console.log('✅ 프로젝트 리스트 API:', res.data);
 
-				const sortedProjects = [...rawProjects].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+				const projectData = (res.data.data || []).filter(Boolean).map(flattenItem);
 
-				setProjects(sortedProjects);
+				console.log('✅ 변환된 프로젝트:', projectData);
+
+				setProjects(projectData);
 			} catch (err) {
-				console.error('❌ 프로젝트 데이터 오류:', err.response?.data || err.message);
+				console.error('❌ 프로젝트 리스트 오류:', err.response?.data || err.message);
+
+				setProjects([]);
 			} finally {
-				setTimeout(() => setLoading(false), 500);
+				setLoading(false);
 			}
 		};
 
 		fetchProjects();
 	}, []);
 
-	if (loading) return <SkeletonProject />;
+	/* =====================================================
+	   로딩
+	===================================================== */
+	if (loading) {
+		return <div className="project-loading">프로젝트를 불러오는 중...</div>;
+	}
 
+	/* =====================================================
+	   리스트
+	===================================================== */
 	return (
-		<div className="board_wrap list">
-			<ul>
-				{projects.map(p =>
-					p?.title ? (
-						<li key={p.id} className="project-card">
-							<div className="media-container">
-								<div className="thumbnail-wrapper">
-									{p.thumbnail?.url && (
-										<img src={p.thumbnail.url.startsWith('http') ? p.thumbnail.url : `${API_BASE}${p.thumbnail.url}`} alt={p.thumbnail.name || '프로젝트 이미지'} className="thumbnail-img" />
-									)}
+		<div className="project-list">
+			{projects.length === 0 ? (
+				<div className="project-empty">프로젝트가 없습니다.</div>
+			) : (
+				projects.map(project => {
+					const imageUrl = getImageUrl(project.thumbnail);
 
-									{p.video?.url && (
-										<>
-											<video
-												src={p.video.url.startsWith('http') ? p.video.url : `${API_BASE}${p.video.url}`}
-												muted
-												loop
-												playsInline
-												className="hover-video"
-												preload="metadata"
-												onMouseOver={e => {
-													if (!window.matchMedia('(hover: none)').matches) {
-														e.target.play();
-													}
-												}}
-												onMouseOut={e => {
-													if (!window.matchMedia('(hover: none)').matches) {
-														e.target.pause();
-														e.target.currentTime = 0;
-													}
-												}}
-												onClick={e => {
-													if (window.matchMedia('(hover: none)').matches) {
-														const video = e.target;
+					const roles = [project.role, project.add, project.more].filter(Boolean);
 
-														if (video.paused) {
-															video.play();
-														} else {
-															video.pause();
-															video.currentTime = 0;
-														}
-													}
-												}}
-											/>
+					return (
+						<div className="project-card" key={project.documentId || project.id}>
+							{/* =================================
+							    썸네일
+							================================= */}
+							<Link to={`/projects/${project.id}`} className="project-thumbnail-link">
+								{imageUrl ? (
+									<img src={imageUrl} alt={project.thumbnail?.alternativeText || project.thumbnail?.name || project.title || '프로젝트 이미지'} className="project-thumbnail" loading="lazy" />
+								) : (
+									<div className="project-thumbnail-empty">No Image</div>
+								)}
+							</Link>
 
-											<div className="video-icon">🎬</div>
-										</>
-									)}
-								</div>
+							{/* =================================
+							    프로젝트 정보
+							================================= */}
+							<div className="project-info">
+								{/* 제목 */}
+								<h3 className="project-title">
+									<Link to={`/projects/${project.id}`}>{project.title}</Link>
+								</h3>
+
+								{/* 설명 */}
+								{project.description && <p className="project-description">{project.description}</p>}
+
+								{/* =================================
+								    프로젝트 실제 사이트 링크
+								    ⭐ 설명 바로 아래
+								================================= */}
+								{project.link && (
+									<div className="project-site-link">
+										<a href={project.link} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+											프로젝트 바로가기 ↗
+										</a>
+									</div>
+								)}
+
+								{/* 역할 */}
+								{roles.length > 0 && (
+									<p className="project-role">
+										<span>역할 :</span> {roles.join(' / ')}
+									</p>
+								)}
+
+								{/* 기여도 */}
+								{project.contribution && (
+									<p className="project-contribution">
+										<span>기여도 :</span> {project.contribution}
+									</p>
+								)}
+
+								{/* 작업 기간 */}
+								{project.period && (
+									<p className="project-period">
+										<span>기간 :</span> {project.period}
+									</p>
+								)}
+
+								{/* 태그 */}
+								{project.tags && (
+									<div className="project-tags">
+										{project.tags.split(',').map((tag, index) => (
+											<span key={index}>{tag.trim()}</span>
+										))}
+									</div>
+								)}
 							</div>
-
-							<strong>
-								💡
-								<Link to={`/projects/${p.id}`}>{p.title}</Link>
-							</strong>
-
-							<br />
-
-							{(p.role || p.add || p.more) && <p>🛠️ {[p.role, p.add, p.more].filter(Boolean).join(' / ')}</p>}
-
-							{p.period && <p>🗓️ {p.period}</p>}
-
-							{p.tags && (
-								<p
-									style={{
-										display: 'flex',
-										alignItems: 'center',
-										flexWrap: 'wrap',
-										gap: '0.4rem',
-									}}
-								>
-									💻
-									{p.tags.split(',').map((tag, i) => {
-										const key = tag.trim().toLowerCase();
-
-										const style = tagStyles[key] || {
-											color: '#aaa',
-											icon: 'fas fa-tag',
-										};
-
-										return (
-											<span
-												key={i}
-												style={{
-													backgroundColor: style.color,
-													color: '#fff',
-													padding: '2px 6px',
-													borderRadius: '4px',
-													fontSize: '0.75rem',
-													display: 'inline-flex',
-													alignItems: 'center',
-													gap: '4px',
-												}}
-											>
-												<i className={style.icon}></i>
-
-												{key}
-											</span>
-										);
-									})}
-								</p>
-							)}
-						</li>
-					) : null
-				)}
-			</ul>
+						</div>
+					);
+				})
+			)}
 		</div>
 	);
 };

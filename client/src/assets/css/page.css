@@ -135,7 +135,29 @@ body {
 	z-index: 10;
 	pointer-events: none;
 }
+/* =========================================================
+   프로젝트 실제 사이트 링크
+========================================================= */
 
+.project-site-link {
+	margin-top: 12px;
+	margin-bottom: 14px;
+}
+
+.project-site-link a {
+	display: inline-block;
+	color: #ff5722;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	border-bottom: 1px solid #ff5722;
+	padding-bottom: 2px;
+	transition: opacity 0.2s ease;
+}
+
+.project-site-link a:hover {
+	opacity: 0.6;
+}
 @media (hover: none) {
 	.project-card:hover .hover-video {
 		opacity: 0;
