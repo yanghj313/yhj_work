@@ -72,7 +72,24 @@
 .project_details li {
 	word-break: keep-all;
 }
+.project-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 18px;
+	border: 1px solid #ff5722;
+	border-radius: 4px;
+	color: #ff5722;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
 
+.project-link:hover {
+	background: #ff5722;
+	color: #fff;
+}
 @media (max-width: 768px) {
 	.project_images div {
 		grid-template-columns: 1fr;
