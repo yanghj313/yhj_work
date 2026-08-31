@@ -55,7 +55,7 @@ const GalleryDetail = () => {
 					setGallery(null);
 				}
 			} catch (err) {
-				console.error('❌ 갤러리 상세 오류:', err.message);
+				console.error('❌ 갤러리 상세 오류:', err.response?.data || err.message);
 				setGallery(null);
 			}
 		};
@@ -72,8 +72,17 @@ const GalleryDetail = () => {
 
 		document.addEventListener('keydown', handleKeyDown);
 
-		return () => document.removeEventListener('keydown', handleKeyDown);
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
 	}, []);
+
+	// 이미지 주소 처리
+	const getImageUrl = image => {
+		if (!image?.url) return null;
+
+		return image.url.startsWith('http') ? image.url : `${API_BASE}${image.url}`;
+	};
 
 	return (
 		<div className="gallery_details">
@@ -99,7 +108,7 @@ const GalleryDetail = () => {
 						<div
 							style={{
 								marginTop: '2rem',
-								marginBottom: '2rem',
+								marginBottom: '1.5rem',
 							}}
 						>
 							<h4>📘 설명</h4>
@@ -121,21 +130,29 @@ const GalleryDetail = () => {
 						</div>
 					)}
 
-					{/* 이미지 */}
-					{gallery.image?.url && (
-						<div className="gallery_image_container">
-							<img
-								src={gallery.image.url.startsWith('http') ? gallery.image.url : `${API_BASE}${gallery.image.url}`}
-								alt={gallery.image.name || '갤러리 이미지'}
-								className="gallery_main_image"
-								onClick={() => setPopupImage(gallery.image.url.startsWith('http') ? gallery.image.url : `${API_BASE}${gallery.image.url}`)}
-							/>
+					{/* 프로젝트 링크 - 설명 바로 밑 */}
+					{gallery.link && (
+						<div
+							style={{
+								marginBottom: '2rem',
+							}}
+						>
+							<a href={gallery.link} target="_blank" rel="noopener noreferrer" className="project-link">
+								🔗 프로젝트 바로가기
+							</a>
 						</div>
 					)}
 
-					<br />
+					{/* 이미지 */}
+					{gallery.image?.url && (
+						<div className="gallery_image_container">
+							<img src={getImageUrl(gallery.image)} alt={gallery.image.name || '갤러리 이미지'} className="gallery_main_image" onClick={() => setPopupImage(getImageUrl(gallery.image))} />
+						</div>
+					)}
 
 					{/* 목록으로 */}
+					<br />
+
 					<Link to="/galleries" className="back-to-list">
 						← 목록으로
 					</Link>
