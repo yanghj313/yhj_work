@@ -490,6 +490,10 @@ body {
 }
 
 /***********************갤러리 게시판***************************/
+.gallery_list {
+	padding-bottom: 100px;
+}
+
 .masonry-grid {
 	display: -webkit-box;
 	display: -ms-flexbox;

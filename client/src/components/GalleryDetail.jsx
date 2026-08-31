@@ -106,7 +106,7 @@ const GalleryDetail = () => {
 					)}
 
 					{typeof gallery.description === 'string' && gallery.description.trim() && (
-						<div style={{ marginTop: '2rem' }}>
+						<div style={{ marginTop: '4rem' }}>
 							<h4>📘 설명</h4>
 
 							<ul
