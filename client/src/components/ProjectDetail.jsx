@@ -266,7 +266,6 @@ const ProjectDetail = () => {
 							>
 								{' '}
 								<h4>📘 설명</h4>
-								```
 								<ul
 									style={{
 										paddingLeft: '1.25rem',
