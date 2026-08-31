@@ -264,8 +264,9 @@ const ProjectDetail = () => {
 									marginBottom: '1.5rem',
 								}}
 							>
+								{' '}
 								<h4>📘 설명</h4>
-
+								```
 								<ul
 									style={{
 										paddingLeft: '1.25rem',
@@ -273,23 +274,16 @@ const ProjectDetail = () => {
 									}}
 								>
 									{p.description.split('\n').map((line, idx) => (line.trim() ? <li key={idx}>{line.trim()}</li> : null))}
-								</ul>
-							</div>
-						)}
 
-						{/* =================================
-						    프로젝트 링크
-						    ⭐ 설명 바로 아래
-						================================= */}
-						{p.link && (
-							<div
-								style={{
-									marginBottom: '2rem',
-								}}
-							>
-								<a href={p.link} target="_blank" rel="noopener noreferrer" className="project-site-link">
-									프로젝트 바로가기 ↗
-								</a>
+									{/* 프로젝트 링크 */}
+									{p.link && (
+										<li>
+											<a href={p.link} target="_blank" rel="noopener noreferrer" className="project-site-link">
+												프로젝트 바로가기 ↗
+											</a>
+										</li>
+									)}
+								</ul>
 							</div>
 						)}
 
