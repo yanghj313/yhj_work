@@ -277,7 +277,7 @@ const ProjectDetail = () => {
 									{/* 프로젝트 링크 */}
 									{p.link && (
 										<li>
-											<a href={p.link} target="_blank" rel="noopener noreferrer" className="project-site-link">
+											<a href={p.link} target="_blank" rel="noopener noreferrer" className="project-link">
 												프로젝트 바로가기 ↗
 											</a>
 										</li>
