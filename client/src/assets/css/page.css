@@ -521,7 +521,7 @@ body {
 	display: -ms-flexbox;
 	display: flex;
 	width: auto;
-	margin: 120px 60px 200px;
+	margin: 60px 60px 200px;
 	max-width: 1800px;
 }
 
@@ -577,7 +577,7 @@ body {
 
 @media (max-width: 1290px) {
 	.masonry-grid {
-		margin: 60px 30px 100px;
+		margin: 30px 30px 100px;
 	}
 	.gallery-filter {
 		margin: 30px 30px;
