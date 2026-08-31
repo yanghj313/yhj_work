@@ -210,6 +210,28 @@ const ProjectDetail = () => {
 							</p>
 						)}
 
+						{/* 설명 - 이미지 위로 이동 */}
+						{typeof p.description === 'string' && p.description.trim() && (
+							<div
+								style={{
+									marginTop: '2rem',
+									marginBottom: '2rem',
+								}}
+							>
+								<h4>📘 설명</h4>
+
+								<ul
+									style={{
+										paddingLeft: '1.25rem',
+										lineHeight: '1.8',
+									}}
+								>
+									{p.description.split('\n').map((line, idx) => (line.trim() ? <li key={idx}>{line.trim()}</li> : null))}
+								</ul>
+							</div>
+						)}
+
+						{/* 이미지 */}
 						{Array.isArray(p.images) && p.images.length > 0 && (
 							<div className="project_images">
 								<div
@@ -252,25 +274,6 @@ const ProjectDetail = () => {
 										);
 									})}
 								</div>
-							</div>
-						)}
-
-						{typeof p.description === 'string' && p.description.trim() && (
-							<div
-								style={{
-									marginTop: '2rem',
-								}}
-							>
-								<h4>📘 설명</h4>
-
-								<ul
-									style={{
-										paddingLeft: '1.25rem',
-										lineHeight: '1.8',
-									}}
-								>
-									{p.description.split('\n').map((line, idx) => (line.trim() ? <li key={idx}>{line.trim()}</li> : null))}
-								</ul>
 							</div>
 						)}
 

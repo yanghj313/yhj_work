@@ -72,15 +72,14 @@ const GalleryDetail = () => {
 
 		document.addEventListener('keydown', handleKeyDown);
 
-		return () => {
-			document.removeEventListener('keydown', handleKeyDown);
-		};
+		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, []);
 
 	return (
 		<div className="gallery_details">
 			{gallery?.title && (
 				<div>
+					{/* 제목 */}
 					<h2
 						className="gallery_title"
 						style={{
@@ -92,21 +91,17 @@ const GalleryDetail = () => {
 						{gallery.title}
 					</h2>
 
+					{/* 카테고리 */}
 					{gallery.category && <p className="bullet">📂 분류: {gallery.category}</p>}
 
-					{gallery.image?.url && (
-						<div className="gallery_image_container">
-							<img
-								src={gallery.image.url.startsWith('http') ? gallery.image.url : `${API_BASE}${gallery.image.url}`}
-								alt={gallery.image.name || '갤러리 이미지'}
-								className="gallery_main_image"
-								onClick={() => setPopupImage(gallery.image.url.startsWith('http') ? gallery.image.url : `${API_BASE}${gallery.image.url}`)}
-							/>
-						</div>
-					)}
-
+					{/* 설명 */}
 					{typeof gallery.description === 'string' && gallery.description.trim() && (
-						<div style={{ marginTop: '4rem' }}>
+						<div
+							style={{
+								marginTop: '2rem',
+								marginBottom: '2rem',
+							}}
+						>
 							<h4>📘 설명</h4>
 
 							<ul
@@ -126,14 +121,28 @@ const GalleryDetail = () => {
 						</div>
 					)}
 
+					{/* 이미지 */}
+					{gallery.image?.url && (
+						<div className="gallery_image_container">
+							<img
+								src={gallery.image.url.startsWith('http') ? gallery.image.url : `${API_BASE}${gallery.image.url}`}
+								alt={gallery.image.name || '갤러리 이미지'}
+								className="gallery_main_image"
+								onClick={() => setPopupImage(gallery.image.url.startsWith('http') ? gallery.image.url : `${API_BASE}${gallery.image.url}`)}
+							/>
+						</div>
+					)}
+
 					<br />
 
+					{/* 목록으로 */}
 					<Link to="/galleries" className="back-to-list">
 						← 목록으로
 					</Link>
 				</div>
 			)}
 
+			{/* 이미지 확대 팝업 */}
 			{popupImage && (
 				<div
 					className="popup-overlay"
