@@ -201,7 +201,9 @@ body {
 
 @media (max-width: 1290px) {
 	.container {
-		min-width: 1300px;
+		min-width: 1280px;
+		width: 100%;
+		max-width: 1280px;
 	}
 }
 
